@@ -892,7 +892,7 @@ Working Directory  →  Staging Area  →  Commit History
 `,
 quiz:[
 {q:'تفاوت اصلی Git و GitHub چیست؟', o:['Git برای طراحان است و GitHub برای برنامه‌نویسان','Git ابزار کنترل نسخه روی کامپیوتر توست؛ GitHub سرویس ابری میزبانی و همکاری روی پروژه‌های Git','GitHub نسخهٔ جدیدتر Git است','هیچ تفاوتی ندارند'], a:1, why:'Git نرم‌افزار محلی کنترل نسخه است و GitHub فقط یکی از سرویس‌های میزبانی آن (در کنار GitLab و Bitbucket).'},
-{q:'ترتیب درست مسیر یک تغییر در Git کدام است؟', o:['Commit ← Staging ← Working Directory','Staging ← Commit ← Working Directory','Working Directory ← Staging Area ← Commit','Working Directory ← Commit ← Staging Area'], a:2, why:'اول در Working Directory ویرایش می‌کنی، با git add وارد Staging می‌شود و با git commit در تاریخچه ثبت می‌شود.'},
+{q:'ترتیب درست مسیر یک تغییر در Git کدام است؟', o:['Commit ← Staging ← Working Directory','Staging ← Commit ← Working Directory','<span dir="ltr">Working Directory → Staging Area → Commit</span>','Working Directory ← Commit ← Staging Area'], a:2, why:'اول در Working Directory ویرایش می‌کنی، با git add وارد Staging می‌شود و با git commit در تاریخچه ثبت می‌شود.'},
 {q:'تفاوت Save با Commit چیست؟', o:['Save سریع‌تر است ولی نتیجهٔ یکسانی دارد','Save حالت قبلی فایل را بازنویسی می‌کند؛ Commit یک نقطهٔ تاریخی جدید اضافه می‌کند بدون حذف قبلی‌ها','Commit فقط برای فایل‌های کدنویسی کار می‌کند','Save تغییرات را به GitHub می‌فرستد'], a:1, why:'Save یعنی بازنویسی آخرین حالت؛ Commit یعنی افزودن یک Snapshot جدید به تاریخچه که همیشه قابل بازگشت است.'},
 {q:'پوشهٔ مخفی .git چه چیزی در خود دارد؟', o:['فقط فایل‌های حذف‌شده','تنظیمات ادیتور','کل تاریخچه و تنظیمات Repository','نسخهٔ پشتیبان از GitHub'], a:2, why:'همهٔ تاریخچه و متادیتای Git داخل پوشهٔ .git است؛ حذف آن یعنی حذف کل تاریخچه.'},
 {q:'چرا Git با Dropbox/Google Drive فرق اساسی دارد؟', o:['چون Git فقط آفلاین است','چون Git نقاط ذخیرهٔ عمدی و توضیح‌دار، Branch و Diff خط‌به‌خط دارد و برای همکاری روی تغییرات ساخته شده','چون Drive فایل‌های بزرگ را قبول نمی‌کند','چون Git فایل‌ها را فشرده نمی‌کند'], a:1, why:'Cloud Storage فقط آخرین نسخه را همگام می‌کند؛ Git تاریخچهٔ عمدی، شاخه‌سازی و مقایسهٔ دقیق ارائه می‌دهد.'},
@@ -1193,9 +1193,9 @@ quiz:[
 body:`
 <h3>سه دستور همگام‌سازی</h3>
 <table><tr><th>دستور</th><th>جهت</th><th>چه می‌کند</th></tr>
-<tr><td><code>git push</code></td><td>Local ← Remote</td><td>Commitهای تو را به GitHub می‌فرستد</td></tr>
-<tr><td><code>git fetch</code></td><td>Remote ← Local</td><td>فقط خبرها را می‌آورد؛ چیزی را در کار تو تغییر نمی‌دهد</td></tr>
-<tr><td><code>git pull</code></td><td>Remote ← Local</td><td>Fetch + Merge؛ تغییرات را می‌آورد و وارد شاخهٔ فعلی‌ات می‌کند</td></tr></table>
+<tr><td><code>git push</code></td><td><span dir="ltr">Local → Remote</span></td><td>Commitهای تو را به GitHub می‌فرستد</td></tr>
+<tr><td><code>git fetch</code></td><td><span dir="ltr">Remote → Local</span></td><td>فقط خبرها را می‌آورد؛ چیزی را در کار تو تغییر نمی‌دهد</td></tr>
+<tr><td><code>git pull</code></td><td><span dir="ltr">Remote → Local</span></td><td>Fetch + Merge؛ تغییرات را می‌آورد و وارد شاخهٔ فعلی‌ات می‌کند</td></tr></table>
 <h3>تفاوت Pull و Fetch — با مثال</h3>
 <p><strong>Fetch</strong> مثل چک‌کردن صندوق پست است: نامه‌ها را می‌بینی ولی هنوز بازشان نکرده‌ای؛ فقط <code>origin/main</code> به‌روز می‌شود و می‌توانی قبل از پذیرش، تغییرات را بررسی کنی. <strong>Pull</strong> یعنی نامه را بگیر و همین حالا اعمالش کن. Fetch برای وقتی است که می‌خواهی اول ببینی همکارانت چه کرده‌اند:</p>
 <pre><code>git fetch origin
