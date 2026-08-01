@@ -1,0 +1,11 @@
+@keyframes rootIn{from{opacity:0; transform:translateY(7px);} to{opacity:1; transform:none;}}
+.view-in{animation:rootIn .32s cubic-bezier(.2,.8,.2,1);}
+.btn:active:not(:disabled){transform:scale(.985);}
+.opt:active{transform:scale(.995);}
+.nav-item .nav-lb{transition:background .15s,color .15s,transform .15s;}
+.nav-item:hover .nav-lb{transform:translateX(-2px);}
+
+
+:focus-visible{outline:2.5px solid var(--accent); outline-offset:2px; border-radius:8px;}
+/* if the icon font never arrives, hide the empty boxes instead of showing tofu */
+.no-icons i.ph,.no-icons i.ph-bold,.no-icons i.ph-fill,.no-icons i.ph-duotone{display:none;}

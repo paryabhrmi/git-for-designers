@@ -1,0 +1,91 @@
+/* IRANYekanX — اگر روی سیستم نصب باشد یا فایل‌ها را کنار همین HTML در پوشهٔ fonts/ بگذاری، استفاده می‌شود.
+   در غیر این صورت Vazirmatn جایگزین می‌شود. */
+@font-face{font-family:'IRANYekanX'; font-weight:400; font-display:swap;
+  src:local('IRANYekanX Regular'),local('IRANYekanXRegular'),local('IRANYekan'),url('../fonts/IRANYekanXRegular.woff2') format('woff2');}
+@font-face{font-family:'IRANYekanX'; font-weight:500; font-display:swap;
+  src:local('IRANYekanX Medium'),local('IRANYekanXMedium'),url('../fonts/IRANYekanXMedium.woff2') format('woff2');}
+@font-face{font-family:'IRANYekanX'; font-weight:700; font-display:swap;
+  src:local('IRANYekanX Bold'),local('IRANYekanXBold'),local('IRANYekan Bold'),url('../fonts/IRANYekanXBold.woff2') format('woff2');}
+@font-face{font-family:'IRANYekanX'; font-weight:800; font-display:swap;
+  src:local('IRANYekanX ExtraBold'),local('IRANYekanXExtraBold'),url('../fonts/IRANYekanXExtraBold.woff2') format('woff2');}
+@font-face{font-family:'IRANYekanX'; font-weight:900; font-display:swap;
+  src:local('IRANYekanX Black'),local('IRANYekanXBlack'),url('../fonts/IRANYekanXBlack.woff2') format('woff2');}
+/* ================= design tokens ================= */
+:root{
+  color-scheme:light;
+  --paper:#F1F1F2; --surface:#FFFFFF; --surface-2:#F6F6F7; --surface-3:#EAEBEC;
+  --ink:#131416; --ink-2:#3B3E43; --muted:#63676D; --line:#DFE0E2; --line-soft:#EBEBED;
+  --rail:#F7F7F8; --rail-2:#FFFFFF; --rail-ink:#131416; --rail-muted:#63676D; --rail-line:#E2E3E5;
+  --rail-item:#4A4E55; --rail-fill:#1314160a; --rail-hover:#13141610;
+  --accent:#131416; --accent-ink:#131416; --accent-soft:#E8E9EA;
+  --gold:#4A4E55; --gold-soft:#F0F0F1;
+  --add:#127A4B; --add-soft:#E6F4EC; --add-bd:#B6DEC7;
+  --del:#C0392B; --del-soft:#FBEAE7; --del-bd:#F0C5BE;
+  --info:#1D4ED8; --info-soft:#E8EDFC; --info-bd:#C6D3F7;
+  --warn:#A15C07; --warn-ink:#A15C07; --warn-soft:#FBF0E0; --warn-bd:#EDD3AA;
+  --code-bg:#131416; --code-ink:#E4E5E7; --code-line:#2A2C30;
+  --p1:#131416; --p2:#3B3E43; --p3:#5C6067; --p4:#83878E;
+  --tip-bg:var(--add-soft); --tip-bd:var(--add-bd);
+  --warn-bg:var(--warn-soft);
+  --note-bg:var(--info-soft); --note-bd:var(--info-bd);
+  --sh-1:0 1px 2px rgba(19,20,22,.04), 0 6px 18px -14px rgba(19,20,22,.22);
+  --sh-2:0 2px 6px rgba(19,20,22,.05), 0 18px 40px -24px rgba(19,20,22,.35);
+  --font:'IRANYekanX','IRANYekan','Vazirmatn',Tahoma,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:40px; --s9:56px;
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-pill:999px;
+  --on-accent:#FFFFFF; --on-add:#FFFFFF; --on-del:#FFFFFF;
+  --r:16px; --fs:16px; --pc:var(--p1);
+}
+[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#0B0C0E; --surface:#141619; --surface-2:#1A1D21; --surface-3:#212429;
+  --ink:#F0F1F2; --ink-2:#C9CBCF; --muted:#9AA0A8; --line:#262A30; --line-soft:#1E2126;
+  --rail:#08090B; --rail-2:#0E1013; --rail-ink:#F0F1F2; --rail-muted:#9AA0A8; --rail-line:#1C1F24;
+  --rail-item:#C6C9CE; --rail-fill:#ffffff0d; --rail-hover:#ffffff14;
+  --accent:#F0F1F2; --accent-ink:#F0F1F2; --accent-soft:#232629;
+  --gold:#C6C9CE; --gold-soft:#1C1F24;
+  --add:#4ECB8C; --add-soft:#0F2A1E; --add-bd:#1E4835;
+  --del:#FF8B7E; --del-soft:#2C1917; --del-bd:#4E2A26;
+  --info:#8CA0FF; --info-soft:#161C33; --info-bd:#28345C;
+  --warn:#E0A455; --warn-ink:#E0A455; --warn-soft:#2A2013; --warn-bd:#4A3720;
+  --code-bg:#07080A; --code-ink:#DDE0E4; --code-line:#22262C;
+  --p1:#F0F1F2; --p2:#C9CBCF; --p3:#9EA3AA; --p4:#7A7F86;
+  --tip-bg:var(--add-soft); --tip-bd:var(--add-bd);
+  --warn-bg:var(--warn-soft);
+  --note-bg:var(--info-soft); --note-bd:var(--info-bd);
+  --on-accent:#0B0C0E; --on-add:#07130D; --on-del:#2A0F0C;
+  --sh-1:0 1px 2px rgba(0,0,0,.5), 0 8px 24px -18px #000;
+  --sh-2:0 2px 10px rgba(0,0,0,.55), 0 22px 48px -26px #000;
+}
+[data-theme="dark"] .example,[data-theme="dark"] .quiz,[data-theme="dark"] .stat,
+[data-theme="dark"] .step,[data-theme="dark"] .namebox,[data-theme="dark"] .nav-card,
+[data-theme="dark"] .gl-item,[data-theme="dark"] .sim,[data-theme="dark"] .toc,
+[data-theme="dark"] .modal,[data-theme="dark"] .cert,[data-theme="dark"] .phase-card,
+[data-theme="dark"] .author-card,[data-theme="dark"] table,[data-theme="dark"] .badge{box-shadow:inset 0 1px 0 #ffffff0a, var(--sh-1);}
+[data-theme="dark"]{--toast-bg:#1E2126; --toast-ink:#F0F1F2; --toast-act:#ffffff1a;}
+[data-theme="dark"] .toast{border-color:#2E3238;}
+[data-theme="dark"] .opt{background:var(--surface-2); border-color:#2B2F35;}
+[data-theme="dark"] .btn-primary{background:#F0F1F2; color:#0B0C0E;}
+[data-theme="dark"] .btn-primary:hover{background:#FFFFFF;}
+[data-theme="dark"] .btn-add{background:#4ECB8C; color:#07130D;}
+[data-theme="dark"] .btn-danger{background:#FF8B7E; color:#2A0F0C;}
+[data-theme="dark"] .btn-gold{background:#C6C9CE; color:#0B0C0E;}
+[data-theme="dark"] .xp-gain{background:#4ECB8C; color:#07130D;}
+[data-theme="dark"] .opt.ok::after{background:#4ECB8C; color:#07130D;}
+[data-theme="dark"] .opt.no::after{background:#FF8B7E; color:#2A0F0C;}
+[data-theme="dark"] .opt.ok .opt-key{background:#4ECB8C; color:#07130D; border-color:#4ECB8C;}
+[data-theme="dark"] .opt.no .opt-key{background:#FF8B7E; color:#2A0F0C; border-color:#FF8B7E;}
+[data-theme="dark"] .opt.sel .opt-key{background:#F0F1F2; color:#0B0C0E; border-color:#F0F1F2;}
+[data-theme="dark"] .sm-bar i{background:#F0F1F2;}
+[data-theme="dark"] .toast{background:#22262B; color:#F0F1F2;}
+[data-theme="dark"] .opt:hover{background:var(--surface-3);}
+[data-theme="dark"] .lvl-pill,[data-theme="dark"] .icon-btn,[data-theme="dark"] .qcount,
+[data-theme="dark"] .opt-key,[data-theme="dark"] .gl-search,[data-theme="dark"] .namebox input{background:var(--surface-2);}
+[data-theme="dark"] .nav-item.active .nav-lb{background:#ffffff14; color:#fff;}
+[data-theme="dark"] .nav-item.done.active .nav-lb{color:#fff;}
+[data-theme="dark"] ::selection{background:#ffffff26; color:#fff;}
+[data-theme="dark"] ::-webkit-scrollbar{width:11px; height:11px;}
+[data-theme="dark"] ::-webkit-scrollbar-track{background:var(--paper);}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:#2A2E34; border:3px solid var(--paper); border-radius:9px;}
+*{box-sizing:border-box; margin:0; padding:0;}
