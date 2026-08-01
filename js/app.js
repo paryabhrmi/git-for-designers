@@ -99,7 +99,9 @@ $('#modalNo').addEventListener('click', closeModal);
 $('#modalBg').addEventListener('click', e => { if (e.target === $('#modalBg')) closeModal(); });
 $('#modalYes').addEventListener('click', () => { const a = modalAction; closeModal(); if (a) a(); });
 $('#resetBtn').addEventListener('click', () => openModal(() => {
-  state.done = {}; state.drafts = {}; state.mistakes = {}; state.tries = {}; state.current = 0; state.view = 'intro'; state.openPhases = null;
+  state.done = {}; state.drafts = {}; state.mistakes = {}; state.tries = {};
+  state.picks = {}; state.checked = false; state.attempt = []; state.glQuery = '';
+  state.current = 0; state.view = 'intro'; state.openPhases = null;
   save(); render();
   toast('پیشرفت پاک شد؛ دوره از ابتدا شروع می‌شود.', 'ph-arrow-counter-clockwise');
 }));
