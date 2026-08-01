@@ -1,4 +1,6 @@
 import { $ } from './dom.js';
+import { state } from './state.js';
+import { LEVELS } from './course.js';
 
 export function buildSim(host) {
   const FILES = [
