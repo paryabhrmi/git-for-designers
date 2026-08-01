@@ -108,6 +108,11 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && $('#rail').classList.contains('open')) { closeMenu(); return; }
   if (e.target.tagName === 'INPUT' || e.target.isContentEditable || e.metaKey || e.ctrlKey || e.altKey) return;
   if (state.view !== 'lesson') return;
+  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  if (!state.checked && Object.keys(state.picks).length) {
+    toast('آزمون نیمه‌کاره است؛ برای رفتن به سطح دیگر از فهرست استفاده کن.', 'ph-hand-tap');
+    return;
+  }
   if (e.key === 'ArrowLeft') go(state.current + 1);
   if (e.key === 'ArrowRight') go(state.current - 1);
 });
