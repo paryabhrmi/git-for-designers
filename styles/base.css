@@ -1,0 +1,9 @@
+html{scroll-behavior:smooth;}
+body.no-scroll{overflow:hidden;}
+[data-theme="dark"] ::-webkit-scrollbar{width:11px; height:11px;}
+[data-theme="dark"] ::-webkit-scrollbar-track{background:var(--paper);}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:#2A3448; border:3px solid var(--paper); border-radius:9px;}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background:#3A465E;}
+body{font-family:var(--font); background:var(--paper); color:var(--ink); font-size:var(--fs); line-height:1.95; -webkit-font-smoothing:antialiased;}
+.mono{font-family:'JetBrains Mono',ui-monospace,Consolas,monospace; direction:ltr; unicode-bidi:isolate;}
+i.ph,i.ph-bold,i.ph-fill,i.ph-duotone{line-height:1; display:inline-block; vertical-align:-.12em;}
