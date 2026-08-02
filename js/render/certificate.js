@@ -8,6 +8,12 @@ import { byline as bylineFn } from '../ui.js';
 import { ctx } from '../ctx.js';
 
 const byline = () => bylineFn(SITE, LINKEDIN);
+const escapeHtml = (s) => String(s)
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;');
 
 export function renderCert() {
   window.scrollTo({ top: 0, behavior: 'auto' });
@@ -27,7 +33,7 @@ export function renderCert() {
     ctx.syncNav(); return;
   }
   const today = new Intl.DateTimeFormat('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date());
-  const name = state.learner.trim() || 'نام شما';
+  const name = escapeHtml(state.learner.trim() || 'نام شما');
   $('#root').innerHTML = `
     <div class="cert-wrap">
       <div class="cert">

@@ -25,7 +25,8 @@ export async function load() {
         });
         if (d.theme) document.documentElement.dataset.theme = d.theme;
         if (typeof d.last === 'number' && d.last >= 0 && d.last < LEVELS.length) state.current = d.last;
-        if (d.view) state.view = d.view;
+        const VIEWS = ['intro', 'lesson', 'glossary', 'cert'];
+        state.view = VIEWS.includes(d.view) ? d.view : 'intro';
         if (state.view === 'lesson' && !isUnlocked(state.current)) state.current = firstOpen();
       }
     }
