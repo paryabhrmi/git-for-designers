@@ -1274,9 +1274,9 @@ quiz:[
 {q:'در Cherry-pick به Conflict خوردی و می‌خواهی منصرف شوی؟', o:['git merge --abort','git cherry-pick --abort','git reset --hard','git revert'], a:1, why:'هر عملیات نیمه‌تمام abort مخصوص خودش را دارد.'},
 {q:'کدام مورد برای Cherry-pick نامناسب است؟', o:['یک Commit مستقل رفع باگ','مجموعه‌ای از Commitهای وابسته به هم که یک فیچر کامل را می‌سازند','Commit جامانده در شاخهٔ اشتباه','یک Commit مفید از شاخهٔ رهاشده'], a:1, why:'برای مجموعهٔ وابسته، Merge یا Rebase راه درست است؛ Cherry-pick تکه‌تکه کد را می‌شکند.'}
 ]},
-{ id:29, title:'Git Internals (اختیاری)', branch:'deep/internals', subtitle:'برای کنجکاوها: زیر کاپوت چه خبر است.',
+{ id:29, title:'Git Internals', branch:'deep/internals', subtitle:'زیر کاپوت: Object Model، HEAD و ساختار تاریخچه.',
 body:`
-<div class="callout note"><span class="co-title">اول یک هشدار دوستانه</span>این سطح برای کار روزمره‌ات لازم نیست. اگر می‌خواهی بدانی چرا Git این‌قدر مطمئن است و چرا تقریباً هیچ‌چیز گم نمی‌شود، بخوانش؛ وگرنه بی‌خیال شو.</div>
+<div class="callout note"><span class="co-title">عمق بیشتر، همان مسیر دوره</span>این سطح از کار روزمره عمیق‌تر است، ولی بخشی از مسیر کامل دوره و شرط گواهی پایان است. اینجا می‌فهمی چرا Git این‌قدر مطمئن است و چرا تقریباً هیچ‌چیز گم نمی‌شود.</div>
 <h3>Object Model — Git یک پایگاه‌دادهٔ ساده است</h3>
 <p>Git در واقع یک انبار «شیء» است که هر شیء با <strong>Hash</strong> (یک <strong>SHA</strong>ی محاسبه‌شده از محتوایش) شناخته می‌شود. چهار نوع شیء اصلی:</p>
 <ul>
@@ -1345,7 +1345,7 @@ git revert COMMIT   <span class="c"># در صورت نیاز</span></code></pre>
 <tr><td><strong>۱. حتماً</strong></td><td>مفاهیم پایه، Repo، Commit، Diff، Branch، Push/Pull، Merge، Conflict، PR، Restore/Revert، gitignore</td><td>۱ تا ۱۴</td></tr>
 <tr><td><strong>۲. کار حرفه‌ای</strong></td><td>Reset، Stash، Tag و Release، Issue، Collaboration، امنیت</td><td>۱۵ تا ۲۰</td></tr>
 <tr><td><strong>۳. Design Technologist</strong></td><td>Git برای AI، Prototype، Design System، Figma Sync، CI/CD، CLI، Rebase</td><td>۲۱ تا ۲۷</td></tr>
-<tr><td><strong>۴. در صورت نیاز</strong></td><td>Cherry-pick، Git Internals، Submodules، Monorepo، مدیریت Repo سازمانی</td><td>۲۸ تا ۲۹</td></tr>
+<tr><td><strong>۴. تعمیق و جمع‌بندی</strong></td><td>Cherry-pick، Git Internals، جمع‌بندی و نقشهٔ راه</td><td>۲۸ تا ۳۰</td></tr>
 </table>
 <h3>سه عادتی که بیشترین اثر را دارند</h3>
 <ul>
