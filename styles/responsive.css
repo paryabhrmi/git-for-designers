@@ -107,10 +107,10 @@ h2.title{font-size:23.5px;}
 @media(max-width:560px){.sim-cols{grid-template-columns:1fr; gap:7px;} .sim-col{min-height:0;}}
 
 @media print{
-  .rail,.overlay,.topbar,.mob,.toast,.modal-bg,.to-top,.cert-actions{display:none!important;}
+  .rail,.overlay,.topbar,.mob,.toast,.modal-bg,.to-top,.cert-actions,.ach-actions,.ach-share-panel{display:none!important;}
   body.no-scroll{overflow:visible;}
   .app{display:block;}
   .main{width:100%;}
   .wrap{padding:0!important; max-width:none;}
-  .cert{box-shadow:none; break-inside:avoid;}
+  .cert,.ach-card{box-shadow:none; break-inside:avoid;}
 }

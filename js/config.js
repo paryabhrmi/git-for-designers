@@ -8,9 +8,11 @@ export const PHASE_IC = ['ph-seedling', 'ph-briefcase', 'ph-compass-tool', 'ph-c
 export const SITE = 'https://paryabahrami.ir';
 export const LINKEDIN = 'https://www.linkedin.com/in/paryabhrmi';
 export const AVATAR_SRC = './assets/avatar.jpg';
+/** Public course URL for optional share links; empty disables URL attachment. */
+export const PUBLIC_COURSE_URL = '';
 export const ROUTES = {
   intro: '#/intro',
   glossary: '#/glossary',
-  certificate: '#/certificate',
+  certificate: '#/certificate', // route id kept for bookmarks / stored state
   level: (id) => '#/level-' + id,
 };

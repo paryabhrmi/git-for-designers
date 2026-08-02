@@ -75,7 +75,7 @@ export function renderLesson() {
     <div class="gate ${state.done[l.id] ? 'open' : ''}" id="gate">
       <i class="ph-fill ${state.done[l.id] ? 'ph-lock-simple-open' : 'ph-lock-simple'}"></i>
       <span>${state.done[l.id]
-        ? (state.current < LEVELS.length - 1 ? 'قفل سطح بعدی باز است. هر وقت آماده بودی ادامه بده.' : 'آخرین سطح را هم قبول شدی؛ گواهی پایان دوره آمادهٔ صدور است.')
+        ? (state.current < LEVELS.length - 1 ? 'قفل سطح بعدی باز است. هر وقت آماده بودی ادامه بده.' : 'آخرین سطح را هم قبول شدی؛ نشان فتح مسیر آماده است.')
         : 'سطح بعدی قفل است. برای باز شدن آن، در آزمون بالا قبول شو.'}</span>
     </div>
 
@@ -88,8 +88,8 @@ export function renderLesson() {
              <span class="ic"><i class="ph-bold ${state.done[l.id] ? 'ph-arrow-left' : 'ph-lock-simple'}"></i></span>
              <span><em>سطح ${FA(LEVELS[state.current+1].id)}</em><b>${LEVELS[state.current+1].title}</b></span></button>`
         : `<button class="nav-card next" id="certCard" ${allPassed() ? '' : 'disabled'}>
-             <span class="ic"><i class="ph-fill ${allPassed() ? 'ph-certificate' : 'ph-lock-simple'}"></i></span>
-             <span><em>پایان دوره</em><b>گواهی پایان دوره</b></span></button>`}
+             <span class="ic"><i class="ph-fill ${allPassed() ? 'ph-trophy' : 'ph-lock-simple'}"></i></span>
+             <span><em>پایان دوره</em><b>مشاهده نشان مسیر</b></span></button>`}
     </div>
     ${byline()}`;
 

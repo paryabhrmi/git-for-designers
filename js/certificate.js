@@ -1,3 +1,4 @@
+/** Legacy helper retained for compatibility; not shown as an official credential id. */
 import { LEVELS } from './course.js';
 
 export function certId(name) {
