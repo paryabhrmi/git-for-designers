@@ -319,10 +319,11 @@ git branch -D feature/failed     <span class="c"># حذف اجباری شاخه�
 <div class="callout note"><span class="co-title">switch یا checkout؟</span><code>git checkout</code> دستور قدیمی و چندکاره بود (هم جابه‌جایی شاخه، هم بازگردانی فایل). برای شفافیت، دو دستور جدید ساختند: <code>git switch</code> برای شاخه‌ها و <code>git restore</code> برای فایل‌ها. در آموزش‌های قدیمی checkout زیاد می‌بینی؛ معادل مدرنش را استفاده کن.</div>
 <h3>شاخهٔ محلی، Remote و Tracking</h3>
 <ul>
-<li><strong>Local Branch:</strong> فقط روی کامپیوتر تو وجود دارد.</li>
-<li><strong>Remote Branch:</strong> نسخه‌ای که روی GitHub است، مثل <code>origin/main</code>.</li>
-<li><strong>Publish کردن:</strong> اولین Push شاخهٔ جدید، آن را روی GitHub منتشر می‌کند.</li>
-<li><strong>Tracking / Upstream Branch:</strong> وقتی شاخهٔ محلی به شاخهٔ Remote «وصل» می‌شود، Git می‌داند pull/push پیش‌فرض به کجاست و می‌تواند بگوید چند Commit جلو یا عقب هستی.</li>
+<li><strong>Local Branch:</strong> شاخه‌ای روی کامپیوتر تو، مثل <code>main</code> یا <code>feature/hero-redesign</code>.</li>
+<li><strong>Remote Branch:</strong> شاخه‌ای که واقعاً روی سرور (مثلاً GitHub) ذخیره شده است.</li>
+<li><strong>Remote-tracking Branch:</strong> تصویر محلی از آخرین وضعیتی که از Remote دیده‌ای، مثل <code>origin/main</code>. این خودِ شاخه روی GitHub نیست؛ فقط یادداشت به‌روزشوندهٔ محلی است.</li>
+<li><strong>Publish کردن:</strong> اولین Push شاخهٔ جدید، آن را روی Remote منتشر می‌کند.</li>
+<li><strong>Tracking / Upstream Branch:</strong> وقتی شاخهٔ محلی به همتای Remote وصل شود، Git می‌داند pull/push پیش‌فرض به کجاست و می‌تواند بگوید چند Commit جلو یا عقب هستی.</li>
 </ul>
 <pre><code>git push -u origin feature/hero-redesign
 <span class="c"># -u یعنی upstream ست شود؛ از این به بعد فقط git push کافی است</span></code></pre>
@@ -343,49 +344,59 @@ quiz:[
 {q:'مهم‌ترین مزیت Branch نسبت به کپی‌کردن پوشهٔ پروژه؟', o:['حجم کمتر فایل zip','تاریخچهٔ مشترک، Diff دقیق و Merge با یک دستور','رنگ‌بندی بهتر در ادیتور','سرعت بیشتر اینترنت'], a:1, why:'شاخه‌ها به یک تاریخچهٔ واحد وصل‌اند؛ به همین دلیل مقایسه و ادغامشان سیستماتیک است.'},
 {q:'دستور مدرن ساخت شاخهٔ جدید و رفتن روی آن؟', o:['git branch --go new','git switch -c feature/x','git checkout --branch','git new feature/x'], a:1, why:'switch -c هم شاخه را می‌سازد هم روی آن سوییچ می‌کند (معادل قدیمی: checkout -b).'},
 {q:'فلگ -u در اولین Push شاخه چه می‌کند؟', o:['Push را سریع‌تر می‌کند','ارتباط Upstream بین شاخهٔ محلی و Remote را تنظیم می‌کند تا pushهای بعدی بدون آدرس کار کنند','شاخه را Private می‌کند','شاخه را بعد از Push حذف می‌کند'], a:1, why:'-u (--set-upstream) شاخهٔ Remote را به‌عنوان مرجع pull/push شاخهٔ محلی ثبت می‌کند.'},
-{q:'origin/main دقیقاً چیست؟', o:['شاخهٔ اصلی روی کامپیوتر تو','نسخهٔ Remote شاخهٔ main (آخرین وضعیتی که از GitHub می‌شناسی)','یک فایل تنظیمات','نام دیگر HEAD'], a:1, why:'شاخه‌های origin/... تصویری از وضعیت شاخه‌ها روی Remote هستند.'},
+{q:'origin/main دقیقاً چیست؟', o:['شاخهٔ اصلی روی کامپیوتر تو','شاخهٔ remote-tracking: آخرین تصویری که کامپیوترت از main روی Remote دارد','خودِ شاخهٔ main روی سرور GitHub','نام دیگر HEAD'], a:1, why:'origin/main یک مرجع remote-tracking است؛ شاخهٔ واقعی روی Remote جداست و با fetch به‌روز می‌شود.'},
 {q:'فرق git branch -d با -D؟', o:['هیچ؛ یکی حروف بزرگ است','-d فقط شاخهٔ Merge‌شده را حذف می‌کند؛ -D حذف اجباری است حتی اگر Merge نشده باشد','-D شاخهٔ Remote را حذف می‌کند','-d شاخه را مخفی می‌کند'], a:1, why:'-d محافظ دارد تا کار Merge‌نشده را از دست ندهی؛ -D این محافظ را برمی‌دارد.'},
 {q:'کدام نام شاخه با کانونشن رایج سازگارتر است؟', o:['MyNewDesign2','fix/mobile-navigation','final_version_REAL','sara-branch-1'], a:1, why:'الگوی type/short-description با حروف کوچک، هدف شاخه را شفاف بیان می‌کند.'}
 ]},
 { id:8, title:'اتصال Local و Remote', branch:'feature/sync', subtitle:'Push، Pull و Fetch: زبان گفت‌وگوی کامپیوتر تو با GitHub.',
 body:`
 <h3>سه دستور همگام‌سازی</h3>
-<table><tr><th>دستور</th><th>جهت</th><th>چه می‌کند</th></tr>
-<tr><td><code>git push</code></td><td><span dir="ltr">Local → Remote</span></td><td>Commitهای تو را به GitHub می‌فرستد</td></tr>
-<tr><td><code>git fetch</code></td><td><span dir="ltr">Remote → Local</span></td><td>فقط خبرها را می‌آورد؛ چیزی را در کار تو تغییر نمی‌دهد</td></tr>
-<tr><td><code>git pull</code></td><td><span dir="ltr">Remote → Local</span></td><td>Fetch + Merge؛ تغییرات را می‌آورد و وارد شاخهٔ فعلی‌ات می‌کند</td></tr></table>
+<p>برای فهم جهت داده، سه جا را جدا نگه دار: <strong>شاخهٔ محلی</strong> (مثل <code>main</code>)، <strong>remote-tracking</strong> (مثل <code>origin/main</code>)، و <strong>شاخه روی Remote</strong> (مثلاً روی GitHub).</p>
+<table><tr><th>دستور</th><th>مسیر داده <span dir="ltr">(منبع → مقصد)</span></th><th>چه می‌کند</th></tr>
+<tr><td><code>git push</code></td><td><span dir="ltr">Local branch → Remote repo</span></td><td>Commitها و مرجع شاخهٔ محلی را طبق refspec به Remote می‌فرستد؛ کار Remote را به شاخهٔ محلی نمی‌آورد</td></tr>
+<tr><td><code>git fetch</code></td><td><span dir="ltr">Remote repo → remote-tracking</span></td><td>اشیاء و به‌روزرسانی <code>origin/...</code> را می‌آورد؛ شاخهٔ کاری فعلی و فایل‌های بازت را خودکار ادغام نمی‌کند</td></tr>
+<tr><td><code>git pull</code></td><td><span dir="ltr">Remote → tracking → current branch</span></td><td>اول fetch، بعد <strong>یکپارچه‌سازی</strong> تاریخچهٔ دریافت‌شده در شاخهٔ فعلی</td></tr></table>
+<div class="callout note"><span class="co-title">جهت در RTL</span>فلش‌های جدول با <span dir="ltr">منبع → مقصد</span> نوشته شده‌اند تا جهت فنی با چیدمان راست‌به‌چپ صفحه جابه‌جا نشود. همیشه برچسب منبع و مقصد را بخوان، نه فقط جهت فلش.</div>
+<pre dir="ltr"><code>push:   [local main] ----------------------> [GitHub main]
+fetch:  [GitHub main] ---> [origin/main]      (working branch untouched)
+pull:   [GitHub main] ---> [origin/main] ---> integrate into [local main]</code></pre>
 <h3>تفاوت Pull و Fetch — با مثال</h3>
-<p><strong>Fetch</strong> مثل چک‌کردن صندوق پست است: نامه‌ها را می‌بینی ولی هنوز بازشان نکرده‌ای؛ فقط <code>origin/main</code> به‌روز می‌شود و می‌توانی قبل از پذیرش، تغییرات را بررسی کنی. <strong>Pull</strong> یعنی نامه را بگیر و همین حالا اعمالش کن. Fetch برای وقتی است که می‌خواهی اول ببینی همکارانت چه کرده‌اند:</p>
+<p><strong>Fetch</strong> مثل چک‌کردن صندوق پست است: نامه‌ها را می‌بینی ولی هنوز بازشان نکرده‌ای؛ فقط مراجع remote-tracking مثل <code>origin/main</code> به‌روز می‌شوند و می‌توانی قبل از پذیرش، تغییرات را بررسی کنی. <strong>Pull</strong> یعنی نامه را بگیر و همین حالا در شاخهٔ فعلی‌ات یکپارچه کن. روش یکپارچه‌سازی ممکن است <strong>merge</strong> یا <strong>rebase</strong> باشد — بسته به فلگ دستور یا تنظیماتی مثل <code>pull.rebase</code>. جزئیات Rebase در سطح ۲۷ می‌آید؛ اینجا کافی است بدانی Pull همیشه فقط Merge نیست.</p>
 <pre><code>git fetch origin
 git log --oneline main..origin/main   <span class="c"># چه Commitهایی روی Remote هست که من ندارم؟</span>
 git diff main origin/main             <span class="c"># تغییراتشان چیست؟</span>
-git pull                              <span class="c"># حالا با خیال راحت بیاور</span></code></pre>
+git pull                              <span class="c"># fetch + یکپارچه‌سازی در شاخهٔ فعلی</span>
+<span class="c"># معادل صریح‌تر (بسته به نیاز تیم):</span>
+<span class="c"># git pull --no-rebase   → بعد از fetch، merge</span>
+<span class="c"># git pull --rebase      → بعد از fetch، rebase</span></code></pre>
+<p>مثال طراحی: همکارت توکن رنگ دکمه را روی <code>main</code> در GitHub عوض کرده. با <code>fetch</code> فقط می‌فهمی چه شده؛ با <code>pull</code> آن تغییر وارد شاخهٔ محلی‌ات می‌شود تا روی همان پایه کار کنی.</p>
 <h3>اولین Push یک شاخه</h3>
 <pre><code>git push -u origin feature/hero-redesign
 <span class="c"># شاخه روی GitHub منتشر (Publish) شد + upstream تنظیم شد</span>
 git push                              <span class="c"># دفعات بعد همین کافی است</span></code></pre>
+<div class="callout tip"><span class="co-title">اگر Push رد شد</span>وقتی Remote جلوتر باشد، Git ممکن است Push را reject کند (مثلاً پیام <code>fetch first</code>). این یعنی تاریخچهٔ Remote را هنوز یکپارچه نکرده‌ای؛ force push در کار تیمی خطرناک است.</div>
 <h3>Ahead و Behind</h3>
-<p><code>git status</code> بعد از Fetch به تو می‌گوید نسبت به Remote کجایی:</p>
+<p><code>git status</code> بعد از Fetch نسبت به upstream (معمولاً همان remote-tracking) می‌گوید کجایی:</p>
 <ul>
 <li><strong>Ahead 2:</strong> دو Commit داری که هنوز Push نشده.</li>
-<li><strong>Behind 3:</strong> سه Commit روی Remote هست که هنوز Pull نکرده‌ای.</li>
-<li><strong>هر دو (Diverged):</strong> هم تو Commit محلی داری هم Remote جلو رفته؛ باید اول Pull کنی (و احتمالاً Merge/Conflict را حل کنی) بعد Push.</li>
+<li><strong>Behind 3:</strong> سه Commit روی Remote هست که هنوز وارد شاخهٔ محلی‌ات نکرده‌ای.</li>
+<li><strong>هر دو (Diverged):</strong> هم تو Commit محلی داری هم Remote جلو رفته؛ باید اول تاریخچهٔ Remote را یکپارچه کنی (با pull، یا fetch سپس merge/rebase) و بعد Push.</li>
 </ul>
 <div class="example"><div class="ex-title">سناریوی رایج: Push رد شد!</div>
 <pre><code>git push
 <span class="r"># ! [rejected]  main -> main (fetch first)</span>
-<span class="c"># یعنی: Remote جلوتر از توست. راه‌حل:</span>
-git pull      <span class="c"># تغییرات Remote را بیاور و ادغام کن</span>
-git push      <span class="c"># حالا قبول می‌شود</span></code></pre></div>
+<span class="c"># یعنی: Remote جلوتر از توست. راه‌حل رایج:</span>
+git pull      <span class="c"># fetch + یکپارچه‌سازی (merge یا rebase طبق تنظیم)</span>
+git push      <span class="c"># حالا معمولاً قبول می‌شود</span></code></pre></div>
 <h3>حذف شاخهٔ Remote</h3>
 <pre><code>git push origin --delete feature/old-experiment
 <span class="c"># شاخهٔ محلی سر جایش می‌ماند؛ جدا حذفش کن: git branch -d</span></code></pre>
-<div class="callout tip"><span class="co-title">عادت حرفه‌ای</span>قبل از شروع کار روزانه Pull کن، و Commitهایت را زود‌به‌زود Push کن. هرچه فاصلهٔ همگام‌سازی کمتر باشد، Conflictها کوچک‌تر و کم‌دردتر می‌شوند.</div>
+<div class="callout tip"><span class="co-title">عادت حرفه‌ای</span>قبل از شروع کار روزانه همگام شو (fetch یا pull)، و Commitهایت را زود‌به‌زود Push کن. هرچه فاصلهٔ همگام‌سازی کمتر باشد، Conflictها کوچک‌تر و کم‌دردتر می‌شوند.</div>
 `,
 quiz:[
-{q:'تفاوت اصلی fetch و pull؟', o:['fetch سریع‌تر است ولی همان کار را می‌کند','fetch فقط اطلاعات Remote را به‌روز می‌کند بدون تغییر کار تو؛ pull همان fetch + ادغام در شاخهٔ فعلی است','pull فقط برای main کار می‌کند','fetch تغییرات را Push هم می‌کند'], a:1, why:'pull = fetch + merge. با fetch می‌توانی قبل از پذیرش، تغییرات را بررسی کنی.'},
-{q:'وضعیت "Ahead 2, Behind 3" یعنی؟', o:['۲ فایل و ۳ پوشه تغییر کرده','۲ Commit محلی Push‌نشده داری و ۳ Commit روی Remote هست که نداری','۲ شاخه جلوتر و ۳ شاخه عقب‌تری','خطای اتصال'], a:1, why:'شاخهٔ محلی و Remote از هم فاصله گرفته‌اند (Diverged)؛ باید pull و سپس push کنی.'},
-{q:'Push شد rejected با پیام fetch first. چه می‌کنی؟', o:['git push --force','git pull سپس git push','Repo را دوباره clone می‌کنی','شاخه را حذف می‌کنی'], a:1, why:'Remote تغییراتی دارد که تو نداری؛ اول باید آن‌ها را بیاوری و ادغام کنی. force push در کار تیمی خطرناک است.'},
+{q:'تفاوت اصلی fetch و pull؟', o:['fetch سریع‌تر است ولی همان کار را می‌کند','fetch فقط remote-tracking را به‌روز می‌کند بدون تغییر شاخهٔ کاری؛ pull همان fetch به‌علاوهٔ یکپارچه‌سازی در شاخهٔ فعلی است','pull فقط برای main کار می‌کند','fetch تغییرات را Push هم می‌کند'], a:1, why:'pull = fetch + یکپارچه‌سازی. یکپارچه‌سازی ممکن است merge یا rebase باشد (فلگ یا pull.rebase). با fetch می‌توانی قبل از پذیرش بررسی کنی.'},
+{q:'وضعیت "Ahead 2, Behind 3" یعنی؟', o:['۲ فایل و ۳ پوشه تغییر کرده','۲ Commit محلی Push‌نشده داری و ۳ Commit روی Remote هست که نداری','۲ شاخه جلوتر و ۳ شاخه عقب‌تری','خطای اتصال'], a:1, why:'شاخهٔ محلی و Remote از هم فاصله گرفته‌اند (Diverged)؛ باید اول تاریخچهٔ Remote را یکپارچه کنی و سپس push کنی.'},
+{q:'Push شد rejected با پیام fetch first. چه می‌کنی؟', o:['git push --force','git pull سپس git push','Repo را دوباره clone می‌کنی','شاخه را حذف می‌کنی'], a:1, why:'Remote تغییراتی دارد که تو نداری؛ اول باید آن‌ها را بیاوری و در شاخه‌ات یکپارچه کنی. force push در کار تیمی خطرناک است.'},
 {q:'برای حذف یک شاخه از روی GitHub؟', o:['git branch -D feature/x','git push origin --delete feature/x','git remote remove feature/x','git fetch --delete'], a:1, why:'حذف شاخهٔ Remote با push --delete انجام می‌شود؛ حذف محلی جداگانه است.'},
 {q:'چرا Pull مکرر، Conflict را کم می‌کند؟', o:['چون Git تغییرات کوچک را نادیده می‌گیرد','چون فاصلهٔ نسخهٔ تو با تیم کم می‌ماند و هم‌پوشانی تغییرات کوچک‌تر و زودتر حل می‌شود','چون Pull به‌طور خودکار Conflict را حذف می‌کند','ربطی ندارد'], a:1, why:'هرچه دیرتر همگام شوی، تغییرات واگرا بیشتر انباشته می‌شوند و برخوردشان سنگین‌تر می‌شود.'}
 ]},
