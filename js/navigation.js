@@ -37,6 +37,7 @@ export function buildNav(filter = '') {
   if (!q) {
     const intro = document.createElement('button');
     intro.className = 'nav-item nav-special' + (state.view === 'intro' ? ' active' : '');
+    intro.dataset.nav = 'intro';
     intro.style.setProperty('--pc', 'var(--p1)');
     intro.innerHTML = `<span class="nav-lb"><i class="ph ph-house"></i><span>معرفی دوره و شروع</span></span>`;
     intro.addEventListener('click', () => { state.view = 'intro'; ctx.render(); ctx.closeMenu(); ctx.save(); });
@@ -120,6 +121,7 @@ export function buildNav(filter = '') {
   if (!q) {
     const g = document.createElement('button');
     g.className = 'nav-item nav-special' + (state.view === 'glossary' ? ' active' : '');
+    g.dataset.nav = 'glossary';
     g.style.setProperty('--pc', 'var(--p3)');
     g.innerHTML = `<span class="nav-lb"><i class="ph ph-book-bookmark"></i><span>واژه‌نامهٔ Git</span></span>`;
     g.addEventListener('click', () => { state.view = 'glossary'; ctx.render(); ctx.closeMenu(); ctx.save(); });
@@ -128,9 +130,10 @@ export function buildNav(filter = '') {
     const c = document.createElement('button');
     const ok = allPassed();
     c.className = 'nav-item nav-special' + (state.view === 'cert' ? ' active' : '') + (ok ? '' : ' lock');
+    c.dataset.nav = 'cert'; // internal view id kept for stored state / #/certificate
     c.style.setProperty('--pc', 'var(--p4)');
-    c.innerHTML = `<span class="nav-lb"><i class="ph-fill ph-certificate"></i><span>گواهی پایان دوره</span>
-      ${ok ? '' : '<i class="ph-fill ph-lock-simple lk"></i>'}</span>`;
+    c.innerHTML = `<span class="nav-lb"><i class="ph-fill ph-trophy" aria-hidden="true"></i><span>نشان مسیر</span>
+      ${ok ? '' : '<i class="ph-fill ph-lock-simple lk" aria-hidden="true"></i>'}</span>`;
     c.addEventListener('click', () => { state.view = 'cert'; ctx.render(); ctx.closeMenu(); ctx.save(); });
     nav.appendChild(c);
   }
@@ -163,8 +166,7 @@ export function syncNav() {
     el.classList.toggle('active', state.view === 'lesson' && LEVELS[state.current].id === +el.dataset.id);
   });
   document.querySelectorAll('.nav-special').forEach(el => {
-    const kind = el.querySelector('.ph-certificate') ? 'cert'
-      : el.querySelector('.ph-book-bookmark') ? 'glossary' : 'intro';
+    const kind = el.dataset.nav || 'intro';
     el.classList.toggle('active', state.view === kind);
   });
   const n = passedCount(), xp = totalXP();
@@ -208,8 +210,8 @@ export function updateMidBtn() {
   if (state.view !== 'lesson') {
     mid.disabled = state.view === 'cert' && !allPassed();
     mid.innerHTML = state.view === 'cert'
-      ? '<i class="ph-bold ph-printer"></i><span>چاپ گواهی</span>'
-      : '<i class="ph-bold ph-play"></i><span>شروع دوره</span>';
+      ? '<i class="ph-bold ph-printer" aria-hidden="true"></i><span>چاپ</span>'
+      : '<i class="ph-bold ph-play" aria-hidden="true"></i><span>شروع دوره</span>';
     mid.dataset.act = state.view === 'cert' ? 'print' : 'start';
     return;
   }
@@ -222,7 +224,7 @@ export function updateMidBtn() {
       mid.innerHTML = '<i class="ph-bold ph-arrow-left"></i><span>سطح بعد</span>';
     } else if (state.done[l.id] && allPassed()) {
       mid.disabled = false; mid.dataset.act = 'cert';
-      mid.innerHTML = '<i class="ph-fill ph-certificate"></i><span>دریافت گواهی</span>';
+      mid.innerHTML = '<i class="ph-fill ph-trophy" aria-hidden="true"></i><span>مشاهده نشان مسیر</span>';
     } else {
       mid.disabled = false; mid.dataset.act = 'retry';
       mid.innerHTML = '<i class="ph-bold ph-arrow-counter-clockwise"></i><span>تلاش دوباره</span>';

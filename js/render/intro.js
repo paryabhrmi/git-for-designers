@@ -35,7 +35,7 @@ export function renderIntro() {
       <div class="step"><span class="n"><i class="ph-bold ph-book-open"></i></span><div><b>۱. سطح را بخوان</b><p>هر سطح یک موضوع کامل است: توضیح روان، مثال طراحی و دستورهای واقعی Git با قابلیت کپی.</p></div></div>
       <div class="step"><span class="n"><i class="ph-bold ph-exam"></i></span><div><b>۲. آزمون بده</b><p>در پایان هر سطح چند سؤال چهارگزینه‌ای. پاسخ درست، پاسخ تو و دلیلش بعد از بررسی نمایش داده می‌شود.</p></div></div>
       <div class="step"><span class="n"><i class="ph-bold ph-lock-simple-open"></i></span><div><b>۳. سطح بعد باز می‌شود</b><p>با کسب حداقل ۷۰٪ نمره، قفل سطح بعدی باز می‌شود. اگر قبول نشوی، توضیح‌ها را می‌خوانی و دوباره امتحان می‌کنی.</p></div></div>
-      <div class="step"><span class="n"><i class="ph-bold ph-certificate"></i></span><div><b>۴. گواهی بگیر</b><p>با قبولی در هر ۳۰ سطح، گواهی پایان دوره به نام تو صادر و قابل چاپ یا ذخیره به‌صورت PDF می‌شود.</p></div></div>
+      <div class="step"><span class="n"><i class="ph-bold ph-trophy"></i></span><div><b>۴. نشان فتح مسیر بگیر</b><p>با قبولی در هر ۳۰ سطح، نشان فتح مسیر و کارت دستاورد شخصی‌سازی‌شده می‌گیری؛ قابل چاپ، دانلود تصویر و اشتراک‌گذاری.</p></div></div>
     </div>
 
     <h3 style="font-size:19px;font-weight:800;margin:28px 0 2px">نشان‌ها</h3>
@@ -49,8 +49,8 @@ export function renderIntro() {
     </div>
 
     <div class="namebox">
-      <label for="nameIn"><i class="ph-fill ph-user-circle"></i>نام تو (روی گواهی چاپ می‌شود)</label>
-      <p>هر وقت خواستی می‌توانی تغییرش بدهی؛ روی صفحهٔ گواهی هم قابل ویرایش است.</p>
+      <label for="nameIn"><i class="ph-fill ph-user-circle"></i>نام تو (روی نشان مسیر نمایش داده می‌شود)</label>
+      <p>هر وقت خواستی می‌توانی تغییرش بدهی؛ روی صفحهٔ نشان مسیر هم قابل ویرایش است.</p>
       <input id="nameIn" type="text" placeholder="مثلاً: سارا احمدی" value="${state.learner.replace(/"/g, '&quot;')}">
     </div>
 

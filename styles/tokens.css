@@ -62,7 +62,7 @@
 [data-theme="dark"] .example,[data-theme="dark"] .quiz,[data-theme="dark"] .stat,
 [data-theme="dark"] .step,[data-theme="dark"] .namebox,[data-theme="dark"] .nav-card,
 [data-theme="dark"] .gl-item,[data-theme="dark"] .sim,[data-theme="dark"] .toc,
-[data-theme="dark"] .modal,[data-theme="dark"] .cert,[data-theme="dark"] .phase-card,
+[data-theme="dark"] .modal,[data-theme="dark"] .cert,[data-theme="dark"] .ach-card,[data-theme="dark"] .phase-card,
 [data-theme="dark"] .author-card,[data-theme="dark"] table,[data-theme="dark"] .badge{box-shadow:inset 0 1px 0 #ffffff0a, var(--sh-1);}
 [data-theme="dark"]{--toast-bg:#1E2126; --toast-ink:#F0F1F2; --toast-act:#ffffff1a;}
 [data-theme="dark"] .toast{border-color:#2E3238;}

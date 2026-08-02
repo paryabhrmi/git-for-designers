@@ -100,12 +100,12 @@ export function checkQuiz() {
   if (passed) {
     gate.className = 'gate open';
     gate.innerHTML = `<i class="ph-fill ph-lock-simple-open"></i><span>${last && allPassed()
-      ? 'همهٔ سطح‌ها را کامل کردی — گواهی پایان دوره آمادهٔ صدور است.'
+      ? 'همهٔ سطح‌ها را کامل کردی — نشان فتح مسیر آماده است.'
       : 'قفل سطح بعدی باز شد.'}</span>`;
     const b = document.createElement('button');
     if (last && allPassed()) {
       b.className = 'btn btn-gold';
-      b.innerHTML = '<i class="ph-fill ph-certificate"></i>دریافت گواهی پایان دوره';
+      b.innerHTML = '<i class="ph-fill ph-trophy" aria-hidden="true"></i>مشاهده نشان مسیر';
       b.addEventListener('click', () => { state.view = 'cert'; ctx.render(); ctx.save(); });
     } else if (!last) {
       b.className = 'btn btn-add';
@@ -113,11 +113,11 @@ export function checkQuiz() {
       b.addEventListener('click', () => ctx.go(state.current + 1));
     }
     if (b.className) $('.quiz-actions').insertBefore(b, $('#retryBtn'));
-    if (!wasDone) ctx.toast(last && allPassed() ? 'دوره کامل شد! گواهی‌ات آماده است.' : 'آفرین! سطح بعدی باز شد.', 'ph-lock-simple-open');
+    if (!wasDone) ctx.toast(last && allPassed() ? 'دوره کامل شد! نشان مسیر آماده است.' : 'آفرین! سطح بعدی باز شد.', 'ph-lock-simple-open');
   }
   ctx.buildNav($('#search').value);
   const nx = $('#nextCard'); if (nx && passed) { nx.disabled = false; nx.querySelector('.ic i').className = 'ph-bold ph-arrow-left'; }
-  const cc = $('#certCard'); if (cc && allPassed()) { cc.disabled = false; cc.querySelector('.ic i').className = 'ph-fill ph-certificate'; }
+  const cc = $('#certCard'); if (cc && allPassed()) { cc.disabled = false; cc.querySelector('.ic i').className = 'ph-fill ph-trophy'; }
   ctx.updateMob();
   (firstWrong || $('#result')).scrollIntoView({ behavior: 'smooth', block: 'center' });
 }

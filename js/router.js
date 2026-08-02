@@ -14,7 +14,7 @@ export function syncHash() {
   const h = hashFor();
   if (location.hash !== h) { state.routing = true; location.hash = h; setTimeout(() => { state.routing = false; }, 30); }
   const t = state.view === 'lesson' ? `سطح ${FA(LEVELS[state.current].id)} · ${LEVELS[state.current].title}`
-    : state.view === 'cert' ? 'گواهی پایان دوره' : state.view === 'glossary' ? 'واژه‌نامهٔ Git' : 'معرفی دوره';
+    : state.view === 'cert' ? 'نشان فتح مسیر' : state.view === 'glossary' ? 'واژه‌نامهٔ Git' : 'معرفی دوره';
   document.title = `${t} | دورهٔ Git برای طراحان — پریا بهرامی`;
 }
 
