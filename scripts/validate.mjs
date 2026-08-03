@@ -18,10 +18,14 @@ import { TRACKS, TRACK_BY_ID } from '../data/tracks.js';
 import { MISSIONS, MISSION_BY_ID, MISSION_IDS } from '../data/missions.js';
 import { BADGES } from '../data/badges.js';
 import { STRINGS, LANGS } from '../js/i18n.js';
+import { EN_LEVELS } from '../data/en/levels.js';
+import { EN_SCENARIO, EN_GLOSSARY, EN_TRACKS, EN_MISSIONS, EN_BADGES, EN_RANKS, EN_PHASES } from '../data/en/content.js';
+import { PHASES as FA_PHASES } from '../data/phases.js';
 
 const errors = [];
 const err = (m) => errors.push(m);
 const lvlIds = new Set(LEVELS.map((l) => l.id));
+const RAW_QUIZ_BY_ID = LEVELS.reduce((m, l) => { m[l.id] = l.quiz; return m; }, {});
 const trackIds = new Set(TRACKS.map((t) => t.id));
 const REQUIRED_TRACKS = ['core', 'ai-prototype', 'design-system', 'design-technologist'];
 const EXPECTED_MISSIONS = ['core-ship-change', 'ai-safe-checkpoint', 'ds-token-conflict', 'dt-clean-branch'];
@@ -167,6 +171,114 @@ Object.entries(STRINGS).forEach(([key, entry]) => {
   });
 });
 
+
+/* ---------- locale parity (Phase 5B) ---------- */
+// Case-sensitive on the ALL-CAPS markers so legitimate prose ("Todo" as a kanban
+// column name in level 18) is not flagged as an untranslated placeholder.
+const PLACEHOLDER = /\b(TODO|TBD|FIXME|TRANSLATE|ENGLISH HERE)\b|\b(lorem ipsum|untranslated)\b/;
+const PERSIAN = /[؀-ۿ]/;
+const nonEmpty = (v) => typeof v === 'string' && v.trim().length > 0;
+
+function checkEn(path, value) {
+  if (!nonEmpty(value)) { err(`en ${path}: empty/missing`); return; }
+  if (PLACEHOLDER.test(value)) err(`en ${path}: contains a translation placeholder`);
+  if (PERSIAN.test(value)) err(`en ${path}: contains Persian characters`);
+}
+
+// levels: same count, same IDs, same order, complete text, quiz shape parity
+if (EN_LEVELS.length !== LEVELS.length) err(`en levels ${EN_LEVELS.length} != fa ${LEVELS.length}`);
+LEVELS.forEach((fa, i) => {
+  const en = EN_LEVELS[i];
+  if (!en) { err(`en level missing at index ${i} (fa id ${fa.id})`); return; }
+  if (en.id !== fa.id) err(`en level order mismatch at index ${i}: ${en.id} != ${fa.id}`);
+  checkEn(`level ${fa.id}.title`, en.title);
+  checkEn(`level ${fa.id}.subtitle`, en.subtitle);
+  checkEn(`level ${fa.id}.body`, en.body);
+  const faQuiz = RAW_QUIZ_BY_ID[fa.id] || [];
+  if (!Array.isArray(en.quiz) || en.quiz.length !== faQuiz.length) {
+    err(`en level ${fa.id}: quiz length ${en.quiz ? en.quiz.length : 'missing'} != fa ${faQuiz.length}`);
+  } else {
+    faQuiz.forEach((fq, qi) => {
+      const eq = en.quiz[qi];
+      checkEn(`level ${fa.id} q${qi}.q`, eq.q);
+      checkEn(`level ${fa.id} q${qi}.why`, eq.why);
+      if (!Array.isArray(eq.o) || eq.o.length !== fq.o.length) err(`en level ${fa.id} q${qi}: option count ${eq.o ? eq.o.length : '?'} != fa ${fq.o.length}`);
+      else eq.o.forEach((o, oi) => checkEn(`level ${fa.id} q${qi}.o[${oi}]`, o));
+    });
+  }
+});
+
+// scenarios: same level keys, same lengths, same option counts
+Object.keys(SCENARIO).forEach((k) => {
+  const faArr = SCENARIO[k], enArr = EN_SCENARIO[k];
+  if (!Array.isArray(enArr) || enArr.length !== faArr.length) { err(`en scenario ${k}: length mismatch`); return; }
+  faArr.forEach((fs, i) => {
+    checkEn(`scenario ${k}[${i}].q`, enArr[i].q);
+    checkEn(`scenario ${k}[${i}].why`, enArr[i].why);
+    if (!Array.isArray(enArr[i].o) || enArr[i].o.length !== fs.o.length) err(`en scenario ${k}[${i}]: option count mismatch`);
+  });
+});
+Object.keys(EN_SCENARIO).forEach((k) => { if (!SCENARIO[k]) err(`en scenario ${k} has no fa counterpart`); });
+
+// glossary: index-aligned, complete
+if (EN_GLOSSARY.length !== GLOSSARY.length) err(`en glossary ${EN_GLOSSARY.length} != fa ${GLOSSARY.length}`);
+EN_GLOSSARY.forEach((g, i) => { checkEn(`glossary[${i}].t`, g.t); checkEn(`glossary[${i}].d`, g.d); });
+
+// tracks: same IDs, complete text
+TRACKS.forEach((t) => {
+  const e = EN_TRACKS.find((x) => x.id === t.id);
+  if (!e) { err(`en track ${t.id} missing`); return; }
+  ['shortTitle', 'title', 'audience', 'description', 'completionMessage', 'difficulty'].forEach((f) => checkEn(`track ${t.id}.${f}`, e[f]));
+});
+if (EN_TRACKS.length !== TRACKS.length) err(`en tracks ${EN_TRACKS.length} != fa ${TRACKS.length}`);
+
+// missions: same IDs, step IDs, choice IDs, complete feedback
+MISSIONS.forEach((m) => {
+  const e = EN_MISSIONS.find((x) => x.id === m.id);
+  if (!e) { err(`en mission ${m.id} missing`); return; }
+  ['title', 'shortDescription', 'context', 'completionMessage', 'nextActionLabel', 'difficulty'].forEach((f) => checkEn(`mission ${m.id}.${f}`, e[f]));
+  if (!Array.isArray(e.objectives) || e.objectives.length !== m.objectives.length) err(`en mission ${m.id}: objective count mismatch`);
+  else e.objectives.forEach((o, i) => checkEn(`mission ${m.id}.objectives[${i}]`, o));
+  if (!Array.isArray(e.steps) || e.steps.length !== m.steps.length) { err(`en mission ${m.id}: step count mismatch`); return; }
+  m.steps.forEach((s, i) => {
+    const es = e.steps[i];
+    if (es.id !== s.id) err(`en mission ${m.id} step ${i}: id ${es.id} != fa ${s.id}`);
+    checkEn(`mission ${m.id}/${s.id}.situation`, es.situation);
+    checkEn(`mission ${m.id}/${s.id}.explanation`, es.explanation);
+    checkEn(`mission ${m.id}/${s.id}.hint`, es.hint);
+    if (s.stateNote) checkEn(`mission ${m.id}/${s.id}.stateNote`, es.stateNote);
+    if (!Array.isArray(es.choices) || es.choices.length !== s.choices.length) { err(`en mission ${m.id}/${s.id}: choice count mismatch`); return; }
+    s.choices.forEach((c, j) => {
+      if (es.choices[j].id !== c.id) err(`en mission ${m.id}/${s.id}: choice id ${es.choices[j].id} != fa ${c.id}`);
+      checkEn(`mission ${m.id}/${s.id}/${c.id}.label`, es.choices[j].label);
+      checkEn(`mission ${m.id}/${s.id}/${c.id}.feedback`, es.choices[j].feedback);
+    });
+  });
+});
+if (EN_MISSIONS.length !== MISSIONS.length) err(`en missions ${EN_MISSIONS.length} != fa ${MISSIONS.length}`);
+
+// badges / ranks / phases
+BADGES.forEach((b) => {
+  const e = EN_BADGES.find((x) => x.id === b.id);
+  if (!e) { err(`en badge ${b.id} missing`); return; }
+  checkEn(`badge ${b.id}.t`, e.t); checkEn(`badge ${b.id}.d`, e.d);
+});
+if (EN_RANKS.length !== RANKS.length) err(`en ranks ${EN_RANKS.length} != fa ${RANKS.length}`);
+EN_RANKS.forEach((r, i) => checkEn(`rank[${i}]`, r));
+if (EN_PHASES.length !== FA_PHASES.length) err(`en phases ${EN_PHASES.length} != fa ${FA_PHASES.length}`);
+EN_PHASES.forEach((p, i) => checkEn(`phase[${i}]`, p));
+
+// UI catalog: no placeholder, no Persian leaking into en values.
+// Exception: the language switcher intentionally names the *other* language in
+// its own script (endonym), so «فارسی» inside an English label is correct.
+const ENDONYM_KEYS = new Set(['top.lang']);
+Object.entries(STRINGS).forEach(([key, entry]) => {
+  if (entry && typeof entry.en === 'string') {
+    if (PLACEHOLDER.test(entry.en)) err(`i18n ${key}.en: placeholder`);
+    if (PERSIAN.test(entry.en) && !ENDONYM_KEYS.has(key)) err(`i18n ${key}.en: contains Persian characters`);
+  }
+});
+
 /* ---------- report ---------- */
 if (errors.length) {
   console.error(`✗ validate: ${errors.length} problem(s)`);
@@ -176,4 +288,5 @@ if (errors.length) {
 console.log('✓ validate: all invariants pass');
 console.log(`  levels=${LEVELS.length} tracks=${TRACKS.length} missions=${MISSIONS.length} badges=${BADGES.length} glossary=${GLOSSARY.length}`);
 console.log(`  mission IDs: ${MISSION_IDS.join(', ')}`);
+console.log(`  locale parity: fa + en (levels ${EN_LEVELS.length}, glossary ${EN_GLOSSARY.length}, tracks ${EN_TRACKS.length}, missions ${EN_MISSIONS.length})`);
 process.exit(0);

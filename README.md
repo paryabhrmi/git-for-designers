@@ -2,20 +2,23 @@
 
 <div dir="rtl">
 
-یک دورهٔ تعاملی و **فارسی** برای یادگیری Git، ساخته‌شده برای طراحان محصول،
+یک دورهٔ تعاملی برای یادگیری Git، ساخته‌شده برای طراحان محصول،
 Design Technologistها و طراحانی که با تیم توسعه، پروتوتایپ‌های ساخته‌شده با
 هوش مصنوعی، و Design System کار می‌کنند.
 
-> این پروژه در حال حاضر فقط به زبان **فارسی** است و رابط آن **راست‌به‌چپ (RTL)**
-> است. دستورهای Git به‌صورت انگلیسی و چپ‌به‌راست نمایش داده می‌شوند.
+> دوره به **فارسی (RTL)** و **انگلیسی (LTR)** در دسترس است و با یک دکمه در نوار
+> بالا بین دو زبان جابه‌جا می‌شوی؛ پیشرفتت بین هر دو زبان مشترک است.
+> دستورهای Git در هر دو زبان انگلیسی و چپ‌به‌راست می‌مانند.
 
 </div>
 
 ## What this is
 
-A browser-based, self-paced Git course delivered entirely in Persian. It runs as
-a static site — no backend, no accounts, no build step — and stores the learner's
-progress locally in the browser.
+A browser-based, self-paced Git course available in **Persian (RTL) and English
+(LTR)** — all 30 levels, quizzes, scenarios, glossary, tracks, and missions exist
+in both languages, and progress is shared between them. It runs as a static site
+— no backend, no accounts, no build step — and stores the learner's progress
+locally in the browser.
 
 ## Intended audience
 
@@ -27,12 +30,13 @@ progress locally in the browser.
 
 ## Features
 
-- **30 curriculum levels** with lessons, copyable Git command examples, and a short quiz at the end of each level (a level unlocks after passing the previous quiz at ≥70%).
+- **30 curriculum levels** (in both languages) with lessons, copyable Git command examples, and a short quiz at the end of each level (a level unlocks after passing the previous quiz at ≥70%).
 - **Four learning tracks** — a required **Core** path plus three optional specialized tracks (AI & Prototype, Design System, Design Technologist). Track progress is derived from completed levels.
 - **Guided practice missions** — optional, multi-step decision scenarios with explanatory feedback for every choice, hints, and retry. Missions simulate Git commands for teaching; **nothing is executed** on your machine.
 - **Glossary** of Git/GitHub terms.
 - **XP, badges, and ranks**, and a **path achievement** with a personalized achievement card you can export as a PNG image.
-- **Light and dark themes**, Persian RTL layout, and locally hosted fonts and icons (no external asset requests at runtime).
+- **Bilingual (fa/en)** — switch the language from the topbar; the layout mirrors between RTL and LTR, and the same completed levels, missions, XP, badges, and achievement carry across both languages. Language choice is stored locally.
+- **Light and dark themes**, and locally hosted fonts and icons (no external asset requests at runtime).
 
 ## Privacy
 
@@ -102,11 +106,11 @@ curriculum audit, curriculum map, and learning-experience design notes.
 
 ## Current non-goals
 
-No backend, no accounts, no cloud sync, no analytics, and no real Git
-execution. A bilingual (fa/en) architecture exists for the application shell —
-the interface chrome can switch to English via the topbar toggle — but
-**curriculum content is still Persian-only**; content translation is planned
-(see [`docs/bilingual-architecture.md`](docs/bilingual-architecture.md)).
+No third language, no backend, no accounts, no cloud sync, no analytics, no
+translation service, and no real Git execution. See
+[`docs/english-content.md`](docs/english-content.md) for the bilingual content
+architecture and its known limitations (notably: static page metadata is Persian
+for crawlers that do not run JavaScript).
 
 ## Contributing
 

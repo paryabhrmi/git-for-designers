@@ -4,6 +4,14 @@
  */
 import { FA } from './dom.js';
 import { ACHIEVEMENT_TITLE } from './achievement.js';
+import { getLang, t } from './i18n.js';
+
+/* Canvas does NOT inherit CSS direction — it must be set explicitly per locale. */
+const dirFor = () => (getLang() === 'en' ? 'ltr' : 'rtl');
+const startAlign = () => (getLang() === 'en' ? 'left' : 'right');
+const fontStack = () => (getLang() === 'en'
+  ? 'system-ui, Segoe UI, Helvetica, Arial, sans-serif'
+  : 'IRANYekanX, Tahoma, sans-serif');
 
 const ICON_CODE = {
   'ph-git-commit': '\ue27a',
@@ -76,10 +84,10 @@ function roundRect(ctx, x, y, w, h, r) {
 
 function fitText(ctx, text, maxWidth, fontPx, weight = '700') {
   let size = fontPx;
-  ctx.font = `${weight} ${size}px IRANYekanX, Tahoma, sans-serif`;
+  ctx.font = `${weight} ${size}px ${fontStack()}`;
   while (size > 22 && ctx.measureText(text).width > maxWidth) {
     size -= 2;
-    ctx.font = `${weight} ${size}px IRANYekanX, Tahoma, sans-serif`;
+    ctx.font = `${weight} ${size}px ${fontStack()}`;
   }
   return size;
 }
@@ -173,7 +181,7 @@ function drawCard(ctx, data, format) {
   roundRect(ctx, cardX, cardY, cardW, 10, 6);
   ctx.fill();
 
-  ctx.direction = 'rtl';
+  ctx.direction = dirFor();
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
 
@@ -181,26 +189,26 @@ function drawCard(ctx, data, format) {
 
   // Kicker
   ctx.fillStyle = c.accent;
-  ctx.font = '700 22px IRANYekanX, Tahoma, sans-serif';
+  ctx.font = `700 22px ${fontStack()}`;
   ctx.fillText('کارت دستاورد', w / 2, y);
   y += 48;
 
   // Title
   ctx.fillStyle = c.ink;
   const titleSize = fitText(ctx, ACHIEVEMENT_TITLE, cardW - 80, format === 'story' ? 44 : 40);
-  ctx.font = `900 ${titleSize}px IRANYekanX, Tahoma, sans-serif`;
+  ctx.font = `900 ${titleSize}px ${fontStack()}`;
   ctx.fillText(ACHIEVEMENT_TITLE, w / 2, y);
   y += format === 'story' ? 70 : 56;
 
   // Learner name
   ctx.fillStyle = c.muted;
-  ctx.font = '400 22px IRANYekanX, Tahoma, sans-serif';
+  ctx.font = `400 22px ${fontStack()}`;
   ctx.fillText('مسیر را کامل کرد', w / 2, y);
   y += 48;
   const name = data.learnerName || 'یادگیرنده';
   const nameSize = fitText(ctx, name, cardW - 100, format === 'story' ? 64 : 56);
   ctx.fillStyle = c.ink;
-  ctx.font = `900 ${nameSize}px IRANYekanX, Tahoma, sans-serif`;
+  ctx.font = `900 ${nameSize}px ${fontStack()}`;
   ctx.fillText(name, w / 2, y);
   y += 28;
 
@@ -266,25 +274,26 @@ function drawCard(ctx, data, format) {
     ctx.fillStyle = c.soft;
     roundRect(ctx, x, yy, cellW, cellH, 18);
     ctx.fill();
-    ctx.direction = 'rtl';
-    ctx.textAlign = 'right';
+    ctx.direction = dirFor();
+    ctx.textAlign = startAlign();
+    const anchor = getLang() === 'en' ? x + 22 : x + cellW - 22;
     ctx.fillStyle = c.muted;
-    ctx.font = '400 18px IRANYekanX, Tahoma, sans-serif';
-    ctx.fillText(cell.em, x + cellW - 22, yy + 32);
+    ctx.font = `400 18px ${fontStack()}`;
+    ctx.fillText(cell.em, anchor, yy + 32);
     ctx.fillStyle = c.ink;
     const bSize = fitText(ctx, cell.b, cellW - 40, 26);
-    ctx.font = `700 ${bSize}px IRANYekanX, Tahoma, sans-serif`;
-    ctx.fillText(cell.b, x + cellW - 22, yy + 64);
+    ctx.font = `700 ${bSize}px ${fontStack()}`;
+    ctx.fillText(cell.b, anchor, yy + 64);
   });
 
   // Date + disclaimer
   const footY = safeBot - (format === 'story' ? 40 : 24);
   ctx.textAlign = 'center';
   ctx.fillStyle = c.muted;
-  ctx.font = '400 20px IRANYekanX, Tahoma, sans-serif';
+  ctx.font = `400 20px ${fontStack()}`;
   if (data.completedAt) ctx.fillText(data.completedAt, w / 2, footY - 36);
-  ctx.font = '400 16px IRANYekanX, Tahoma, sans-serif';
-  const disc = 'یادبود دیجیتال تکمیل مسیر · نه مدرک رسمی';
+  ctx.font = `400 16px ${fontStack()}`;
+  const disc = t('ach.disclaimer');
   ctx.fillText(disc, w / 2, footY);
 }
 

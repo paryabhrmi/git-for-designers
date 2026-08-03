@@ -4,7 +4,7 @@
 .quiz-ic{width:40px; height:40px; border-radius:12px; display:grid; place-items:center; font-size:21px; background:color-mix(in srgb,var(--pc) 12%, transparent); color:var(--pc); flex-shrink:0;}
 .quiz-top h3{font-size:20px; font-weight:800; letter-spacing:-.2px;}
 .quiz-sub{color:var(--muted); font-size:13.5px; margin-top:2px;}
-.qcount{margin-right:auto; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:6px 11px; border-radius:9px; white-space:nowrap;}
+.qcount{margin-inline-start:auto; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:6px 11px; border-radius:9px; white-space:nowrap;}
 .q-item{margin:var(--s5) 0; padding-top:var(--s5); border-top:1px solid var(--line-soft);}
 .q-text{font-weight:700; margin-bottom:var(--s3); font-size:15.3px; line-height:1.8; display:flex; gap:9px;}
 .q-text i{font-family:'JetBrains Mono',monospace; color:var(--pc); font-style:normal; font-size:13px; flex-shrink:0; padding-top:2px;}
@@ -16,18 +16,18 @@
 .opt.sel .opt-key{background:var(--pc); color:var(--on-accent); border-color:var(--pc);}
 .opt.ok{border-color:var(--add); border-width:2px; background:var(--add-soft);}
 .opt.ok .opt-text{font-weight:700;}
-.opt.ok::after{content:'پاسخ درست'; position:absolute; top:-9px; right:14px; font-size:10px; font-weight:700;
+.opt.ok::after{content:'پاسخ درست'; position:absolute; top:-9px; inset-inline-start:14px; font-size:10px; font-weight:700;
   background:var(--add); color:var(--on-add); padding:2px 8px; border-radius:var(--r-pill);}
 .opt.ok .opt-key{background:var(--add); color:var(--on-add); border-color:var(--add);}
 .opt.ok .opt-mark{opacity:1; color:var(--add);}
 .opt.no{border-color:var(--del); border-style:solid; background:var(--del-soft);}
 .opt.no .opt-text{color:var(--del); text-decoration:line-through; text-decoration-thickness:1px; text-decoration-color:color-mix(in srgb,var(--del) 55%, transparent);}
-.opt.no::after{content:'انتخاب تو'; position:absolute; top:-9px; right:14px; font-size:10px; font-weight:700;
+.opt.no::after{content:'انتخاب تو'; position:absolute; top:-9px; inset-inline-start:14px; font-size:10px; font-weight:700;
   background:var(--del); color:var(--on-del); padding:2px 8px; border-radius:var(--r-pill);}
 .opt.no .opt-key{background:var(--del); color:var(--on-del); border-color:var(--del);}
 .opt.no .opt-mark{opacity:1; color:var(--del);}
 .opt.locked{pointer-events:none;}
-.q-why{display:none; font-size:13.4px; margin-top:var(--s2); padding:var(--s3) var(--s4); border-radius:var(--r-md); line-height:1.8; background:var(--note-bg); color:var(--ink-2); border-right:3px solid var(--accent);}
+.q-why{display:none; font-size:13.4px; margin-top:var(--s2); padding:var(--s3) var(--s4); border-radius:var(--r-md); line-height:1.8; background:var(--note-bg); color:var(--ink-2); border-inline-start:3px solid var(--accent);}
 .q-why.show{display:block;} .q-why b{color:var(--accent-ink);}
 .quiz-actions{margin-top:var(--s6); padding-top:var(--s5); border-top:1px solid var(--line-soft); display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
 .btn{font-family:inherit; font-size:14px; font-weight:700; padding:var(--s3) var(--s5); border-radius:var(--r-md); border:1.5px solid transparent; cursor:pointer; transition:.15s; display:inline-flex; align-items:center; gap:7px;}
@@ -36,25 +36,25 @@
 .btn-add{background:var(--add); color:var(--on-add);} .btn-add:hover{filter:brightness(1.09);}
 .btn-gold{background:var(--gold); color:var(--on-accent);} .btn-gold:hover{filter:brightness(1.09);}
 .btn:disabled{opacity:.45; cursor:not-allowed;}
-.result{display:none; align-items:center; gap:9px; font-size:14px; font-weight:700; margin-right:auto;}
+.result{display:none; align-items:center; gap:9px; font-size:14px; font-weight:700; margin-inline-start:auto;}
 .result.show{display:flex;}
 .result .tag{font-family:'JetBrains Mono',monospace; font-size:12px; padding:4px 9px; border-radius:8px; display:flex; align-items:center; gap:5px;}
 .result.pass{color:var(--add);} .result.pass .tag{background:var(--add-soft);}
 .result.fail{color:var(--del);} .result.fail .tag{background:var(--del-soft);}
 
 /* ---- راست‌چین‌سازی کامل آزمون برای متن فارسی ---- */
-.quiz, .quiz-top, .q-item, .q-text, .opt, .q-why, .quiz-actions, .result{direction:rtl; text-align:right;}
+.quiz, .quiz-top, .q-item, .q-text, .opt, .q-why, .quiz-actions, .result{text-align:start;}
 .q-text{align-items:flex-start;}
-.q-text > span{flex:1; text-align:right; unicode-bidi:isolate; word-break:break-word;}
+.q-text > span{flex:1; text-align:start; unicode-bidi:isolate; word-break:break-word;}
 .q-text > i{order:-1;}
 .opt{grid-template-columns:auto 1fr auto; justify-items:stretch;}
 .opt-text{
-  text-align:right; direction:rtl; unicode-bidi:isolate; line-height:1.85;
+  text-align:start; unicode-bidi:isolate; line-height:1.85;
   word-break:break-word; overflow-wrap:anywhere;
 }
 /* گزینه‌ای که کاملاً انگلیسی است، خودش چپ‌به‌راست خوانده می‌شود ولی از سمت راست شروع می‌شود */
 .opt-text code{unicode-bidi:isolate;}
-.q-why{text-align:right;}
+.q-why{text-align:start;}
 .qcount{direction:ltr;}
 .quiz-actions{justify-content:flex-start;}
 
@@ -64,13 +64,13 @@
 .gate.open{background:var(--tip-bg); border-color:var(--tip-bd); border-style:solid; color:var(--add);}
 .gate.open i{color:var(--add);}
 .lesson-nav{display:flex; justify-content:space-between; gap:var(--s3); margin-top:var(--s6);}
-.nav-card{flex:1; max-width:47%; text-align:right; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--s4); cursor:pointer; font-family:inherit; color:inherit; transition:.15s; display:flex; align-items:center; gap:10px;}
+.nav-card{flex:1; max-width:47%; text-align:start; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--s4); cursor:pointer; font-family:inherit; color:inherit; transition:.15s; display:flex; align-items:center; gap:10px;}
 .nav-card:hover:not(:disabled){border-color:var(--accent); transform:translateY(-1px); box-shadow:var(--sh-1);}
 .nav-card:disabled{opacity:.5; cursor:not-allowed;}
 .nav-card .ic{font-size:19px; color:var(--muted);}
 .nav-card em{font-style:normal; font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace; display:block;}
 .nav-card b{font-size:14px; font-weight:700; display:block; line-height:1.6;}
-.nav-card.next{text-align:left; flex-direction:row-reverse;}
+.nav-card.next{text-align:end; flex-direction:row-reverse;}
 .sign{text-align:center; margin-top:32px; font-size:12.5px; color:var(--muted); display:flex; align-items:center; justify-content:center; gap:7px;}
 .sign b{color:var(--ink);}
 
@@ -81,11 +81,11 @@
 }
 .opt{
   display:grid; grid-template-columns:27px minmax(0,1fr) 20px; align-items:center; gap:var(--s3);
-  padding:var(--s3) var(--s4); margin:var(--s2) 0; text-align:right; direction:rtl; position:relative;
+  padding:var(--s3) var(--s4); margin:var(--s2) 0; text-align:start; position:relative;
 }
 .opt-key{width:27px; height:27px; align-self:center; margin:0;}
 .opt-text{
-  text-align:right; direction:rtl; unicode-bidi:isolate; line-height:1.8;
+  text-align:start; unicode-bidi:isolate; line-height:1.8;
   overflow-wrap:anywhere; padding-block:1px;
 }
 .opt-mark{width:20px; height:20px; justify-self:start; align-self:center; display:grid; place-items:center;}
@@ -100,6 +100,6 @@
 .q-item.need .q-text i{color:var(--del);}
 .q-item.need .opt{border-color:color-mix(in srgb,var(--del) 35%, var(--line));}
 .q-item.need::before{
-  content:'بی‌پاسخ'; position:absolute; top:14px; left:0; font-size:10.5px; font-weight:700;
+  content:'بی‌پاسخ'; position:absolute; top:14px; inset-inline-end:0; font-size:10.5px; font-weight:700;
   color:var(--del); background:var(--del-soft); padding:2px 9px; border-radius:99px;
 }
