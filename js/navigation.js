@@ -4,6 +4,7 @@ import { PHASE_IC } from './config.js';
 import { earned } from '../data/badges.js';
 import { $, FA } from './dom.js';
 import { ctx } from './ctx.js';
+import { t } from './i18n.js';
 
 export function defaultOpenPhase() {
   const idx = state.view === 'lesson' ? state.current : firstOpen();
@@ -39,7 +40,7 @@ export function buildNav(filter = '') {
     intro.className = 'nav-item nav-special' + (state.view === 'intro' ? ' active' : '');
     intro.dataset.nav = 'intro';
     intro.style.setProperty('--pc', 'var(--p1)');
-    intro.innerHTML = `<span class="nav-lb"><i class="ph ph-house"></i><span>معرفی دوره و شروع</span></span>`;
+    intro.innerHTML = `<span class="nav-lb"><i class="ph ph-house"></i><span>${t('nav.intro')}</span></span>`;
     intro.addEventListener('click', () => { state.view = 'intro'; ctx.render(); ctx.closeMenu(); ctx.save(); });
     nav.appendChild(intro);
 
@@ -47,7 +48,7 @@ export function buildNav(filter = '') {
     tr.className = 'nav-item nav-special' + (state.view === 'tracks' || state.view === 'track' ? ' active' : '');
     tr.dataset.nav = 'tracks';
     tr.style.setProperty('--pc', 'var(--p2)');
-    tr.innerHTML = `<span class="nav-lb"><i class="ph ph-path"></i><span>مسیرهای یادگیری</span></span>`;
+    tr.innerHTML = `<span class="nav-lb"><i class="ph ph-path"></i><span>${t('nav.tracks')}</span></span>`;
     tr.addEventListener('click', () => { state.view = 'tracks'; state.track = null; ctx.render(); ctx.closeMenu(); ctx.save(); });
     nav.appendChild(tr);
 
@@ -55,7 +56,7 @@ export function buildNav(filter = '') {
     ms.className = 'nav-item nav-special' + (state.view === 'missions' || state.view === 'mission' ? ' active' : '');
     ms.dataset.nav = 'missions';
     ms.style.setProperty('--pc', 'var(--p3)');
-    ms.innerHTML = `<span class="nav-lb"><i class="ph ph-flag-checkered"></i><span>مأموریت‌های عملی</span></span>`;
+    ms.innerHTML = `<span class="nav-lb"><i class="ph ph-flag-checkered"></i><span>${t('nav.missions')}</span></span>`;
     ms.addEventListener('click', () => { state.view = 'missions'; state.mission = null; ctx.render(); ctx.closeMenu(); ctx.save(); });
     nav.appendChild(ms);
   }
@@ -139,7 +140,7 @@ export function buildNav(filter = '') {
     g.className = 'nav-item nav-special' + (state.view === 'glossary' ? ' active' : '');
     g.dataset.nav = 'glossary';
     g.style.setProperty('--pc', 'var(--p3)');
-    g.innerHTML = `<span class="nav-lb"><i class="ph ph-book-bookmark"></i><span>واژه‌نامهٔ Git</span></span>`;
+    g.innerHTML = `<span class="nav-lb"><i class="ph ph-book-bookmark"></i><span>${t('nav.glossary')}</span></span>`;
     g.addEventListener('click', () => { state.view = 'glossary'; ctx.render(); ctx.closeMenu(); ctx.save(); });
     nav.appendChild(g);
 
@@ -148,7 +149,7 @@ export function buildNav(filter = '') {
     c.className = 'nav-item nav-special' + (state.view === 'cert' ? ' active' : '') + (ok ? '' : ' lock');
     c.dataset.nav = 'cert'; // internal view id kept for stored state / #/certificate
     c.style.setProperty('--pc', 'var(--p4)');
-    c.innerHTML = `<span class="nav-lb"><i class="ph-fill ph-trophy" aria-hidden="true"></i><span>نشان مسیر</span>
+    c.innerHTML = `<span class="nav-lb"><i class="ph-fill ph-trophy" aria-hidden="true"></i><span>${t('nav.achievement')}</span>
       ${ok ? '' : '<i class="ph-fill ph-lock-simple lk" aria-hidden="true"></i>'}</span>`;
     c.addEventListener('click', () => { state.view = 'cert'; ctx.render(); ctx.closeMenu(); ctx.save(); });
     nav.appendChild(c);

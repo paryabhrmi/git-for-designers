@@ -17,6 +17,7 @@ import { RANKS } from '../data/ranks.js';
 import { TRACKS, TRACK_BY_ID } from '../data/tracks.js';
 import { MISSIONS, MISSION_BY_ID, MISSION_IDS } from '../data/missions.js';
 import { BADGES } from '../data/badges.js';
+import { STRINGS, LANGS } from '../js/i18n.js';
 
 const errors = [];
 const err = (m) => errors.push(m);
@@ -156,6 +157,15 @@ const bIds = BADGES.map((b) => b.id);
 if (new Set(bIds).size !== bIds.length) err('duplicate badge IDs');
 if (!BADGES.some((b) => b.id === 'missions')) err('missions badge missing');
 if (BADGES[BADGES.length - 1].id !== 'all') err(`last badge should be 'all' (completion hero), got '${BADGES[BADGES.length - 1].id}'`);
+
+/* ---------- i18n shell catalog ---------- */
+if (!Array.isArray(LANGS) || LANGS[0] !== 'fa' || !LANGS.includes('en')) err('LANGS must default to fa and include en');
+Object.entries(STRINGS).forEach(([key, entry]) => {
+  if (!entry || typeof entry !== 'object') { err(`i18n key ${key} is not an object`); return; }
+  LANGS.forEach((l) => {
+    if (typeof entry[l] !== 'string' || !entry[l].trim()) err(`i18n key ${key} missing/empty '${l}' string`);
+  });
+});
 
 /* ---------- report ---------- */
 if (errors.length) {
