@@ -1,10 +1,10 @@
 /**
- * Canvas PNG exporter for path achievement cards (کارت دستاورد).
+ * Canvas PNG exporter for the path achievement card (both locales).
  * Uses the same normalized data as the in-app preview; no third-party libs.
  */
 import { FA } from './dom.js';
 import { ACHIEVEMENT_TITLE } from './achievement.js';
-import { getLang, t } from './i18n.js';
+import { getLang, t, tf } from './i18n.js';
 
 /* Canvas does NOT inherit CSS direction — it must be set explicitly per locale. */
 const dirFor = () => (getLang() === 'en' ? 'ltr' : 'rtl');
@@ -190,7 +190,7 @@ function drawCard(ctx, data, format) {
   // Kicker
   ctx.fillStyle = c.accent;
   ctx.font = `700 22px ${fontStack()}`;
-  ctx.fillText('کارت دستاورد', w / 2, y);
+  ctx.fillText(t('ach.card'), w / 2, y);
   y += 48;
 
   // Title
@@ -203,9 +203,9 @@ function drawCard(ctx, data, format) {
   // Learner name
   ctx.fillStyle = c.muted;
   ctx.font = `400 22px ${fontStack()}`;
-  ctx.fillText('مسیر را کامل کرد', w / 2, y);
+  ctx.fillText(t('ach.completed'), w / 2, y);
   y += 48;
-  const name = data.learnerName || 'یادگیرنده';
+  const name = data.learnerName || t('ach.learner');
   const nameSize = fitText(ctx, name, cardW - 100, format === 'story' ? 64 : 56);
   ctx.fillStyle = c.ink;
   ctx.font = `900 ${nameSize}px ${fontStack()}`;
@@ -259,10 +259,10 @@ function drawCard(ctx, data, format) {
   // Stats strip
   const statsY = format === 'story' ? fieldY + 260 : fieldY + (badges.length > 6 ? 200 : 180);
   const cells = [
-    { em: 'رتبه', b: data.rank?.t || '—' },
-    { em: 'امتیاز', b: `${FA(data.xp)} XP` },
-    { em: 'سطح‌ها', b: `${FA(data.completedLevelCount)} از ${FA(data.totalLevelCount)}` },
-    { em: 'نشان‌ها', b: FA(data.earnedBadgeCount) },
+    { em: t('ach.rank'), b: data.rank?.t || '—' },
+    { em: t('ach.xp'), b: `${FA(data.xp)} XP` },
+    { em: t('ach.levelsDone'), b: tf('ach.ofTotal', FA(data.completedLevelCount), FA(data.totalLevelCount)) },
+    { em: t('ach.badges'), b: FA(data.earnedBadgeCount) },
   ];
   const cellW = (cardW - 80) / 2;
   const cellH = 88;

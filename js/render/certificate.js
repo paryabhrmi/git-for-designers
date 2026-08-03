@@ -1,7 +1,7 @@
 /**
  * Completion view renderer.
  * Internal name "certificate" / renderCert kept for route & module compatibility.
- * User-facing product: نشان فتح مسیر / کارت دستاورد.
+ * User-facing product: the path achievement / achievement card (i18n: ach.*).
  */
 import { state, passedCount, allPassed, firstOpen } from '../state.js';
 import { LEVELS } from '../course.js';
@@ -9,13 +9,11 @@ import { SITE, LINKEDIN } from '../config.js';
 import { $, FA } from '../dom.js';
 import { byline as bylineFn } from '../ui.js';
 import { ctx } from '../ctx.js';
+import { t, tf } from '../i18n.js';
 import {
   normalizeAchievement,
   escapeHtml,
   buildShareCaption,
-  ACHIEVEMENT_DISCLAIMER,
-  ACHIEVEMENT_TITLE,
-  ACHIEVEMENT_PAGE,
 } from '../achievement.js';
 import { canShareFiles, shareAchievement, downloadAchievement, copyShareCaption, openLinkedInUrlShare } from '../achievement-share.js';
 
@@ -26,7 +24,7 @@ function badgeMarkup(data) {
     return `
       <div class="ach-empty" aria-hidden="false">
         <i class="ph-duotone ph-path" aria-hidden="true"></i>
-        هنوز نشانی به‌دست نیاورده‌ای؛ مسیر را کامل کرده‌ای و می‌توانی کارت دستاورد را بسازی.
+        ${t('ach.empty')}
       </div>`;
   }
   const heroId = data.heroBadge ? data.heroBadge.id : null;
@@ -45,16 +43,16 @@ function currentData() {
 export function renderCert() {
   window.scrollTo({ top: 0, behavior: 'auto' });
   document.documentElement.style.setProperty('--pc', 'var(--p4)');
-  $('#crumbTitle').textContent = ACHIEVEMENT_PAGE;
+  $('#crumbTitle').textContent = t('ach.page');
   const n = passedCount();
   if (!allPassed()) {
     $('#root').innerHTML = `
       <div class="locked-cert">
         <i class="ph-duotone ph-trophy big" aria-hidden="true"></i>
-        <h2>نشان مسیر هنوز قفل است</h2>
-        <p>نشان فتح مسیر پس از قبولی در آزمون هر ۳۰ سطح باز می‌شود. تا اینجا ${FA(n)} سطح را کامل کرده‌ای.</p>
+        <h2>${t('ach.locked.h')}</h2>
+        <p>${tf('ach.locked.p', FA(n))}</p>
         <div class="mini-prog"><i style="width:${n / LEVELS.length * 100}%"></i></div>
-        <button class="btn btn-primary" id="contBtn"><i class="ph-bold ph-play" aria-hidden="true"></i>ادامه از سطح ${FA(LEVELS[firstOpen()].id)}</button>
+        <button class="btn btn-primary" id="contBtn"><i class="ph-bold ph-play" aria-hidden="true"></i>${tf('ach.continue', FA(LEVELS[firstOpen()].id))}</button>
       </div>`;
     $('#contBtn').addEventListener('click', () => ctx.go(firstOpen()));
     ctx.syncNav();
@@ -70,67 +68,65 @@ export function renderCert() {
     <div class="ach-wrap">
       <div class="ach-card ach-theme-${data.themeKey} ach-layout-${data.layoutMode}" id="achCard" data-theme-key="${data.themeKey}">
         <div class="ach-in">
-          <div class="ach-kicker"><i class="ph-fill ph-trophy" aria-hidden="true"></i>کارت دستاورد</div>
-          <h2 class="ach-title">${ACHIEVEMENT_TITLE}</h2>
-          <p class="ach-to">مسیر را کامل کرد</p>
-          <div class="ach-who" id="certName" contenteditable="true" spellcheck="false" role="textbox" aria-label="نام روی نشان مسیر">${nameHtml}</div>
+          <div class="ach-kicker"><i class="ph-fill ph-trophy" aria-hidden="true"></i>${t('ach.card')}</div>
+          <h2 class="ach-title">${t('ach.title')}</h2>
+          <p class="ach-to">${t('ach.completed')}</p>
+          <div class="ach-who" id="certName" contenteditable="true" spellcheck="false" role="textbox" aria-label="${t('ach.nameAria')}">${nameHtml}</div>
           <div class="ach-meta">
-            <div class="ach-cell"><em>رتبه</em><b id="achRank">${escapeHtml(data.rank.t)}</b></div>
-            <div class="ach-cell"><em>امتیاز</em><b id="achXp">${FA(data.xp)} XP</b></div>
-            <div class="ach-cell"><em>سطح‌های کامل‌شده</em><b>${FA(data.completedLevelCount)} از ${FA(data.totalLevelCount)}</b></div>
-            <div class="ach-cell"><em>نشان‌ها</em><b id="achBadgeCount">${FA(data.earnedBadgeCount)}</b></div>
+            <div class="ach-cell"><em>${t('ach.rank')}</em><b id="achRank">${escapeHtml(data.rank.t)}</b></div>
+            <div class="ach-cell"><em>${t('ach.xp')}</em><b id="achXp">${FA(data.xp)} XP</b></div>
+            <div class="ach-cell"><em>${t('ach.levelsDone')}</em><b>${tf('ach.ofTotal', FA(data.completedLevelCount), FA(data.totalLevelCount))}</b></div>
+            <div class="ach-cell"><em>${t('ach.badges')}</em><b id="achBadgeCount">${FA(data.earnedBadgeCount)}</b></div>
           </div>
-          <div class="ach-badges" id="achBadges" aria-label="نشان‌های به‌دست‌آمده">
+          <div class="ach-badges" id="achBadges" aria-label="${t('ach.badgesAria')}">
             ${badgeMarkup(data)}
           </div>
-          ${heroName ? `<p class="ach-badge-name">نشان برجسته: ${heroName}</p>` : ''}
+          ${heroName ? `<p class="ach-badge-name">${tf('ach.hero', heroName)}</p>` : ''}
           ${data.completedAt ? `<p class="ach-badge-name">${escapeHtml(data.completedAt)}</p>` : ''}
-          <p class="ach-disclaimer">${ACHIEVEMENT_DISCLAIMER}</p>
-          <div class="ach-foot">تهیه‌شده در دورهٔ Git for Designers · پریا بهرامی</div>
+          <p class="ach-disclaimer">${t('ach.disclaimer')}</p>
+          <div class="ach-foot">${t('ach.foot')}</div>
         </div>
       </div>
 
       <div class="ach-actions cert-actions">
         <button type="button" class="btn btn-gold" id="buildCardBtn">
-          <i class="ph-bold ph-image" aria-hidden="true"></i>ساخت کارت دستاورد
+          <i class="ph-bold ph-image" aria-hidden="true"></i>${t('ach.build')}
         </button>
         <button type="button" class="btn btn-primary" id="shareBtn" ${nativeShare ? '' : 'hidden'}>
-          <i class="ph-bold ph-share-network" aria-hidden="true"></i>اشتراک‌گذاری
+          <i class="ph-bold ph-share-network" aria-hidden="true"></i>${t('ach.share')}
         </button>
         <button type="button" class="btn btn-ghost" id="printBtn">
-          <i class="ph-bold ph-printer" aria-hidden="true"></i>چاپ
+          <i class="ph-bold ph-printer" aria-hidden="true"></i>${t('ach.print')}
         </button>
         <button type="button" class="btn btn-ghost" id="editName">
-          <i class="ph ph-pencil-simple" aria-hidden="true"></i>ویرایش نام
+          <i class="ph ph-pencil-simple" aria-hidden="true"></i>${t('ach.editName')}
         </button>
         <button type="button" class="btn btn-ghost" id="backBtn">
-          <i class="ph ph-arrow-right" aria-hidden="true"></i>بازگشت به دوره
+          <i class="ph ph-arrow-right" aria-hidden="true"></i>${t('ach.back')}
         </button>
       </div>
 
       <div class="ach-share-panel" id="sharePanel" hidden>
-        <h3><i class="ph-fill ph-export" aria-hidden="true"></i>ساخت و اشتراک کارت دستاورد</h3>
-        <p id="shareHint">${nativeShare
-          ? 'می‌توانی تصویر را از طریق برگهٔ اشتراک دستگاه بفرستی، یا دانلود کنی و در LinkedIn یا Instagram بارگذاری کنی.'
-          : 'اشتراک‌گذاری مستقیم فایل در این مرورگر در دسترس نیست. تصویر را دانلود کن و همراه متن پست در LinkedIn یا Instagram بارگذاری کن.'}</p>
+        <h3><i class="ph-fill ph-export" aria-hidden="true"></i>${t('ach.panel.h')}</h3>
+        <p id="shareHint">${nativeShare ? t('ach.hint.native') : t('ach.hint.dl')}</p>
         <div class="ach-share-row">
           <button type="button" class="btn btn-primary" id="dlSquare">
-            <i class="ph-bold ph-download-simple" aria-hidden="true"></i>دانلود تصویر مربعی
+            <i class="ph-bold ph-download-simple" aria-hidden="true"></i>${t('ach.dl.square')}
           </button>
           <button type="button" class="btn btn-ghost" id="dlStory">
-            <i class="ph-bold ph-device-mobile" aria-hidden="true"></i>دانلود تصویر استوری
+            <i class="ph-bold ph-device-mobile" aria-hidden="true"></i>${t('ach.dl.story')}
           </button>
           <button type="button" class="btn btn-ghost" id="shareNative" ${nativeShare ? '' : 'hidden'}>
-            <i class="ph-bold ph-share-network" aria-hidden="true"></i>اشتراک‌گذاری
+            <i class="ph-bold ph-share-network" aria-hidden="true"></i>${t('ach.share')}
           </button>
           <button type="button" class="btn btn-ghost" id="copyCaption">
-            <i class="ph-bold ph-copy" aria-hidden="true"></i>کپی متن پست
+            <i class="ph-bold ph-copy" aria-hidden="true"></i>${t('ach.copyCaption')}
           </button>
           <button type="button" class="btn btn-ghost" id="liUrlBtn">
-            <i class="ph-fill ph-linkedin-logo" aria-hidden="true"></i>اشتراک لینک LinkedIn
+            <i class="ph-fill ph-linkedin-logo" aria-hidden="true"></i>${t('ach.liShare')}
           </button>
         </div>
-        <label class="sr-only" for="captionBox">متن پست</label>
+        <label class="sr-only" for="captionBox">${t('ach.caption')}</label>
         <textarea id="captionBox" class="ach-caption" rows="5">${escapeHtml(buildShareCaption(data))}</textarea>
       </div>
       ${byline()}
@@ -195,14 +191,14 @@ export function renderCert() {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           try {
             await navigator.clipboard.writeText(custom);
-            ctx.toast('متن پست کپی شد.', 'ph-check');
+            ctx.toast(t('ach.captionCopied'), 'ph-check');
             return;
           } catch (e) { /* fall through */ }
         }
         box.focus();
         box.select();
         if (document.execCommand('copy')) {
-          ctx.toast('متن پست کپی شد.', 'ph-check');
+          ctx.toast(t('ach.captionCopied'), 'ph-check');
           return;
         }
       } catch (e) { /* fall through */ }

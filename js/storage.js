@@ -1,8 +1,10 @@
 import { STORE_KEY } from './config.js';
 import { state, isUnlocked, firstOpen } from './state.js';
 import { LEVELS } from './course.js';
-import { TRACK_BY_ID } from './content.js';
-import { MISSION_BY_ID } from './content.js';
+// Stored IDs are language-neutral: validate against the canonical data modules,
+// not the localized view (which is only populated once setLang() runs).
+import { TRACK_BY_ID } from '../data/tracks.js';
+import { MISSION_BY_ID } from '../data/missions.js';
 
 function lsGet() { try { return window.localStorage.getItem(STORE_KEY); } catch (e) { return null; } }
 function lsSet(v) { try { window.localStorage.setItem(STORE_KEY, v); } catch (e) {} }

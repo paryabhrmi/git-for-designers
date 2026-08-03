@@ -22,7 +22,7 @@ export function snippet(text, q) {
   const i = text.indexOf(q);
   if (i < 0) return '';
   const from = Math.max(0, i - 40), to = Math.min(text.length, i + q.length + 60);
-  const esc = t => t.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  const esc = x => x.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
   return (from ? '…' : '') + esc(text.slice(from, i)) + '<mark>' + esc(text.slice(i, i + q.length)) + '</mark>' +
     esc(text.slice(i + q.length, to)) + (to < text.length ? '…' : '');
 }

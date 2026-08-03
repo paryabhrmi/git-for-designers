@@ -1,7 +1,10 @@
 import { state, isUnlocked, firstOpen } from './state.js';
 import { LEVELS } from './course.js';
-import { TRACK_BY_ID } from './content.js';
-import { MISSION_BY_ID } from './content.js';
+// Route validation uses the canonical, language-neutral ID maps (always
+// populated, no dependency cycle); document titles use the localized view.
+import { TRACK_BY_ID } from '../data/tracks.js';
+import { MISSION_BY_ID } from '../data/missions.js';
+import { TRACK_BY_ID as L_TRACK, MISSION_BY_ID as L_MISSION } from './content.js';
 import { FA } from './dom.js';
 import { toast } from './ui.js';
 import { t, tf } from './i18n.js';
@@ -23,9 +26,9 @@ export function syncHash() {
   const pageTitle = state.view === 'lesson' ? tf('lesson.crumb', FA(LEVELS[state.current].id), LEVELS[state.current].title)
     : state.view === 'cert' ? t('ach.page') : state.view === 'glossary' ? t('nav.glossary')
     : state.view === 'tracks' ? t('nav.tracks')
-    : state.view === 'track' ? tf('track.crumb', TRACK_BY_ID[state.track] ? TRACK_BY_ID[state.track].shortTitle : '')
+    : state.view === 'track' ? tf('track.crumb', L_TRACK[state.track] ? L_TRACK[state.track].shortTitle : '')
     : state.view === 'missions' ? t('nav.missions')
-    : state.view === 'mission' ? tf('mission.crumb', MISSION_BY_ID[state.mission] ? MISSION_BY_ID[state.mission].title : '')
+    : state.view === 'mission' ? tf('mission.crumb', L_MISSION[state.mission] ? L_MISSION[state.mission].title : '')
     : t('intro.crumb');
   document.title = tf('doc.title', pageTitle);
 }

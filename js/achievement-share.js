@@ -4,8 +4,9 @@
  */
 import { PUBLIC_COURSE_URL } from './config.js';
 import { toast } from './ui.js';
-import { buildShareCaption, ACHIEVEMENT_TITLE } from './achievement.js';
+import { buildShareCaption } from './achievement.js';
 import { renderAchievementFile, renderAchievementBlob, achievementFilename } from './achievement-export.js';
+import { t } from './i18n.js';
 
 function publicUrl() {
   const u = (PUBLIC_COURSE_URL || '').trim();
@@ -43,7 +44,7 @@ function triggerDownload(blob, filename) {
 export async function downloadAchievement(data, format = 'square') {
   const blob = await renderAchievementBlob(data, format);
   triggerDownload(blob, achievementFilename(format));
-  toast('تصویر کارت دستاورد دانلود شد.', 'ph-download-simple');
+  toast(t('ach.downloaded'), 'ph-download-simple');
   return blob;
 }
 
@@ -67,20 +68,20 @@ export async function copyShareCaption(data) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       try {
         await navigator.clipboard.writeText(text);
-        toast('متن پست کپی شد.', 'ph-check');
+        toast(t('ach.captionCopied'), 'ph-check');
         return true;
       } catch (e) {
         /* fall through to execCommand */
       }
     }
     if (copyTextFallback(text)) {
-      toast('متن پست کپی شد.', 'ph-check');
+      toast(t('ach.captionCopied'), 'ph-check');
       return true;
     }
-    toast('کپی متن ممکن نشد؛ دستی انتخاب کن.', 'ph-warning');
+    toast(t('ach.copyFail'), 'ph-warning');
     return false;
   } catch (e) {
-    toast('کپی متن ممکن نشد؛ دستی انتخاب کن.', 'ph-warning');
+    toast(t('ach.copyFail'), 'ph-warning');
     return false;
   }
 }
@@ -92,7 +93,7 @@ export async function copyShareCaption(data) {
 export async function shareAchievement(data, format = 'square') {
   const caption = buildShareCaption(data);
   const url = publicUrl();
-  const title = ACHIEVEMENT_TITLE;
+  const title = t('ach.title');
 
   if (!canShareFiles()) {
     await downloadAchievement(data, format);
@@ -118,7 +119,7 @@ export async function shareAchievement(data, format = 'square') {
       await downloadAchievement(data, format);
       return 'fallback';
     } catch (e2) {
-      toast('اشتراک‌گذاری ممکن نشد؛ تصویر را دانلود کن.', 'ph-warning');
+      toast(t('ach.shareFail'), 'ph-warning');
       return 'unsupported';
     }
   }
@@ -128,11 +129,11 @@ export async function shareAchievement(data, format = 'square') {
 export function openLinkedInUrlShare() {
   const url = publicUrl();
   if (!url) {
-    toast('آدرس عمومی دوره تنظیم نشده است.', 'ph-link');
+    toast(t('ach.noUrl'), 'ph-link');
     return false;
   }
   const share = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
   window.open(share, '_blank', 'noopener,noreferrer');
-  toast('لینک دوره در LinkedIn باز شد؛ تصویر را جداگانه بارگذاری کن.', 'ph-linkedin-logo');
+  toast(t('ach.liOpened'), 'ph-linkedin-logo');
   return true;
 }
