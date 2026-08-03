@@ -1,10 +1,10 @@
 import { state, phaseIndex, firstOpen, isUnlocked, passedCount, totalXP, maxXP, rankOf, allPassed } from './state.js';
 import { LEVELS, PHASES } from './course.js';
 import { PHASE_IC } from './config.js';
-import { earned } from '../data/badges.js';
+import { earned } from './content.js';
 import { $, FA } from './dom.js';
 import { ctx } from './ctx.js';
-import { t } from './i18n.js';
+import { t, tf } from './i18n.js';
 
 export function defaultOpenPhase() {
   const idx = state.view === 'lesson' ? state.current : firstOpen();
@@ -103,15 +103,15 @@ export function buildNav(filter = '') {
           <span class="gline ${i === items.length - 1 ? 'off' : ''}"></span>
         </span>
         <span class="nav-lb">
-          <span><span class="nav-n">سطح ${FA(String(l.id).padStart(2, '0'))}</span>${l.title}
+          <span><span class="nav-n">${tf('level.n', FA(String(l.id).padStart(2, '0')))}</span>${l.title}
           ${q ? `<span class="hit-snip">${snippet(levelText(l), q)}</span>` : ''}</span>
-          ${isNext && !isCurrent && !q ? '<span class="here"><b></b>اینجایی</span>' : ''}
+          ${isNext && !isCurrent && !q ? `<span class="here"><b></b>${t('state.here')}</span>` : ''}
           ${unlocked ? '' : '<i class="ph-fill ph-lock-simple lk"></i>'}
         </span>`;
       b.addEventListener('click', () => {
         if (!unlocked) {
-          ctx.toast('اول باید آزمون سطح قبلی را قبول شوی.', 'ph-lock-simple',
-            { label: 'برو به سطح باز', fn: () => { ctx.go(firstOpen()); ctx.closeMenu(); } });
+          ctx.toast(t('lock.prevQuiz'), 'ph-lock-simple',
+            { label: t('lock.goOpen'), fn: () => { ctx.go(firstOpen()); ctx.closeMenu(); } });
           return;
         }
         ctx.go(idx); ctx.closeMenu();
@@ -125,13 +125,13 @@ export function buildNav(filter = '') {
   if (q) {
     const m = document.createElement('div');
     m.className = 'search-mode';
-    m.innerHTML = `<i class="ph ph-text-aa"></i>جست‌وجو در کل متن دوره · ${FA(hits)} نتیجه`;
+    m.innerHTML = `<i class="ph ph-text-aa"></i>${tf('nav.searchMode', FA(hits))}`;
     nav.insertBefore(m, nav.firstChild);
   }
   if (q && !hits) {
     const e = document.createElement('div');
     e.className = 'no-hit';
-    e.innerHTML = '<i class="ph ph-magnifying-glass" style="font-size:20px;display:block;margin-bottom:6px"></i>سطحی با این عبارت پیدا نشد.';
+    e.innerHTML = `<i class="ph ph-magnifying-glass" style="font-size:20px;display:block;margin-bottom:6px"></i>${t('nav.noHit')}`;
     nav.appendChild(e);
   }
 
@@ -187,7 +187,7 @@ export function syncNav() {
     el.classList.toggle('active', state.view === kind || (kind === 'tracks' && state.view === 'track') || (kind === 'missions' && state.view === 'mission'));
   });
   const n = passedCount(), xp = totalXP();
-  $('#progTxt').textContent = `${FA(n)} از ${FA(LEVELS.length)} سطح · ${FA(earned().length)} نشان`;
+  $('#progTxt').textContent = tf('nav.progTxt', FA(n), FA(LEVELS.length), FA(earned().length));
   $('#xpTxt').textContent = `${FA(xp)} XP`;
   $('#xpBar').style.width = (xp / maxXP() * 100) + '%';
   $('#rankTxt').textContent = rankOf(xp).t;
@@ -201,8 +201,8 @@ export function focusMain() {
 export function go(i) {
   if (i < 0 || i >= LEVELS.length) return;
   if (!isUnlocked(i)) {
-    ctx.toast('این سطح قفل است؛ اول آزمون سطح قبل را قبول شو.', 'ph-lock-simple',
-      { label: 'برو به سطح باز', fn: () => go(firstOpen()) });
+    ctx.toast(t('lock.levelLockedGo'), 'ph-lock-simple',
+      { label: t('lock.goOpen'), fn: () => go(firstOpen()) });
     return;
   }
   state.current = i; state.view = 'lesson';
@@ -227,8 +227,8 @@ export function updateMidBtn() {
   if (state.view !== 'lesson') {
     mid.disabled = state.view === 'cert' && !allPassed();
     mid.innerHTML = state.view === 'cert'
-      ? '<i class="ph-bold ph-printer" aria-hidden="true"></i><span>چاپ</span>'
-      : '<i class="ph-bold ph-play" aria-hidden="true"></i><span>شروع دوره</span>';
+      ? `<i class="ph-bold ph-printer" aria-hidden="true"></i><span>${t('ach.print')}</span>`
+      : `<i class="ph-bold ph-play" aria-hidden="true"></i><span>${t('mid.start')}</span>`;
     mid.dataset.act = state.view === 'cert' ? 'print' : 'start';
     return;
   }
@@ -238,22 +238,22 @@ export function updateMidBtn() {
   if (state.checked) {
     if (state.done[l.id] && state.current < LEVELS.length - 1) {
       mid.disabled = false; mid.dataset.act = 'next';
-      mid.innerHTML = '<i class="ph-bold ph-arrow-left"></i><span>سطح بعد</span>';
+      mid.innerHTML = `<i class="ph-bold ph-arrow-left"></i><span>${t('mid.next')}</span>`;
     } else if (state.done[l.id] && allPassed()) {
       mid.disabled = false; mid.dataset.act = 'cert';
-      mid.innerHTML = '<i class="ph-fill ph-trophy" aria-hidden="true"></i><span>مشاهده نشان مسیر</span>';
+      mid.innerHTML = `<i class="ph-fill ph-trophy" aria-hidden="true"></i><span>${t('ach.view')}</span>`;
     } else {
       mid.disabled = false; mid.dataset.act = 'retry';
-      mid.innerHTML = '<i class="ph-bold ph-arrow-counter-clockwise"></i><span>تلاش دوباره</span>';
+      mid.innerHTML = `<i class="ph-bold ph-arrow-counter-clockwise"></i><span>${t('mid.retry')}</span>`;
     }
   } else if (inQuiz) {
     const answered = Object.keys(state.picks).length;
     mid.disabled = false;
     mid.dataset.act = 'check';
-    mid.innerHTML = `<i class="ph-bold ph-check-square-offset"></i><span>بررسی پاسخ‌ها ${FA(answered)}/${FA(l.quiz.length)}</span>`;
+    mid.innerHTML = `<i class="ph-bold ph-check-square-offset"></i><span>${tf('quiz.checkCount', FA(answered), FA(l.quiz.length))}</span>`;
   } else {
     mid.disabled = false; mid.dataset.act = 'toquiz';
-    mid.innerHTML = '<i class="ph-bold ph-exam"></i><span>برو به آزمون</span>';
+    mid.innerHTML = `<i class="ph-bold ph-exam"></i><span>${t('mid.toquiz')}</span>`;
   }
 }
 

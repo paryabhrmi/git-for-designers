@@ -46,7 +46,7 @@
 .ach-who:focus{outline:2px solid var(--ach-accent); outline-offset:4px; border-radius:6px;}
 .ach-meta{
   display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px;
-  margin:26px 0 8px; text-align:right;
+  margin:26px 0 8px; text-align:start;
 }
 @media(min-width:640px){.ach-meta{grid-template-columns:repeat(4,minmax(0,1fr));}}
 .ach-cell{
@@ -138,7 +138,7 @@
 .ach-share-panel{
   margin-top:18px; padding:18px 18px 16px;
   background:var(--surface-2); border:1px solid var(--line); border-radius:16px;
-  text-align:right;
+  text-align:start;
 }
 .ach-share-panel[hidden]{display:none;}
 .ach-share-panel h3{

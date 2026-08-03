@@ -7,7 +7,7 @@
 
 @media(max-width:940px){
   body{--fs:15.5px; overflow-x:hidden; line-height:1.9;}
-  .rail{position:fixed; right:0; top:0; height:100dvh; transform:translateX(101%); transition:transform .28s cubic-bezier(.2,.8,.2,1); width:min(330px,88vw); box-shadow:-18px 0 50px rgba(0,0,0,.45); z-index:60;}
+  .rail{position:fixed; inset-inline-start:0; top:0; height:100dvh; transform:translateX(101%); transition:transform .28s cubic-bezier(.2,.8,.2,1); width:min(330px,88vw); box-shadow:-18px 0 50px rgba(0,0,0,.45); z-index:60;}
   .rail.open{transform:translateX(0);}
   .rail-close{display:grid; place-items:center;}
   .rail-head{padding:18px 18px 16px; padding-top:max(18px,env(safe-area-inset-top));}
@@ -28,12 +28,12 @@ h2.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
   .sub{font-size:14.8px; margin-top:8px;}
   .meta{gap:10px 14px; font-size:12px; margin-top:13px;}
   .eyebrow{gap:6px; margin-bottom:14px;} .chip{font-size:10.5px; padding:4px 9px;}
-  .body{padding-right:16px; margin-right:3px;}
-  .body h3{font-size:18px; margin:30px 0 10px;} .body h3::before{right:-23px; width:9px; height:9px; top:.6em;}
+  .body{padding-inline-start:16px; margin-inline-start:3px;}
+  .body h3{font-size:18px; margin:30px 0 10px;} .body h3::before{inset-inline-start:-23px; width:9px; height:9px; top:.6em;}
   .body h4{font-size:15.3px;}
-  .body ul,.body ol{margin-right:16px;}
+  .body ul,.body ol{margin-inline-start:16px;}
   pre{font-size:12px; padding:15px 15px; line-height:1.8; border-radius:11px;}
-  .copy{opacity:1; top:8px; left:8px; padding:4px 8px; font-size:10px;}
+  .copy{opacity:1; top:8px; inset-inline-end:8px; padding:4px 8px; font-size:10px;}
   .callout{padding:13px 15px; font-size:14px; border-radius:13px;}
   .example{padding:14px 16px; border-radius:13px;}
   table{font-size:13.3px;} th,td{padding:9px 11px;}
@@ -46,7 +46,7 @@ h2.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
   .opt-key{width:26px; height:26px;}
   .q-why{font-size:13px; padding:10px 12px;}
   .quiz-actions{gap:8px;} .quiz-actions .btn{flex:1; justify-content:center; padding:12px 12px;}
-  .result{width:100%; margin-right:0; justify-content:center; font-size:13.4px;}
+  .result{width:100%; margin-inline-start:0; justify-content:center; font-size:13.4px;}
   .gate{padding:13px 15px; font-size:13px; align-items:flex-start;}
   .lesson-nav{display:none;}
   .sign{margin-top:26px;}
@@ -63,12 +63,12 @@ h2.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
   .cert .desc{font-size:13.8px; line-height:1.95; margin-top:18px;}
   .cert-grid{grid-template-columns:1fr; gap:9px; margin:22px 0 18px;}
   .cert-foot{flex-direction:column; align-items:flex-start; gap:14px;}
-  .cert-id{text-align:right;}
+  .cert-id{text-align:start;}
   .cert-actions .btn{flex:1; justify-content:center;}
-  .to-top{bottom:80px; left:14px; width:40px; height:40px; font-size:15px;}
+  .to-top{bottom:80px; inset-inline-end:14px; width:40px; height:40px; font-size:15px;}
   .toast{bottom:82px;}
   .mob{
-    display:flex; position:fixed; bottom:0; right:0; left:0; z-index:40; gap:8px;
+    display:flex; position:fixed; bottom:0; inset-inline:0; z-index:40; gap:8px;
     padding:9px 12px; padding-bottom:max(9px,env(safe-area-inset-bottom));
     background:color-mix(in srgb,var(--surface) 95%, transparent); backdrop-filter:blur(16px); border-top:1px solid var(--line);
   }
@@ -97,7 +97,7 @@ h2.title{font-size:23.5px;}
 
 @media(max-width:380px){
   .wrap{padding:18px 12px 118px;}
-  .body{padding-right:13px;} .body h3::before{right:-20px;}
+  .body{padding-inline-start:13px;} .body h3::before{inset-inline-start:-20px;}
   .opt{grid-template-columns:auto 1fr; } .opt-mark{display:none;}
   .opt.ok,.opt.no{position:relative;}
 }
@@ -114,3 +114,30 @@ h2.title{font-size:23.5px;}
   .wrap{padding:0!important; max-width:none;}
   .cert,.ach-card{box-shadow:none; break-inside:avoid;}
 }
+
+/* ============ English (LTR) direction adjustments ============
+   The layout is authored RTL-first and mirrors through logical properties.
+   These rules cover the few cases logical properties cannot express:
+   physical transforms/shadows, direction-dependent icons, and the
+   Persian strings baked into CSS ::after content. */
+
+/* Mobile drawer slides in from the inline-start edge in both directions. */
+@media (max-width:940px){
+  html[dir="ltr"] .rail{transform:translateX(-101%); box-shadow:18px 0 50px rgba(0,0,0,.45);}
+  html[dir="ltr"] .rail.open{transform:translateX(0);}
+}
+
+/* Arrow/caret icons encode direction, so mirror them in LTR.
+   Non-directional and brand icons are untouched. */
+html[dir="ltr"] .ph-arrow-left::before,
+html[dir="ltr"] .ph-arrow-right::before,
+html[dir="ltr"] .ph-caret-left::before,
+html[dir="ltr"] .ph-caret-right::before{display:inline-block; transform:scaleX(-1);}
+
+/* Quiz answer chips: the label text lives in CSS content, so localize it. */
+html[lang="en"] .opt.ok::after{content:'Correct answer';}
+html[lang="en"] .opt.no::after{content:'Your choice';}
+html[lang="en"] .q-item.need::after{content:'Unanswered';}
+
+/* Code stays LTR in both languages (already set on pre); keep inline code isolated. */
+code{unicode-bidi:isolate;}

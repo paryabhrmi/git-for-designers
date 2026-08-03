@@ -1,6 +1,6 @@
 import { LEVELS as RAW_LEVELS } from '../data/levels.js';
 import { SCENARIO } from '../data/scenarios.js';
-import { PHASES } from '../data/phases.js';
+import { PHASES as RAW_PHASES } from '../data/phases.js';
 
 /** Pure: returns new level objects; never mutates RAW_LEVELS or their quiz arrays. */
 export function buildLevelsWithScenarios(levels = RAW_LEVELS, scenarios = SCENARIO) {
@@ -20,4 +20,5 @@ export function getLevelWithScenarios(levelId, levels = RAW_LEVELS, scenarios = 
 }
 
 export const LEVELS = buildLevelsWithScenarios();
-export { PHASES };
+// Mutable copy owned by the app; content.js swaps localized names in place.
+export const PHASES = RAW_PHASES.map(p => ({ ...p }));

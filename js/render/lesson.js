@@ -1,12 +1,13 @@
 import { state, levelMinutes, phaseOf, phaseIndex, allPassed } from '../state.js';
 import { LEVELS } from '../course.js';
-import { trackOfLevel } from '../../data/tracks.js';
-import { MISSIONS } from '../../data/missions.js';
+import { trackOfLevel } from '../content.js';
+import { MISSIONS } from '../content.js';
 import { PASS_RATIO, KEYS, XP_PASS, XP_PERFECT, PHASE_IC, SITE, LINKEDIN } from '../config.js';
 import { $, FA } from '../dom.js';
 import { byline as bylineFn } from '../ui.js';
 import { ctx } from '../ctx.js';
 import { placeSim } from '../simulator.js';
+import { t, tf } from '../i18n.js';
 
 const byline = () => bylineFn(SITE, LINKEDIN);
 
@@ -17,7 +18,7 @@ export function renderLesson() {
   const need = Math.ceil(l.quiz.length * PASS_RATIO);
   const mins = levelMinutes(l);
   document.documentElement.style.setProperty('--pc', ph.color);
-  $('#crumbTitle').textContent = `سطح ${FA(l.id)} · ${l.title}`;
+  $('#crumbTitle').textContent = tf('lesson.crumb', FA(l.id), l.title);
   const draft = state.drafts[l.id];
   state.attempt = (draft && draft.attempt) || ctx.newAttempt(l);
   state.picks = (draft && draft.picks) ? { ...draft.picks } : {};
@@ -25,7 +26,7 @@ export function renderLesson() {
 
   $('#root').innerHTML = `
     <div class="step-meter">
-      <span class="sm-txt">سطح <b>${FA(l.id)}</b> از ${FA(LEVELS.length)}</span>
+      <span class="sm-txt">${tf('lesson.meter', FA(l.id), FA(LEVELS.length))}</span>
       <span class="sm-bar"><i style="width:${(l.id / LEVELS.length * 100).toFixed(1)}%"></i></span>
       <span class="sm-phase"><i class="ph-fill ${PHASE_IC[pi]}" aria-hidden="true"></i> ${ph.name.split('·')[0].trim()}</span>
     </div>
@@ -33,18 +34,18 @@ export function renderLesson() {
     <p class="sub">${l.subtitle}</p>
     <div class="meta">
       <span class="mono" style="direction:ltr"><i class="ph ph-git-branch"></i>${l.branch}</span>
-      <span><i class="ph ph-clock"></i>حدود ${FA(mins)} دقیقه مطالعه</span>
-      <span><i class="ph ph-seal-question"></i>${FA(l.quiz.length)} سؤال آزمون</span>
-      <span><i class="ph ph-target"></i>حد نصاب: ${FA(need)} پاسخ درست</span>
-      ${state.done[l.id] ? `<span style="font-weight:700"><i class="ph-fill ph-check-circle"></i>قبول‌شده · ${FA(XP_PASS + (state.done[l.id].perfect ? XP_PERFECT : 0))} XP${state.done[l.id].perfect ? ' · نمرهٔ کامل' : ''}</span>` : `<span><i class="ph ph-lightning"></i>تا ${FA(XP_PASS + XP_PERFECT)} امتیاز</span>`}
-      ${trk ? `<a class="meta-track" href="#/track-${trk.id}"><i class="ph ph-path"></i>بخشی از مسیر ${trk.shortTitle}</a>` : ''}
+      <span><i class="ph ph-clock"></i>${tf('lesson.meta.mins', FA(mins))}</span>
+      <span><i class="ph ph-seal-question"></i>${tf('lesson.meta.q', FA(l.quiz.length))}</span>
+      <span><i class="ph ph-target"></i>${tf('lesson.meta.pass', FA(need))}</span>
+      ${state.done[l.id] ? `<span style="font-weight:700"><i class="ph-fill ph-check-circle"></i>${tf('lesson.meta.passed', FA(XP_PASS + (state.done[l.id].perfect ? XP_PERFECT : 0)))}${state.done[l.id].perfect ? ` · ${t('lesson.meta.perfect')}` : ''}</span>` : `<span><i class="ph ph-lightning"></i>${tf('lesson.meta.upto', FA(XP_PASS + XP_PERFECT))}</span>`}
+      ${trk ? `<a class="meta-track" href="#/track-${trk.id}"><i class="ph ph-path"></i>${tf('lesson.meta.track', trk.shortTitle)}</a>` : ''}
     </div>
     <div class="rule"></div>
     ${(state.mistakes[l.id] && state.mistakes[l.id].length) ? `
       <div class="review">
-        <b><i class="ph-fill ph-warning-circle"></i>در تلاش قبلی این‌ها را اشتباه زدی</b>
+        <b><i class="ph-fill ph-warning-circle"></i>${t('lesson.review.h')}</b>
         <ol>${state.mistakes[l.id].map(m => `<li>${m}</li>`).join('')}</ol>
-        <button class="go" id="goQuiz">رفتن به آزمون<i class="ph-bold ph-arrow-left"></i></button>
+        <button class="go" id="goQuiz">${t('lesson.review.go')}<i class="ph-bold ph-arrow-left"></i></button>
       </div>` : ''}
     <div class="body">${l.body}</div>
 
@@ -52,8 +53,8 @@ export function renderLesson() {
       <div class="quiz-top">
         <span class="quiz-ic"><i class="ph-duotone ph-exam"></i></span>
         <div>
-          <h3>آزمون سطح ${FA(l.id)}</h3>
-          <p class="quiz-sub">${FA(l.quiz.length)} سؤال · برای باز شدن سطح بعد ${FA(need)} پاسخ درست لازم است.</p>
+          <h3>${tf('lesson.quiz.h', FA(l.id))}</h3>
+          <p class="quiz-sub">${tf('lesson.quiz.sub', FA(l.quiz.length), FA(need))}</p>
         </div>
         <span class="qcount" id="qcount">${FA(0)}/${FA(l.quiz.length)}</span>
       </div>
@@ -70,9 +71,9 @@ export function renderLesson() {
           <div class="q-why" data-why="${qi}"></div>
         </div>`; }).join('')}
       <div class="quiz-actions">
-        <button class="btn btn-primary" id="checkBtn"><i class="ph-bold ph-check-square-offset"></i>بررسی پاسخ‌ها</button>
+        <button class="btn btn-primary" id="checkBtn"><i class="ph-bold ph-check-square-offset"></i>${t('quiz.check')}</button>
         <span class="ans-count" id="ansCount"></span>
-        <button class="btn btn-ghost" id="retryBtn"><i class="ph ph-arrow-counter-clockwise"></i>پاک‌کردن پاسخ‌ها</button>
+        <button class="btn btn-ghost" id="retryBtn"><i class="ph ph-arrow-counter-clockwise"></i>${t('quiz.clear')}</button>
         <span class="result" id="result" role="status" aria-live="polite"></span>
       </div>
     </section>
@@ -80,26 +81,26 @@ export function renderLesson() {
     <div class="gate ${state.done[l.id] ? 'open' : ''}" id="gate">
       <i class="ph-fill ${state.done[l.id] ? 'ph-lock-simple-open' : 'ph-lock-simple'}"></i>
       <span>${state.done[l.id]
-        ? (state.current < LEVELS.length - 1 ? 'قفل سطح بعدی باز است. هر وقت آماده بودی ادامه بده.' : 'آخرین سطح را هم قبول شدی؛ نشان فتح مسیر آماده است.')
-        : 'سطح بعدی قفل است. برای باز شدن آن، در آزمون بالا قبول شو.'}</span>
+        ? (state.current < LEVELS.length - 1 ? t('lesson.gate.open') : t('lesson.gate.last'))
+        : t('lesson.gate.locked')}</span>
     </div>
 
     ${practice ? `<div class="lesson-practice">
       <i class="ph-fill ph-flag-checkered lp-ic" aria-hidden="true"></i>
-      <div class="lp-txt"><b>تمرین این مهارت</b><span>مأموریت عملی «${practice.title}» — اختیاری و بدون اثر روی امتیاز.</span></div>
-      <a class="btn btn-ghost" href="#/mission-${practice.id}"><i class="ph-bold ph-play" aria-hidden="true"></i>شروع تمرین</a>
+      <div class="lp-txt"><b>${t('lesson.practice.h')}</b><span>${tf('lesson.practice.d', practice.title)}</span></div>
+      <a class="btn btn-ghost" href="#/mission-${practice.id}"><i class="ph-bold ph-play" aria-hidden="true"></i>${t('mission.startCta')}</a>
     </div>` : ''}
     <div class="lesson-nav">
       ${state.current > 0
-        ? `<button class="nav-card" id="prevCard"><span class="ic"><i class="ph-bold ph-arrow-right"></i></span><span><em>سطح ${FA(LEVELS[state.current-1].id)}</em><b>${LEVELS[state.current-1].title}</b></span></button>`
+        ? `<button class="nav-card" id="prevCard"><span class="ic"><i class="ph-bold ph-arrow-right"></i></span><span><em>${tf('level.n', FA(LEVELS[state.current-1].id))}</em><b>${LEVELS[state.current-1].title}</b></span></button>`
         : '<span></span>'}
       ${state.current < LEVELS.length - 1
         ? `<button class="nav-card next" id="nextCard" ${state.done[l.id] ? '' : 'disabled'}>
              <span class="ic"><i class="ph-bold ${state.done[l.id] ? 'ph-arrow-left' : 'ph-lock-simple'}"></i></span>
-             <span><em>سطح ${FA(LEVELS[state.current+1].id)}</em><b>${LEVELS[state.current+1].title}</b></span></button>`
+             <span><em>${tf('level.n', FA(LEVELS[state.current+1].id))}</em><b>${LEVELS[state.current+1].title}</b></span></button>`
         : `<button class="nav-card next" id="certCard" ${allPassed() ? '' : 'disabled'}>
              <span class="ic"><i class="ph-fill ${allPassed() ? 'ph-trophy' : 'ph-lock-simple'}"></i></span>
-             <span><em>پایان دوره</em><b>مشاهده نشان مسیر</b></span></button>`}
+             <span><em>${t('lesson.nav.end')}</em><b>${t('ach.view')}</b></span></button>`}
     </div>
     ${byline()}`;
 
@@ -135,19 +136,19 @@ export function renderLesson() {
 export function enhance() {
   const ICON = { tip: 'ph-lightbulb', warn: 'ph-warning', note: 'ph-info' };
   // wide tables get their own scroll area so they never break the layout on phones
-  $('#root').querySelectorAll('.body table').forEach(t => {
-    if (t.parentNode.classList.contains('tbl-scroll')) return;
+  $('#root').querySelectorAll('.body table').forEach(tbl => {
+    if (tbl.parentNode.classList.contains('tbl-scroll')) return;
     const w = document.createElement('div');
     w.className = 'tbl-scroll';
-    t.parentNode.insertBefore(w, t); w.appendChild(t);
+    tbl.parentNode.insertBefore(w, tbl); w.appendChild(tbl);
   });
   $('#root').querySelectorAll('.callout').forEach(c => {
     const kind = c.classList.contains('tip') ? 'tip' : c.classList.contains('warn') ? 'warn' : 'note';
-    const t = c.querySelector('.co-title');
-    if (t && !t.querySelector('i')) t.insertAdjacentHTML('afterbegin', `<i class="ph-fill ${ICON[kind]}"></i>`);
+    const head = c.querySelector('.co-title');
+    if (head && !head.querySelector('i')) head.insertAdjacentHTML('afterbegin', `<i class="ph-fill ${ICON[kind]}"></i>`);
   });
-  $('#root').querySelectorAll('.example .ex-title').forEach(t => {
-    if (!t.querySelector('i')) t.insertAdjacentHTML('afterbegin', '<i class="ph-fill ph-cursor-click"></i>');
+  $('#root').querySelectorAll('.example .ex-title').forEach(ttl => {
+    if (!ttl.querySelector('i')) ttl.insertAdjacentHTML('afterbegin', '<i class="ph-fill ph-cursor-click"></i>');
   });
   buildToc();
   placeSim();
@@ -157,14 +158,14 @@ export function enhance() {
     pre.parentNode.insertBefore(wrap, pre); wrap.appendChild(pre);
     const btn = document.createElement('button');
     btn.className = 'copy';
-    btn.innerHTML = '<i class="ph ph-copy"></i>کپی';
+    btn.innerHTML = `<i class="ph ph-copy"></i>${t('code.copy')}`;
     btn.addEventListener('click', async () => {
       const clone = pre.cloneNode(true);
-      clone.querySelectorAll('.c').forEach(x => x.remove());   // drop the Persian side-comments
+      clone.querySelectorAll('.c').forEach(x => x.remove());   // drop the localized side-comments
       const text = clone.innerText.split('\n').map(x => x.replace(/\s+$/, '')).filter(x => x.trim()).join('\n');
-      try { await navigator.clipboard.writeText(text || pre.innerText); btn.innerHTML = '<i class="ph-bold ph-check"></i>کپی شد'; }
-      catch (e) { btn.innerHTML = 'دستی انتخاب کن'; }
-      setTimeout(() => btn.innerHTML = '<i class="ph ph-copy"></i>کپی', 1600);
+      try { await navigator.clipboard.writeText(text || pre.innerText); btn.innerHTML = `<i class="ph-bold ph-check"></i>${t('code.copied')}`; }
+      catch (e) { btn.innerHTML = t('code.manual'); }
+      setTimeout(() => btn.innerHTML = `<i class="ph ph-copy"></i>${t('code.copy')}`, 1600);
     });
     wrap.appendChild(btn);
   });
@@ -180,7 +181,7 @@ export function buildToc() {
   const nav = document.createElement('nav');
   nav.className = 'toc' + (small ? ' collapsed' : '');
   nav.innerHTML = `<button class="toc-h" type="button">
-      <i class="ph-fill ph-list-bullets"></i>در این سطح می‌خوانی
+      <i class="ph-fill ph-list-bullets"></i>${t('lesson.toc')}
       <span class="cnt">${hs.length}</span><i class="ph-bold ph-caret-down chev"></i></button>
     <ol class="toc-list">${hs.map((h, i) =>
       `<li><a href="#sec-${i}"><em>${String(i + 1).padStart(2, '0')}</em>${h.textContent}</a></li>`).join('')}</ol>`;

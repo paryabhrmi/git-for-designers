@@ -17,7 +17,7 @@
 .prog-bar{height:4px; border-radius:99px; background:var(--rail-fill); overflow:hidden;}
 .prog-bar i{display:block; height:100%; width:0; border-radius:99px; background:var(--p3); transition:width .6s cubic-bezier(.2,.8,.2,1);}
 .rail-search{padding:13px 18px 6px; position:relative;}
-.rail-search i{position:absolute; right:30px; top:23px; color:var(--rail-muted); font-size:15px;}
+.rail-search i{position:absolute; inset-inline-start:30px; top:23px; color:var(--rail-muted); font-size:15px;}
 .rail-search input{width:100%; background:var(--rail-fill); border:1px solid var(--rail-line); color:var(--rail-ink); border-radius:10px; padding:9px 34px 9px 12px; font-family:inherit; font-size:13px; outline:none;}
 .rail-search input::placeholder{color:var(--rail-muted);}
 .rail-search input:focus{border-color:var(--p1); background:var(--rail-hover);}
@@ -26,7 +26,7 @@
 .rail-list::-webkit-scrollbar{width:7px;}
 .rail-list::-webkit-scrollbar-thumb{background:var(--rail-line); border-radius:9px;}
 .rail-list::-webkit-scrollbar-thumb:hover{background:var(--rail-muted);}
-.fade{position:absolute; right:0; left:0; height:26px; pointer-events:none; z-index:3; opacity:0; transition:opacity .2s;}
+.fade{position:absolute; inset-inline:0; height:26px; pointer-events:none; z-index:3; opacity:0; transition:opacity .2s;}
 .fade.top{top:0; background:linear-gradient(to bottom,var(--rail),transparent);}
 .fade.bot{bottom:0; background:linear-gradient(to top,var(--rail),transparent);}
 .fade.show{opacity:1;}
@@ -36,7 +36,7 @@
 .phase{
   position:sticky; top:0; z-index:2; width:100%; border:none; cursor:pointer; font-family:inherit;
   background:var(--rail); padding:12px 18px 12px 14px; font-size:11.5px; font-weight:700; color:var(--rail-ink);
-  display:flex; align-items:center; gap:9px; text-align:right; transition:background .15s;
+  display:flex; align-items:center; gap:9px; text-align:start; transition:background .15s;
 }
 .phase:hover{background:var(--rail-2);}
 .phase>i:first-child{color:var(--pc); font-size:14px;}
@@ -56,11 +56,11 @@
 @keyframes blip{0%,100%{opacity:1; box-shadow:0 0 0 0 color-mix(in srgb,var(--pc) 55%, transparent);}
   50%{opacity:.65; box-shadow:0 0 0 4px transparent;}}
 .clear-s{
-  position:absolute; left:26px; top:22px; width:22px; height:22px; border-radius:6px; border:none; cursor:pointer;
+  position:absolute; inset-inline-end:26px; top:22px; width:22px; height:22px; border-radius:6px; border:none; cursor:pointer;
   background:var(--rail-fill); color:var(--rail-muted); display:none; place-items:center; font-size:11px;
 }
 .clear-s.show{display:grid;} .clear-s:hover{color:var(--rail-ink);}
-.nav-item{display:flex; width:100%; border:none; background:none; cursor:pointer; text-align:right; font-family:inherit; padding:0 12px 0 14px; color:inherit;}
+.nav-item{display:flex; width:100%; border:none; background:none; cursor:pointer; text-align:start; font-family:inherit; padding-block:0; padding-inline-start:12px; padding-inline-end:14px; color:inherit;}
 .gcol{width:30px; flex-shrink:0; display:flex; flex-direction:column; align-items:center;}
 .gline{width:1.5px; flex:1; background:var(--rail-line);}
 .gline.off{background:transparent;}
@@ -92,7 +92,7 @@
 .author-id{min-width:0; line-height:1.5;}
 .author-id b{display:block; font-size:13.5px; font-weight:700; color:var(--rail-ink);}
 .author-id span{display:block; font-size:11px; color:var(--rail-muted);}
-.author-links{margin-right:auto; display:flex; gap:6px;}
+.author-links{margin-inline-start:auto; display:flex; gap:6px;}
 .author-links a{
   width:31px; height:31px; border-radius:9px; border:1px solid var(--rail-line); color:var(--rail-muted);
   display:grid; place-items:center; font-size:14px; text-decoration:none; transition:.15s;
@@ -139,5 +139,5 @@
 .spacer{flex:1;}
 .icon-btn{width:36px; height:36px; border-radius:10px; border:1px solid var(--line); background:var(--surface); color:var(--muted); cursor:pointer; display:grid; place-items:center; font-size:17px; flex-shrink:0; transition:.15s;}
 .icon-btn:hover{border-color:var(--accent); color:var(--accent);}
-.read-bar{position:absolute; bottom:-1px; right:0; height:2px; background:var(--accent); width:0; transition:width .1s linear;}
+.read-bar{position:absolute; bottom:-1px; inset-inline-start:0; height:2px; background:var(--accent); width:0; transition:width .1s linear;}
 .wrap{padding:var(--s8) var(--s7) 130px; max-width:880px; width:100%; margin:0 auto;}

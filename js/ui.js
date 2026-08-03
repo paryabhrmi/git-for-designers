@@ -1,4 +1,5 @@
 import { $ } from './dom.js';
+import { t } from './i18n.js';
 
 export function toast(msg, icon = 'ph-lock-simple', action) {
   const t = $('#toast');
@@ -16,10 +17,10 @@ export function toast(msg, icon = 'ph-lock-simple', action) {
 export function authorCard(avatarSrc, site, linkedin) {
   return `
   <div class="author-card">
-    <img class="avatar" src="${avatarSrc}" alt="پریا بهرامی" width="62" height="62">
+    <img class="avatar" src="${avatarSrc}" alt="${t('author.name')}" width="62" height="62">
     <div class="who">
-      <b>پریا بهرامی</b>
-      <span>طراح محصول · تهیه‌کننده و مدرس این دوره</span>
+      <b>${t('author.name')}</b>
+      <span>${t('author.roleFull')}</span>
     </div>
     <div class="links">
       <a href="${site}" target="_blank" rel="noopener"><i class="ph-bold ph-globe-simple"></i>paryabahrami.ir</a>
@@ -31,7 +32,7 @@ export function authorCard(avatarSrc, site, linkedin) {
 export function byline(site, linkedin) {
   return `
   <div class="byline">
-    <span>تهیه‌شده توسط <b>پریا بهرامی</b></span>
+    <span>${t('byline.by')} <b>${t('author.name')}</b></span>
     <span class="dot"></span>
     <a href="${site}" target="_blank" rel="noopener"><i class="ph ph-globe-simple"></i>paryabahrami.ir</a>
     <span class="dot"></span>

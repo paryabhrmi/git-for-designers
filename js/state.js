@@ -1,6 +1,6 @@
 import { LEVELS, PHASES } from './course.js';
 import { XP_PASS, XP_PERFECT } from './config.js';
-import { RANKS } from '../data/ranks.js';
+import { RANKS } from './content.js';
 
 export const state = {
   view: 'intro',

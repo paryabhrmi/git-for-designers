@@ -1,6 +1,7 @@
-import { $ } from './dom.js';
+import { $, FA } from './dom.js';
 import { state } from './state.js';
 import { LEVELS } from './course.js';
+import { t, tf } from './i18n.js';
 
 export function buildSim(host) {
   const FILES = [
@@ -14,12 +15,12 @@ export function buildSim(host) {
   const el = document.createElement('div');
   el.className = 'sim';
   el.innerHTML = `
-    <div class="sim-head"><i class="ph-duotone ph-cursor-click"></i><b>تمرین تعاملی: مسیر یک تغییر</b></div>
-    <p class="sim-note">دستورها را بزن و ببین فایل‌ها بین سه ناحیهٔ Git چطور جابه‌جا می‌شوند.</p>
+    <div class="sim-head"><i class="ph-duotone ph-cursor-click"></i><b>${t('sim.head')}</b></div>
+    <p class="sim-note">${t('sim.note')}</p>
     <div class="sim-cols">
-      <div class="sim-col" data-z="wd"><h5><i class="ph ph-folder-open"></i>پوشهٔ کار <em>working</em></h5><div class="chips"></div></div>
-      <div class="sim-col" data-z="st"><h5><i class="ph ph-tray"></i>ناحیهٔ آماده‌سازی <em>staged</em></h5><div class="chips"></div></div>
-      <div class="sim-col" data-z="cm"><h5><i class="ph ph-git-commit"></i>تاریخچه <em>committed</em></h5><div class="chips"></div></div>
+      <div class="sim-col" data-z="wd"><h5><i class="ph ph-folder-open"></i>${t('sim.col.wd')} <em>working</em></h5><div class="chips"></div></div>
+      <div class="sim-col" data-z="st"><h5><i class="ph ph-tray"></i>${t('sim.col.st')} <em>staged</em></h5><div class="chips"></div></div>
+      <div class="sim-col" data-z="cm"><h5><i class="ph ph-git-commit"></i>${t('sim.col.cm')} <em>committed</em></h5><div class="chips"></div></div>
     </div>
     <div class="sim-cmds">
       <button class="sim-cmd" data-a="status">git status</button>
@@ -27,7 +28,7 @@ export function buildSim(host) {
       <button class="sim-cmd" data-a="addall">git add .</button>
       <button class="sim-cmd" data-a="commit">git commit</button>
       <button class="sim-cmd" data-a="push">git push</button>
-      <button class="sim-cmd ghost" data-a="reset">از نو</button>
+      <button class="sim-cmd ghost" data-a="reset">${t('sim.reset')}</button>
     </div>
     <div class="sim-log"></div>`;
 
@@ -43,7 +44,7 @@ export function buildSim(host) {
       const ic = z === 'wd' ? 'ph-pencil-simple' : z === 'st' ? 'ph-check' : (pushed ? 'ph-cloud-check' : 'ph-git-commit');
       box.innerHTML = list.length
         ? list.map(f => `<span class="chip-f ${cls}"><i class="ph-bold ${ic}"></i>${f.n}</span>`).join('')
-        : '<div class="sim-empty">خالی</div>';
+        : `<div class="sim-empty">${t('sim.empty')}</div>`;
     });
     el.querySelector('[data-a="add1"]').disabled = !files.some(f => f.z === 'wd' && f.n === 'styles.css');
     el.querySelector('[data-a="addall"]').disabled = !files.some(f => f.z === 'wd');
@@ -51,7 +52,7 @@ export function buildSim(host) {
     el.querySelector('[data-a="push"]').disabled = pushed || !files.some(f => f.z === 'cm');
     el.querySelector('.sim-log').innerHTML = log.length
       ? log.map(l => `<div><span class="cmd">$ ${l.cmd}</span><span class="exp">${l.exp}</span></div>`).join('')
-      : '<div><span class="exp" style="color:#7A8AA3">هنوز دستوری اجرا نشده. با <span class="cmd">git status</span> شروع کن.</span></div>';
+      : `<div><span class="exp" style="color:#7A8AA3">${t('sim.logEmpty')}</span></div>`;
   }
 
   el.querySelectorAll('.sim-cmd').forEach(b => b.addEventListener('click', () => {
@@ -59,21 +60,21 @@ export function buildSim(host) {
     let hot = null;
     if (a === 'status') {
       const wd = files.filter(f => f.z === 'wd').length, st = files.filter(f => f.z === 'st').length;
-      say('git status', `${FA(st)} فایل آمادهٔ ثبت، ${FA(wd)} فایل تغییرکردهٔ Stage‌نشده.`);
+      say('git status', tf('sim.exp.status', FA(st), FA(wd)));
       hot = wd ? 'wd' : 'st';
     } else if (a === 'add1') {
       files.forEach(f => { if (f.n === 'styles.css' && f.z === 'wd') f.z = 'st'; });
-      say('git add styles.css', 'فقط همین فایل وارد ناحیهٔ آماده‌سازی شد.'); hot = 'st';
+      say('git add styles.css', t('sim.exp.add1')); hot = 'st';
     } else if (a === 'addall') {
       files.forEach(f => { if (f.z === 'wd') f.z = 'st'; });
-      say('git add .', 'همهٔ تغییرات Stage شدند — با احتیاط استفاده کن.'); hot = 'st';
+      say('git add .', t('sim.exp.addall')); hot = 'st';
     } else if (a === 'commit') {
       const n = files.filter(f => f.z === 'st').length;
       files.forEach(f => { if (f.z === 'st') f.z = 'cm'; });
-      say('git commit -m "…"', `${FA(n)} فایل در یک Commit ثبت شد. چیزی که Stage نبود، ثبت نشد.`); hot = 'cm';
+      say('git commit -m "…"', tf('sim.exp.commit', FA(n))); hot = 'cm';
     } else if (a === 'push') {
       pushed = true;
-      say('git push', 'Commitها روی Remote (GitHub) هم قرار گرفتند.'); hot = 'cm';
+      say('git push', t('sim.exp.push')); hot = 'cm';
     } else {
       files = FILES.map(f => ({ ...f })); log = []; pushed = false;
     }
@@ -91,7 +92,7 @@ export function placeSim() {
   const id = LEVELS[state.current].id;
   if (id !== 1 && id !== 4) return;
   const holder = document.createElement('div');
-  const anchorText = id === 1 ? 'سه ناحیهٔ اصلی Git' : 'git commit';
+  const anchorText = id === 1 ? t('sim.anchor') : 'git commit';
   const h = [...body.querySelectorAll('h3')].find(x => x.textContent.includes(anchorText));
   if (h) {
     let node = h.nextElementSibling;
