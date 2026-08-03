@@ -283,6 +283,21 @@ Technologist track.
   plus a link to the learner's current open level — they never add a lock the course did not
   already have.
 
+### Learning missions (Phase 3)
+
+Optional guided-practice missions map to tracks and prerequisite lessons (see
+[`docs/learning-experience.md`](./learning-experience.md) for the full model):
+
+| Mission | Track | Prerequisite lessons |
+| --- | --- | --- |
+| `core-ship-change` | core | 4, 5, 7, 8, 11, 12 |
+| `ai-safe-checkpoint` | ai-prototype | 21, 6, 14 |
+| `ds-token-conflict` | design-system | 8, 10, 17, 23, 24 |
+| `dt-clean-branch` | design-technologist | 14, 27, 28 |
+
+Missions are optional practice: they award no XP and do not change track
+progress, Core completion, or path-achievement eligibility.
+
 ### Completion interpretation
 
 - **Level completion:** unchanged — a level is done when its quiz is passed (≥70%), stored in `state.done`.

@@ -17,4 +17,6 @@ export const ROUTES = {
   level: (id) => '#/level-' + id,
   tracks: '#/tracks',
   track: (id) => '#/track-' + id,
+  missions: '#/missions',
+  mission: (id) => '#/mission-' + id,
 };

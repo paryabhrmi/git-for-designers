@@ -1,4 +1,5 @@
 import { state, passedCount, perfectCount, allPassed } from '../js/state.js';
+import { MISSION_IDS } from './missions.js';
 
 export const BADGES = [
   { id: 'first', ic: 'ph-git-commit', t: 'اولین Commit', d: 'سطح ۱ را قبول شدی', ok: () => !!state.done[1] },
@@ -10,6 +11,7 @@ export const BADGES = [
   { id: 'half', ic: 'ph-flag', t: 'نیمهٔ راه', d: '۱۵ سطح پشت سر گذاشته شد', ok: () => passedCount() >= 15 },
   { id: 'perfect5', ic: 'ph-target', t: 'بی‌خطا ×۵', d: '۵ آزمون با نمرهٔ کامل', ok: () => perfectCount() >= 5 },
   { id: 'tokens', ic: 'ph-palette', t: 'توکن‌شناس', d: 'Design System و Tokenها', ok: () => state.done[23] && state.done[24] },
+  { id: 'missions', ic: 'ph-flag-checkered', t: 'مأمور میدان', d: 'هر چهار مأموریت عملی را کامل کردی', ok: () => MISSION_IDS.every(id => (state.missionsDone || []).includes(id)) },
   { id: 'all', ic: 'ph-crown-simple', t: 'پایان مسیر', d: 'هر ۳۰ سطح قبول شد', ok: () => allPassed() }
 ];
 

@@ -1,6 +1,7 @@
 import { state, levelMinutes, phaseOf, phaseIndex, allPassed } from '../state.js';
 import { LEVELS } from '../course.js';
 import { trackOfLevel } from '../../data/tracks.js';
+import { MISSIONS } from '../../data/missions.js';
 import { PASS_RATIO, KEYS, XP_PASS, XP_PERFECT, PHASE_IC, SITE, LINKEDIN } from '../config.js';
 import { $, FA } from '../dom.js';
 import { byline as bylineFn } from '../ui.js';
@@ -12,6 +13,7 @@ const byline = () => bylineFn(SITE, LINKEDIN);
 export function renderLesson() {
   const l = LEVELS[state.current], ph = phaseOf(l.id), pi = phaseIndex(l.id);
   const trk = trackOfLevel(l.id);
+  const practice = MISSIONS.find(m => m.levelIds.includes(l.id)) || null;
   const need = Math.ceil(l.quiz.length * PASS_RATIO);
   const mins = levelMinutes(l);
   document.documentElement.style.setProperty('--pc', ph.color);
@@ -82,6 +84,11 @@ export function renderLesson() {
         : 'سطح بعدی قفل است. برای باز شدن آن، در آزمون بالا قبول شو.'}</span>
     </div>
 
+    ${practice ? `<div class="lesson-practice">
+      <i class="ph-fill ph-flag-checkered lp-ic" aria-hidden="true"></i>
+      <div class="lp-txt"><b>تمرین این مهارت</b><span>مأموریت عملی «${practice.title}» — اختیاری و بدون اثر روی امتیاز.</span></div>
+      <a class="btn btn-ghost" href="#/mission-${practice.id}"><i class="ph-bold ph-play" aria-hidden="true"></i>شروع تمرین</a>
+    </div>` : ''}
     <div class="lesson-nav">
       ${state.current > 0
         ? `<button class="nav-card" id="prevCard"><span class="ic"><i class="ph-bold ph-arrow-right"></i></span><span><em>سطح ${FA(LEVELS[state.current-1].id)}</em><b>${LEVELS[state.current-1].title}</b></span></button>`

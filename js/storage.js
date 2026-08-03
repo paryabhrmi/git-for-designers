@@ -2,6 +2,7 @@ import { STORE_KEY } from './config.js';
 import { state, isUnlocked, firstOpen } from './state.js';
 import { LEVELS } from './course.js';
 import { TRACK_BY_ID } from '../data/tracks.js';
+import { MISSION_BY_ID } from '../data/missions.js';
 
 function lsGet() { try { return window.localStorage.getItem(STORE_KEY); } catch (e) { return null; } }
 function lsSet(v) { try { window.localStorage.setItem(STORE_KEY, v); } catch (e) {} }
@@ -27,10 +28,16 @@ export async function load() {
         if (d.theme) document.documentElement.dataset.theme = d.theme;
         if (typeof d.last === 'number' && d.last >= 0 && d.last < LEVELS.length) state.current = d.last;
         state.track = (typeof d.track === 'string' && TRACK_BY_ID[d.track]) ? d.track : null;
-        const VIEWS = ['intro', 'lesson', 'glossary', 'cert', 'tracks', 'track'];
+        state.mission = (typeof d.mission === 'string' && MISSION_BY_ID[d.mission]) ? d.mission : null;
+        // completed mission IDs: dedupe + drop unknown IDs; tolerate a missing/corrupt value
+        state.missionsDone = Array.isArray(d.missionsDone)
+          ? [...new Set(d.missionsDone.filter(id => MISSION_BY_ID[id]))]
+          : [];
+        const VIEWS = ['intro', 'lesson', 'glossary', 'cert', 'tracks', 'track', 'missions', 'mission'];
         state.view = VIEWS.includes(d.view) ? d.view : 'intro';
         if (state.view === 'lesson' && !isUnlocked(state.current)) state.current = firstOpen();
         if (state.view === 'track' && !state.track) state.view = 'tracks';
+        if (state.view === 'mission' && !state.mission) state.view = 'missions';
       }
     }
   } catch (e) {}
@@ -44,6 +51,8 @@ export async function save() {
     last: state.current,
     view: state.view,
     track: state.track,
+    mission: state.mission,
+    missionsDone: state.missionsDone,
     theme: document.documentElement.dataset.theme,
   });
   lsSet(payload);

@@ -9,6 +9,7 @@
 import { state, isUnlocked, firstOpen } from '../state.js';
 import { LEVELS } from '../course.js';
 import { TRACKS, TRACK_BY_ID } from '../../data/tracks.js';
+import { missionsForTrack } from '../../data/missions.js';
 import { SITE, LINKEDIN } from '../config.js';
 import { $, FA } from '../dom.js';
 import { byline as bylineFn } from '../ui.js';
@@ -139,6 +140,27 @@ function actionBlock(track, st) {
   </div>`;
 }
 
+function missionSection(track) {
+  const missions = missionsForTrack(track.id);
+  if (!missions.length) return '';
+  const rows = missions.map(m => {
+    const done = state.missionsDone.includes(m.id);
+    return `<li><a class="td-mission${done ? ' is-done' : ''}" href="#/mission-${m.id}">
+      <span class="tm-ic"><i class="ph-fill ${m.icon}" aria-hidden="true"></i></span>
+      <span class="tm-main">
+        <span class="tm-title">${m.title}</span>
+        <span class="tm-meta">${FA(m.steps.length)} مرحله · ${m.difficulty}</span>
+      </span>
+      <span class="tm-state">${done ? 'تکمیل‌شده' : 'شروع تمرین'}</span>
+    </a></li>`;
+  }).join('');
+  return `<section class="td-missions">
+    <h3 class="td-missions-h">تمرین عملی این مسیر</h3>
+    <p class="td-missions-sub">مأموریت اختیاری برای تمرین همین مهارت‌ها در یک موقعیت واقعی طراحی. روی امتیاز و نشان فتح مسیر اثری ندارد.</p>
+    <ol class="td-levels" style="margin-bottom:0">${rows}</ol>
+  </section>`;
+}
+
 function completionBlock(track) {
   const nextNames = track.recommendedNextTrackIds.map(id => TRACK_BY_ID[id]).filter(Boolean);
   const next = nextNames.length
@@ -182,6 +204,7 @@ function detail(track) {
     <ol class="td-levels">
       ${st.levels.map(l => levelRow(l, recIdx)).join('')}
     </ol>
+    ${missionSection(track)}
     ${st.complete ? completionBlock(track) : ''}
     ${byline()}`;
 
