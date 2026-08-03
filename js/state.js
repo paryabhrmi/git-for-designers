@@ -6,6 +6,8 @@ export const state = {
   view: 'intro',
   current: 0,
   track: null,   // active track id in track-detail view (derived; never a source of progress)
+  mission: null, // active mission id in mission-detail view
+  missionsDone: [], // completed mission IDs (practice completion; awards no XP)
   done: {},
   learner: '',
   picks: {},

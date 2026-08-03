@@ -50,6 +50,14 @@ export function buildNav(filter = '') {
     tr.innerHTML = `<span class="nav-lb"><i class="ph ph-path"></i><span>مسیرهای یادگیری</span></span>`;
     tr.addEventListener('click', () => { state.view = 'tracks'; state.track = null; ctx.render(); ctx.closeMenu(); ctx.save(); });
     nav.appendChild(tr);
+
+    const ms = document.createElement('button');
+    ms.className = 'nav-item nav-special' + (state.view === 'missions' || state.view === 'mission' ? ' active' : '');
+    ms.dataset.nav = 'missions';
+    ms.style.setProperty('--pc', 'var(--p3)');
+    ms.innerHTML = `<span class="nav-lb"><i class="ph ph-flag-checkered"></i><span>مأموریت‌های عملی</span></span>`;
+    ms.addEventListener('click', () => { state.view = 'missions'; state.mission = null; ctx.render(); ctx.closeMenu(); ctx.save(); });
+    nav.appendChild(ms);
   }
 
   let hits = 0;
@@ -175,7 +183,7 @@ export function syncNav() {
   });
   document.querySelectorAll('.nav-special').forEach(el => {
     const kind = el.dataset.nav || 'intro';
-    el.classList.toggle('active', state.view === kind || (kind === 'tracks' && state.view === 'track'));
+    el.classList.toggle('active', state.view === kind || (kind === 'tracks' && state.view === 'track') || (kind === 'missions' && state.view === 'mission'));
   });
   const n = passedCount(), xp = totalXP();
   $('#progTxt').textContent = `${FA(n)} از ${FA(LEVELS.length)} سطح · ${FA(earned().length)} نشان`;

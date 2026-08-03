@@ -16,19 +16,21 @@ import { renderLesson, enhance, buildToc } from './render/lesson.js';
 import { renderGlossary } from './render/glossary.js';
 import { renderCert } from './render/certificate.js';
 import { renderTracks } from './render/tracks.js';
+import { renderMissions } from './render/missions.js';
 
 export { shuffle, newAttempt, refreshCount, checkQuiz };
 export {
   buildNav, revealActive, fades, syncNav, focusMain, go,
   updateMob, updateMidBtn, closeMenu, toggleMenu,
 };
-export { renderIntro, renderLesson, enhance, buildToc, renderGlossary, renderCert, renderTracks };
+export { renderIntro, renderLesson, enhance, buildToc, renderGlossary, renderCert, renderTracks, renderMissions };
 
 export function render() {
   if (state.view === 'intro') renderIntro();
   else if (state.view === 'cert') renderCert();
   else if (state.view === 'glossary') renderGlossary();
   else if (state.view === 'tracks' || state.view === 'track') renderTracks();
+  else if (state.view === 'missions' || state.view === 'mission') renderMissions();
   else renderLesson();
   buildNav($('#search').value);
   updateMob();
@@ -104,6 +106,7 @@ $('#resetBtn').addEventListener('click', () => openModal(() => {
   state.done = {}; state.drafts = {}; state.mistakes = {}; state.tries = {};
   state.picks = {}; state.checked = false; state.attempt = []; state.glQuery = '';
   state.current = 0; state.view = 'intro'; state.openPhases = null;
+  state.track = null; state.mission = null; state.missionsDone = [];
   save(); render();
   toast('پیشرفت پاک شد؛ دوره از ابتدا شروع می‌شود.', 'ph-arrow-counter-clockwise');
 }));

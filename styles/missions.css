@@ -1,0 +1,143 @@
+/* Learning missions — hub + step engine. Built on existing tokens; monochrome-safe. */
+
+/* ---- hub ---- */
+.mission-sim{display:inline-flex; align-items:center; gap:7px; font-size:12.5px; color:var(--muted); margin-top:10px;
+  background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-pill); padding:5px 12px;}
+.mission-filter{display:flex; flex-wrap:wrap; gap:8px; margin:var(--s5) 0 var(--s4);}
+.mf-btn{font-family:inherit; font-size:13px; font-weight:700; padding:7px 14px; border-radius:var(--r-pill);
+  border:1px solid var(--line); background:var(--surface); color:var(--ink-2); cursor:pointer; transition:.15s;}
+.mf-btn:hover{border-color:var(--muted);}
+.mf-btn.active{background:var(--accent); color:var(--on-accent); border-color:var(--accent);}
+
+.mission-grid{list-style:none; display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:var(--s4); margin:0; padding:0;}
+.mission-card{display:flex; flex-direction:column; gap:10px; height:100%; background:var(--surface);
+  border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--s5); box-shadow:var(--sh-1);
+  color:inherit; text-decoration:none; transition:border-color .15s, transform .15s, box-shadow .15s;}
+.mission-card:hover{border-color:var(--muted); transform:translateY(-2px); box-shadow:var(--sh-2);}
+.mission-card.is-done{border-color:var(--accent);}
+.mc-top{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+.mc-ic{width:40px; height:40px; border-radius:12px; display:grid; place-items:center; background:var(--accent-soft); color:var(--accent-ink); font-size:21px;}
+.mc-flag{display:inline-flex; align-items:center; gap:5px; white-space:nowrap; font-size:11px; font-weight:800; padding:3px 10px; border-radius:var(--r-pill); border:1px solid var(--line); color:var(--muted); background:var(--surface-2);}
+.mission-card.is-done .mc-flag{background:var(--accent); color:var(--on-accent); border-color:var(--accent);}
+.mc-title{font-size:15.5px; font-weight:800; line-height:1.6;}
+.mc-desc{font-size:13px; color:var(--muted); line-height:1.8;}
+.mc-meta{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto;}
+.mc-chip{white-space:nowrap; font-size:11px; font-weight:700; padding:3px 9px; border-radius:var(--r-pill); border:1px solid var(--line); color:var(--ink-2); background:var(--surface-2);}
+.mc-cta{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; color:var(--accent-ink);}
+
+/* ---- detail: header + context ---- */
+.mission-detail-head{display:flex; align-items:center; gap:var(--s3); margin-bottom:var(--s4);}
+.mission-detail-head .md-ic{width:52px; height:52px; border-radius:14px; flex-shrink:0; display:grid; place-items:center; background:var(--accent-soft); color:var(--accent-ink); font-size:26px;}
+.mission-detail-head h2{font-size:clamp(20px,2.7vw,27px); font-weight:900; letter-spacing:-.4px; line-height:1.5;}
+.mission-detail-head .md-sub{font-size:13px; color:var(--muted); margin-top:3px;}
+.md-done{color:var(--accent-ink); font-weight:800;}
+.ms-context{display:flex; gap:12px; align-items:flex-start; background:var(--surface-2); border:1px solid var(--line);
+  border-radius:var(--r-lg); padding:var(--s4) var(--s5); margin-bottom:var(--s5);}
+.ms-context>i{font-size:20px; color:var(--muted); margin-top:2px; flex-shrink:0;}
+.ms-context b{display:block; font-size:13.5px; font-weight:800; margin-bottom:2px;}
+.ms-context p{font-size:13.5px; color:var(--ink-2); line-height:1.9;}
+
+/* ---- step progress ---- */
+.ms-progress{display:flex; align-items:center; gap:12px; margin-bottom:var(--s4);}
+.ms-step-txt{font-size:12.5px; font-weight:800; color:var(--ink-2); white-space:nowrap;}
+.ms-bar{flex:1; height:8px; border-radius:var(--r-pill); background:var(--surface-2); border:1px solid var(--line); overflow:hidden;}
+.ms-bar i{display:block; height:100%; background:var(--accent); border-radius:var(--r-pill); transition:width .4s;}
+
+/* ---- situation + command + state ---- */
+.ms-situation{font-size:16px; line-height:2; margin-bottom:var(--s4);}
+.ms-situation:focus{outline:none;}
+.ms-situation code{font-family:'JetBrains Mono',monospace; direction:ltr; unicode-bidi:isolate; background:var(--surface-2); border:1px solid var(--line); border-radius:6px; padding:1px 6px; font-size:.9em;}
+.ms-cmd{margin:0 0 var(--s4); border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden;}
+.ms-cmd-label{display:flex; align-items:center; gap:7px; font-size:11.5px; color:var(--muted); background:var(--surface-2); padding:7px 12px; border-bottom:1px solid var(--line);}
+.ms-cmd pre{margin:0; padding:12px 14px; background:var(--surface); overflow-x:auto;}
+.ms-cmd code{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--ink); white-space:pre;}
+.ms-state{display:flex; gap:8px; align-items:flex-start; font-size:12.8px; color:var(--muted); line-height:1.8; margin:0 0 var(--s4);
+  background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-md); padding:9px 13px;}
+.ms-state i{margin-top:3px; flex-shrink:0;}
+
+/* ---- choices ---- */
+.ms-choices{display:flex; flex-direction:column; gap:10px; margin-bottom:var(--s4);}
+.ms-choice{display:flex; align-items:flex-start; gap:12px; text-align:start; width:100%;
+  background:var(--surface); border:1.5px solid var(--line); border-radius:var(--r-md); padding:14px 16px;
+  font-family:inherit; font-size:14.5px; line-height:1.8; color:var(--ink); cursor:pointer; transition:border-color .15s, background .15s;}
+.ms-choice:hover{border-color:var(--muted); background:var(--surface-2);}
+.ms-choice-mark{flex-shrink:0; font-size:19px; color:var(--muted); margin-top:1px;}
+.ms-choice-label{flex:1;}
+.ms-choice-label code{font-family:'JetBrains Mono',monospace; direction:ltr; unicode-bidi:isolate; font-size:.9em;}
+.ms-choice.picked{border-width:2px;}
+.ms-choice.picked.ok{border-color:var(--add,#2f9e44);}
+.ms-choice.picked.ok .ms-choice-mark{color:var(--add,#2f9e44);}
+.ms-choice.picked.unsafe,.ms-choice.picked.incorrect{border-color:var(--del,#e03131);}
+.ms-choice.picked.unsafe .ms-choice-mark,.ms-choice.picked.incorrect .ms-choice-mark{color:var(--del,#e03131);}
+.ms-choice.picked.risky{border-color:var(--gold,#c98a00);}
+.ms-choice.picked.risky .ms-choice-mark{color:var(--gold,#c98a00);}
+
+/* ---- feedback ---- */
+.ms-feedback{margin-bottom:var(--s3);}
+.ms-fb{border:1px solid var(--line); border-inline-start:3px solid var(--muted); border-radius:var(--r-md); padding:14px 16px; background:var(--surface-2);}
+.ms-fb.ok{border-inline-start-color:var(--add,#2f9e44);}
+.ms-fb.unsafe,.ms-fb.incorrect{border-inline-start-color:var(--del,#e03131);}
+.ms-fb.risky{border-inline-start-color:var(--gold,#c98a00);}
+.ms-fb-head{display:flex; align-items:center; gap:8px; font-size:14.5px; margin-bottom:6px;}
+.ms-fb-head i{font-size:19px;}
+.ms-fb-head b{font-weight:800;}
+.ms-fb-head b:focus{outline:none;}
+.ms-fb.ok .ms-fb-head i{color:var(--add,#2f9e44);}
+.ms-fb.unsafe .ms-fb-head i,.ms-fb.incorrect .ms-fb-head i{color:var(--del,#e03131);}
+.ms-fb.risky .ms-fb-head i{color:var(--gold,#c98a00);}
+.ms-fb-body{font-size:13.8px; color:var(--ink-2); line-height:1.95;}
+.ms-fb-body code,.ms-fb-explain code{font-family:'JetBrains Mono',monospace; direction:ltr; unicode-bidi:isolate; background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:1px 5px; font-size:.9em;}
+.ms-fb-explain{display:flex; gap:8px; align-items:flex-start; font-size:13.5px; line-height:1.9; color:var(--ink); margin-top:10px; padding-top:10px; border-top:1px dashed var(--line);}
+.ms-fb-explain i{margin-top:3px; flex-shrink:0;}
+.ms-fb-retry{display:flex; align-items:center; gap:7px; font-size:13px; color:var(--muted); margin-top:8px;}
+.ms-fb #msNext,.ms-fb .btn{margin-top:12px;}
+
+/* ---- tools + hint ---- */
+.ms-tools{display:flex; flex-wrap:wrap; gap:10px; margin:var(--s3) 0;}
+.ms-hint{display:flex; gap:9px; align-items:flex-start; font-size:13.5px; line-height:1.9; color:var(--ink-2);
+  background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-md); padding:12px 15px; margin-bottom:var(--s3);}
+.ms-hint[hidden]{display:none;}
+.ms-hint i{margin-top:3px; flex-shrink:0; color:var(--gold,#c98a00);}
+
+/* ---- debrief ---- */
+.ms-debrief{border:1px solid var(--accent); border-radius:var(--r-lg); padding:var(--s5) var(--s6); background:var(--surface); box-shadow:var(--sh-1);}
+.ms-debrief-head{display:flex; align-items:center; gap:12px; margin-bottom:12px;}
+.ms-debrief-head i{font-size:28px; color:var(--accent-ink);}
+.ms-debrief-head h2{font-size:22px; font-weight:900;}
+.ms-debrief-msg{font-size:15px; color:var(--ink-2); line-height:2; margin-bottom:var(--s4);}
+.ms-objectives-h{font-size:14px; font-weight:800; margin-bottom:10px;}
+.ms-objectives{list-style:none; display:flex; flex-direction:column; gap:8px; margin:0 0 var(--s5); padding:0;}
+.ms-objectives li{display:flex; gap:9px; align-items:flex-start; font-size:13.8px; line-height:1.85; color:var(--ink-2);}
+.ms-objectives li i{margin-top:4px; flex-shrink:0; color:var(--accent-ink);}
+.ms-debrief-actions{display:flex; flex-wrap:wrap; gap:10px;}
+
+/* ---- mission section inside track detail ---- */
+.td-missions{margin:var(--s5) 0 0;}
+.td-missions-h{font-size:17px; font-weight:800; margin-bottom:6px;}
+.td-missions-sub{font-size:12.8px; color:var(--muted); margin-bottom:var(--s3); line-height:1.8;}
+.td-mission{display:flex; align-items:center; gap:12px; width:100%; text-align:start; background:var(--surface);
+  border:1px solid var(--line); border-radius:var(--r-md); padding:13px 16px; text-decoration:none; color:inherit; transition:border-color .15s;}
+.td-mission:hover{border-color:var(--muted);}
+.td-mission.is-done{border-color:var(--accent);}
+.td-mission .tm-ic{width:34px; height:34px; border-radius:10px; flex-shrink:0; display:grid; place-items:center; background:var(--accent-soft); color:var(--accent-ink); font-size:18px;}
+.td-mission .tm-main{flex:1; min-width:0;}
+.td-mission .tm-title{display:block; font-size:14px; font-weight:800; line-height:1.5;}
+.td-mission .tm-meta{display:block; font-size:11.5px; color:var(--muted); margin-top:2px;}
+.td-mission .tm-state{flex-shrink:0; white-space:nowrap; font-size:11.5px; font-weight:800; padding:3px 10px; border-radius:var(--r-pill); border:1px solid var(--line); color:var(--muted); background:var(--surface-2);}
+.td-mission.is-done .tm-state{color:var(--accent-ink); border-color:var(--accent);}
+
+/* ---- lesson practice link ---- */
+.lesson-practice{display:flex; align-items:center; gap:12px; flex-wrap:wrap; background:var(--surface-2);
+  border:1px solid var(--line); border-inline-start:3px solid var(--accent); border-radius:var(--r-md);
+  padding:13px 16px; margin:var(--s4) 0;}
+.lesson-practice .lp-ic{font-size:20px; color:var(--accent-ink); flex-shrink:0;}
+.lesson-practice .lp-txt{flex:1 1 220px;}
+.lesson-practice .lp-txt b{display:block; font-size:14px; font-weight:800;}
+.lesson-practice .lp-txt span{font-size:12.5px; color:var(--muted);}
+.lesson-practice .btn{flex-shrink:0;}
+
+@media (max-width:600px){
+  .mission-grid{grid-template-columns:1fr;}
+  .ms-choice{font-size:14px; padding:13px 13px;}
+  .ms-debrief-actions .btn,.lesson-practice .btn{width:100%; justify-content:center;}
+}
