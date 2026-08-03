@@ -31,9 +31,9 @@
 
 </head>
 <body>
-<a class="skip" href="#mainContent">پرش به محتوای درس</a>
+<a class="skip" href="#mainContent" data-i18n="skip">پرش به محتوای درس</a>
 <div class="app">
-  <aside class="rail" id="rail" aria-label="فهرست دوره">
+  <aside class="rail" id="rail" aria-label="فهرست دوره" data-i18n-aria="rail.label">
     <div class="rail-head">
       <div class="logo">
         <span class="logo-mark">
@@ -43,13 +43,13 @@
           </svg>
         </span>
         <div class="logo-txt">
-          <b>دورهٔ Git برای طراحان</b>
-          <span>۳۰ سطح · آزمون و نشان مسیر</span>
+          <b data-i18n="logo.title">دورهٔ Git برای طراحان</b>
+          <span data-i18n="logo.sub">۳۰ سطح · آزمون و نشان مسیر</span>
         </div>
-        <button class="rail-close" id="railClose" aria-label="بستن فهرست"><i class="ph-bold ph-x"></i></button>
+        <button class="rail-close" id="railClose" aria-label="بستن فهرست" data-i18n-aria="rail.close"><i class="ph-bold ph-x"></i></button>
       </div>
       <div class="prog">
-        <div class="xp-row"><span>امتیاز تو</span><b id="xpTxt">۰ XP</b></div>
+        <div class="xp-row"><span data-i18n="xp.yours">امتیاز تو</span><b id="xpTxt">۰ XP</b></div>
         <div class="xp-bar"><i id="xpBar"></i></div>
         <div class="rank-row">
           <span class="rank-tag"><i class="ph-fill ph-medal" aria-hidden="true"></i><span id="rankTxt">نوآموز</span></span>
@@ -59,8 +59,8 @@
     </div>
     <div class="rail-search">
       <i class="ph ph-magnifying-glass"></i>
-      <input id="search" type="search" placeholder="جست‌وجو در سطح‌ها…" autocomplete="off">
-      <button class="clear-s" id="clearS" aria-label="پاک‌کردن جست‌وجو"><i class="ph-bold ph-x"></i></button>
+      <input id="search" type="search" placeholder="جست‌وجو در سطح‌ها…" autocomplete="off" data-i18n-ph="search.ph">
+      <button class="clear-s" id="clearS" aria-label="پاک‌کردن جست‌وجو" data-i18n-aria="search.clear"><i class="ph-bold ph-x"></i></button>
     </div>
     <div class="list-wrap">
       <span class="fade top" id="fadeTop"></span>
@@ -72,45 +72,47 @@
         <img class="avatar" src="./assets/avatar.jpg" alt="پریا بهرامی" width="38" height="38">
         <div class="author-id">
           <b>پریا بهرامی</b>
-          <span>طراح محصول · تهیه‌کنندهٔ دوره</span>
+          <span data-i18n="author.role">طراح محصول · تهیه‌کنندهٔ دوره</span>
         </div>
         <div class="author-links">
           <a href="https://paryabahrami.ir" target="_blank" rel="noopener" aria-label="وب‌سایت پریا بهرامی" title="paryabahrami.ir"><i class="ph-bold ph-globe-simple"></i></a>
           <a href="https://www.linkedin.com/in/paryabhrmi" target="_blank" rel="noopener" aria-label="لینکدین پریا بهرامی" title="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a>
         </div>
       </div>
-      <button class="mini-btn wide" id="resetBtn"><i class="ph ph-arrow-counter-clockwise"></i>شروع دوبارهٔ دوره</button>
+      <button class="mini-btn wide" id="resetBtn"><i class="ph ph-arrow-counter-clockwise"></i><span data-i18n="reset.btn">شروع دوبارهٔ دوره</span></button>
     </div>
   </aside>
   <div class="overlay" id="overlay"></div>
 
   <main class="main">
     <header class="topbar">
-      <button class="icon-btn" id="menuBtn" aria-label="فهرست" style="display:none"><i class="ph ph-list"></i></button>
+      <button class="icon-btn" id="menuBtn" aria-label="فهرست" data-i18n-aria="top.menu" style="display:none"><i class="ph ph-list"></i></button>
       <div class="crumb"><b id="crumbTitle"></b></div>
       <div class="spacer"></div>
       <span class="lvl-pill" id="lvlPill"><i class="ph-fill ph-lightning"></i><b>۰ XP</b></span>
-      <button class="icon-btn" id="themeBtn" aria-label="حالت روشن و تیره"><i class="ph ph-moon"></i></button>
+      <button class="icon-btn" id="langBtn" aria-label="تغییر زبان رابط · English" data-i18n-aria="top.lang"><i class="ph ph-translate"></i></button>
+      <button class="icon-btn" id="themeBtn" aria-label="حالت روشن و تیره" data-i18n-aria="top.theme"><i class="ph ph-moon"></i></button>
       <div class="read-bar" id="readBar"></div>
     </header>
+    <p class="lang-notice" id="langNotice" hidden dir="ltr" lang="en"></p>
     <div class="wrap" id="mainContent"><div id="root" tabindex="-1"></div></div>
   </main>
 </div>
 <nav class="mob">
-  <button class="btn btn-ghost sq" id="mPrev" aria-label="سطح قبلی"><i class="ph-bold ph-arrow-right"></i></button>
+  <button class="btn btn-ghost sq" id="mPrev" aria-label="سطح قبلی" data-i18n-aria="mob.prev"><i class="ph-bold ph-arrow-right"></i></button>
   <button class="btn btn-primary grow" id="mMid"><i class="ph-bold ph-exam"></i><span>برو به آزمون</span></button>
-  <button class="btn btn-ghost sq" id="mNext" aria-label="سطح بعدی"><i class="ph-bold ph-arrow-left"></i></button>
+  <button class="btn btn-ghost sq" id="mNext" aria-label="سطح بعدی" data-i18n-aria="mob.next"><i class="ph-bold ph-arrow-left"></i></button>
 </nav>
-<button class="to-top" id="toTop" aria-label="بازگشت به بالا"><i class="ph-bold ph-arrow-up"></i></button>
+<button class="to-top" id="toTop" aria-label="بازگشت به بالا" data-i18n-aria="top.totop"><i class="ph-bold ph-arrow-up"></i></button>
 <div class="toast" id="toast" role="status"></div>
 <div class="modal-bg" id="modalBg" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <span class="modal-ic"><i class="ph-fill ph-warning"></i></span>
-    <h3 id="modalTitle">شروع دوبارهٔ دوره؟</h3>
-    <p id="modalText">با این کار همهٔ سطح‌های قبول‌شده و پیشرفت تو پاک می‌شود و دوره از سطح ۱ شروع می‌شود. این کار برگشت‌پذیر نیست.</p>
+    <h3 id="modalTitle" data-i18n="modal.title">شروع دوبارهٔ دوره؟</h3>
+    <p id="modalText" data-i18n="modal.text">با این کار همهٔ سطح‌های قبول‌شده و پیشرفت تو پاک می‌شود و دوره از سطح ۱ شروع می‌شود. این کار برگشت‌پذیر نیست.</p>
     <div class="modal-actions">
-      <button class="btn btn-ghost" id="modalNo">انصراف</button>
-      <button class="btn btn-danger" id="modalYes"><i class="ph-bold ph-arrow-counter-clockwise"></i>بله، پاک کن</button>
+      <button class="btn btn-ghost" id="modalNo" data-i18n="modal.cancel">انصراف</button>
+      <button class="btn btn-danger" id="modalYes"><i class="ph-bold ph-arrow-counter-clockwise"></i><span data-i18n="modal.confirm">بله، پاک کن</span></button>
     </div>
   </div>
 </div>

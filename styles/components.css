@@ -122,4 +122,6 @@
 .streak{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--muted);}
 .privacy-note{display:flex; align-items:flex-start; gap:8px; font-size:12.5px; color:var(--muted); line-height:1.9; margin:var(--s4) 0 0; max-width:64ch;}
 .privacy-note i{margin-top:3px; flex-shrink:0;}
+.lang-notice{font-size:12.8px; color:var(--muted); line-height:1.8; background:var(--surface-2); border-block-end:1px solid var(--line); padding:9px 22px; text-align:left;}
+.lang-notice[hidden]{display:none;}
 .perfect-tag{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; color:var(--add); border:1px solid var(--add); border-radius:99px; padding:2px 9px;}

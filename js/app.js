@@ -17,6 +17,7 @@ import { renderGlossary } from './render/glossary.js';
 import { renderCert } from './render/certificate.js';
 import { renderTracks } from './render/tracks.js';
 import { renderMissions } from './render/missions.js';
+import { applyLang, setLang, getLang } from './i18n.js';
 
 export { shuffle, newAttempt, refreshCount, checkQuiz };
 export {
@@ -99,6 +100,11 @@ $('#themeBtn').addEventListener('click', () => {
   $('#themeBtn').innerHTML = `<i class="ph ph-${el.dataset.theme === 'dark' ? 'sun' : 'moon'}"></i>`;
   save();
 });
+$('#langBtn').addEventListener('click', () => {
+  setLang(getLang() === 'fa' ? 'en' : 'fa');
+  save();
+  render();   // rebuild nav + views so t()-driven labels update
+});
 $('#modalNo').addEventListener('click', closeModal);
 $('#modalBg').addEventListener('click', e => { if (e.target === $('#modalBg')) closeModal(); });
 $('#modalYes').addEventListener('click', () => { const a = modalAction; closeModal(); if (a) a(); });
@@ -158,6 +164,7 @@ if (document.fonts && document.fonts.ready) {
 
 (async () => {
   await load();
+  applyLang();   // stored UI language before the first paint of the shell
   $('#themeBtn').innerHTML = `<i class="ph ph-${document.documentElement.dataset.theme === 'dark' ? 'sun' : 'moon'}"></i>`;
   applyHash();   // a shared link wins over the stored position
   render();

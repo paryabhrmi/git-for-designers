@@ -41,6 +41,7 @@ export async function load() {
         });
         if (d.theme === 'light' || d.theme === 'dark') document.documentElement.dataset.theme = d.theme;
         if (typeof d.last === 'number' && d.last >= 0 && d.last < LEVELS.length) state.current = d.last;
+        state.lang = d.lang === 'en' ? 'en' : 'fa';
         state.track = (typeof d.track === 'string' && TRACK_BY_ID[d.track]) ? d.track : null;
         state.mission = (typeof d.mission === 'string' && MISSION_BY_ID[d.mission]) ? d.mission : null;
         // completed mission IDs: dedupe + drop unknown IDs; tolerate a missing/corrupt value
@@ -67,6 +68,7 @@ export async function save() {
     track: state.track,
     mission: state.mission,
     missionsDone: state.missionsDone,
+    lang: state.lang,
     theme: document.documentElement.dataset.theme,
   });
   lsSet(payload);

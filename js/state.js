@@ -8,6 +8,7 @@ export const state = {
   track: null,   // active track id in track-detail view (derived; never a source of progress)
   mission: null, // active mission id in mission-detail view
   missionsDone: [], // completed mission IDs (practice completion; awards no XP)
+  lang: 'fa',    // UI language ('fa' | 'en'); curriculum content stays fa until translated
   done: {},
   learner: '',
   picks: {},

@@ -102,8 +102,11 @@ curriculum audit, curriculum map, and learning-experience design notes.
 
 ## Current non-goals
 
-No English/bilingual version yet, no backend, no accounts, no cloud sync, no
-analytics, and no real Git execution.
+No backend, no accounts, no cloud sync, no analytics, and no real Git
+execution. A bilingual (fa/en) architecture exists for the application shell —
+the interface chrome can switch to English via the topbar toggle — but
+**curriculum content is still Persian-only**; content translation is planned
+(see [`docs/bilingual-architecture.md`](docs/bilingual-architecture.md)).
 
 ## Contributing
 
