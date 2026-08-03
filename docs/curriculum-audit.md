@@ -285,3 +285,60 @@ Product-design decisions (certificate scope, editor recommendation, track packag
 - No edits to `data/levels.js`, quizzes, XP, badges, ranks, or application code
 - No lesson rewrites
 - Stabilization already merged to `main` via PR #4
+
+---
+
+## Resolution log (added after audit — original findings above are preserved)
+
+The audit above is the original read-only review. The findings themselves are
+unchanged; this section only records how each **critical** and **important**
+curriculum-accuracy item was subsequently handled across the content revisions.
+Revisions map to merged/opened branches:
+
+- **Revision 1** — `feat/curriculum-revision-1` (PR #6, `content: correct push fetch and pull lessons`)
+- **Revision 2** — `feat/curriculum-revision-2` (PR #7, `content: align optional track and certificate rules`)
+- **Revision 3** — `content/curriculum-accuracy-final` (this branch, `content: resolve remaining curriculum accuracy issues`)
+
+### Critical
+
+| Audit issue | Level(s) | Status | Where |
+| --- | --- | --- | --- |
+| `git pull` taught as always `fetch + merge` (should be fetch + integrate: merge **or** rebase) | 8 + glossary + L8 quiz why + L8 scenario | **Resolved** | Revision 1 |
+
+### Important
+
+| Audit issue | Level(s) | Status | Where |
+| --- | --- | --- | --- |
+| Private repo presented as inherently “امن‌تر” (safer) rather than access-restricted | 2 | **Resolved** | Revision 3 |
+| VS Code presented as the universal “استاندارد” (standard) editor | 2 | **Resolved** | Revision 3 |
+| History overstated as “دستکاری‌ناپذیر” (immutable) — integrity ≠ immutability; local history is still rewritable via reset/rebase + force push | 29 (body + quiz why) | **Resolved** | Revision 3 |
+| Level 29 labeled optional («اختیاری») while certificate requires all 30 | 29 | **Resolved** | Revision 2 |
+| Phase 4 «فقط در صورت نیاز» vs mandatory-all-30 certificate gate | 28–30 + `phases.js` | **Resolved** | Revision 2 |
+| Level 30 roadmap drift (Submodules / Monorepo / org-repo mentioned but not taught) | 30 phase-4 summary table | **Resolved** | Revision 2 |
+| Rebase nuance for pull should cross-link Level 27 | 8 → 27 | **Resolved** | Revision 1 (L8 now points to Level 27) |
+| “Private = safe” echo risk in security level | 20 | **No longer applicable** | Verified in Revision 3: Level 20 already frames Private/Public as *visibility* (“Public یعنی هر کسی روی اینترنت می‌بیند”), leads with secrets-never-committed, and does not claim private = secure |
+| Move Level 17 (Tag/Release) earlier for Design System track | 17 | **Deferred** | Structural reordering; out of scope for an accuracy-only revision (level order and IDs preserved). Tracked in `curriculum-map.md` Part B |
+| Demote / merge Level 26 (CLI cheat-sheet) into a non-blocking reference | 26 | **Deferred** | Changes completion gating and level structure; out of scope for an accuracy-only revision. Tracked in `curriculum-map.md` Part B |
+
+### Accuracy areas re-verified in Revision 3 as already correct (no change made)
+
+To avoid rewriting correct lessons only for style, these were inspected and left
+as-is:
+
+- **Git vs GitHub** distinction — Level 1 table + quiz clearly separate the tool from the hosting platform.
+- **restore / reset / revert** — Level 14 keeps them distinct (working tree / history rewrite / new reversing commit), not collapsed into “undo”.
+- **switch vs checkout** — Level 7 callout describes `checkout` as the older multi-purpose command, `switch`/`restore` as clearer modern intent; no deprecation/removal claim.
+- **Merge conflict** — Level 10 states “Conflict خطا نیست؛ درخواست تصمیم انسانی است”, keeps markers as inspectable text, and pairs abort with its operation (`merge --abort`).
+- **Pull Request terminology** — Level 11 explicitly separates `git pull` (local command) from Pull Request (GitHub process); not described as a Git command.
+- **Branch protection / required checks** — Levels 19–20, 25 frame these as GitHub/repository configuration, not universal Git behavior.
+- **Push / fetch / pull states & RTL diagrams** — Revision 1 content (remote-tracking distinction, source→destination labels) left intact.
+
+### Technical sources for Revision 3
+
+Same primary sources the original audit verified against (live re-fetch during
+this revision was blocked by the session network policy, `403`; the corrections
+match the audit’s prior primary-source verification):
+
+- Repository visibility & security considerations — https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories
+- `git reset` (local history rewrite) — https://git-scm.com/docs/git-reset
+- `git rebase` (history rewrite + force-push implications) — https://git-scm.com/docs/git-rebase
