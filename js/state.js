@@ -5,6 +5,7 @@ import { RANKS } from '../data/ranks.js';
 export const state = {
   view: 'intro',
   current: 0,
+  track: null,   // active track id in track-detail view (derived; never a source of progress)
   done: {},
   learner: '',
   picks: {},

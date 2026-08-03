@@ -99,7 +99,13 @@ Level 30’s phase-4 summary mentions Submodules, Monorepo, and org-repo managem
 
 ---
 
-## Part B — Proposed structure (not implemented)
+## Part B — Proposed structure (original proposal)
+
+> **Update:** the four-track model below has since been **implemented in the product**
+> via `data/tracks.js` and the `#/tracks` / `#/track-<id>` views. The shipped mapping
+> and rules are documented in **[Part C — Implemented learning tracks](#part-c--implemented-learning-tracks-datatracksjs)**.
+> This Part B is kept as the original design rationale. Level order, IDs, phases, and the
+> certificate/achievement rule were **not** changed by the track work.
 
 Proposed packaging into four learning tracks.  
 Each level is assigned to **one primary track** (no silent omissions). Cross-links note secondary relevance.
@@ -219,3 +225,72 @@ Checksum: 18 + 2 + 3 + 7 = **30**.
 ## Implementation note
 
 This map is documentation only. Applying it requires a later content PR that may edit `data/phases.js`, level order/copy, unlock rules, and certificate conditions — explicitly out of scope for the audit PR.
+
+---
+
+## Part C — Implemented learning tracks (`data/tracks.js`)
+
+The four-track model is now shipped in the product. This part documents **what was
+actually implemented**, which supersedes Part B as the source of truth for tracks.
+
+### Architecture
+
+- **Source module:** `data/tracks.js` exports `TRACKS`, `TRACK_BY_ID`, and `trackOfLevel(levelId)`.
+- **Pure data + references only.** A track lists existing level IDs (`levelIds`); it never
+  duplicates lesson, quiz, or scenario content. Lesson content stays in `data/levels.js`.
+- **Views:** track overview (`renderTracks` → `#/tracks`) and per-track detail (`#/track-<id>`),
+  rendered by `js/render/tracks.js` and styled by `styles/tracks.css`.
+- **Stable IDs (never localized):** `core`, `ai-prototype`, `design-system`, `design-technologist`.
+- **Progress is derived, never stored per track.** Track progress = the learner's completed
+  level IDs (`state.done`) filtered to that track's `levelIds`, reusing the existing
+  linear-unlock rule. Only `state.track` (the active track in the detail view) is persisted,
+  under the unchanged storage key `git-course-fa-v3`.
+
+### Four tracks
+
+| Track ID | Persian short title | Status | Levels | Prerequisite | Audience |
+| --- | --- | --- | ---: | --- | --- |
+| `core` | مبانی Git | **required** (recommended start) | 18 | — | همهٔ طراحان — نقطهٔ شروع دوره |
+| `ai-prototype` | AI و پروتوتایپ | optional · تخصصی | 2 | core | کار با کد تولیدشده با AI و پروتوتایپ‌ها |
+| `design-system` | Design System | optional · تخصصی | 3 | core | مشارکت‌کنندگان Design System و توکن‌ها |
+| `design-technologist` | Design Technologist | optional · پیشرفته | 7 | core | Design Technologistها و کار عمیق‌تر با مهندسی |
+
+### Level-to-track mapping (single-ownership — each level in exactly one track)
+
+| Track | Level IDs |
+| --- | --- |
+| **core** | 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 26, 30 |
+| **ai-prototype** | 21, 22 |
+| **design-system** | 17, 23, 24 |
+| **design-technologist** | 18, 19, 20, 25, 27, 28, 29 |
+
+Checksum: 18 + 2 + 3 + 7 = **30**, each level assigned exactly once. No multi-track
+membership was used — a single primary owner was clearer for every level.
+
+Notable placements vs the old phase grouping: **17 (Tag/Release)** and **23–24** form the
+Design System track; **26 (CLI reference)** and **30 (capstone)** stay in Core; the advanced
+history/collaboration/security levels (**18, 19, 20, 25, 27, 28, 29**) form the Design
+Technologist track.
+
+### Prerequisite relationships
+
+- `core` has no prerequisite; it is the required starting path.
+- `ai-prototype`, `design-system`, `design-technologist` each list `core` as a prerequisite
+  and are marked optional.
+- Prerequisites are **guidance, not new locks.** The only hard gate remains the pre-existing
+  per-level linear unlock (pass level *n* to open level *n+1*). Track detail views surface a
+  prerequisite note and, when a track's next level is not yet unlocked, an explanatory notice
+  plus a link to the learner's current open level — they never add a lock the course did not
+  already have.
+
+### Completion interpretation
+
+- **Level completion:** unchanged — a level is done when its quiz is passed (≥70%), stored in `state.done`.
+- **Track progress / completion:** derived count of a track's completed levels; a track is
+  "complete" when all its levels are done. Completing an optional track is celebrated, never
+  presented as a pending obligation.
+- **Core completion:** all 18 Core levels done. Core does not require any optional track.
+- **Overall mastery / achievement:** the نشان فتح مسیر (path achievement) still requires all
+  **30** levels — unchanged (`allPassed()` in `js/state.js`). Tracks are an organizational and
+  navigational layer over the same completion data; they do not change eligibility, XP, badges,
+  or ranks.

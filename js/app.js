@@ -15,18 +15,20 @@ import { renderIntro } from './render/intro.js';
 import { renderLesson, enhance, buildToc } from './render/lesson.js';
 import { renderGlossary } from './render/glossary.js';
 import { renderCert } from './render/certificate.js';
+import { renderTracks } from './render/tracks.js';
 
 export { shuffle, newAttempt, refreshCount, checkQuiz };
 export {
   buildNav, revealActive, fades, syncNav, focusMain, go,
   updateMob, updateMidBtn, closeMenu, toggleMenu,
 };
-export { renderIntro, renderLesson, enhance, buildToc, renderGlossary, renderCert };
+export { renderIntro, renderLesson, enhance, buildToc, renderGlossary, renderCert, renderTracks };
 
 export function render() {
   if (state.view === 'intro') renderIntro();
   else if (state.view === 'cert') renderCert();
   else if (state.view === 'glossary') renderGlossary();
+  else if (state.view === 'tracks' || state.view === 'track') renderTracks();
   else renderLesson();
   buildNav($('#search').value);
   updateMob();

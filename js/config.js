@@ -15,4 +15,6 @@ export const ROUTES = {
   glossary: '#/glossary',
   certificate: '#/certificate', // route id kept for bookmarks / stored state
   level: (id) => '#/level-' + id,
+  tracks: '#/tracks',
+  track: (id) => '#/track-' + id,
 };
