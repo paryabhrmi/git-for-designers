@@ -2,16 +2,16 @@ import { $ } from './dom.js';
 import { t } from './i18n.js';
 
 export function toast(msg, icon = 'ph-lock-simple', action) {
-  const t = $('#toast');
-  t.innerHTML = `<i class="ph ${icon}"></i>${msg}`;
+  const el = $('#toast');
+  el.innerHTML = `<i class="ph ${icon}"></i>${msg}`;
   if (action) {
     const b = document.createElement('button');
     b.className = 'toast-act'; b.textContent = action.label;
-    b.addEventListener('click', () => { t.classList.remove('show'); action.fn(); });
-    t.appendChild(b);
+    b.addEventListener('click', () => { el.classList.remove('show'); action.fn(); });
+    el.appendChild(b);
   }
-  t.classList.add('show');
-  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), action ? 5200 : 2600);
+  el.classList.add('show');
+  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), action ? 5200 : 2600);
 }
 
 export function authorCard(avatarSrc, site, linkedin) {

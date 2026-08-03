@@ -44,6 +44,8 @@ export const STRINGS = {
   'nav.missions':    { fa: 'مأموریت‌های عملی', en: 'Practice missions' },
   'nav.glossary':    { fa: 'واژه‌نامهٔ Git', en: 'Git glossary' },
   'nav.achievement': { fa: 'نشان مسیر', en: 'Path achievement' },
+  'author.site':      { fa: 'وب‌سایت پریا بهرامی', en: 'Parya Bahrami’s website' },
+  'author.li':        { fa: 'لینکدین پریا بهرامی', en: 'Parya Bahrami on LinkedIn' },
   'author.role':     { fa: 'طراح محصول · تهیه‌کنندهٔ دوره', en: 'Product designer · course author' },
 
   /* ---- shared UI atoms (reused across renderers) ---- */
@@ -127,6 +129,7 @@ export const STRINGS = {
   'code.manual':        { fa: 'دستی انتخاب کن', en: 'Select it manually' },
 
   /* ---- quiz ---- */
+  'quiz.optKeys':       { fa: 'الف,ب,پ,ت', en: 'A,B,C,D' },
   'quiz.check':         { fa: 'بررسی پاسخ‌ها', en: 'Check answers' },
   'quiz.checkCount':    { fa: 'بررسی پاسخ‌ها {0}/{1}', en: 'Check answers {0}/{1}' },
   'quiz.clear':         { fa: 'پاک‌کردن پاسخ‌ها', en: 'Clear answers' },
@@ -339,6 +342,7 @@ export function applyLang() {
   document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
   document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.setAttribute('alt', t(el.dataset.i18nAlt)); });
   const langBtn = document.getElementById('langBtn');
   if (langBtn) langBtn.title = t('top.lang');
 }

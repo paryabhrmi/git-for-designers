@@ -1,12 +1,13 @@
 /**
- * Path achievement data (user-facing: نشان فتح مسیر).
+ * Path achievement data (user-facing name comes from the i18n key ach.page).
  * Kept separate from certificate.js which remains for backward-compatible IDs.
  */
 import { state, passedCount, totalXP, rankOf, allPassed } from './state.js';
 import { LEVELS } from './course.js';
-import { BADGES } from '../data/badges.js';
+import { BADGES } from './content.js';
 import { RANKS } from '../data/ranks.js';
 import { FA } from './dom.js';
+import { t, tf, getLang } from './i18n.js';
 
 const BADGE_BY_ID = Object.fromEntries(BADGES.map(b => [b.id, b]));
 
@@ -83,8 +84,10 @@ function resolveEarnedBadges(badgeIds) {
 }
 
 function formatDisplayDate(date = new Date()) {
+  // Persian mode keeps the Jalali calendar; English mode uses a Gregorian date.
   try {
-    return new Intl.DateTimeFormat('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+    const locale = getLang() === 'en' ? 'en-US' : 'fa-IR';
+    return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
   } catch (e) {
     return '—';
   }
@@ -97,6 +100,7 @@ function formatDisplayDate(date = new Date()) {
  * @param {{ learnerName?: string, badgeIds?: string[], xp?: number, completedLevelCount?: number, completedAt?: string|null }} [overrides]
  */
 export function normalizeAchievement(overrides = {}) {
+  refreshAchievementStrings();
   const totalLevelCount = LEVELS.length;
   let completedLevelCount = overrides.completedLevelCount != null
     ? Number(overrides.completedLevelCount)
@@ -119,7 +123,7 @@ export function normalizeAchievement(overrides = {}) {
     ? String(overrides.learnerName)
     : String(state.learner || '');
   learnerName = learnerName.trim();
-  const displayName = learnerName || 'یادگیرنده';
+  const displayName = learnerName || t('ach.learner');
 
   // No historical completion date is stored; show a safe viewing-date fallback.
   const completedAt = overrides.completedAt === null
@@ -145,20 +149,36 @@ export function normalizeAchievement(overrides = {}) {
 }
 
 export function buildShareCaption(data) {
+  refreshAchievementStrings();
   const d = data || normalizeAchievement();
   const rank = d.rank?.t || '—';
   const count = FA(d.earnedBadgeCount || 0);
   return [
-    'مسیر Git for Designers را کامل کردم و نشان فتح مسیر را گرفتم.',
-    `رتبهٔ فعلی من: ${rank}`,
-    `نشان‌های به‌دست‌آمده: ${count}`,
+    t('ach.cap.done'),
+    tf('ach.cap.rank', rank),
+    tf('ach.cap.badges', count),
     '#GitForDesigners #DesignTechnologist #ProductDesign',
   ].join('\n');
 }
 
-export const ACHIEVEMENT_DISCLAIMER =
-  'این نشان یادبود دیجیتال تکمیل مسیر آموزشی Git for Designers است و مدرک رسمی، دانشگاهی یا حرفه‌ای محسوب نمی‌شود.';
+/**
+ * Localized achievement strings.
+ *
+ * These stay *value* exports (not functions) because js/achievement-export.js
+ * imports ACHIEVEMENT_TITLE and passes it straight to canvas measureText /
+ * fillText. ES module exports are live bindings, so reassigning them here
+ * updates every importer; refreshAchievementStrings() re-reads the catalog and
+ * runs on each achievement build (normalizeAchievement / buildShareCaption),
+ * which is what every preview, export, and share path goes through.
+ */
+export let ACHIEVEMENT_DISCLAIMER = t('ach.disclaimer');
+export let ACHIEVEMENT_TITLE = t('ach.title');
+export let ACHIEVEMENT_SHORT = t('ach.short');
+export let ACHIEVEMENT_PAGE = t('ach.page');
 
-export const ACHIEVEMENT_TITLE = 'نشان فتح مسیر Git for Designers';
-export const ACHIEVEMENT_SHORT = 'نشان مسیر';
-export const ACHIEVEMENT_PAGE = 'نشان فتح مسیر';
+export function refreshAchievementStrings() {
+  ACHIEVEMENT_DISCLAIMER = t('ach.disclaimer');
+  ACHIEVEMENT_TITLE = t('ach.title');
+  ACHIEVEMENT_SHORT = t('ach.short');
+  ACHIEVEMENT_PAGE = t('ach.page');
+}

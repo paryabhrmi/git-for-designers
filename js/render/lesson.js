@@ -2,7 +2,7 @@ import { state, levelMinutes, phaseOf, phaseIndex, allPassed } from '../state.js
 import { LEVELS } from '../course.js';
 import { trackOfLevel } from '../content.js';
 import { MISSIONS } from '../content.js';
-import { PASS_RATIO, KEYS, XP_PASS, XP_PERFECT, PHASE_IC, SITE, LINKEDIN } from '../config.js';
+import { PASS_RATIO, XP_PASS, XP_PERFECT, PHASE_IC, SITE, LINKEDIN } from '../config.js';
 import { $, FA } from '../dom.js';
 import { byline as bylineFn } from '../ui.js';
 import { ctx } from '../ctx.js';
@@ -16,6 +16,7 @@ export function renderLesson() {
   const trk = trackOfLevel(l.id);
   const practice = MISSIONS.find(m => m.levelIds.includes(l.id)) || null;
   const need = Math.ceil(l.quiz.length * PASS_RATIO);
+  const optKeys = t('quiz.optKeys').split(',');   // answer letters follow the UI language
   const mins = levelMinutes(l);
   document.documentElement.style.setProperty('--pc', ph.color);
   $('#crumbTitle').textContent = tf('lesson.crumb', FA(l.id), l.title);
@@ -64,7 +65,7 @@ export function renderLesson() {
           ${a.opts.map((src, oi) => `
             <label class="opt${state.picks[qi] === oi ? ' sel' : ''}" data-q="${qi}" data-o="${oi}">
               <input type="radio" name="q-${qi}" value="${oi}"${state.picks[qi] === oi ? ' checked' : ''}>
-              <span class="opt-key" aria-hidden="true">${KEYS[oi]}</span>
+              <span class="opt-key" aria-hidden="true">${optKeys[oi]}</span>
               <span class="opt-text">${q.o[src]}</span>
               <span class="opt-mark" aria-hidden="true"></span>
             </label>`).join('')}
