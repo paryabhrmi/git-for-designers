@@ -76,6 +76,7 @@ export function renderIntro() {
       <button class="btn btn-ghost" id="glBtn"><i class="ph ph-book-bookmark"></i>واژه‌نامهٔ Git</button>
       ${n ? `<span class="streak"><i class="ph-fill ph-lightning"></i>${FA(totalXP())} XP · رتبهٔ ${rankOf(totalXP()).t}</span>` : ''}
     </div>
+    <p class="privacy-note"><i class="ph-fill ph-lock-simple" aria-hidden="true"></i>پیشرفت تو فقط در همین مرورگر ذخیره می‌شود؛ نه حسابی لازم است و نه چیزی جایی آپلود می‌شود. پاک‌کردن دادهٔ مرورگر می‌تواند پیشرفت را حذف کند.</p>
     ${authorCard()}`;
 
   $('#nameIn').addEventListener('input', e => { state.learner = e.target.value; ctx.save(); });

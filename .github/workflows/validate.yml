@@ -1,0 +1,40 @@
+name: validate
+
+# Lightweight, dependency-free validation for a static (no-build) project.
+# No deployment, no release publishing, no write access, no secrets.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+
+      - name: JavaScript syntax check (all .js files)
+        run: |
+          set -e
+          count=0
+          while IFS= read -r -d '' f; do
+            node --check "$f"
+            count=$((count + 1))
+          done < <(find . -path ./.git -prune -o -name '*.js' -print0)
+          echo "Syntax-checked $count JavaScript file(s)."
+
+      - name: Repository invariant validation
+        run: node scripts/validate.mjs
