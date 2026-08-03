@@ -19,13 +19,27 @@ export async function load() {
       const r = raw ? { value: raw } : null;
       if (r && r.value) {
         const d = JSON.parse(r.value);
-        state.done = d.done || {};
-        state.learner = d.learner || '';
-        state.tries = d.tries || {};
-        Object.keys(state.done).forEach(k => {
-          if (state.done[k] === true) state.done[k] = { perfect: false, score: 0 };
+        const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
+        // learner: string only
+        state.learner = typeof d.learner === 'string' ? d.learner : '';
+        // done: keep valid level keys with normalized {perfect, score}; drop any junk safely
+        const rawDone = isObj(d.done) ? d.done : {};
+        state.done = {};
+        Object.keys(rawDone).forEach(k => {
+          const id = Number(k);
+          if (!Number.isInteger(id) || id < 1) return;
+          const v = rawDone[k];
+          if (v === true) state.done[id] = { perfect: false, score: 0 };
+          else if (isObj(v)) state.done[id] = { perfect: !!v.perfect, score: Number(v.score) || 0 };
         });
-        if (d.theme) document.documentElement.dataset.theme = d.theme;
+        // tries: level -> positive integer attempt count
+        const rawTries = isObj(d.tries) ? d.tries : {};
+        state.tries = {};
+        Object.keys(rawTries).forEach(k => {
+          const id = Number(k), n = Number(rawTries[k]);
+          if (Number.isInteger(id) && id >= 1 && Number.isFinite(n) && n > 0) state.tries[id] = Math.floor(n);
+        });
+        if (d.theme === 'light' || d.theme === 'dark') document.documentElement.dataset.theme = d.theme;
         if (typeof d.last === 'number' && d.last >= 0 && d.last < LEVELS.length) state.current = d.last;
         state.track = (typeof d.track === 'string' && TRACK_BY_ID[d.track]) ? d.track : null;
         state.mission = (typeof d.mission === 'string' && MISSION_BY_ID[d.mission]) ? d.mission : null;
