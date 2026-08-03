@@ -42,6 +42,14 @@ export function buildNav(filter = '') {
     intro.innerHTML = `<span class="nav-lb"><i class="ph ph-house"></i><span>معرفی دوره و شروع</span></span>`;
     intro.addEventListener('click', () => { state.view = 'intro'; ctx.render(); ctx.closeMenu(); ctx.save(); });
     nav.appendChild(intro);
+
+    const tr = document.createElement('button');
+    tr.className = 'nav-item nav-special' + (state.view === 'tracks' || state.view === 'track' ? ' active' : '');
+    tr.dataset.nav = 'tracks';
+    tr.style.setProperty('--pc', 'var(--p2)');
+    tr.innerHTML = `<span class="nav-lb"><i class="ph ph-path"></i><span>مسیرهای یادگیری</span></span>`;
+    tr.addEventListener('click', () => { state.view = 'tracks'; state.track = null; ctx.render(); ctx.closeMenu(); ctx.save(); });
+    nav.appendChild(tr);
   }
 
   let hits = 0;
@@ -167,7 +175,7 @@ export function syncNav() {
   });
   document.querySelectorAll('.nav-special').forEach(el => {
     const kind = el.dataset.nav || 'intro';
-    el.classList.toggle('active', state.view === kind);
+    el.classList.toggle('active', state.view === kind || (kind === 'tracks' && state.view === 'track'));
   });
   const n = passedCount(), xp = totalXP();
   $('#progTxt').textContent = `${FA(n)} از ${FA(LEVELS.length)} سطح · ${FA(earned().length)} نشان`;

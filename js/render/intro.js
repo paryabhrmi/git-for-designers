@@ -54,11 +54,19 @@ export function renderIntro() {
       <input id="nameIn" type="text" placeholder="مثلاً: سارا احمدی" value="${state.learner.replace(/"/g, '&quot;')}">
     </div>
 
-    <h3 style="font-size:19px;font-weight:800;margin:26px 0 4px">مسیر یادگیری</h3>
+    <h3 style="font-size:19px;font-weight:800;margin:26px 0 4px">مراحل دوره</h3>
     <div class="phase-cards">
       ${PHASES.map((p, i) => `<div class="phase-card" style="--pc:${p.color}">
         <i class="ph-fill ${PHASE_IC[i]}"></i><span>${p.name}</span>
         <em>${String(p.from).padStart(2, '0')}–${String(p.to).padStart(2, '0')}</em></div>`).join('')}
+    </div>
+
+    <div class="track-entry">
+      <div class="te-txt">
+        <b>مسیرهای یادگیری</b>
+        <p>سطح‌ها در چهار مسیر دسته‌بندی شده‌اند: از «مبانی Git» شروع کن و بعد مسیرهای تخصصی (AI و پروتوتایپ، Design System، Design Technologist) را ببین. پیشرفتت خودکار در هر مسیر شمرده می‌شود.</p>
+      </div>
+      <button class="btn btn-primary" id="tracksBtn"><i class="ph-bold ph-path"></i>دیدن چهار مسیر</button>
     </div>
 
     <div class="quiz-actions" style="border:none;margin-top:26px">
@@ -73,4 +81,5 @@ export function renderIntro() {
   $('#nameIn').addEventListener('input', e => { state.learner = e.target.value; ctx.save(); });
   $('#startBtn').addEventListener('click', () => ctx.go(firstOpen()));
   $('#glBtn').addEventListener('click', () => { state.view = 'glossary'; ctx.render(); ctx.save(); });
+  $('#tracksBtn').addEventListener('click', () => { state.view = 'tracks'; state.track = null; ctx.render(); ctx.save(); });
 }

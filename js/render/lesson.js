@@ -1,5 +1,6 @@
 import { state, levelMinutes, phaseOf, phaseIndex, allPassed } from '../state.js';
 import { LEVELS } from '../course.js';
+import { trackOfLevel } from '../../data/tracks.js';
 import { PASS_RATIO, KEYS, XP_PASS, XP_PERFECT, PHASE_IC, SITE, LINKEDIN } from '../config.js';
 import { $, FA } from '../dom.js';
 import { byline as bylineFn } from '../ui.js';
@@ -10,6 +11,7 @@ const byline = () => bylineFn(SITE, LINKEDIN);
 
 export function renderLesson() {
   const l = LEVELS[state.current], ph = phaseOf(l.id), pi = phaseIndex(l.id);
+  const trk = trackOfLevel(l.id);
   const need = Math.ceil(l.quiz.length * PASS_RATIO);
   const mins = levelMinutes(l);
   document.documentElement.style.setProperty('--pc', ph.color);
@@ -33,6 +35,7 @@ export function renderLesson() {
       <span><i class="ph ph-seal-question"></i>${FA(l.quiz.length)} سؤال آزمون</span>
       <span><i class="ph ph-target"></i>حد نصاب: ${FA(need)} پاسخ درست</span>
       ${state.done[l.id] ? `<span style="font-weight:700"><i class="ph-fill ph-check-circle"></i>قبول‌شده · ${FA(XP_PASS + (state.done[l.id].perfect ? XP_PERFECT : 0))} XP${state.done[l.id].perfect ? ' · نمرهٔ کامل' : ''}</span>` : `<span><i class="ph ph-lightning"></i>تا ${FA(XP_PASS + XP_PERFECT)} امتیاز</span>`}
+      ${trk ? `<a class="meta-track" href="#/track-${trk.id}"><i class="ph ph-path"></i>بخشی از مسیر ${trk.shortTitle}</a>` : ''}
     </div>
     <div class="rule"></div>
     ${(state.mistakes[l.id] && state.mistakes[l.id].length) ? `

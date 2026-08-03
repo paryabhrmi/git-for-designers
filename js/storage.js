@@ -1,6 +1,7 @@
 import { STORE_KEY } from './config.js';
 import { state, isUnlocked, firstOpen } from './state.js';
 import { LEVELS } from './course.js';
+import { TRACK_BY_ID } from '../data/tracks.js';
 
 function lsGet() { try { return window.localStorage.getItem(STORE_KEY); } catch (e) { return null; } }
 function lsSet(v) { try { window.localStorage.setItem(STORE_KEY, v); } catch (e) {} }
@@ -25,9 +26,11 @@ export async function load() {
         });
         if (d.theme) document.documentElement.dataset.theme = d.theme;
         if (typeof d.last === 'number' && d.last >= 0 && d.last < LEVELS.length) state.current = d.last;
-        const VIEWS = ['intro', 'lesson', 'glossary', 'cert'];
+        state.track = (typeof d.track === 'string' && TRACK_BY_ID[d.track]) ? d.track : null;
+        const VIEWS = ['intro', 'lesson', 'glossary', 'cert', 'tracks', 'track'];
         state.view = VIEWS.includes(d.view) ? d.view : 'intro';
         if (state.view === 'lesson' && !isUnlocked(state.current)) state.current = firstOpen();
+        if (state.view === 'track' && !state.track) state.view = 'tracks';
       }
     }
   } catch (e) {}
@@ -40,6 +43,7 @@ export async function save() {
     learner: state.learner,
     last: state.current,
     view: state.view,
+    track: state.track,
     theme: document.documentElement.dataset.theme,
   });
   lsSet(payload);
