@@ -1,9 +1,10 @@
 import { state, totalXP, allPassed } from './state.js';
 import { LEVELS } from './course.js';
 import { PASS_RATIO } from './config.js';
-import { earned } from '../data/badges.js';
+import { earned } from './content.js';
 import { $, FA } from './dom.js';
 import { ctx } from './ctx.js';
+import { t, tf } from './i18n.js';
 
 export const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
@@ -20,8 +21,8 @@ export function refreshCount() {
   if (ac) {
     ac.className = 'ans-count' + (n === total ? ' full' : '');
     ac.innerHTML = n === total
-      ? `<i class="ph-bold ph-check"></i>هر ${FA(total)} سؤال پاسخ داده شد`
-      : `${FA(n)} از ${FA(total)} سؤال پاسخ داده شد`;
+      ? `<i class="ph-bold ph-check"></i>${tf('quiz.allAnswered', FA(total))}`
+      : tf('quiz.answered', FA(n), FA(total));
   }
   ctx.updateMidBtn();
 }
@@ -38,7 +39,7 @@ export function checkQuiz() {
         if (it) it.classList.add('need');
       });
       const first = document.querySelector(`.q-item[data-q="${missing[0]}"]`);
-      ctx.toast(`به ${FA(missing.length)} سؤال جواب نداده‌ای؛ مشخص‌شان کردم.`, 'ph-warning-circle');
+      ctx.toast(tf('quiz.missing', FA(missing.length)), 'ph-warning-circle');
       if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
@@ -60,7 +61,7 @@ export function checkQuiz() {
       else if (state.picks[qi] === oi) { opt.classList.add('no'); mark.innerHTML = '<i class="ph-fill ph-x-circle"></i>'; }
     });
     const why = item.querySelector('.q-why');
-    why.innerHTML = `<b>چرا؟ </b>${q.why}`;
+    why.innerHTML = `<b>${t('quiz.why')} </b>${q.why}`;
     why.classList.add('show');
     if (state.picks[qi] === rightPos) correct++;
     else { missed.push(q.q.replace(/<[^>]+>/g, '')); if (firstWrong === null) firstWrong = item; }
@@ -86,34 +87,34 @@ export function checkQuiz() {
   const res = $('#result');
   res.className = 'result show ' + (passed ? 'pass' : 'fail');
   res.innerHTML = `<span class="tag"><i class="ph-bold ph-${passed ? 'check' : 'x'}"></i>${FA(correct)}/${FA(l.quiz.length)}</span>` +
-    (passed ? 'قبول شدی؛ قفل سطح بعد باز شد.' : `${FA(need)} پاسخ درست لازم بود. توضیح‌ها را بخوان و دوباره تلاش کن.`) +
+    (passed ? t('quiz.pass') : tf('quiz.fail', FA(need))) +
     (gained ? `<span class="xp-gain"><i class="ph-fill ph-lightning"></i>+${gained} XP</span>` : '') +
-    (perfect && passed ? '<span class="perfect-tag"><i class="ph-fill ph-target"></i>نمرهٔ کامل در تلاش اول</span>' : '') +
-    (state.tries[l.id] > 1 ? `<span class="streak"><i class="ph ph-arrow-counter-clockwise"></i>تلاش ${FA(state.tries[l.id])}</span>` : '');
-  fresh.forEach((b, i) => setTimeout(() => ctx.toast(`نشان تازه: ${b.t}`, b.ic), 900 + i * 1400));
+    (perfect && passed ? `<span class="perfect-tag"><i class="ph-fill ph-target"></i>${t('quiz.perfect')}</span>` : '') +
+    (state.tries[l.id] > 1 ? `<span class="streak"><i class="ph ph-arrow-counter-clockwise"></i>${tf('quiz.try', FA(state.tries[l.id]))}</span>` : '');
+  fresh.forEach((b, i) => setTimeout(() => ctx.toast(tf('quiz.newBadge', b.t), b.ic), 900 + i * 1400));
   $('#checkBtn').disabled = true;
   const ac0 = $('#ansCount'); if (ac0) ac0.style.display = 'none';
-  $('#retryBtn').innerHTML = '<i class="ph ph-arrow-counter-clockwise"></i>' + (passed ? 'تکرار آزمون' : 'تلاش دوباره');
+  $('#retryBtn').innerHTML = '<i class="ph ph-arrow-counter-clockwise"></i>' + (passed ? t('quiz.redo') : t('mid.retry'));
 
   const gate = $('#gate');
   const last = state.current === LEVELS.length - 1;
   if (passed) {
     gate.className = 'gate open';
     gate.innerHTML = `<i class="ph-fill ph-lock-simple-open"></i><span>${last && allPassed()
-      ? 'همهٔ سطح‌ها را کامل کردی — نشان فتح مسیر آماده است.'
-      : 'قفل سطح بعدی باز شد.'}</span>`;
+      ? t('quiz.gate.all')
+      : t('quiz.gate.next')}</span>`;
     const b = document.createElement('button');
     if (last && allPassed()) {
       b.className = 'btn btn-gold';
-      b.innerHTML = '<i class="ph-fill ph-trophy" aria-hidden="true"></i>مشاهده نشان مسیر';
+      b.innerHTML = `<i class="ph-fill ph-trophy" aria-hidden="true"></i>${t('ach.view')}`;
       b.addEventListener('click', () => { state.view = 'cert'; ctx.render(); ctx.save(); });
     } else if (!last) {
       b.className = 'btn btn-add';
-      b.innerHTML = 'رفتن به سطح بعد<i class="ph-bold ph-arrow-left"></i>';
+      b.innerHTML = `${t('quiz.goNext')}<i class="ph-bold ph-arrow-left"></i>`;
       b.addEventListener('click', () => ctx.go(state.current + 1));
     }
     if (b.className) $('.quiz-actions').insertBefore(b, $('#retryBtn'));
-    if (!wasDone) ctx.toast(last && allPassed() ? 'دوره کامل شد! نشان مسیر آماده است.' : 'آفرین! سطح بعدی باز شد.', 'ph-lock-simple-open');
+    if (!wasDone) ctx.toast(last && allPassed() ? t('quiz.toast.done') : t('quiz.toast.pass'), 'ph-lock-simple-open');
   }
   ctx.buildNav($('#search').value);
   const nx = $('#nextCard'); if (nx && passed) { nx.disabled = false; nx.querySelector('.ic i').className = 'ph-bold ph-arrow-left'; }

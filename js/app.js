@@ -17,7 +17,7 @@ import { renderGlossary } from './render/glossary.js';
 import { renderCert } from './render/certificate.js';
 import { renderTracks } from './render/tracks.js';
 import { renderMissions } from './render/missions.js';
-import { applyLang, setLang, getLang } from './i18n.js';
+import { setLang, getLang, t } from './i18n.js';
 
 export { shuffle, newAttempt, refreshCount, checkQuiz };
 export {
@@ -81,7 +81,7 @@ document.addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
   if (Math.abs(dx) < 70 || Math.abs(dy) > 55) return;
   if (!state.checked && Object.keys(state.picks).length) {
-    toast('آزمون نیمه‌کاره است؛ برای رفتن به سطح دیگر از فهرست استفاده کن.', 'ph-hand-tap');
+    toast(t('app.quizInProgress'), 'ph-hand-tap');
     return;
   }
   if (dx < 0) go(state.current + 1); else go(state.current - 1);
@@ -114,7 +114,7 @@ $('#resetBtn').addEventListener('click', () => openModal(() => {
   state.current = 0; state.view = 'intro'; state.openPhases = null;
   state.track = null; state.mission = null; state.missionsDone = [];
   save(); render();
-  toast('پیشرفت پاک شد؛ دوره از ابتدا شروع می‌شود.', 'ph-arrow-counter-clockwise');
+  toast(t('app.reset'), 'ph-arrow-counter-clockwise');
 }));
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !$('#modalBg').hidden) { closeModal(); return; }
@@ -123,7 +123,7 @@ document.addEventListener('keydown', e => {
   if (state.view !== 'lesson') return;
   if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
   if (!state.checked && Object.keys(state.picks).length) {
-    toast('آزمون نیمه‌کاره است؛ برای رفتن به سطح دیگر از فهرست استفاده کن.', 'ph-hand-tap');
+    toast(t('app.quizInProgress'), 'ph-hand-tap');
     return;
   }
   if (e.key === 'ArrowLeft') go(state.current + 1);
@@ -164,7 +164,7 @@ if (document.fonts && document.fonts.ready) {
 
 (async () => {
   await load();
-  applyLang();   // stored UI language before the first paint of the shell
+  setLang(getLang());   // apply stored UI language + locale content before first paint
   $('#themeBtn').innerHTML = `<i class="ph ph-${document.documentElement.dataset.theme === 'dark' ? 'sun' : 'moon'}"></i>`;
   applyHash();   // a shared link wins over the stored position
   render();

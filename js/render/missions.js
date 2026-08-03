@@ -6,12 +6,13 @@
  * a deduplicated list of mission IDs (state.missionsDone) and awards no XP.
  */
 import { state } from '../state.js';
-import { MISSIONS, MISSION_BY_ID, missionsForTrack } from '../../data/missions.js';
-import { TRACK_BY_ID } from '../../data/tracks.js';
+import { MISSIONS, MISSION_BY_ID, missionsForTrack } from '../content.js';
+import { TRACK_BY_ID } from '../content.js';
 import { SITE, LINKEDIN } from '../config.js';
 import { $, FA } from '../dom.js';
 import { byline as bylineFn } from '../ui.js';
 import { ctx } from '../ctx.js';
+import { t, tf } from '../i18n.js';
 
 const byline = () => bylineFn(SITE, LINKEDIN);
 
@@ -19,11 +20,13 @@ const byline = () => bylineFn(SITE, LINKEDIN);
 let ui = { missionId: null, step: 0, picked: null };
 let hubFilter = 'all';
 
+// Headings are catalog keys, not strings: this map is built once at import time
+// while the UI language can change at runtime, so it is resolved at render time.
 const TONE = {
-  correct:   { cls: 'ok',        ic: 'ph-check-circle',    head: 'انتخاب درست' },
-  unsafe:    { cls: 'unsafe',    ic: 'ph-shield-warning',  head: 'در این موقعیت امن نیست' },
-  risky:     { cls: 'risky',     ic: 'ph-warning-circle',  head: 'ممکن است، ولی بهترین انتخاب نیست' },
-  incorrect: { cls: 'incorrect', ic: 'ph-x-circle',        head: 'این مدل ذهنی دقیق نیست' },
+  correct:   { cls: 'ok',        ic: 'ph-check-circle',    headKey: 'mission.tone.correct' },
+  unsafe:    { cls: 'unsafe',    ic: 'ph-shield-warning',  headKey: 'mission.tone.unsafe' },
+  risky:     { cls: 'risky',     ic: 'ph-warning-circle',  headKey: 'mission.tone.risky' },
+  incorrect: { cls: 'incorrect', ic: 'ph-x-circle',        headKey: 'mission.tone.incorrect' },
 };
 
 const isDone = (id) => state.missionsDone.includes(id);
@@ -37,21 +40,21 @@ function markDone(id) {
 
 function missionCard(m) {
   const done = isDone(m);
-  const cta = done ? 'مرور دوباره' : 'شروع تمرین';
+  const cta = done ? t('mission.reviewCta') : t('mission.startCta');
   return `
     <li>
       <a class="mission-card${done ? ' is-done' : ''}" href="#/mission-${m.id}"
-         aria-label="مأموریت ${m.title} — ${done ? 'تکمیل‌شده' : 'شروع‌نشده'}">
+         aria-label="${tf('mission.card.aria', m.title, done ? t('state.done') : t('state.notStarted'))}">
         <span class="mc-top">
           <span class="mc-ic"><i class="ph-fill ${m.icon}" aria-hidden="true"></i></span>
-          <span class="mc-flag">${done ? '<i class="ph-fill ph-check" aria-hidden="true"></i>تکمیل‌شده' : 'مأموریت عملی'}</span>
+          <span class="mc-flag">${done ? `<i class="ph-fill ph-check" aria-hidden="true"></i>${t('state.done')}` : t('mission.flag')}</span>
         </span>
         <b class="mc-title">${m.title}</b>
         <span class="mc-desc">${m.shortDescription}</span>
         <span class="mc-meta">
-          <span class="mc-chip">مسیر ${trackName(m.trackId)}</span>
+          <span class="mc-chip">${tf('track.crumb', trackName(m.trackId))}</span>
           <span class="mc-chip">${m.difficulty}</span>
-          <span class="mc-chip">${FA(m.steps.length)} مرحله</span>
+          <span class="mc-chip">${tf('mission.steps', FA(m.steps.length))}</span>
         </span>
         <span class="mc-cta">${cta}<i class="ph-bold ph-arrow-left" aria-hidden="true"></i></span>
       </a>
@@ -60,31 +63,31 @@ function missionCard(m) {
 
 function hub() {
   document.documentElement.style.setProperty('--pc', 'var(--p2)');
-  $('#crumbTitle').textContent = 'مأموریت‌های عملی';
+  $('#crumbTitle').textContent = t('nav.missions');
   const recommended = MISSIONS.find(m => !isDone(m.id)) || null;
-  const filters = [['all', 'همه']].concat(MISSIONS.map(m => [m.trackId, trackName(m.trackId)]));
+  const filters = [['all', t('filter.all')]].concat(MISSIONS.map(m => [m.trackId, trackName(m.trackId)]));
   const shown = hubFilter === 'all' ? MISSIONS : MISSIONS.filter(m => m.trackId === hubFilter);
   $('#root').innerHTML = `
     <div class="tracks-head">
-      <span class="hero-badge"><i class="ph-fill ph-flag-checkered" aria-hidden="true"></i>تمرین عملی</span>
-      <h2>مأموریت‌های عملی</h2>
-      <p class="lead">هر مأموریت یک موقعیت واقعی طراحی است که در چند مرحله تصمیم می‌گیری و برای هر انتخاب، بازخورد روشن می‌گیری: چه اتفاقی می‌افتد، کدام حالت Git تغییر می‌کند و امن‌تر چیست. این‌ها اختیاری‌اند و مکمل درس‌ها و آزمون‌ها هستند؛ روی امتیاز و نشان فتح مسیر اثری ندارند.</p>
-      <p class="mission-sim"><i class="ph-fill ph-info" aria-hidden="true"></i>شبیه‌سازی آموزشی — هیچ فرمانی روی سیستم تو اجرا نمی‌شود.</p>
+      <span class="hero-badge"><i class="ph-fill ph-flag-checkered" aria-hidden="true"></i>${t('mission.heroBadge')}</span>
+      <h2>${t('nav.missions')}</h2>
+      <p class="lead">${t('mission.lead')}</p>
+      <p class="mission-sim"><i class="ph-fill ph-info" aria-hidden="true"></i>${t('mission.simNotice')}</p>
     </div>
     ${recommended ? `
     <div class="track-reco">
       <span class="tr-ic"><i class="ph-fill ${recommended.icon}" aria-hidden="true"></i></span>
       <div class="tr-txt">
-        <b>مأموریت پیشنهادی: ${recommended.title}</b>
-        <p>مسیر ${trackName(recommended.trackId)} · ${FA(recommended.steps.length)} مرحله · ${recommended.difficulty}</p>
+        <b>${tf('mission.reco', recommended.title)}</b>
+        <p>${tf('mission.recoMeta', trackName(recommended.trackId), FA(recommended.steps.length), recommended.difficulty)}</p>
       </div>
-      <a class="btn btn-primary" href="#/mission-${recommended.id}"><i class="ph-bold ph-play" aria-hidden="true"></i>شروع تمرین</a>
+      <a class="btn btn-primary" href="#/mission-${recommended.id}"><i class="ph-bold ph-play" aria-hidden="true"></i>${t('mission.startCta')}</a>
     </div>` : `
-    <div class="td-done"><i class="ph-fill ph-check-circle" aria-hidden="true"></i><div><b>همهٔ مأموریت‌ها را کامل کردی</b><p>هر وقت خواستی می‌توانی دوباره مرورشان کنی.</p></div></div>`}
-    <div class="mission-filter" role="group" aria-label="فیلتر مأموریت‌ها بر اساس مسیر">
+    <div class="td-done"><i class="ph-fill ph-check-circle" aria-hidden="true"></i><div><b>${t('mission.allDone.h')}</b><p>${t('mission.allDone.p')}</p></div></div>`}
+    <div class="mission-filter" role="group" aria-label="${t('mission.filter.aria')}">
       ${filters.map(([id, label]) => `<button type="button" class="mf-btn${hubFilter === id ? ' active' : ''}" data-filter="${id}" aria-pressed="${hubFilter === id}">${label}</button>`).join('')}
     </div>
-    <ul class="mission-grid" aria-label="فهرست مأموریت‌ها">
+    <ul class="mission-grid" aria-label="${t('mission.list.aria')}">
       ${shown.map(missionCard).join('')}
     </ul>
     ${byline()}`;
@@ -102,17 +105,17 @@ function stepBody(m, step, stepIdx) {
   const isCorrect = picked && step.correct === picked.id;
   return `
     <div class="ms-progress">
-      <span class="ms-step-txt">مرحلهٔ ${FA(stepIdx + 1)} از ${FA(total)}</span>
-      <span class="ms-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${stepIdx}" aria-label="پیشرفت مأموریت: مرحلهٔ ${FA(stepIdx + 1)} از ${FA(total)}"><i style="width:${(stepIdx) / total * 100}%"></i></span>
+      <span class="ms-step-txt">${tf('mission.stepOf', FA(stepIdx + 1), FA(total))}</span>
+      <span class="ms-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${stepIdx}" aria-label="${tf('mission.progAria', FA(stepIdx + 1), FA(total))}"><i style="width:${(stepIdx) / total * 100}%"></i></span>
     </div>
-    <div class="ms-situation" id="msSituation" tabindex="-1"><h3 class="sr-only">موقعیت مرحلهٔ ${FA(stepIdx + 1)}</h3>${step.situation}</div>
+    <div class="ms-situation" id="msSituation" tabindex="-1"><h3 class="sr-only">${tf('mission.situationOf', FA(stepIdx + 1))}</h3>${step.situation}</div>
     ${step.commandPreview ? `
       <div class="ms-cmd">
-        <div class="ms-cmd-label"><i class="ph ph-terminal-window" aria-hidden="true"></i>شبیه‌سازی آموزشی — این فرمان روی سیستم تو اجرا نمی‌شود</div>
+        <div class="ms-cmd-label"><i class="ph ph-terminal-window" aria-hidden="true"></i>${t('mission.cmdSim')}</div>
         <pre dir="ltr"><code>${step.commandPreview}</code></pre>
       </div>` : ''}
     ${step.stateNote ? `<p class="ms-state"><i class="ph ph-git-branch" aria-hidden="true"></i>${step.stateNote}</p>` : ''}
-    <div class="ms-choices" role="group" aria-label="گزینه‌ها">
+    <div class="ms-choices" role="group" aria-label="${t('mission.choices.aria')}">
       ${step.choices.map(c => {
         const chosen = ui.picked === c.id;
         const reveal = chosen ? TONE[c.tone] : null;
@@ -126,8 +129,8 @@ function stepBody(m, step, stepIdx) {
       ${picked ? feedbackHtml(m, step, picked, isCorrect, stepIdx) : ''}
     </div>
     <div class="ms-tools">
-      <button type="button" class="btn btn-ghost" id="msHintBtn" aria-expanded="false" aria-controls="msHint"><i class="ph ph-lightbulb" aria-hidden="true"></i>راهنمایی</button>
-      <a class="btn btn-ghost" href="#/missions"><i class="ph ph-squares-four" aria-hidden="true"></i>همهٔ مأموریت‌ها</a>
+      <button type="button" class="btn btn-ghost" id="msHintBtn" aria-expanded="false" aria-controls="msHint"><i class="ph ph-lightbulb" aria-hidden="true"></i>${t('mission.hint')}</button>
+      <a class="btn btn-ghost" href="#/missions"><i class="ph ph-squares-four" aria-hidden="true"></i>${t('mission.all')}</a>
     </div>
     <div class="ms-hint" id="msHint" hidden><i class="ph-fill ph-lightbulb" aria-hidden="true"></i>${step.hint}</div>`;
 }
@@ -137,12 +140,12 @@ function feedbackHtml(m, step, choice, isCorrect, stepIdx) {
   const last = stepIdx === m.steps.length - 1;
   return `
     <div class="ms-fb ${tone.cls}">
-      <div class="ms-fb-head"><i class="ph-fill ${tone.ic}" aria-hidden="true"></i><b tabindex="-1" id="msFbHead">${tone.head}</b></div>
+      <div class="ms-fb-head"><i class="ph-fill ${tone.ic}" aria-hidden="true"></i><b tabindex="-1" id="msFbHead">${t(tone.headKey)}</b></div>
       <p class="ms-fb-body">${choice.feedback}</p>
       ${isCorrect ? `<p class="ms-fb-explain"><i class="ph ph-arrow-bend-down-right" aria-hidden="true"></i>${step.explanation}</p>` : ''}
       ${isCorrect
-        ? `<button type="button" class="btn btn-primary" id="msNext">${last ? 'پایان مأموریت' : 'مرحلهٔ بعد'}<i class="ph-bold ph-arrow-left" aria-hidden="true"></i></button>`
-        : `<p class="ms-fb-retry"><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>گزینهٔ دیگری را امتحان کن؛ تلاش دوباره اشکالی ندارد.</p>`}
+        ? `<button type="button" class="btn btn-primary" id="msNext">${last ? t('mission.finish') : t('mission.nextStep')}<i class="ph-bold ph-arrow-left" aria-hidden="true"></i></button>`
+        : `<p class="ms-fb-retry"><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>${t('mission.retryNote')}</p>`}
     </div>`;
 }
 
@@ -151,36 +154,36 @@ function debrief(m) {
   markDone(m.id);
   return `
     <div class="ms-debrief">
-      <div class="ms-debrief-head"><i class="ph-fill ph-flag-checkered" aria-hidden="true"></i><h2>مأموریت کامل شد</h2></div>
+      <div class="ms-debrief-head"><i class="ph-fill ph-flag-checkered" aria-hidden="true"></i><h2>${t('mission.debrief.h')}</h2></div>
       <p class="ms-debrief-msg">${m.completionMessage}</p>
-      <h3 class="ms-objectives-h">در این مأموریت تمرین کردی:</h3>
+      <h3 class="ms-objectives-h">${t('mission.debrief.obj')}</h3>
       <ul class="ms-objectives">
         ${m.objectives.map(o => `<li><i class="ph-bold ph-check" aria-hidden="true"></i>${o}</li>`).join('')}
       </ul>
       <div class="ms-debrief-actions">
         <a class="btn btn-primary" href="${m.nextAction.href}"><i class="ph-bold ph-arrow-left" aria-hidden="true"></i>${m.nextAction.label}</a>
-        ${track ? `<a class="btn btn-ghost" href="#/track-${track.id}"><i class="ph ph-path" aria-hidden="true"></i>مسیر ${track.shortTitle}</a>` : ''}
-        <button type="button" class="btn btn-ghost" id="msReplay"><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>تمرین دوباره</button>
-        <a class="btn btn-ghost" href="#/missions"><i class="ph ph-squares-four" aria-hidden="true"></i>همهٔ مأموریت‌ها</a>
+        ${track ? `<a class="btn btn-ghost" href="#/track-${track.id}"><i class="ph ph-path" aria-hidden="true"></i>${tf('track.crumb', track.shortTitle)}</a>` : ''}
+        <button type="button" class="btn btn-ghost" id="msReplay"><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>${t('mission.replay')}</button>
+        <a class="btn btn-ghost" href="#/missions"><i class="ph ph-squares-four" aria-hidden="true"></i>${t('mission.all')}</a>
       </div>
     </div>`;
 }
 
 function renderDetail(m) {
   document.documentElement.style.setProperty('--pc', 'var(--p2)');
-  $('#crumbTitle').textContent = `مأموریت: ${m.title}`;
+  $('#crumbTitle').textContent = tf('mission.crumb', m.title);
   const finished = ui.step >= m.steps.length;
   const step = finished ? null : m.steps[ui.step];
   $('#root').innerHTML = `
-    <a class="track-back" href="#/missions"><i class="ph-bold ph-arrow-right" aria-hidden="true"></i>همهٔ مأموریت‌ها</a>
+    <a class="track-back" href="#/missions"><i class="ph-bold ph-arrow-right" aria-hidden="true"></i>${t('mission.all')}</a>
     <div class="mission-detail-head">
       <span class="md-ic"><i class="ph-fill ${m.icon}" aria-hidden="true"></i></span>
       <div>
         <h2>${m.title}</h2>
-        <p class="md-sub">مسیر ${trackName(m.trackId)} · ${m.difficulty}${isDone(m.id) ? ' · <span class="md-done">تکمیل‌شده</span>' : ''}</p>
+        <p class="md-sub">${tf('track.crumb', trackName(m.trackId))} · ${m.difficulty}${isDone(m.id) ? ` · <span class="md-done">${t('state.done')}</span>` : ''}</p>
       </div>
     </div>
-    ${finished ? '' : `<div class="ms-context"><i class="ph-fill ph-info" aria-hidden="true"></i><div><b>موقعیت</b><p>${m.context}</p></div></div>`}
+    ${finished ? '' : `<div class="ms-context"><i class="ph-fill ph-info" aria-hidden="true"></i><div><b>${t('mission.context')}</b><p>${m.context}</p></div></div>`}
     <div id="msStage">${finished ? debrief(m) : stepBody(m, step, ui.step)}</div>
     ${byline()}`;
 

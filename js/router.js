@@ -1,9 +1,10 @@
 import { state, isUnlocked, firstOpen } from './state.js';
 import { LEVELS } from './course.js';
-import { TRACK_BY_ID } from '../data/tracks.js';
-import { MISSION_BY_ID } from '../data/missions.js';
+import { TRACK_BY_ID } from './content.js';
+import { MISSION_BY_ID } from './content.js';
 import { FA } from './dom.js';
 import { toast } from './ui.js';
+import { t, tf } from './i18n.js';
 
 export function hashFor() {
   if (state.view === 'lesson') return '#/level-' + LEVELS[state.current].id;
@@ -19,14 +20,14 @@ export function hashFor() {
 export function syncHash() {
   const h = hashFor();
   if (location.hash !== h) { state.routing = true; location.hash = h; setTimeout(() => { state.routing = false; }, 30); }
-  const t = state.view === 'lesson' ? `سطح ${FA(LEVELS[state.current].id)} · ${LEVELS[state.current].title}`
-    : state.view === 'cert' ? 'نشان فتح مسیر' : state.view === 'glossary' ? 'واژه‌نامهٔ Git'
-    : state.view === 'tracks' ? 'مسیرهای یادگیری'
-    : state.view === 'track' ? `مسیر ${TRACK_BY_ID[state.track] ? TRACK_BY_ID[state.track].shortTitle : ''}`
-    : state.view === 'missions' ? 'مأموریت‌های عملی'
-    : state.view === 'mission' ? `مأموریت: ${MISSION_BY_ID[state.mission] ? MISSION_BY_ID[state.mission].title : ''}`
-    : 'معرفی دوره';
-  document.title = `${t} | دورهٔ Git برای طراحان — پریا بهرامی`;
+  const pageTitle = state.view === 'lesson' ? tf('lesson.crumb', FA(LEVELS[state.current].id), LEVELS[state.current].title)
+    : state.view === 'cert' ? t('ach.page') : state.view === 'glossary' ? t('nav.glossary')
+    : state.view === 'tracks' ? t('nav.tracks')
+    : state.view === 'track' ? tf('track.crumb', TRACK_BY_ID[state.track] ? TRACK_BY_ID[state.track].shortTitle : '')
+    : state.view === 'missions' ? t('nav.missions')
+    : state.view === 'mission' ? tf('mission.crumb', MISSION_BY_ID[state.mission] ? MISSION_BY_ID[state.mission].title : '')
+    : t('intro.crumb');
+  document.title = tf('doc.title', pageTitle);
 }
 
 export function applyHash() {
@@ -37,7 +38,7 @@ export function applyHash() {
     const idx = LEVELS.findIndex(l => l.id === +m[1]);
     if (idx > -1) {
       if (!isUnlocked(idx)) {
-        toast('این سطح هنوز قفل است؛ از سطح باز فعلی ادامه بده.');
+        toast(t('lock.levelLockedRoute'));
         state.view = 'lesson';
         state.current = firstOpen();
         return true;
