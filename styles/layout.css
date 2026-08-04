@@ -21,6 +21,9 @@
 .rail-search input{width:100%; background:var(--rail-fill); border:1px solid var(--rail-line); color:var(--rail-ink); border-radius:10px; padding:9px 34px 9px 12px; font-family:inherit; font-size:13px; outline:none;}
 .rail-search input::placeholder{color:var(--rail-muted);}
 .rail-search input:focus{border-color:var(--p1); background:var(--rail-hover);}
+/* The rule above sets outline:none, which outranks the global :focus-visible
+   ring on specificity and left the search field with no keyboard indicator. */
+.rail-search input:focus-visible{outline:2.5px solid var(--accent); outline-offset:2px;}
 .list-wrap{position:relative; flex:1; min-height:0; display:flex;}
 .rail-list{flex:1; overflow-y:auto; overscroll-behavior:contain; padding:4px 0 14px; scrollbar-width:thin; scrollbar-color:var(--rail-line) transparent;}
 .rail-list::-webkit-scrollbar{width:7px;}
@@ -73,9 +76,13 @@
 .nav-lb > span:first-child{flex:1; min-width:0;}
 .nav-lb .lk{font-size:14px; color:var(--rail-muted); opacity:1;}
 .nav-item:hover .nav-lb{background:var(--rail-hover); color:var(--rail-ink);}
-.nav-item.active .nav-lb{background:color-mix(in srgb,var(--pc) 16%, transparent); color:var(--pc); font-weight:700;}
+/* The phase colour stays as the tinted background (the active signal); the label
+   itself uses rail ink. Painting late-phase colours as text gave only 2.87:1 on
+   the tint, and darkening --p4 cannot fix it because the tint darkens with it.
+   This mirrors what the dark theme already does for the same rule. */
+.nav-item.active .nav-lb{background:color-mix(in srgb,var(--pc) 16%, transparent); color:var(--rail-ink); font-weight:700;}
 .nav-item.done .nav-lb{color:var(--rail-muted);}
-.nav-item.done.active .nav-lb{color:var(--pc);}
+.nav-item.done.active .nav-lb{color:var(--rail-ink);}
 .nav-item.lock{cursor:not-allowed;} .nav-item.lock .nav-lb{color:var(--rail-muted);}
 .nav-item.lock:hover .nav-lb{background:var(--rail-hover); color:var(--rail-muted);}
 .nav-n{display:block; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--rail-muted); letter-spacing:.5px;}

@@ -67,6 +67,10 @@
 [data-theme="dark"]{--toast-bg:#1E2126; --toast-ink:#F0F1F2; --toast-act:#ffffff1a;}
 [data-theme="dark"] .toast{border-color:#2E3238;}
 [data-theme="dark"] .opt{background:var(--surface-2); border-color:#2B2F35;}
+/* The skip link paints on var(--accent), which inverts to a near-white in dark
+   theme; a hardcoded white label would leave it unreadable (1.13:1) even though
+   it is the first keyboard stop on every view. */
+[data-theme="dark"] .skip{color:#0B0C0E;}
 [data-theme="dark"] .btn-primary{background:#F0F1F2; color:#0B0C0E;}
 [data-theme="dark"] .btn-primary:hover{background:#FFFFFF;}
 [data-theme="dark"] .btn-add{background:#4ECB8C; color:#07130D;}

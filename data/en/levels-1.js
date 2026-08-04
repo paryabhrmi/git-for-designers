@@ -100,7 +100,7 @@ quiz:[
 {q:'Which command tests your SSH connection to GitHub?', o:['git test ssh','ssh -T git@github.com','git connect github','ssh --check github.com'], why:'This command tests SSH authentication and, on success, replies with your username.'},
 {q:'Why is setting init.defaultBranch main recommended?', o:['Because Git will not install without it','Because it makes the default branch of new repos match today\u2019s standard, main','Because it makes Git faster','Because GitHub only accepts main'], why:'The current standard name for the main branch is main, and this setting applies it to every new git init.'}
 ]},
-{ id:3, title:'Creating and getting a Repository', subtitle:'Two ways into any project: start from scratch, or bring in an existing one.',
+{ id:3, title:'Creating and cloning a Repository', subtitle:'Two ways into any project: start from scratch, or bring in an existing one.',
 body:`
 <h3>Way one: start from scratch with git init</h3>
 <p>You can turn any folder into a repository with a single command:</p>

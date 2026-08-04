@@ -99,10 +99,17 @@ requests to `main`.
 
 ## Project status
 
-Actively developed. This is a **release-candidate quality pass**, not a released
-product. See [`docs/public-readiness.md`](docs/public-readiness.md) for the
-current readiness assessment and known limitations, and [`docs/`](docs/) for the
-curriculum audit, curriculum map, and learning-experience design notes.
+Actively developed. This is a **release candidate**, not a released product —
+nothing has been deployed. See
+[`docs/release-candidate.md`](docs/release-candidate.md) for the current
+go/no-go assessment, what was verified and how, and the open items;
+[`docs/public-readiness.md`](docs/public-readiness.md) for the earlier quality
+report; and [`docs/`](docs/) for the curriculum audit, curriculum map, and
+learning-experience design notes.
+
+A public launch is currently blocked on three decisions that belong to the
+repository owner: the **software license**, the **hosting target**, and the
+resulting **production URL** (which enables `canonical`/`og:url`).
 
 ## Current non-goals
 
