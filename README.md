@@ -1,12 +1,14 @@
-# Git for Designers — دورهٔ تعاملی Git برای طراحان
+# Git for Designers — راهنمای تعاملی Git برای طراحان
+
+**Live demo → https://paryabhrmi.github.io/git-for-designers/**
 
 <div dir="rtl">
 
-یک دورهٔ تعاملی برای یادگیری Git، ساخته‌شده برای طراحان محصول،
+راهنمایی تعاملی برای یادگیری Git، ساخته‌شده برای طراحان محصول،
 Design Technologistها و طراحانی که با تیم توسعه، پروتوتایپ‌های ساخته‌شده با
 هوش مصنوعی، و Design System کار می‌کنند.
 
-> دوره به **فارسی (RTL)** و **انگلیسی (LTR)** در دسترس است و با یک دکمه در نوار
+> این راهنما به **فارسی (RTL)** و **انگلیسی (LTR)** در دسترس است و با یک دکمه در نوار
 > بالا بین دو زبان جابه‌جا می‌شوی؛ پیشرفتت بین هر دو زبان مشترک است.
 > دستورهای Git در هر دو زبان انگلیسی و چپ‌به‌راست می‌مانند.
 
@@ -14,7 +16,7 @@ Design Technologistها و طراحانی که با تیم توسعه، پروت
 
 ## What this is
 
-A browser-based, self-paced Git course available in **Persian (RTL) and English
+A browser-based, self-paced Git handbook available in **Persian (RTL) and English
 (LTR)** — all 30 levels, quizzes, scenarios, glossary, tracks, and missions exist
 in both languages, and progress is shared between them. It runs as a static site
 — no backend, no accounts, no build step — and stores the learner's progress
@@ -65,8 +67,10 @@ work for someone who is not me.
   keyboard stop of every page. Theme inversion had been applied to the token but
   not to the one component that hardcoded its text colour.
 
-**Known limits:** no screen-reader session or cross-browser testing has been
-performed; there is no `h1` yet; and both locales load eagerly.
+**Known limits:** no screen-reader session and no cross-browser testing — only
+Chromium is available in the environment this was built in, so Firefox and
+Safari remain genuinely unverified. Static page metadata stays Persian for
+crawlers that do not run JavaScript.
 See [`docs/release-candidate.md`](docs/release-candidate.md) for the full,
 honest accounting.
 
@@ -88,6 +92,12 @@ honest accounting.
 - **Bilingual (fa/en)** — switch the language from the topbar; the layout mirrors between RTL and LTR, and the same completed levels, missions, XP, badges, and achievement carry across both languages. Language choice is stored locally.
 - **Light and dark themes**, and locally hosted fonts and icons (no external asset requests at runtime).
 
+## Screenshots
+
+| A lesson | A quiz, answered | The achievement card |
+|---|---|---|
+| ![A lesson view](assets/screenshots/lesson.png) | ![A quiz after answering, showing correct and incorrect options with explanations](assets/screenshots/quiz.png) | ![The exported path achievement card](assets/screenshots/achievement.png) |
+
 ## Privacy
 
 <div dir="rtl">
@@ -102,6 +112,18 @@ honest accounting.
 At runtime the application makes no network requests (verified by review): all
 fonts and icons are served locally, and there is no analytics, tracking, or
 progress upload. Learner state lives only in `localStorage` under a single key.
+
+## Project status
+
+Actively developed and **live at https://paryabhrmi.github.io/git-for-designers/**, served by GitHub Pages from `main`. See
+[`docs/release-candidate.md`](docs/release-candidate.md) for the current
+go/no-go assessment, what was verified and how, and the open items;
+[`docs/public-readiness.md`](docs/public-readiness.md) for the earlier quality
+report; and [`docs/`](docs/) for the curriculum audit, curriculum map, and
+learning-experience design notes.
+
+Licence (MIT), hosting (GitHub Pages) and the production URL are all settled,
+so `canonical` and `og:url` are now published in `index.html`.
 
 ## Architecture
 
@@ -166,19 +188,6 @@ find . -path ./.git -prune -o -name '*.js' -print0 | xargs -0 -n1 node --check
 These are the same checks run in CI (`.github/workflows/validate.yml`) on pull
 requests to `main`.
 
-## Project status
-
-Actively developed. This is a **release candidate**, not a released product —
-nothing has been deployed. See
-[`docs/release-candidate.md`](docs/release-candidate.md) for the current
-go/no-go assessment, what was verified and how, and the open items;
-[`docs/public-readiness.md`](docs/public-readiness.md) for the earlier quality
-report; and [`docs/`](docs/) for the curriculum audit, curriculum map, and
-learning-experience design notes.
-
-The licence is settled (MIT) and the hosting target is GitHub Pages. The only
-launch item still outstanding is the **production URL**, which enables
-`canonical` and `og:url`.
 
 ## Current non-goals
 

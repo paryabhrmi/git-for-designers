@@ -164,3 +164,38 @@ link in dark theme) is fixed and re-verified, and the remaining open items are
 documented, non-blocking, and post-launch. The launch cannot proceed on
 engineering grounds alone — it is gated on a licence, a host, and a URL, none of
 which this review is authorized to choose.
+
+---
+
+# Post-release-candidate update — 2026-08-04
+
+Recorded so this document does not keep describing items that are now closed.
+
+**Closed since the assessment above:**
+
+| Was | Now |
+|---|---|
+| Finding 6 — no `h1` on any view | **Fixed.** Every view has exactly one `h1` and the outline has no skipped levels. Rather than a hidden heading, 336 curriculum headings were shifted a level in both locales so the structure is genuinely correct. |
+| Finding 7 — ~20.5 MB of unused vendored icon formats | **Fixed** in an earlier pass; the repository is ~11 MB. |
+| Launch blocker 1 — software licence | **Settled: MIT.** `LICENSE` at the root; third-party assets keep their own terms. |
+| Launch blocker 2 — hosting target | **Settled: GitHub Pages**, served from `main` with `.nojekyll`, no build step. |
+| Launch blocker 3 — production URL | **Settled: https://paryabhrmi.github.io/git-for-designers/.** `canonical` and `og:url` are published in `index.html`. |
+| Known limitation — both locales load eagerly | **Fixed.** The inactive locale is fetched on demand: Persian startup JS 631 KB → 435 KB, with zero `data/en` requests. |
+
+**Found and fixed after the assessment:** the completed-level tick in the
+sidebar painted a hardcoded white glyph on `var(--pc)` and measured **1.13:1 in
+dark theme** — the same failure class as the skip link, missed by the automated
+audit because an icon-font glyph has no text node to measure. Both now derive
+their colour from `var(--paper)` and pass in either theme.
+
+**Still open, unchanged:** no screen-reader session and no cross-browser
+verification (only Chromium is available in this environment — this gap cannot be
+closed here by any means); no native-speaker editorial read of the English prose;
+static page metadata stays Persian for non-JavaScript crawlers; and the
+achievement card's rank accents remain the one place the interface leaves its
+monochrome palette.
+
+**Deployment verified before release:** the exact committed tree was exported and
+served from a Pages-style subpath. All 11 route families rendered in both
+locales, every font and image loaded, and there were zero failed requests and
+zero console errors.
