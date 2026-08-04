@@ -18,9 +18,9 @@ export function buildSim(host) {
     <div class="sim-head"><i class="ph-duotone ph-cursor-click"></i><b>${t('sim.head')}</b></div>
     <p class="sim-note">${t('sim.note')}</p>
     <div class="sim-cols">
-      <div class="sim-col" data-z="wd"><h5><i class="ph ph-folder-open"></i>${t('sim.col.wd')} <em>working</em></h5><div class="chips"></div></div>
-      <div class="sim-col" data-z="st"><h5><i class="ph ph-tray"></i>${t('sim.col.st')} <em>staged</em></h5><div class="chips"></div></div>
-      <div class="sim-col" data-z="cm"><h5><i class="ph ph-git-commit"></i>${t('sim.col.cm')} <em>committed</em></h5><div class="chips"></div></div>
+      <div class="sim-col" data-z="wd"><h4><i class="ph ph-folder-open"></i>${t('sim.col.wd')} <em>working</em></h4><div class="chips"></div></div>
+      <div class="sim-col" data-z="st"><h4><i class="ph ph-tray"></i>${t('sim.col.st')} <em>staged</em></h4><div class="chips"></div></div>
+      <div class="sim-col" data-z="cm"><h4><i class="ph ph-git-commit"></i>${t('sim.col.cm')} <em>committed</em></h4><div class="chips"></div></div>
     </div>
     <div class="sim-cmds">
       <button class="sim-cmd" data-a="status">git status</button>
