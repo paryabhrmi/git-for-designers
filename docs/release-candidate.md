@@ -1,5 +1,12 @@
 # Release Candidate Review — Phase 6
 
+> **Status: superseded.** This is the Phase 6 release-candidate assessment, kept
+> as a record of what was checked and when. The product has since shipped as
+> [**v1.0.0**](https://github.com/paryabhrmi/git-for-designers/releases/tag/v1.0.0) and is live at <https://paryabhrmi.github.io/git-for-designers/>. Statements below about nothing
+> being deployed, or about the licence, host and URL being undecided, were true
+> when written and are no longer. The *Post-release-candidate update* section at
+> the end of this file lists exactly what changed.
+
 **Branch:** `claude/git-designers-curriculum-review-ztwe5f` · **Base:** `origin/main` at `42c9c95` (merge of PR #15)
 **Environment:** Linux container, Node v22.22.2, Chromium 1194 (Playwright-driven), local static server.
 **Date context:** 2026-08-04.
