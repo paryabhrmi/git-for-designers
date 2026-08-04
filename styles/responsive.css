@@ -1,4 +1,9 @@
-@media(max-width:1180px){ .wrap{padding:38px 26px 120px;} .topbar{padding:11px 26px;} }
+@media(max-width:1180px){ .wrap{padding:38px 26px 120px;} .topbar{padding-inline:26px;} }
+
+/* The rail already shows XP, the progress bar and the rank. The topbar pill is
+   the only XP readout once the rail collapses into a drawer, so it appears
+   there and nowhere else. */
+@media(min-width:941px){ .lvl-pill{display:none;} }
 
 @media(max-width:1024px){
   .rail{width:290px;}

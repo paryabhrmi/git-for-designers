@@ -20,6 +20,56 @@ in both languages, and progress is shared between them. It runs as a static site
 — no backend, no accounts, no build step — and stores the learner's progress
 locally in the browser.
 
+## Why this exists — and what building it involved
+
+I wanted to learn Git properly, as a product designer rather than as a
+developer. The material I could find split into two useless halves: tutorials
+written for engineers that assumed a terminal was already home, and
+designer-facing posts that stopped at "commit means save". In Persian there was
+essentially nothing. So the first version of this was notes to myself.
+
+It stopped being notes when I added the quiz gate. Once a level could refuse to
+let you continue, it was no longer a reference — it was a course, and it had to
+work for someone who is not me.
+
+**Decisions worth defending:**
+
+- **No framework, no build step, no runtime dependencies.** Not minimalism for
+  its own sake: a learning resource that needs `npm install` to survive is a
+  resource that dies in two years. This one is HTML, CSS and ES modules, and it
+  will still open in a browser long after any toolchain I picked today is gone.
+- **Progress is gated, not suggested.** A level unlocks only after passing the
+  previous quiz at 70%. It is the one genuinely opinionated decision in the
+  product, and the reason people finish it.
+- **Missions award no XP.** They are optional practice; paying XP for them would
+  turn an optional path into a compulsory grind and quietly break the rank
+  ladder that the required track defines.
+- **Persian and English share one behavioural source of truth.** The Persian
+  data modules define structure; English carries text only. Adding a language
+  can never fork the logic, because there is no logic to fork.
+- **Commands never mirror.** The interface flips between RTL and LTR using CSS
+  logical properties, but every Git command is explicitly `dir="ltr"`. Without
+  that, punctuation reorders inside Persian text and the course teaches the
+  wrong command. The `#/system` page documents this rule.
+
+**What I got wrong, and fixed:**
+
+- Storing progress keyed on localized content made a refactor silently wipe
+  completed missions. Stored IDs are now language-neutral and validated against
+  the canonical data modules. It was caught by reproducing it in a real browser,
+  not by reading the diff.
+- The mission steps showed the Git command *above* the choices. In 14 of 20
+  steps that command was the correct answer, so the missions had quietly become
+  a matching exercise. The command is now the consequence of a correct decision.
+- The skip link was white-on-near-white in dark theme — 1.13:1, on the first
+  keyboard stop of every page. Theme inversion had been applied to the token but
+  not to the one component that hardcoded its text colour.
+
+**Known limits:** no screen-reader session or cross-browser testing has been
+performed; there is no `h1` yet; and both locales load eagerly.
+See [`docs/release-candidate.md`](docs/release-candidate.md) for the full,
+honest accounting.
+
 ## Intended audience
 
 - product designers
@@ -57,7 +107,8 @@ progress upload. Learner state lives only in `localStorage` under a single key.
 
 - Static **HTML + CSS + native JavaScript ES modules** — no framework and no required build step.
 - **No runtime package dependencies.**
-- **Hash-based routing** (`#/level-<id>`, `#/tracks`, `#/track-<id>`, `#/missions`, `#/mission-<id>`, `#/glossary`, `#/certificate`).
+- **Hash-based routing** (`#/level-<id>`, `#/tracks`, `#/track-<id>`, `#/missions`, `#/mission-<id>`, `#/glossary`, `#/certificate`, `#/system`).
+- **`#/system` documents the design system from the live CSS** — the colour ramp, type scale, spacing tokens and the RTL/LTR rules are read from computed styles at render time, so the page cannot drift from the stylesheets.
 - Content lives in `data/` (levels, scenarios, glossary, tracks, missions, badges, ranks, phases); rendering and app logic in `js/`; styles in `styles/`; local fonts and icons in `assets/`.
 
 ## Run locally

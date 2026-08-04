@@ -29,7 +29,7 @@ const RAW_QUIZ_BY_ID = LEVELS.reduce((m, l) => { m[l.id] = l.quiz; return m; }, 
 const trackIds = new Set(TRACKS.map((t) => t.id));
 const REQUIRED_TRACKS = ['core', 'ai-prototype', 'design-system', 'design-technologist'];
 const EXPECTED_MISSIONS = ['core-ship-change', 'ai-safe-checkpoint', 'ds-token-conflict', 'dt-clean-branch'];
-const STATIC_ROUTES = new Set(['#/intro', '#/glossary', '#/certificate', '#/tracks', '#/missions']);
+const STATIC_ROUTES = new Set(['#/intro', '#/glossary', '#/certificate', '#/tracks', '#/missions', '#/system']);
 
 /** A content route href must resolve to a real destination. */
 function routeResolves(href) {

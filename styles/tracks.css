@@ -15,7 +15,10 @@
 .track-reco .tr-txt p{font-size:13.2px; color:var(--muted); line-height:1.8; margin-top:3px;}
 .track-reco .btn{flex-shrink:0;}
 
-.track-grid{list-style:none; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:var(--s4); margin:0;}
+/* Four tracks: an auto-fill grid produced a 3+1 orphan row at desktop widths
+   and squeezed two of the titles onto two lines. A fixed 2x2 reads as one set
+   and gives every card the same width. */
+.track-grid{list-style:none; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s4); margin:0;}
 .track-card{display:flex; flex-direction:column; gap:var(--s3); height:100%;
   background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg);
   padding:var(--s5); box-shadow:var(--sh-1); color:inherit; text-decoration:none;
@@ -27,7 +30,9 @@
   background:var(--accent-soft); color:var(--accent-ink); font-size:21px;}
 .tc-name{flex:1; min-width:0;}
 .tc-name b{display:block; font-size:15.5px; font-weight:800; line-height:1.5;}
-.tc-name em{display:block; font-style:normal; font-size:11.5px; color:var(--muted); font-family:'JetBrains Mono',monospace; margin-top:1px;}
+/* A track name is not code. Monospace made these read as identifiers and forced
+   a three-line wrap on the longest one; the UI face keeps them as names. */
+.tc-name em{display:block; font-style:normal; font-size:12px; color:var(--muted); letter-spacing:.1px; margin-top:2px;}
 .tc-flag{flex-shrink:0; white-space:nowrap; font-size:11px; font-weight:800; padding:3px 9px; border-radius:99px; border:1px solid var(--line);}
 .tc-flag.t-req{background:var(--accent); color:var(--on-accent); border-color:var(--accent);}
 .tc-flag.t-opt{background:var(--surface-2); color:var(--muted);}
@@ -49,7 +54,7 @@
 .track-detail-head .td-ic{width:52px; height:52px; border-radius:14px; flex-shrink:0; display:grid; place-items:center;
   background:var(--accent-soft); color:var(--accent-ink); font-size:26px;}
 .track-detail-head h2{font-size:clamp(22px,3vw,30px); font-weight:900; letter-spacing:-.5px; line-height:1.4;}
-.track-detail-head .td-en{font-size:12.5px; color:var(--muted); font-family:'JetBrains Mono',monospace; margin-top:2px;}
+.track-detail-head .td-en{font-size:13px; color:var(--muted); letter-spacing:.1px; margin-top:2px;}
 .td-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:var(--s4);}
 .td-tag{white-space:nowrap; font-size:12px; font-weight:700; padding:5px 11px; border-radius:var(--r-pill); border:1px solid var(--line); background:var(--surface); color:var(--ink-2);}
 .td-tag.t-req{background:var(--accent); color:var(--on-accent); border-color:var(--accent);}

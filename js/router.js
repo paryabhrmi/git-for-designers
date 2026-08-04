@@ -17,6 +17,7 @@ export function hashFor() {
   if (state.view === 'tracks') return '#/tracks';
   if (state.view === 'mission' && MISSION_BY_ID[state.mission]) return '#/mission-' + state.mission;
   if (state.view === 'missions') return '#/missions';
+  if (state.view === 'system') return '#/system';
   return '#/intro';
 }
 
@@ -29,6 +30,7 @@ export function syncHash() {
     : state.view === 'track' ? tf('track.crumb', L_TRACK[state.track] ? L_TRACK[state.track].shortTitle : '')
     : state.view === 'missions' ? t('nav.missions')
     : state.view === 'mission' ? tf('mission.crumb', L_MISSION[state.mission] ? L_MISSION[state.mission].title : '')
+    : state.view === 'system' ? t('nav.system')
     : t('intro.crumb');
   document.title = tf('doc.title', pageTitle);
 }
@@ -68,6 +70,7 @@ export function applyHash() {
     state.view = 'missions'; state.mission = null; return true;
   }
   if (h.startsWith('#/missions')) { state.view = 'missions'; state.mission = null; return true; }
+  if (h.startsWith('#/system')) { state.view = 'system'; return true; }
   if (h.startsWith('#/certificate')) { state.view = 'cert'; return true; }
   if (h.startsWith('#/glossary')) { state.view = 'glossary'; return true; }
   if (h.startsWith('#/intro')) { state.view = 'intro'; return true; }

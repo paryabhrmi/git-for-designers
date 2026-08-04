@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="./styles/quiz.css">
 <link rel="stylesheet" href="./styles/tracks.css">
 <link rel="stylesheet" href="./styles/missions.css">
+<link rel="stylesheet" href="./styles/system.css">
 <link rel="stylesheet" href="./styles/utilities.css">
 <link rel="stylesheet" href="./styles/responsive.css">
 
@@ -79,7 +80,13 @@
           <a href="https://www.linkedin.com/in/paryabhrmi" target="_blank" rel="noopener" aria-label="لینکدین پریا بهرامی" data-i18n-aria="author.li" title="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a>
         </div>
       </div>
-      <button class="mini-btn wide" id="resetBtn"><i class="ph ph-arrow-counter-clockwise"></i><span data-i18n="reset.btn">شروع دوبارهٔ دوره</span></button>
+      <details class="rail-settings" id="railSettings">
+        <summary class="mini-btn wide"><i class="ph ph-gear-six"></i><span data-i18n="settings.btn">تنظیمات دوره</span><i class="ph-bold ph-caret-down cs"></i></summary>
+        <div class="rail-settings-body">
+          <p data-i18n="settings.resetNote">شروع دوباره، همهٔ پیشرفت این مرورگر را پاک می‌کند و برگشت‌پذیر نیست.</p>
+          <button class="mini-btn wide danger" id="resetBtn"><i class="ph ph-arrow-counter-clockwise"></i><span data-i18n="reset.btn">شروع دوبارهٔ دوره</span></button>
+        </div>
+      </details>
     </div>
   </aside>
   <div class="overlay" id="overlay"></div>

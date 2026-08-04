@@ -109,11 +109,6 @@ function stepBody(m, step, stepIdx) {
       <span class="ms-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${stepIdx}" aria-label="${tf('mission.progAria', FA(stepIdx + 1), FA(total))}"><i style="width:${(stepIdx) / total * 100}%"></i></span>
     </div>
     <div class="ms-situation" id="msSituation" tabindex="-1"><h3 class="sr-only">${tf('mission.situationOf', FA(stepIdx + 1))}</h3>${step.situation}</div>
-    ${step.commandPreview ? `
-      <div class="ms-cmd">
-        <div class="ms-cmd-label"><i class="ph ph-terminal-window" aria-hidden="true"></i>${t('mission.cmdSim')}</div>
-        <pre dir="ltr"><code>${step.commandPreview}</code></pre>
-      </div>` : ''}
     ${step.stateNote ? `<p class="ms-state"><i class="ph ph-git-branch" aria-hidden="true"></i>${step.stateNote}</p>` : ''}
     <div class="ms-choices" role="group" aria-label="${t('mission.choices.aria')}">
       ${step.choices.map(c => {
@@ -143,6 +138,14 @@ function feedbackHtml(m, step, choice, isCorrect, stepIdx) {
       <div class="ms-fb-head"><i class="ph-fill ${tone.ic}" aria-hidden="true"></i><b tabindex="-1" id="msFbHead">${t(tone.headKey)}</b></div>
       <p class="ms-fb-body">${choice.feedback}</p>
       ${isCorrect ? `<p class="ms-fb-explain"><i class="ph ph-arrow-bend-down-right" aria-hidden="true"></i>${step.explanation}</p>` : ''}
+      ${/* The command is the consequence of a correct decision, never a hint shown
+            before it — rendering it above the choices made 14 of 20 steps a
+            matching exercise instead of a decision. */
+        isCorrect && step.commandPreview ? `
+        <div class="ms-cmd">
+          <div class="ms-cmd-label"><i class="ph ph-terminal-window" aria-hidden="true"></i>${t('mission.cmdSim')}</div>
+          <pre dir="ltr"><code>${step.commandPreview}</code></pre>
+        </div>` : ''}
       ${isCorrect
         ? `<button type="button" class="btn btn-primary" id="msNext">${last ? t('mission.finish') : t('mission.nextStep')}<i class="ph-bold ph-arrow-left" aria-hidden="true"></i></button>`
         : `<p class="ms-fb-retry"><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>${t('mission.retryNote')}</p>`}
