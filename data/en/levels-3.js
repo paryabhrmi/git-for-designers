@@ -1,9 +1,9 @@
 export const EN_LEVELS_3 = [
 { id:21, title:'Git for AI Projects', subtitle:'When a machine writes part of the code, Git becomes your quality control system.',
 body:`
-<h3>Why is Git critical here?</h3>
+<h2>Why is Git critical here?</h2>
 <p>AI-generated code is fast, voluminous, and sometimes goes beyond what you asked for. Git gives you three things without which working with agents is unmanageable: a <strong>restore point</strong>, a <strong>reviewable Diff</strong>, and a <strong>separate space for experiments</strong>.</p>
-<h3>A safe protocol for working with an agent</h3>
+<h2>A safe protocol for working with an agent</h2>
 <pre><code>1. git status            <span class="c"># make sure nothing uncommitted is left hanging</span>
 2. git commit            <span class="c"># create a clean restore point</span>
 3. git switch -c experiment/ai-onboarding   <span class="c"># separate branch for the experiment</span>
@@ -11,7 +11,7 @@ body:`
 5. git diff              <span class="c"># review line by line; anything out of scope?</span>
 6. git add -p            <span class="c"># stage only the changes that are right</span>
 7. git commit            <span class="c"># with a clear message, noting it was AI-assisted</span></code></pre>
-<h3>Checklist for reviewing AI output</h3>
+<h2>Checklist for reviewing AI output</h2>
 <ul>
 <li><strong>Out-of-scope changes:</strong> Were files modified that should have been left alone? Did it rewrite healthy code on its own initiative?</li>
 <li><strong>Added dependencies:</strong> Every new package in <code>package.json</code> must be necessary and trustworthy.</li>
@@ -19,16 +19,16 @@ body:`
 <li><strong>Security risk:</strong> Sample keys or tokens in the code, calls to unknown services, disabled protections.</li>
 <li><strong>Accidental deletions:</strong> Take large red blocks in the Diff seriously.</li>
 </ul>
-<h3>Recording generation context (Prompt Changelog)</h3>
+<h2>Recording generation context (Prompt Changelog)</h2>
 <p>For reproducibility and transparency, keep the generation details in the repository: the prompt that was used, the model and its version, and the context and constraints you provided. A simple file like <code>ai/prompts.md</code> is enough:</p>
 <pre><code>## 2026-04-02 — Empty state component
 Model: claude-opus-5
 Prompt: "Build an EmptyState component with the existing tokens; no raw color values."
 Constraints: no new libraries, RTL-safe
 Outcome: accepted with a spacing fix (PR #128)</code></pre>
-<h3>Comparing multiple outputs</h3>
+<h2>Comparing multiple outputs</h2>
 <p>Want to evaluate two AI solutions? Put each output on its own branch (<code>experiment/ai-a</code> and <code>experiment/ai-b</code>), commit each one, and compare them with <code>git diff experiment/ai-a experiment/ai-b</code> or each branch's preview. The losing branch gets deleted, without leaving any trace on main.</p>
-<h3>Governance: agents on a team</h3>
+<h2>Governance: agents on a team</h2>
 <ul>
 <li><strong>Limit access:</strong> An agent should never hold a production key or be allowed to push directly to main.</li>
 <li><strong>Agent-generated Commit/PR:</strong> In the commit message or PR description, state that the output was produced with AI assistance and who reviewed it.</li>
@@ -46,9 +46,9 @@ quiz:[
 ]},
 { id:22, title:'Git for Prototypes', subtitle:'Multiple live, comparable versions — without final-v7 folders.',
 body:`
-<h3>A repository for prototypes</h3>
+<h2>A repository for prototypes</h2>
 <p>A code prototype deserves its own lightweight repository — a place where you're free to experiment without the pressure of production standards. Practical advice: <strong>keep prototype and production separate</strong>, so exploratory code doesn't accidentally slip into the product and throwaway code doesn't slow down the team's reviews.</p>
-<h3>One idea, one branch</h3>
+<h2>One idea, one branch</h2>
 <ul>
 <li><strong>Variant:</strong> <code>prototype/nav-tabs</code> and <code>prototype/nav-drawer</code> to compare two solutions.</li>
 <li><strong>User flow:</strong> <code>prototype/checkout-one-step</code> for one complete path.</li>
@@ -56,7 +56,7 @@ body:`
 <li><strong>User test:</strong> <code>prototype/test-round-2</code>, which stays untouched during the test so the results remain valid.</li>
 </ul>
 <p>Treat <strong>main in the prototype repository</strong> as the <strong>stable version</strong>: the one that always works and that you can show anyone without stress.</p>
-<h3>Per-branch deploys and Preview URLs</h3>
+<h2>Per-branch deploys and Preview URLs</h2>
 <p>Hosting services (like Vercel or Netlify, and GitHub Pages too) can connect to your repository and create a live <strong>Preview URL</strong> for every branch or every PR. For a designer, the effect is transformative:</p>
 <ul>
 <li>A live link for stakeholders instead of a zip file or screenshots.</li>
@@ -69,14 +69,14 @@ body:`
 git push -u origin prototype/nav-drawer
 <span class="c"># a Preview URL is created automatically &rarr; send the link to the team</span>
 <span class="c"># record feedback in that branch's PR or Issue</span></code></pre></div>
-<h3>Recording feedback and each version's fate</h3>
+<h2>Recording feedback and each version's fate</h2>
 <p>Open a PR (even a Draft) for every variant, and write the feedback, test results, and final decision right there. After the decision:</p>
 <ul>
 <li><strong>Winner:</strong> merge into the prototype's main.</li>
 <li><strong>Loser:</strong> delete the branch — the history and the documented discussion live on in the closed PR.</li>
 <li><strong>Rollback:</strong> if the new version bombs in a presentation, get back quickly with a revert or by returning to the stable version's tag.</li>
 </ul>
-<h3>Turning a prototype into production</h3>
+<h2>Turning a prototype into production</h2>
 <p>Prototype code usually doesn't go straight into the product; but its value isn't thrown away either: the prototype acts as an <strong>executable specification</strong> — it shows behavior, animation, states, and edge cases precisely. In the hand-off PR, link to the prototype branch or commit so the developer has an exact reference.</p>
 `,
 quiz:[
@@ -88,9 +88,9 @@ quiz:[
 ]},
 { id:23, title:'Git for Design Systems', subtitle:'When your design output is code, Git becomes the primary tool for managing it.',
 body:`
-<h3>Why is a Design System fragile without version control?</h3>
+<h2>Why is a Design System fragile without version control?</h2>
 <p>A Design System is a product with many consumers. Without history, versioning, and review, one small change can break ten products at once. Git answers three vital questions: what changed, why, and how do we go back.</p>
-<h3>The Design Token repository</h3>
+<h2>The Design Token repository</h2>
 <p>Tokens are usually kept in JSON files and feed every platform:</p>
 <pre><code>{
   "color": {
@@ -100,26 +100,26 @@ body:`
   "spacing": { "md": { "value": "16px" } }
 }</code></pre>
 <p>Every token change is perfectly transparent in a Diff: one red line and one green line. That's why reviewing tokens is far more precise than sending a screenshot of a color in chat.</p>
-<h3>The component change workflow</h3>
+<h2>The component change workflow</h2>
 <pre><code>1. Issue: the problem and the reason for the change
 2. Branch: ds/button-focus-state
 3. Change the component + update the docs (Storybook)
 4. PR with Before/After, states, and an a11y note
 5. Review by the system designer (Code Owner) + a developer
 6. Merge &rarr; release a new version with a Tag and Changelog</code></pre>
-<h3>Breaking changes, deprecation, and migration</h3>
+<h2>Breaking changes, deprecation, and migration</h2>
 <ul>
 <li><strong>Breaking Change:</strong> a change that forces consumers to modify their code (removing a token, renaming a prop) &larr; a MAJOR version.</li>
 <li><strong>Deprecation:</strong> the politer path: first declare the old element "deprecated" (with a warning and a suggested replacement), then remove it in the next version.</li>
 <li><strong>Migration Guide:</strong> a step-by-step "from version 1 to 2" guide with an old &rarr; new table. Without it, upgrading becomes very expensive for teams.</li>
 </ul>
-<h3>Documentation and quality</h3>
+<h2>Documentation and quality</h2>
 <ul>
 <li><strong>Storybook:</strong> living component documentation kept next to the code in the same repository and updated with every PR. Documentation kept apart from the code always falls behind.</li>
 <li><strong>Documentation versioning:</strong> each version's docs must match that version's code; a team still on v1 needs to see the v1 docs.</li>
 <li><strong>Visual regression testing:</strong> automatic screenshots of components on every PR, compared against the previous version; it catches unintended visual changes before Merge.</li>
 </ul>
-<h3>Governance</h3>
+<h2>Governance</h2>
 <ul>
 <li><strong>Contribution Guideline:</strong> a file that explains how to propose changes, what's required, and what the acceptance criteria are.</li>
 <li><strong>Code Owners:</strong> changes to tokens or foundational components automatically require the system designer's review.</li>
@@ -137,29 +137,29 @@ quiz:[
 ]},
 { id:24, title:'Git for Figma and Design Tokens', subtitle:'Connecting the worlds of design and code — where you must know where the truth lives.',
 body:`
-<h3>Figma Variables and Design Tokens</h3>
+<h2>Figma Variables and Design Tokens</h2>
 <p><strong>Figma Variables</strong> are named values (color, spacing, typography, and so on) inside the design file. The same concepts live in code as <strong>Design Tokens</strong> stored in JSON. Sync means keeping the two in agreement.</p>
-<h3>How does sync work?</h3>
+<h2>How does sync work?</h2>
 <p>Figma plugins (like Tokens Studio and similar ones) can connect to a repository:</p>
 <ul>
 <li><strong>Push from Figma to GitHub:</strong> variable changes are committed on a new branch and a PR is created.</li>
 <li><strong>Pull from GitHub to Figma:</strong> values flow from the repository back into the design file.</li>
 <li><strong>One-way or two-way:</strong> two-way sync creates the possibility of a <strong>Token Conflict</strong> (both sides changed the same token). The simplest policy for small teams: make one direction official — usually Figma as the source of changes and the repository as the destination.</li>
 </ul>
-<h3>Source of Truth</h3>
+<h2>Source of Truth</h2>
 <p>The most important decision in this space: <strong>where does the truth live?</strong></p>
 <table><tr><th>Design Source of Truth (Figma)</th><th>Code Source of Truth (Repo)</th></tr>
 <tr><td>The designer makes changes, the code follows</td><td>The repository is the official reference; Figma syncs to it</td></tr>
 <tr><td>Faster for design-driven teams</td><td>Safer for large, multi-platform products</td></tr></table>
 <p>There is no wrong choice; there is an <strong>unclear</strong> choice. A team that hasn't settled this keeps getting stuck on "which value is correct?"</p>
-<h3>Branches and PRs for tokens</h3>
+<h2>Branches and PRs for tokens</h2>
 <p>Never take a brand color or typography scale change straight to main. Create a <code>tokens/brand-color-update</code> branch and write in the PR: which token, the old and new value, where it is used, and a screenshot of the visual impact.</p>
-<h3>Renaming, removal, and aliases</h3>
+<h2>Renaming, removal, and aliases</h2>
 <ul>
 <li><strong>Renaming or removing a token:</strong> it's a Breaking Change; it needs deprecation, a Migration Guide, and a MAJOR version.</li>
 <li><strong>Token Alias:</strong> a token that points to another token — for example <code>button-background &rarr; color-brand</code>. The alias layer (semantic tokens) means a change to a base value propagates correctly everywhere without renaming anything in the components.</li>
 </ul>
-<h3>Token transformation and Style Dictionary</h3>
+<h2>Token transformation and Style Dictionary</h2>
 <p><strong>Style Dictionary</strong> is a tool that converts JSON tokens into each platform's format: CSS Variables for the web, XML for Android, Swift for iOS. One source, many outputs; and because the conversion happens in the repository, the outputs always stay in sync with the source.</p>
 <div class="callout tip"><span class="co-title">What to look for when reviewing tokens in a Diff</span>Did only the value change, or the name too? (A rename = Breaking.) Does the new token follow the naming convention? Do the aliases still point to an existing token? Is the JSON file still valid?</div>
 `,
@@ -173,12 +173,12 @@ quiz:[
 ]},
 { id:25, title:'GitHub Actions and CI/CD', subtitle:'Just enough to understand why a PR turned red and what to do about it.',
 body:`
-<h3>What are CI and CD?</h3>
+<h2>What are CI and CD?</h2>
 <ul>
 <li><strong>CI (Continuous Integration):</strong> with every change, the project's health is checked automatically (it builds, the tests pass, standards are met).</li>
 <li><strong>CD (Continuous Delivery/Deployment):</strong> an approved change is automatically released or made ready to release.</li>
 </ul>
-<h3>GitHub Actions and its vocabulary</h3>
+<h2>GitHub Actions and its vocabulary</h2>
 <p><strong>GitHub Actions</strong> is the system that runs this work. Its structure is simple:</p>
 <ul>
 <li><strong>Workflow:</strong> the whole automated process (defined in a file inside <code>.github/workflows/</code>).</li>
@@ -192,7 +192,7 @@ jobs:
     steps:              <span class="c"># Steps</span>
       - npm install
       - npm test</code></pre>
-<h3>Common checks you'll see on a PR</h3>
+<h2>Common checks you'll see on a PR</h2>
 <table><tr><th>Check</th><th>What it means</th><th>When it turns red, it means</th></tr>
 <tr><td>Build</td><td>Does the project build?</td><td>A code error; this version does not run at all</td></tr>
 <tr><td>Test</td><td>Do the tests pass?</td><td>Some behavior is broken</td></tr>
@@ -200,9 +200,9 @@ jobs:
 <tr><td>Accessibility</td><td>a11y rules (contrast, roles, labels)</td><td>An accessibility issue — important for a designer!</td></tr>
 <tr><td>Visual Regression</td><td>Visual difference from the previous version</td><td>Either a visual bug, or an intentional change that needs approval</td></tr>
 </table>
-<h3>Preview Deployments and deploying after Merge</h3>
+<h2>Preview Deployments and deploying after Merge</h2>
 <p>A workflow can build a <strong>Preview Deployment</strong> for every PR (the same Preview URL from level 22) and, after the merge into main, release the production version.</p>
-<h3>When a PR turns red</h3>
+<h2>When a PR turns red</h2>
 <ol>
 <li>Click the check's name and open the <strong>Action Log</strong>.</li>
 <li>The error message is usually at the end of the log, in the red lines.</li>
@@ -212,7 +212,7 @@ jobs:
 <p>A <strong>Required Check</strong> is a check that must turn green before the Merge button is enabled. A <strong>Secret in Actions</strong> is where the keys a workflow needs are stored in the repository settings (without ever appearing in the code).</p>
 <div class="callout note"><span class="co-title">Your role</span>You don't need to write pipelines. You need to be able to read the state of the checks, recognize design-related problems (a11y and Visual Regression), and know that "it works on my machine" is not a valid answer to a red check.</div>
 
-<h3>Hooks — the checks that run before CI</h3>
+<h2>Hooks — the checks that run before CI</h2>
 <p>Sometimes you run <code>git commit</code> and get an error instead of a commit; or the commit succeeds but your files come back reformatted on their own. Nothing is broken — a <b>hook</b> ran.</p>
 <p>A hook is a script Git runs at specific moments on <i>your own</i> machine, unlike GitHub Actions which runs on a server. Teams usually wire them up with tools like Husky so mistakes are caught before they ever reach a PR.</p>
 <table><tr><th>Hook</th><th>When</th><th>Typical job</th></tr>
@@ -233,7 +233,7 @@ quiz:[
 ]},
 { id:26, title:'Command-Line Reference', subtitle:'The essential everyday commands and the next layer, at a glance.',
 body:`
-<h3>Layer one: the essential commands</h3>
+<h2>Layer one: the essential commands</h2>
 <p>These cover 90% of your daily work:</p>
 <table><tr><th>Command</th><th>What it does</th></tr>
 <tr><td><code>git --version</code></td><td>Check installation and version</td></tr>
@@ -256,7 +256,7 @@ body:`
 <tr><td><code>git stash</code></td><td>Temporarily shelve changes</td></tr>
 <tr><td><code>git tag</code></td><td>Mark a version</td></tr>
 </table>
-<h3>Layer two: once you're more advanced</h3>
+<h2>Layer two: once you're more advanced</h2>
 <ul>
 <li><code>git show COMMIT</code> — the details and changes of one specific commit.</li>
 <li><code>git blame FILE</code> — who wrote each line of a file, in which commit, and when. Unbeatable for answering "why is this value like this?" (the name sounds scary, but the use is investigative).</li>
@@ -281,7 +281,7 @@ quiz:[
 ]},
 { id:27, title:'Rebase', subtitle:'Rewriting history for a clean timeline — but only once you know its rules.',
 body:`
-<h3>What is Rebase?</h3>
+<h2>What is Rebase?</h2>
 <p><strong>Rebase</strong> means picking up your branch's commits and "replanting" them on top of another branch. The result: as if you had started your work on the latest version of main from the very beginning.</p>
 <pre><code>before:  main    o───o───A───B
                    \\
@@ -291,17 +291,17 @@ after rebase main:
          main    o───o───A───B
                              \\
          feature              o1'──o2'   <span class="c">&larr; the rewritten commits</span></code></pre>
-<h3>Merge or Rebase?</h3>
+<h2>Merge or Rebase?</h2>
 <table><tr><th></th><th>Merge</th><th>Rebase</th></tr>
 <tr><td>History</td><td>True and non-linear, with a merge commit</td><td>Linear and clean (Linear History)</td></tr>
 <tr><td>Commits</td><td>Left untouched</td><td>Rewritten (new hashes)</td></tr>
 <tr><td>Safety</td><td>Always safe</td><td>Safe only on a personal branch</td></tr>
 </table>
-<h3>Updating a local branch with Rebase</h3>
+<h2>Updating a local branch with Rebase</h2>
 <pre><code>git switch feature/hero
 git fetch origin
 git rebase origin/main     <span class="c"># replant my work on the latest main</span></code></pre>
-<h3>Interactive Rebase — cleanup before a PR</h3>
+<h2>Interactive Rebase — cleanup before a PR</h2>
 <pre><code>git rebase -i HEAD~4   <span class="c"># edit the last four commits</span></code></pre>
 <p>An editor opens and you choose a command for each commit:</p>
 <ul>
@@ -310,14 +310,14 @@ git rebase origin/main     <span class="c"># replant my work on the latest main<
 <li><strong>drop:</strong> delete a commit entirely.</li>
 <li><strong>Line order:</strong> moving the lines around means reordering the commits.</li>
 </ul>
-<h3>Conflicts during a Rebase</h3>
+<h2>Conflicts during a Rebase</h2>
 <p>Because the commits are re-applied one by one, you may hit conflicts several times — once per commit:</p>
 <pre><code><span class="c"># resolve the conflict in the files, then:</span>
 git add FILE
 git rebase --continue
 <span class="c"># or give up entirely and go back to how things were:</span>
 git rebase --abort</code></pre>
-<h3>The golden rule and force push</h3>
+<h2>The golden rule and force push</h2>
 <div class="callout warn"><span class="co-title">Never rebase a public branch</span>Rebase changes commit hashes. If you rebase a branch that others are working on, their history becomes incompatible with yours and everyone ends up in trouble. Rebase belongs on a personal, unpushed branch (or one only you are working on).</div>
 <p>After a rebase, your local branch diverges from the remote version and a normal push is rejected. The right way:</p>
 <pre><code>git push --force-with-lease
@@ -334,32 +334,32 @@ quiz:[
 ]},
 { id:28, title:'Cherry-pick', subtitle:'Taking exactly one commit from one branch and bringing it to another.',
 body:`
-<h3>What is Cherry-pick?</h3>
+<h2>What is Cherry-pick?</h2>
 <p>When you need just <strong>one specific commit</strong> from a branch — not the whole branch — you use Cherry-pick. Git takes that commit's changes and applies them as a new commit (with a new hash) on the current branch.</p>
 <pre><code>git switch main
 git cherry-pick a1b2c3d          <span class="c"># one commit</span>
 git cherry-pick a1b2c3d f4e5d6c  <span class="c"># several commits</span></code></pre>
-<h3>The right use cases</h3>
+<h2>The right use cases</h2>
 <ul>
 <li><strong>Hotfix:</strong> you fixed an urgent bug on a feature branch, and that one commit needs to go to main immediately — without dragging the rest of the unfinished work along.</li>
 <li><strong>Rescuing one piece of an abandoned branch:</strong> the experiment failed, but it contained one useful commit.</li>
 <li><strong>Moving a commit to the right branch:</strong> you accidentally committed on main or the wrong branch.</li>
 </ul>
-<h3>Conflicts and bailing out</h3>
+<h2>Conflicts and bailing out</h2>
 <pre><code><span class="c"># if there is a conflict: resolve the files, then</span>
 git add FILE
 git cherry-pick --continue
 <span class="c"># or give up:</span>
 git cherry-pick --abort</code></pre>
-<h3>The duplicate-commit risk</h3>
+<h2>The duplicate-commit risk</h2>
 <div class="callout warn"><span class="co-title">Twin commits</span>The transplanted commit has a new hash, meaning that to Git it is not the same as the original. If you later merge that same branch too, "the same change" appears twice in the history, and the odds of confusing conflicts go up.</div>
-<h3>Cherry-pick or Merge?</h3>
+<h2>Cherry-pick or Merge?</h2>
 <table><tr><th></th><th>Cherry-pick</th><th>Merge</th></tr>
 <tr><td>What it brings</td><td>Only the selected commits</td><td>The whole branch with its history</td></tr>
 <tr><td>Hashes</td><td>New (a copy)</td><td>Preserved</td></tr>
 <tr><td>Best for</td><td>Exceptional, urgent cases</td><td>The normal workflow</td></tr>
 </table>
-<h3>When NOT to use Cherry-pick</h3>
+<h2>When NOT to use Cherry-pick</h2>
 <ul>
 <li>As a daily workflow instead of Merge — it fragments the history and makes it untrustworthy.</li>
 <li>When you need several consecutive commits (merge or rebase the branch instead).</li>
@@ -376,7 +376,7 @@ quiz:[
 { id:29, title:'Git Internals', subtitle:'Under the hood: the Object Model, HEAD, and the structure of history.',
 body:`
 <div class="callout note"><span class="co-title">Deeper, but still on the course path</span>This level goes deeper than daily work, but it is part of the full course path and required for the completion certificate. Here you learn why Git is so reliable and why almost nothing ever gets lost.</div>
-<h3>The Object Model — Git is a simple database</h3>
+<h2>The Object Model — Git is a simple database</h2>
 <p>Git is really a store of "objects," where each object is identified by a <strong>Hash</strong> (a <strong>SHA</strong> computed from its content). The four main object types:</p>
 <ul>
 <li><strong>Blob:</strong> the content of a file (without its name).</li>
@@ -385,18 +385,18 @@ body:`
 <li><strong>Tag Object:</strong> an annotated tag.</li>
 </ul>
 <p>Because the identifier is derived from the content, changing a single byte means a completely new object with a different hash; that is why every change in content is <strong>detectable</strong> and the integrity of the history can be verified. Note: this means tampering "becomes visible," not that history is immutable — local history can still be rewritten with <code>reset</code> or <code>rebase</code> and published with a force push; but because the hashes change, that rewriting cannot stay hidden.</p>
-<h3>References and HEAD</h3>
+<h2>References and HEAD</h2>
 <p>A <strong>Reference</strong> is a readable name for a hash: branches and tags are just pointers to a commit. <strong>HEAD</strong> means "where you are standing right now" — usually it points to a branch.</p>
 <p><strong>Detached HEAD</strong> is when you are standing directly on a commit, not on a branch. If you commit there and move away, that work is not attached to any branch (though it can be recovered from the reflog). The fix: <code>git switch -c new-branch</code>.</p>
-<h3>The Index and Packfiles</h3>
+<h2>The Index and Packfiles</h2>
 <ul>
 <li><strong>Index:</strong> the technical name for the Staging Area; the file that holds what is ready for the next commit.</li>
 <li><strong>Packfile:</strong> to save space, Git packs objects into compressed, delta-encoded files. That is why years of history can take up surprisingly little space.</li>
 <li><strong>Garbage Collection:</strong> the automatic cleanup of objects that no Reference or reflog points to. As long as the reflog holds onto them, "lost" commits remain recoverable.</li>
 </ul>
-<h3>The DAG and Three-way Merge</h3>
+<h2>The DAG and Three-way Merge</h2>
 <p>Git's history structure is a <strong>DAG</strong> (a directed acyclic graph): every commit points to its parent, and merge commits have two parents. To merge, Git uses a <strong>Three-way Merge</strong>: it compares my version, your version, and the <strong>common ancestor</strong>. It is this common ancestor that lets Git figure out what actually changed and where a real conflict exists.</p>
-<h3>Plumbing versus Porcelain</h3>
+<h2>Plumbing versus Porcelain</h2>
 <p>The everyday commands (<code>add</code>, <code>commit</code>, <code>log</code>) are the <strong>Porcelain</strong> layer: made for humans. Beneath them sit <strong>Plumbing</strong> commands like <code>git hash-object</code> and <code>git cat-file</code>, which work directly with the object database and are mostly used in scripts.</p>
 `,
 quiz:[
@@ -408,7 +408,7 @@ quiz:[
 ]},
 { id:30, title:'Wrap-up and Roadmap', subtitle:'Now — where and how to put all of this to work.',
 body:`
-<h3>The core workflow you should master</h3>
+<h2>The core workflow you should master</h2>
 <pre><code>Clone
  → Create Branch
  → Make Change
@@ -432,21 +432,21 @@ git push -u origin feature/search-empty-state
 <span class="c"># on GitHub: Pull Request → Review → Merge</span>
 git switch main &amp;&amp; git pull
 git revert COMMIT   <span class="c"># if needed</span></code></pre>
-<h3>Four scenarios you should be able to run</h3>
+<h2>Four scenarios you should be able to run</h2>
 <ol>
 <li><strong>Managing multiple Prototype versions:</strong> a branch per variant, a Preview URL for each, feedback recorded in the PR, losers deleted, and the stable version kept on main. <em>(Levels 7, 22)</em></li>
 <li><strong>Reviewing AI-generated changes:</strong> a commit as a restore point, a separate experiment branch, careful Diff reading, attention to dependencies and config, selective staging, and a revert if needed. <em>(Levels 13, 14, 21)</em></li>
 <li><strong>Design hand-off and review in a Pull Request:</strong> a PR structured as Problem / Design decision / What changed / Figma / States / Limitations / Questions, with Before-After and responses to reviews. <em>(Levels 11, 12)</em></li>
 <li><strong>Managing Design System and token changes:</strong> a branch and PR for token changes, careful Diff review, spotting Breaking Changes, Semantic Versioning, Changelog, and Releases. <em>(Levels 17, 23, 24)</em></li>
 </ol>
-<h3>The learning order, condensed</h3>
+<h2>The learning order, condensed</h2>
 <table><tr><th>Phase</th><th>Content</th><th>Levels</th></tr>
 <tr><td><strong>1. Must-learn</strong></td><td>Core concepts, Repo, Commit, Diff, Branch, Push/Pull, Merge, Conflict, PR, Restore/Revert, gitignore</td><td>1 to 14</td></tr>
 <tr><td><strong>2. Professional work</strong></td><td>Reset, Stash, Tags & Releases, Issues, Collaboration, security</td><td>15 to 20</td></tr>
 <tr><td><strong>3. Design Technologist</strong></td><td>Git for AI, Prototypes, Design Systems, Figma Sync, CI/CD, CLI, Rebase</td><td>21 to 27</td></tr>
 <tr><td><strong>4. Depth & wrap-up</strong></td><td>Cherry-pick, Git Internals, wrap-up and roadmap</td><td>28 to 30</td></tr>
 </table>
-<h3>The three habits with the biggest impact</h3>
+<h2>The three habits with the biggest impact</h2>
 <ul>
 <li><strong>status before anything, diff before every commit.</strong> These two habits prevent most of the common mistakes.</li>
 <li><strong>Small branches, small PRs, focused commits.</strong> Review quality and team speed depend directly on this.</li>

@@ -2,7 +2,7 @@
 .quiz{margin-top:var(--s9); background:var(--surface); border:1px solid var(--line); border-radius:var(--r-xl); padding:var(--s6); box-shadow:var(--sh-2);}
 .quiz-top{display:flex; align-items:flex-start; gap:14px;}
 .quiz-ic{width:40px; height:40px; border-radius:12px; display:grid; place-items:center; font-size:21px; background:color-mix(in srgb,var(--pc) 12%, transparent); color:var(--pc); flex-shrink:0;}
-.quiz-top h3{font-size:20px; font-weight:800; letter-spacing:-.2px;}
+.quiz-top h2{font-size:20px; font-weight:800; letter-spacing:-.2px;}
 .quiz-sub{color:var(--muted); font-size:13.5px; margin-top:2px;}
 .qcount{margin-inline-start:auto; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:6px 11px; border-radius:9px; white-space:nowrap;}
 .q-item{margin:var(--s5) 0; padding-top:var(--s5); border-top:1px solid var(--line-soft);}

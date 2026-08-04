@@ -2,7 +2,7 @@
 
 /* ---- overview ---- */
 .tracks-head{margin-bottom:var(--s5);}
-.tracks-head h2{font-size:clamp(26px,3.6vw,38px); font-weight:900; letter-spacing:-.7px; line-height:1.4; margin-top:6px;}
+.tracks-head h1{font-size:clamp(26px,3.6vw,38px); font-weight:900; letter-spacing:-.7px; line-height:1.4; margin-top:6px;}
 .tracks-head .lead{font-size:16px; color:var(--muted); margin-top:12px; max-width:62ch; line-height:2;}
 
 .track-reco{display:flex; align-items:center; gap:var(--s3); flex-wrap:wrap;
@@ -53,7 +53,7 @@
 .track-detail-head{display:flex; align-items:center; gap:var(--s3); margin-bottom:var(--s4);}
 .track-detail-head .td-ic{width:52px; height:52px; border-radius:14px; flex-shrink:0; display:grid; place-items:center;
   background:var(--accent-soft); color:var(--accent-ink); font-size:26px;}
-.track-detail-head h2{font-size:clamp(22px,3vw,30px); font-weight:900; letter-spacing:-.5px; line-height:1.4;}
+.track-detail-head h1{font-size:clamp(22px,3vw,30px); font-weight:900; letter-spacing:-.5px; line-height:1.4;}
 .track-detail-head .td-en{font-size:13px; color:var(--muted); letter-spacing:.1px; margin-top:2px;}
 .td-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:var(--s4);}
 .td-tag{white-space:nowrap; font-size:12px; font-weight:700; padding:5px 11px; border-radius:var(--r-pill); border:1px solid var(--line); background:var(--surface); color:var(--ink-2);}

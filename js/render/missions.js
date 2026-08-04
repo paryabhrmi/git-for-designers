@@ -70,7 +70,7 @@ function hub() {
   $('#root').innerHTML = `
     <div class="tracks-head">
       <span class="hero-badge"><i class="ph-fill ph-flag-checkered" aria-hidden="true"></i>${t('mission.heroBadge')}</span>
-      <h2>${t('nav.missions')}</h2>
+      <h1>${t('nav.missions')}</h1>
       <p class="lead">${t('mission.lead')}</p>
       <p class="mission-sim"><i class="ph-fill ph-info" aria-hidden="true"></i>${t('mission.simNotice')}</p>
     </div>
@@ -108,7 +108,7 @@ function stepBody(m, step, stepIdx) {
       <span class="ms-step-txt">${tf('mission.stepOf', FA(stepIdx + 1), FA(total))}</span>
       <span class="ms-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${stepIdx}" aria-label="${tf('mission.progAria', FA(stepIdx + 1), FA(total))}"><i style="width:${(stepIdx) / total * 100}%"></i></span>
     </div>
-    <div class="ms-situation" id="msSituation" tabindex="-1"><h3 class="sr-only">${tf('mission.situationOf', FA(stepIdx + 1))}</h3>${step.situation}</div>
+    <div class="ms-situation" id="msSituation" tabindex="-1"><h2 class="sr-only">${tf('mission.situationOf', FA(stepIdx + 1))}</h2>${step.situation}</div>
     ${step.stateNote ? `<p class="ms-state"><i class="ph ph-git-branch" aria-hidden="true"></i>${step.stateNote}</p>` : ''}
     <div class="ms-choices" role="group" aria-label="${t('mission.choices.aria')}">
       ${step.choices.map(c => {
@@ -182,7 +182,7 @@ function renderDetail(m) {
     <div class="mission-detail-head">
       <span class="md-ic"><i class="ph-fill ${m.icon}" aria-hidden="true"></i></span>
       <div>
-        <h2>${m.title}</h2>
+        <h1>${m.title}</h1>
         <p class="md-sub">${tf('track.crumb', trackName(m.trackId))} · ${m.difficulty}${isDone(m.id) ? ` · <span class="md-done">${t('state.done')}</span>` : ''}</p>
       </div>
     </div>

@@ -1,12 +1,14 @@
-# Git for Designers — دورهٔ تعاملی Git برای طراحان
+# Git for Designers — راهنمای تعاملی Git برای طراحان
+
+**Live demo → https://paryabhrmi.github.io/git-for-designers/**
 
 <div dir="rtl">
 
-یک دورهٔ تعاملی برای یادگیری Git، ساخته‌شده برای طراحان محصول،
+راهنمایی تعاملی برای یادگیری Git، ساخته‌شده برای طراحان محصول،
 Design Technologistها و طراحانی که با تیم توسعه، پروتوتایپ‌های ساخته‌شده با
 هوش مصنوعی، و Design System کار می‌کنند.
 
-> دوره به **فارسی (RTL)** و **انگلیسی (LTR)** در دسترس است و با یک دکمه در نوار
+> این راهنما به **فارسی (RTL)** و **انگلیسی (LTR)** در دسترس است و با یک دکمه در نوار
 > بالا بین دو زبان جابه‌جا می‌شوی؛ پیشرفتت بین هر دو زبان مشترک است.
 > دستورهای Git در هر دو زبان انگلیسی و چپ‌به‌راست می‌مانند.
 
@@ -14,7 +16,7 @@ Design Technologistها و طراحانی که با تیم توسعه، پروت
 
 ## What this is
 
-A browser-based, self-paced Git course available in **Persian (RTL) and English
+A browser-based, self-paced Git handbook available in **Persian (RTL) and English
 (LTR)** — all 30 levels, quizzes, scenarios, glossary, tracks, and missions exist
 in both languages, and progress is shared between them. It runs as a static site
 — no backend, no accounts, no build step — and stores the learner's progress
@@ -65,8 +67,10 @@ work for someone who is not me.
   keyboard stop of every page. Theme inversion had been applied to the token but
   not to the one component that hardcoded its text colour.
 
-**Known limits:** no screen-reader session or cross-browser testing has been
-performed; there is no `h1` yet; and both locales load eagerly.
+**Known limits:** no screen-reader session and no cross-browser testing — only
+Chromium is available in the environment this was built in, so Firefox and
+Safari remain genuinely unverified. Static page metadata stays Persian for
+crawlers that do not run JavaScript.
 See [`docs/release-candidate.md`](docs/release-candidate.md) for the full,
 honest accounting.
 
@@ -88,6 +92,12 @@ honest accounting.
 - **Bilingual (fa/en)** — switch the language from the topbar; the layout mirrors between RTL and LTR, and the same completed levels, missions, XP, badges, and achievement carry across both languages. Language choice is stored locally.
 - **Light and dark themes**, and locally hosted fonts and icons (no external asset requests at runtime).
 
+## Screenshots
+
+| A lesson | A quiz, answered | The achievement card |
+|---|---|---|
+| ![A lesson view](assets/screenshots/lesson.png) | ![A quiz after answering, showing correct and incorrect options with explanations](assets/screenshots/quiz.png) | ![The exported path achievement card](assets/screenshots/achievement.png) |
+
 ## Privacy
 
 <div dir="rtl">
@@ -102,6 +112,18 @@ honest accounting.
 At runtime the application makes no network requests (verified by review): all
 fonts and icons are served locally, and there is no analytics, tracking, or
 progress upload. Learner state lives only in `localStorage` under a single key.
+
+## Project status
+
+Actively developed and **live at https://paryabhrmi.github.io/git-for-designers/**, served by GitHub Pages from `main`. See
+[`docs/release-candidate.md`](docs/release-candidate.md) for the current
+go/no-go assessment, what was verified and how, and the open items;
+[`docs/public-readiness.md`](docs/public-readiness.md) for the earlier quality
+report; and [`docs/`](docs/) for the curriculum audit, curriculum map, and
+learning-experience design notes.
+
+Licence (MIT), hosting (GitHub Pages) and the production URL are all settled,
+so `canonical` and `og:url` are now published in `index.html`.
 
 ## Architecture
 
@@ -129,6 +151,24 @@ may not work because ES modules require an HTTP origin.
 The app also works when hosted from a repository subpath (all asset and route
 references are relative).
 
+### Deployment
+
+The site is served by **GitHub Pages** straight from the `main` branch — there
+is **no build step and no deploy workflow**. Pages publishes the repository as-is,
+so what is committed is what is served.
+
+- Every asset path, module import and route reference is relative (`./…`), which
+  is what lets the site work from the project subpath
+  `https://<user>.github.io/git-for-designers/` rather than only at a domain root.
+- `.nojekyll` at the repository root tells Pages to skip Jekyll processing and
+  publish the files unchanged.
+- Routing is hash-based, so **no SPA rewrite rules are needed** — every URL is
+  `index.html`, and deep links such as `#/level-6` survive a refresh.
+
+To publish: `Settings → Pages → Source: Deploy from a branch → main → / (root)`.
+Any static host works equally well; nothing here is Pages-specific beyond
+`.nojekyll`.
+
 ## Validate locally
 
 A dependency-free validator checks the repository's content invariants (30
@@ -148,19 +188,6 @@ find . -path ./.git -prune -o -name '*.js' -print0 | xargs -0 -n1 node --check
 These are the same checks run in CI (`.github/workflows/validate.yml`) on pull
 requests to `main`.
 
-## Project status
-
-Actively developed. This is a **release candidate**, not a released product —
-nothing has been deployed. See
-[`docs/release-candidate.md`](docs/release-candidate.md) for the current
-go/no-go assessment, what was verified and how, and the open items;
-[`docs/public-readiness.md`](docs/public-readiness.md) for the earlier quality
-report; and [`docs/`](docs/) for the curriculum audit, curriculum map, and
-learning-experience design notes.
-
-A public launch is currently blocked on three decisions that belong to the
-repository owner: the **software license**, the **hosting target**, and the
-resulting **production URL** (which enables `canonical`/`og:url`).
 
 ## Current non-goals
 
@@ -178,11 +205,23 @@ LTR Git commands; run `node scripts/validate.mjs` before opening a pull request.
 
 ## License and third-party notices
 
-No software license file is present yet, so reuse rights have not been granted;
-adding a license is a decision for the repository owner. Third-party assets keep
-their own licenses — the Phosphor icon set is MIT-licensed (see
-`assets/icons/phosphor/LICENSE`). The IRANYekanX font in `assets/fonts/` is used
-under its own license terms.
+This project is released under the **MIT License** — see [`LICENSE`](LICENSE).
+You may use, copy, modify and redistribute it, including commercially, provided
+the copyright notice and the licence text travel with it.
+
+Third-party assets keep their own licences and are **not** relicensed by the
+above: the Phosphor icon set is MIT-licensed (see
+`assets/icons/phosphor/LICENSE`), and the IRANYekanX font in `assets/fonts/` is
+used under its own terms — check those terms before redistributing the font.
+
+<div dir="rtl">
+
+این پروژه با مجوز **MIT** منتشر شده است: می‌توانی استفاده، تغییر و بازتوزیعش کنی
+— حتی تجاری — به شرط اینکه متن مجوز و اعلان حق نشر همراهش بماند. دارایی‌های
+شخص ثالث (فونت IRANYekanX و آیکون‌های Phosphor) مجوز خودشان را دارند و مشمول
+این مجوز نمی‌شوند.
+
+</div>
 
 ## Author
 

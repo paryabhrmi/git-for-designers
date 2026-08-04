@@ -64,3 +64,27 @@ logical properties.
 language. Browser QA covered: default fa, toggle to en (shell strings, notice,
 root marking, Persian content intact), reload persistence, legacy payload → fa,
 toggle back, and console cleanliness.
+
+## The inactive locale is loaded on demand
+
+The English text modules (`data/en/levels*.js` and `data/en/content.js`, ~197 KB)
+are no longer static imports. `js/content.js` fetches them with a dynamic
+`import()` the first time English is actually selected, caches them in module
+scope, and never fetches them again.
+
+Consequences, all measured in a browser:
+
+- A Persian reader makes **zero** requests to `data/en` at startup. Measured
+  startup JS dropped from 631 KB to **435 KB** (total 1865 KB → 1668 KB).
+- An English reader pays one extra round trip on first load and is otherwise
+  unchanged.
+- `applyContentLocale()` and `i18n.setLang()` are therefore **async**, and both
+  callers — the boot sequence and the language button — await them. Rendering
+  before the await would paint English chrome over Persian content.
+- Concurrent calls share one in-flight promise, and the language button ignores
+  clicks while a switch is in progress (`aria-busy` while loading), so a
+  double-click cannot start two loads or interleave two renders.
+
+Switching language mid-course was verified to preserve the current route, the
+scroll position, and all progress (levels, missions, XP, badges), because
+progress is keyed by ID and never by language.

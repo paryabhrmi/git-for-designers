@@ -18,9 +18,9 @@ export function buildSim(host) {
     <div class="sim-head"><i class="ph-duotone ph-cursor-click"></i><b>${t('sim.head')}</b></div>
     <p class="sim-note">${t('sim.note')}</p>
     <div class="sim-cols">
-      <div class="sim-col" data-z="wd"><h4><i class="ph ph-folder-open"></i>${t('sim.col.wd')} <em>working</em></h4><div class="chips"></div></div>
-      <div class="sim-col" data-z="st"><h4><i class="ph ph-tray"></i>${t('sim.col.st')} <em>staged</em></h4><div class="chips"></div></div>
-      <div class="sim-col" data-z="cm"><h4><i class="ph ph-git-commit"></i>${t('sim.col.cm')} <em>committed</em></h4><div class="chips"></div></div>
+      <div class="sim-col" data-z="wd"><h3><i class="ph ph-folder-open"></i>${t('sim.col.wd')} <em>working</em></h3><div class="chips"></div></div>
+      <div class="sim-col" data-z="st"><h3><i class="ph ph-tray"></i>${t('sim.col.st')} <em>staged</em></h3><div class="chips"></div></div>
+      <div class="sim-col" data-z="cm"><h3><i class="ph ph-git-commit"></i>${t('sim.col.cm')} <em>committed</em></h3><div class="chips"></div></div>
     </div>
     <div class="sim-cmds">
       <button class="sim-cmd" data-a="status">git status</button>
@@ -93,7 +93,7 @@ export function placeSim() {
   if (id !== 1 && id !== 4) return;
   const holder = document.createElement('div');
   const anchorText = id === 1 ? t('sim.anchor') : 'git commit';
-  const h = [...body.querySelectorAll('h3')].find(x => x.textContent.includes(anchorText));
+  const h = [...body.querySelectorAll('h2')].find(x => x.textContent.includes(anchorText));
   if (h) {
     let node = h.nextElementSibling;
     while (node && !['PRE', 'DIV'].includes(node.tagName)) node = node.nextElementSibling;

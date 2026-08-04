@@ -39,7 +39,7 @@ export function renderGlossary() {
   $('#root').innerHTML = `
     <div class="gl-head">
       <span class="gl-ic"><i class="ph-duotone ph-book-bookmark"></i></span>
-      <div><h2 class="title" style="font-size:28px">${t('nav.glossary')}</h2>
+      <div><h1 class="title" style="font-size:28px">${t('nav.glossary')}</h1>
       <p class="sub" style="margin-top:4px">${tf('gl.sub', FA(GLOSSARY.length))}</p></div>
     </div>
     <div class="gl-wrap">

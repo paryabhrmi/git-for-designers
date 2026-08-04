@@ -2,7 +2,7 @@
    of its own, so the page stays an honest mirror of the palette. */
 
 .ds-sec{margin-top:var(--s8);}
-.ds-sec > h3{font-size:19px; font-weight:800; letter-spacing:-.2px; margin-bottom:6px;}
+.ds-sec > h2{font-size:19px; font-weight:800; letter-spacing:-.2px; margin-bottom:6px;}
 .ds-note{font-size:12.6px; color:var(--muted); line-height:1.9; max-width:64ch; margin-bottom:var(--s4);}
 
 .ds-grid{

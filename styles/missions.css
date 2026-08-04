@@ -28,7 +28,7 @@
 /* ---- detail: header + context ---- */
 .mission-detail-head{display:flex; align-items:center; gap:var(--s3); margin-bottom:var(--s4);}
 .mission-detail-head .md-ic{width:52px; height:52px; border-radius:14px; flex-shrink:0; display:grid; place-items:center; background:var(--accent-soft); color:var(--accent-ink); font-size:26px;}
-.mission-detail-head h2{font-size:clamp(20px,2.7vw,27px); font-weight:900; letter-spacing:-.4px; line-height:1.5;}
+.mission-detail-head h1{font-size:clamp(20px,2.7vw,27px); font-weight:900; letter-spacing:-.4px; line-height:1.5;}
 .mission-detail-head .md-sub{font-size:13px; color:var(--muted); margin-top:3px;}
 .md-done{color:var(--accent-ink); font-weight:800;}
 .ms-context{display:flex; gap:12px; align-items:flex-start; background:var(--surface-2); border:1px solid var(--line);
