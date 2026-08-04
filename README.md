@@ -158,9 +158,9 @@ go/no-go assessment, what was verified and how, and the open items;
 report; and [`docs/`](docs/) for the curriculum audit, curriculum map, and
 learning-experience design notes.
 
-A public launch is currently blocked on three decisions that belong to the
-repository owner: the **software license**, the **hosting target**, and the
-resulting **production URL** (which enables `canonical`/`og:url`).
+The licence is settled (MIT) and the hosting target is GitHub Pages. The only
+launch item still outstanding is the **production URL**, which enables
+`canonical` and `og:url`.
 
 ## Current non-goals
 
@@ -178,11 +178,23 @@ LTR Git commands; run `node scripts/validate.mjs` before opening a pull request.
 
 ## License and third-party notices
 
-No software license file is present yet, so reuse rights have not been granted;
-adding a license is a decision for the repository owner. Third-party assets keep
-their own licenses — the Phosphor icon set is MIT-licensed (see
-`assets/icons/phosphor/LICENSE`). The IRANYekanX font in `assets/fonts/` is used
-under its own license terms.
+This project is released under the **MIT License** — see [`LICENSE`](LICENSE).
+You may use, copy, modify and redistribute it, including commercially, provided
+the copyright notice and the licence text travel with it.
+
+Third-party assets keep their own licences and are **not** relicensed by the
+above: the Phosphor icon set is MIT-licensed (see
+`assets/icons/phosphor/LICENSE`), and the IRANYekanX font in `assets/fonts/` is
+used under its own terms — check those terms before redistributing the font.
+
+<div dir="rtl">
+
+این پروژه با مجوز **MIT** منتشر شده است: می‌توانی استفاده، تغییر و بازتوزیعش کنی
+— حتی تجاری — به شرط اینکه متن مجوز و اعلان حق نشر همراهش بماند. دارایی‌های
+شخص ثالث (فونت IRANYekanX و آیکون‌های Phosphor) مجوز خودشان را دارند و مشمول
+این مجوز نمی‌شوند.
+
+</div>
 
 ## Author
 
