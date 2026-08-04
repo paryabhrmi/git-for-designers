@@ -129,6 +129,24 @@ may not work because ES modules require an HTTP origin.
 The app also works when hosted from a repository subpath (all asset and route
 references are relative).
 
+### Deployment
+
+The site is served by **GitHub Pages** straight from the `main` branch — there
+is **no build step and no deploy workflow**. Pages publishes the repository as-is,
+so what is committed is what is served.
+
+- Every asset path, module import and route reference is relative (`./…`), which
+  is what lets the site work from the project subpath
+  `https://<user>.github.io/git-for-designers/` rather than only at a domain root.
+- `.nojekyll` at the repository root tells Pages to skip Jekyll processing and
+  publish the files unchanged.
+- Routing is hash-based, so **no SPA rewrite rules are needed** — every URL is
+  `index.html`, and deep links such as `#/level-6` survive a refresh.
+
+To publish: `Settings → Pages → Source: Deploy from a branch → main → / (root)`.
+Any static host works equally well; nothing here is Pages-specific beyond
+`.nojekyll`.
+
 ## Validate locally
 
 A dependency-free validator checks the repository's content invariants (30
