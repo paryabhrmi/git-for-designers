@@ -89,10 +89,12 @@ export function renderCert() {
       </div>
 
       <div class="ach-actions cert-actions">
-        <button type="button" class="btn btn-gold" id="buildCardBtn">
+        <!-- Exactly one filled button on the screen: building the card is the
+             action this page exists for. Everything else is secondary. -->
+        <button type="button" class="btn btn-primary" id="buildCardBtn">
           <i class="ph-bold ph-image" aria-hidden="true"></i>${t('ach.build')}
         </button>
-        <button type="button" class="btn btn-primary" id="shareBtn" ${nativeShare ? '' : 'hidden'}>
+        <button type="button" class="btn btn-ghost" id="shareBtn" ${nativeShare ? '' : 'hidden'}>
           <i class="ph-bold ph-share-network" aria-hidden="true"></i>${t('ach.share')}
         </button>
         <button type="button" class="btn btn-ghost" id="printBtn">

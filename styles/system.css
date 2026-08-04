@@ -1,0 +1,55 @@
+/* Design-system page. Uses only existing tokens — this file introduces no colour
+   of its own, so the page stays an honest mirror of the palette. */
+
+.ds-sec{margin-top:var(--s8);}
+.ds-sec > h3{font-size:19px; font-weight:800; letter-spacing:-.2px; margin-bottom:6px;}
+.ds-note{font-size:12.6px; color:var(--muted); line-height:1.9; max-width:64ch; margin-bottom:var(--s4);}
+
+.ds-grid{
+  list-style:none; margin:0 0 var(--s3); padding:0;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:var(--s3);
+}
+.ds-sw{
+  display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto;
+  align-items:center; gap:2px var(--s3);
+  background:var(--surface); border:1px solid var(--line); border-radius:13px; padding:11px 13px;
+}
+.ds-chip{
+  grid-row:1 / span 2; inline-size:38px; block-size:38px; border-radius:10px;
+  border:1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+}
+/* Global `code` carries a filled, bordered box; inside a swatch that reads as an
+   input field rather than a label, so it is stripped back here. */
+.ds-sec code{background:none; border:0; padding:0;}
+.ds-sw code{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink); align-self:end;}
+.ds-sw em{font-family:'JetBrains Mono',monospace; font-style:normal; font-size:10.5px; color:var(--muted); align-self:start;}
+
+.ds-type-list{list-style:none; margin:0; padding:0; display:grid; gap:var(--s3);}
+.ds-type{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--s4);
+  background:var(--surface); border:1px solid var(--line); border-radius:13px; padding:14px 16px;
+}
+.ds-type-sample{line-height:1.5; min-width:0; overflow-wrap:anywhere;}
+.ds-type-meta{display:grid; justify-items:end; flex-shrink:0;}
+.ds-type-meta code{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink);}
+.ds-type-meta em{font-family:'JetBrains Mono',monospace; font-style:normal; font-size:10.5px; color:var(--muted);}
+
+.ds-space-list{list-style:none; margin:0; padding:0; display:grid; gap:var(--s2);}
+.ds-space{display:flex; align-items:center; gap:var(--s3);}
+.ds-space-bar{block-size:12px; border-radius:4px; background:var(--pc); flex-shrink:0;}
+.ds-space code{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink);}
+.ds-space em{font-family:'JetBrains Mono',monospace; font-style:normal; font-size:10.5px; color:var(--muted);}
+
+.ds-dir{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s4);}
+.ds-dir-cell{background:var(--surface); border:1px solid var(--line); border-radius:13px; padding:16px;}
+.ds-dir-cell b{display:block; font-size:14px; margin-bottom:6px;}
+.ds-dir-cell p{font-size:12.6px; color:var(--muted); line-height:1.9; margin:0;}
+.ds-dir-cell pre{margin:0 0 8px;}
+
+.ds-comp{display:flex; flex-wrap:wrap; align-items:center; gap:var(--s3);}
+
+@media(max-width:640px){
+  .ds-dir{grid-template-columns:1fr;}
+  .ds-type{flex-direction:column; align-items:flex-start; gap:8px;}
+  .ds-type-meta{justify-items:start;}
+}

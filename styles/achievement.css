@@ -75,10 +75,13 @@
   position:relative; margin:18px auto 8px;
   min-height:160px; display:flex; align-items:center; justify-content:center;
 }
+/* Every badge here is earned. A low-contrast tint read as "locked" next to the
+   solid hero, so earned badges get a full-strength icon and a defined edge —
+   the hero stays distinct by size and its ring, not by being the only solid one. */
 .ach-badge{
   width:56px; height:56px; border-radius:50%;
   background:var(--ach-soft); color:var(--ach-accent);
-  border:1.5px solid color-mix(in srgb, var(--ach-accent) 35%, var(--line));
+  border:1.5px solid color-mix(in srgb, var(--ach-accent) 60%, var(--line));
   display:grid; place-items:center; font-size:26px;
   box-shadow:var(--sh-1);
 }

@@ -17,6 +17,7 @@ import { renderGlossary } from './render/glossary.js';
 import { renderCert } from './render/certificate.js';
 import { renderTracks } from './render/tracks.js';
 import { renderMissions } from './render/missions.js';
+import { renderSystem } from './render/system.js';
 import { setLang, getLang, t } from './i18n.js';
 
 export { shuffle, newAttempt, refreshCount, checkQuiz };
@@ -24,7 +25,7 @@ export {
   buildNav, revealActive, fades, syncNav, focusMain, go,
   updateMob, updateMidBtn, closeMenu, toggleMenu,
 };
-export { renderIntro, renderLesson, enhance, buildToc, renderGlossary, renderCert, renderTracks, renderMissions };
+export { renderIntro, renderLesson, enhance, buildToc, renderGlossary, renderCert, renderTracks, renderMissions, renderSystem };
 
 export function render() {
   if (state.view === 'intro') renderIntro();
@@ -32,6 +33,7 @@ export function render() {
   else if (state.view === 'glossary') renderGlossary();
   else if (state.view === 'tracks' || state.view === 'track') renderTracks();
   else if (state.view === 'missions' || state.view === 'mission') renderMissions();
+  else if (state.view === 'system') renderSystem();
   else renderLesson();
   buildNav($('#search').value);
   updateMob();

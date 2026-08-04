@@ -71,7 +71,6 @@ export function checkQuiz() {
 
   const need = Math.ceil(l.quiz.length * PASS_RATIO);
   const passed = correct >= need;
-  const wasDone = !!state.done[l.id];
   state.tries[l.id] = (state.tries[l.id] || 0) + 1;
   const perfect = correct === l.quiz.length && state.tries[l.id] === 1;
   const beforeBadges = earned().map(b => b.id);
@@ -92,7 +91,10 @@ export function checkQuiz() {
     (perfect && passed ? `<span class="perfect-tag"><i class="ph-fill ph-target"></i>${t('quiz.perfect')}</span>` : '') +
     (state.tries[l.id] > 1 ? `<span class="streak"><i class="ph ph-arrow-counter-clockwise"></i>${tf('quiz.try', FA(state.tries[l.id]))}</span>` : '');
   fresh.forEach((b, i) => setTimeout(() => ctx.toast(tf('quiz.newBadge', b.t), b.ic), 900 + i * 1400));
+  // Hidden, not merely disabled: a greyed-out filled button still reads as the
+  // heaviest control on the row and competed with the real next action.
   $('#checkBtn').disabled = true;
+  $('#checkBtn').hidden = true;
   const ac0 = $('#ansCount'); if (ac0) ac0.style.display = 'none';
   $('#retryBtn').innerHTML = '<i class="ph ph-arrow-counter-clockwise"></i>' + (passed ? t('quiz.redo') : t('mid.retry'));
 
@@ -109,12 +111,16 @@ export function checkQuiz() {
       b.innerHTML = `<i class="ph-fill ph-trophy" aria-hidden="true"></i>${t('ach.view')}`;
       b.addEventListener('click', () => { state.view = 'cert'; ctx.render(); ctx.save(); });
     } else if (!last) {
-      b.className = 'btn btn-add';
+      // Monochrome primary, not the semantic green: this is navigation, and the
+      // green is reserved for "your answer was right".
+      b.className = 'btn btn-primary';
       b.innerHTML = `${t('quiz.goNext')}<i class="ph-bold ph-arrow-left"></i>`;
       b.addEventListener('click', () => ctx.go(state.current + 1));
     }
-    if (b.className) $('.quiz-actions').insertBefore(b, $('#retryBtn'));
-    if (!wasDone) ctx.toast(last && allPassed() ? t('quiz.toast.done') : t('quiz.toast.pass'), 'ph-lock-simple-open');
+    // Insert ahead of the (now hidden) check button so the next action leads.
+    if (b.className) $('.quiz-actions').insertBefore(b, $('#checkBtn'));
+    // The result row and the gate already announce the pass; a third toast for
+    // the same event only dilutes it. New badges still toast — that is new news.
   }
   ctx.buildNav($('#search').value);
   const nx = $('#nextCard'); if (nx && passed) { nx.disabled = false; nx.querySelector('.ic i').className = 'ph-bold ph-arrow-left'; }

@@ -144,6 +144,14 @@ export function buildNav(filter = '') {
     g.addEventListener('click', () => { state.view = 'glossary'; ctx.render(); ctx.closeMenu(); ctx.save(); });
     nav.appendChild(g);
 
+    const sys = document.createElement('button');
+    sys.className = 'nav-item nav-special' + (state.view === 'system' ? ' active' : '');
+    sys.dataset.nav = 'system';
+    sys.style.setProperty('--pc', 'var(--p2)');
+    sys.innerHTML = `<span class="nav-lb"><i class="ph ph-swatches"></i><span>${t('nav.system')}</span></span>`;
+    sys.addEventListener('click', () => { state.view = 'system'; ctx.render(); ctx.closeMenu(); ctx.save(); });
+    nav.appendChild(sys);
+
     const c = document.createElement('button');
     const ok = allPassed();
     c.className = 'nav-item nav-special' + (state.view === 'cert' ? ' active' : '') + (ok ? '' : ' lock');
