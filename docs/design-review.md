@@ -97,3 +97,63 @@ design decision, not a fix — but it is worth a decision either way.
 - The rank-based achievement accents above.
 - Cross-browser and screen-reader verification remain impossible in this
   environment: only Chromium is installed.
+
+---
+
+# Second pass — 2026-08-04
+
+## Sidebar rail
+
+The rail was the weakest surface in the product. Two problems, both visible at a
+glance:
+
+- **Six identical filled-and-bordered slabs** stacked on top of each other for
+  the section links. They read as disabled input fields, not navigation.
+- **Phase headers carried no state.** A finished phase (`14/14`) and a
+  barely-started one (`2/6`) were visually identical apart from two digits, on a
+  surface whose entire job is telling you where you are.
+
+Changes, all within the existing tokens:
+
+- Section links are now plain rows. Emphasis is earned on hover or when active,
+  and the active row carries a short leading rule in its phase colour. No fills,
+  no borders, no six-slab wall.
+- Phase headers gained a **progress rule along the bottom edge** — a filled
+  proportion of `passed / total` in the phase colour. Completion now reads three
+  ways at once: a full rule, ink instead of muted text, and a check glyph in the
+  count pill.
+
+## Introduction and framing
+
+The product called itself "a course" in **31 catalogue strings and 13 places in
+the static HTML** — page title, meta description, OG tags, the logo, the rail
+label, the reset dialog, the achievement footer.
+
+It is not really a course. It is a practice-first reference you work through, and
+"course" was setting the wrong expectation while making every piece of microcopy
+longer ("شروع دوبارهٔ دوره", "بازگشت به دوره", "پایان دوره"). All of it was
+reframed:
+
+- **Name:** «دورهٔ Git برای طراحان» → «Git برای طراحان».
+- **Positioning:** "a step-by-step course" → «راهنمای تعاملی · تمرین‌محور» /
+  "Interactive · practice-first".
+- **Headline:** «Git، آن‌قدر که یک طراح واقعاً لازم دارد» /
+  "Git, as much as a designer actually needs".
+- **Lead:** now opens by saying what it is *not* — «مرجع کامل Git نیست؛ همان
+  بخشی است که در کار روزمره... واقعاً به آن برمی‌خوری». Naming the scope limit
+  first is more credible than claiming completeness.
+- Destructive copy became literal: "Restart the course" → **"Clear all
+  progress"**, which is what the button actually does.
+
+Terminology was then unified: the mechanic is called آزمون/quiz everywhere, and
+"practice-first" is used only as positioning, never as the name of the mechanic.
+
+## Verification
+
+Validator passes. RC sweep 38 pass with the same three documented harness
+artifacts. Accessibility audit across both locales, both themes, four widths and
+nine views: no contrast failures, no missing accessible names, no skipped
+headings, no horizontal overflow, zero keyboard stops without a focus indicator.
+Levels 6 and 25 (the changed content) played end to end in both locales, 7/7.
+
+No new colour was introduced in this pass either.

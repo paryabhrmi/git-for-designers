@@ -291,8 +291,44 @@ temp-*         <span class="c"># anything starting with temp-</span></code></pre
 <div class="callout warn"><span class="co-title">Critical point</span>This removes the file from future commits, but the earlier versions are still in the history. If a real secret has leaked, you must immediately revoke that key and create a new one; removing it from the history alone is not enough.</div>
 <h3>Gitignore templates</h3>
 <p>You do not have to write it from scratch; when creating a repo, GitHub offers ready-made templates for every kind of project (Node, macOS, and more), and the complete collection of templates lives in the official <code>github/gitignore</code> repo.</p>
+
+<h3>Binary files and Git LFS</h3>
+<p>Git was built for text: for each commit it stores only the differences between lines. A binary file — a PNG, a video, a font, a Figma export, a PSD — cannot be diffed, so Git has to store <b>every version in full</b>. Editing one 5 MB image ten times means roughly 50 MB in the history, forever — even if you delete the file later. History does not shrink.</p>
+<p>This is where a designer's work collides with Git more than anywhere else. Three practical rules:</p>
+<ul>
+<li><b>Do not commit reproducible output.</b> If that PNG comes out of a Figma file or a script, version the source, not the export.</li>
+<li><b>Do commit small, final assets.</b> SVG icons, the logo, web fonts — these are small and belong next to the code.</li>
+<li><b>For large files you genuinely need, use Git LFS.</b></li>
+</ul>
+<p><b>Git LFS</b> (Large File Storage) keeps a few-hundred-byte text pointer inside the repository and stores the real content elsewhere. The history stays small and <code>clone</code> stays fast.</p>
+<div class="code-wrap"><pre><code><span class="c"># once per machine</span>
+git lfs install
+
+<span class="c"># tell Git which file types LFS should handle</span>
+git lfs track "*.psd"
+git lfs track "design/**/*.mp4"
+
+<span class="c"># this file must be committed, or it will not work for anyone else</span>
+git add .gitattributes
+git commit -m "chore: track binary design assets with LFS"</code></pre></div>
+<div class="callout warn"><span class="co-title">LFS is a team decision, not a personal one</span>A teammate who has not installed LFS sees a short text file instead of your image. Agree on it before turning it on. LFS usually has its own storage quota, which can cost money.</div>
+
+<h3>.gitattributes and the line-ending trap</h3>
+<p>One day you change a single comma and Git reports that all 400 lines of the file changed. It is usually not your fault: Windows ends each line with two characters (<code>CRLF</code>), macOS and Linux with one (<code>LF</code>). When a Windows designer and a Mac developer work in the same repo, every save can mark the whole file as modified.</p>
+<p>This directly ruins review quality: a diff that is entirely red and green cannot actually be read. The fix is a <code>.gitattributes</code> file at the root of the project:</p>
+<div class="code-wrap"><pre><code><span class="c"># normalise line endings for everyone</span>
+* text=auto eol=lf
+
+<span class="c"># these are binary; Git should not touch their contents</span>
+*.png binary
+*.woff2 binary
+*.fig binary</code></pre></div>
+<div class="callout note"><span class="co-title">How it differs from .gitignore</span><code>.gitignore</code> says "which files to ignore"; <code>.gitattributes</code> says "how to treat the files you do see". Both are committed and both apply to the whole team.</div>
 `,
 quiz:[
+{q:'You need an 80 MB video in the repository. What is the best approach?', o:['Commit it directly; Git will compress it','Track it with Git LFS so only a pointer enters the history','Put it in .gitignore and send it to teammates manually','Split it into several smaller files'], why:'Git stores every version of a binary file in full; LFS stores a small pointer instead of the content, so the history stays light.'},
+{q:'You changed one comma, but the diff says the whole file changed. Most likely cause?', o:['The file is corrupted','A line-ending mismatch (CRLF vs LF) between operating systems, fixed with .gitattributes','Your Git version is out of date','You need to run git gc'], why:'Windows writes CRLF while macOS and Linux write LF; without normalisation every save marks the whole file as modified and makes review useless.'},
+
 {q:'Why do we ignore node_modules?', o:['Because its files are corrupted','Because it can be fully rebuilt from package.json with npm install, and committing it makes the repo heavy','Because Git refuses large folders','Because it contains sensitive information'], why:'The general rule: anything that can be regenerated has no place in the history.'},
 {q:'What does the .env file usually contain, and what should you do with it?', o:['Font settings; it should be committed','Passwords and API keys; it must always be in .gitignore','The list of branches; it is generated automatically','The commit history'], why:'.env is where secrets live and must never enter the history.'},
 {q:'A file was committed earlier, and you have now added it to .gitignore, but Git still shows its changes. Why?', o:['gitignore is broken','gitignore only affects untracked files; you must untrack it with git rm --cached','You need to restart your computer','You need to rename the file'], why:'ignore prevents tracking from starting; for an already-tracked file you must stop the tracking manually.'},
