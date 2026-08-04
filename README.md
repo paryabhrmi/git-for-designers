@@ -80,7 +80,7 @@ honest accounting.
 
 ## Features
 
-- **30 curriculum levels** (in both languages) with lessons, copyable Git command examples, and a short quiz at the end of each level (a level unlocks after passing the previous quiz at ≥70%).
+- **30 levels** (in both languages) with lessons, copyable Git command examples, and a short quiz at the end of each level (a level unlocks after passing the previous quiz at ≥70%). Coverage includes the designer-specific corners that general Git material skips: binary assets and **Git LFS**, `.gitattributes` and line-ending normalisation, and why a **pre-commit hook** rejected your commit.
 - **Four learning tracks** — a required **Core** path plus three optional specialized tracks (AI & Prototype, Design System, Design Technologist). Track progress is derived from completed levels.
 - **Guided practice missions** — optional, multi-step decision scenarios with explanatory feedback for every choice, hints, and retry. Missions simulate Git commands for teaching; **nothing is executed** on your machine.
 - **Glossary** of Git/GitHub terms.

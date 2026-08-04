@@ -79,8 +79,9 @@ export function buildNav(filter = '') {
     head.type = 'button';
     head.innerHTML = `<i class="ph-fill ${PHASE_IC[pi]}"></i>
       <span class="grp-name">${ph.name}</span>
-      <span class="grp-meta">${FA(passed)}/${FA(total)}</span>
-      <i class="ph-bold ph-caret-down chev-p"></i>`;
+      <span class="grp-meta">${passed === total ? '<i class="ph-bold ph-check" aria-hidden="true"></i>' : ''}${FA(passed)}/${FA(total)}</span>
+      <i class="ph-bold ph-caret-down chev-p"></i>
+      <span class="grp-prog" aria-hidden="true"><i style="inline-size:${total ? (passed / total * 100).toFixed(1) : 0}%"></i></span>`;
     head.addEventListener('click', () => {
       grp.classList.toggle('open');
       if (grp.classList.contains('open')) state.openPhases.add(pi); else state.openPhases.delete(pi);

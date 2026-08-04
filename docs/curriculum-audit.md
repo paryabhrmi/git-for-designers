@@ -342,3 +342,49 @@ match the audit’s prior primary-source verification):
 - Repository visibility & security considerations — https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories
 - `git reset` (local history rewrite) — https://git-scm.com/docs/git-reset
 - `git rebase` (history rewrite + force-push implications) — https://git-scm.com/docs/git-rebase
+
+---
+
+# Coverage Audit — 2026-08-04
+
+**Question asked:** is the curriculum professionally complete for its audience —
+product designers and design technologists?
+
+**Method:** every level's title, subtitle, body, quiz questions, options and
+explanations were searched for 21 professional Git topics. Coverage was measured,
+not estimated.
+
+## Result
+
+**Already covered** (level numbers where the topic appears): `git blame` (26),
+GUI clients (2, 10), VS Code source control (2, 6, 10), `bisect` (26), signed
+commits / GPG (2, 20), history search (26), squash (9, 27), draft PRs (11, 22),
+CODEOWNERS (19), changelog (17, 21, 23, 30), semantic versioning (17, 30),
+Storybook / visual review (5, 23, 25).
+
+**Correctly out of scope** — absent, and deliberately so for this audience:
+submodules, worktrees, monorepo tooling, Codespaces. Adding them would pad the
+curriculum without serving a designer's actual work.
+
+**Genuine gaps found — now closed:**
+
+| Gap | Why it matters for this audience | Where it was added |
+|---|---|---|
+| **Binary files and Git LFS** | The single most designer-specific Git problem, and it was entirely missing. Designers commit PNGs, videos, fonts, Figma and PSD exports. Git cannot diff a binary, so it stores **every version in full** — ten edits of a 5 MB image is ~50 MB of permanent history. Without this, a designer bloats a repository and never learns why. | Level 6, with three practical rules (don't commit reproducible output, do commit small final assets, use LFS for the rest), a worked `git lfs track` example, and a warning that LFS is a team decision. **+1 quiz question.** |
+| **`.gitattributes` and line endings** | A Windows designer and a Mac developer in one repo produce diffs where a one-character change marks the whole file as modified (CRLF vs LF). This directly undermines Level 13 (reading diffs) — a diff that is entirely red and green cannot be reviewed. | Level 6, explaining the cause, the `.gitattributes` fix, and how it differs from `.gitignore`. **+1 quiz question.** |
+| **Git hooks / pre-commit** | Designers meet hooks as a confusing failure: "my commit was rejected" or "my files reformatted themselves". Nothing in the curriculum explained why. | Level 25, with a hook/timing table and an explicit hook-vs-CI comparison (local and fast but bypassable, versus server-side and unavoidable). **+1 quiz question.** |
+
+Three glossary entries were added to match — **Git LFS**, **.gitattributes**,
+**Git Hook** — in both locales, keeping index alignment.
+
+## Structural impact
+
+Deliberately none. The additions went **inside existing levels** rather than
+adding a 31st: the level count is part of the product's identity, the XP ceiling
+(`30 × 150`), the rank ladder, the phase model, the four tracks and the validator
+all key off 30. Quiz totals moved 166 → 169; both locales moved together.
+
+**Verified after the change:** validator passes (30 levels, 4 tracks, 4 missions,
+75 glossary, fa + en parity); levels 6 and 25 played end to end in both locales
+and graded 7/7 — which also confirms the new English options stay aligned with
+the Persian answer indices.

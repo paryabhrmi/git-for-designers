@@ -44,8 +44,14 @@
 .phase:hover{background:var(--rail-2);}
 .phase>i:first-child{color:var(--pc); font-size:14px;}
 .grp-name{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11.5px;}
-.grp-meta{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--rail-muted); background:var(--rail-fill); padding:3px 7px; border-radius:6px;}
-.grp.done-all .grp-meta{color:var(--p3); background:color-mix(in srgb,var(--p3) 18%, transparent);}
+.grp-meta{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--rail-muted); background:var(--rail-fill); padding:3px 7px; border-radius:6px; display:flex; align-items:center; gap:4px; border:1px solid transparent;}
+/* A finished phase and a barely-started one used to look identical apart from
+   two digits. Completion now reads three ways at once: ink instead of muted,
+   a check glyph, and a filled progress rule along the bottom of the header. */
+.grp.done-all .grp-meta{color:var(--rail-ink); background:color-mix(in srgb,var(--rail-ink) 9%, transparent); border-color:color-mix(in srgb,var(--rail-ink) 22%, transparent);}
+.grp-meta i{font-size:10px;}
+.grp-prog{position:absolute; inset-inline:0; bottom:0; block-size:2px; background:color-mix(in srgb,var(--rail-line) 65%, transparent); overflow:hidden;}
+.grp-prog > i{display:block; block-size:100%; background:var(--pc); transition:inline-size .35s cubic-bezier(.2,.8,.2,1);}
 .chev-p{font-size:12px; color:var(--rail-muted); transition:transform .22s;}
 .grp:not(.open) .chev-p{transform:rotate(90deg);}
 .grp:not(.open) .grp-body{display:none;}
@@ -87,8 +93,21 @@
 .nav-item.lock:hover .nav-lb{background:var(--rail-hover); color:var(--rail-muted);}
 .nav-n{display:block; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--rail-muted); letter-spacing:.5px;}
 .nav-item.active .nav-n{color:color-mix(in srgb,var(--pc) 75%, transparent);}
-.nav-special{margin:6px 12px 4px; padding:0;}
-.nav-special .nav-lb{border:1px solid var(--rail-line); margin:0; background:var(--rail-fill);}
+/* These were six identical filled-and-bordered slabs stacked on top of each
+   other — they read as disabled fields rather than navigation. They are now
+   plain rows that earn emphasis only on hover or when active, with a short
+   leading rule in the section's phase colour carrying the active state. */
+.nav-special{margin:1px 12px; padding:0;}
+.nav-special .nav-lb{border:0; margin:0; background:none; position:relative; padding-inline-start:15px;}
+.nav-special .nav-lb::before{
+  content:''; position:absolute; inset-inline-start:3px; top:50%; translate:0 -50%;
+  inline-size:2.5px; block-size:0; border-radius:2px; background:var(--pc); transition:block-size .2s;
+}
+.nav-special.active .nav-lb::before{block-size:17px;}
+.nav-special:not(.active):hover .nav-lb::before{block-size:9px; background:var(--rail-muted);}
+.nav-special .nav-lb > i:first-child{font-size:15px; color:var(--rail-muted); transition:color .15s;}
+.nav-special.active .nav-lb > i:first-child,
+.nav-special:hover .nav-lb > i:first-child{color:var(--rail-ink);}
 .rail-foot{padding:13px 16px 15px; border-top:1px solid var(--rail-line); background:var(--rail-2); display:grid; gap:10px;}
 .author-row{display:flex; align-items:center; gap:10px;}
 .monogram{

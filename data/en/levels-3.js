@@ -211,8 +211,19 @@ jobs:
 </ol>
 <p>A <strong>Required Check</strong> is a check that must turn green before the Merge button is enabled. A <strong>Secret in Actions</strong> is where the keys a workflow needs are stored in the repository settings (without ever appearing in the code).</p>
 <div class="callout note"><span class="co-title">Your role</span>You don't need to write pipelines. You need to be able to read the state of the checks, recognize design-related problems (a11y and Visual Regression), and know that "it works on my machine" is not a valid answer to a red check.</div>
+
+<h3>Hooks — the checks that run before CI</h3>
+<p>Sometimes you run <code>git commit</code> and get an error instead of a commit; or the commit succeeds but your files come back reformatted on their own. Nothing is broken — a <b>hook</b> ran.</p>
+<p>A hook is a script Git runs at specific moments on <i>your own</i> machine, unlike GitHub Actions which runs on a server. Teams usually wire them up with tools like Husky so mistakes are caught before they ever reach a PR.</p>
+<table><tr><th>Hook</th><th>When</th><th>Typical job</th></tr>
+<tr><td><code>pre-commit</code></td><td>before the commit is created</td><td>format and lint the staged files</td></tr>
+<tr><td><code>commit-msg</code></td><td>after you write the message</td><td>check the Conventional Commits format</td></tr>
+<tr><td><code>pre-push</code></td><td>before pushing</td><td>run a fast test pass</td></tr></table>
+<div class="callout note"><span class="co-title">Hooks vs CI</span>A hook is fast and local — feedback in seconds, but it can be bypassed. CI is slower but runs on the server where nobody can skip it. That is why important checks are defined in <i>both</i> places.</div>
 `,
 quiz:[
+{q:'You run git commit and get an error, even though nothing has been pushed yet. Most likely cause?', o:['A GitHub Actions run failed','A local hook such as pre-commit blocked the commit','Your internet is down','The repository is corrupted'], why:'GitHub Actions only runs once changes reach the server; an error at commit time means a hook ran on your own machine.'},
+
 {q:'CI in one sentence?', o:['Automatic release to a server','Automatic health checks on the project with every change','A design tool','A task management system'], why:'Continuous Integration means every change is built and tested immediately, so breakage is caught early.'},
 {q:'A Trigger in GitHub Actions is?', o:['The final result','The event that starts a Workflow (such as a PR being opened)','A runtime error','The name of a Job'], why:'The Trigger is the condition that starts a Workflow automatically.'},
 {q:'The Accessibility check turned red. The designer’s responsibility?', o:['It has nothing to do with the designer','Investigating the issue (contrast, labels, focus), because it relates directly to design decisions','Just force the Merge','Disable the check'], why:'a11y failures usually have design roots, and the designer is the best person to fix them.'},
