@@ -102,10 +102,19 @@ $('#themeBtn').addEventListener('click', () => {
   $('#themeBtn').innerHTML = `<i class="ph ph-${el.dataset.theme === 'dark' ? 'sun' : 'moon'}"></i>`;
   save();
 });
-$('#langBtn').addEventListener('click', () => {
-  setLang(getLang() === 'fa' ? 'en' : 'fa');
-  save();
-  render();   // rebuild nav + views so t()-driven labels update
+$('#langBtn').addEventListener('click', async () => {
+  const btn = $('#langBtn');
+  if (btn.dataset.busy) return;   // ignore double-clicks while the locale loads
+  btn.dataset.busy = '1';
+  btn.setAttribute('aria-busy', 'true');
+  try {
+    await setLang(getLang() === 'fa' ? 'en' : 'fa');
+    save();
+    render();   // rebuild nav + views so t()-driven labels update
+  } finally {
+    delete btn.dataset.busy;
+    btn.removeAttribute('aria-busy');
+  }
 });
 $('#modalNo').addEventListener('click', closeModal);
 $('#modalBg').addEventListener('click', e => { if (e.target === $('#modalBg')) closeModal(); });
@@ -166,7 +175,7 @@ if (document.fonts && document.fonts.ready) {
 
 (async () => {
   await load();
-  setLang(getLang());   // apply stored UI language + locale content before first paint
+  await setLang(getLang());   // apply stored UI language + locale content before first paint
   $('#themeBtn').innerHTML = `<i class="ph ph-${document.documentElement.dataset.theme === 'dark' ? 'sun' : 'moon'}"></i>`;
   applyHash();   // a shared link wins over the stored position
   render();

@@ -381,8 +381,10 @@ export function applyLang() {
 }
 
 /** Switch the UI language; caller persists and re-renders. */
-export function setLang(lang) {
+/* Async because the English text modules are fetched on demand. Callers must
+   await it before rendering, or English would paint with Persian content. */
+export async function setLang(lang) {
   state.lang = LANGS.includes(lang) ? lang : 'fa';
-  applyContentLocale(state.lang);
+  await applyContentLocale(state.lang);
   applyLang();
 }

@@ -21,14 +21,42 @@ import { MISSIONS as FA_MISSIONS } from '../data/missions.js';
 import { BADGES as FA_BADGES } from '../data/badges.js';
 import { RANKS as FA_RANKS } from '../data/ranks.js';
 import { PHASES as FA_PHASES } from '../data/phases.js';
-import { EN_LEVELS } from '../data/en/levels.js';
-import { EN_SCENARIO, EN_GLOSSARY, EN_TRACKS, EN_MISSIONS, EN_BADGES, EN_RANKS, EN_PHASES } from '../data/en/content.js';
+/* The English text modules are ~197 KB and are useless to a Persian reader, so
+   they are fetched on demand instead of at startup. Persian stays the default
+   and pays nothing for a translation it never reads; English costs one extra
+   request the first time it is selected, then nothing.
 
+   Everything below reads these through EN, which stays null until loaded. Only
+   the en branch of applyContentLocale touches it, and that branch is reached
+   only after loadEnglish() has resolved. */
 const byId = (arr) => arr.reduce((m, x) => { m[x.id] = x; return m; }, {});
-const EN_LEVEL_BY_ID = byId(EN_LEVELS);
-const EN_TRACK_BY_ID = byId(EN_TRACKS);
-const EN_MISSION_BY_ID = byId(EN_MISSIONS);
-const EN_BADGE_BY_ID = byId(EN_BADGES);
+
+let EN = null;
+let enPending = null;
+
+export function englishLoaded() { return EN !== null; }
+
+function loadEnglish() {
+  if (EN) return Promise.resolve(EN);
+  // Concurrent callers share one in-flight request rather than racing.
+  if (!enPending) {
+    enPending = Promise.all([
+      import('../data/en/levels.js'),
+      import('../data/en/content.js'),
+    ]).then(([lv, ct]) => {
+      EN = {
+        LEVELS: lv.EN_LEVELS, SCENARIO: ct.EN_SCENARIO, GLOSSARY: ct.EN_GLOSSARY,
+        TRACKS: ct.EN_TRACKS, MISSIONS: ct.EN_MISSIONS, BADGES: ct.EN_BADGES,
+        RANKS: ct.EN_RANKS, PHASES: ct.EN_PHASES,
+        LEVEL_BY_ID: byId(lv.EN_LEVELS), TRACK_BY_ID: byId(ct.EN_TRACKS),
+        MISSION_BY_ID: byId(ct.EN_MISSIONS), BADGE_BY_ID: byId(ct.EN_BADGES),
+      };
+      enPending = null;
+      return EN;
+    });
+  }
+  return enPending;
+}
 
 /* Stable localized collections (same references across switches). */
 export const GLOSSARY = [];
@@ -47,7 +75,7 @@ export const missionsForTrack = (trackId) => MISSIONS.filter(m => m.trackId === 
 function levelsFor(lang) {
   if (lang !== 'en') return FA_LEVELS;
   return FA_LEVELS.map(fa => {
-    const en = EN_LEVEL_BY_ID[fa.id];
+    const en = EN.LEVEL_BY_ID[fa.id];
     return {
       ...fa,
       title: en.title, subtitle: en.subtitle, body: en.body,
@@ -60,29 +88,30 @@ function scenariosFor(lang) {
   if (lang !== 'en') return FA_SCENARIO;
   const out = {};
   Object.keys(FA_SCENARIO).forEach(k => {
-    out[k] = FA_SCENARIO[k].map((s, i) => ({ ...s, q: EN_SCENARIO[k][i].q, o: EN_SCENARIO[k][i].o, why: EN_SCENARIO[k][i].why }));
+    out[k] = FA_SCENARIO[k].map((s, i) => ({ ...s, q: EN.SCENARIO[k][i].q, o: EN.SCENARIO[k][i].o, why: EN.SCENARIO[k][i].why }));
   });
   return out;
 }
 
 const swap = (arr, next) => { arr.length = 0; arr.push(...next); };
 
-export function applyContentLocale(lang) {
+export async function applyContentLocale(lang) {
   const en = lang === 'en';
+  if (en) await loadEnglish();
 
   swap(LEVELS, buildLevelsWithScenarios(levelsFor(lang), scenariosFor(lang)));
 
-  swap(PHASES, FA_PHASES.map((p, i) => en ? { ...p, name: EN_PHASES[i] } : { ...p }));
+  swap(PHASES, FA_PHASES.map((p, i) => en ? { ...p, name: EN.PHASES[i] } : { ...p }));
 
   // English mode shows the English term + definition; the Persian equivalent and
   // pronunciation are Persian-learner aids and are dropped (renderer guards them).
   swap(GLOSSARY, FA_GLOSSARY.map((g, i) => en
-    ? { ...g, t: EN_GLOSSARY[i].t, d: EN_GLOSSARY[i].d, fa: '', p: '' }
+    ? { ...g, t: EN.GLOSSARY[i].t, d: EN.GLOSSARY[i].d, fa: '', p: '' }
     : { ...g }));
 
   swap(TRACKS, FA_TRACKS.map(t => {
     if (!en) return { ...t };
-    const e = EN_TRACK_BY_ID[t.id];
+    const e = EN.TRACK_BY_ID[t.id];
     return { ...t, title: e.title, shortTitle: e.shortTitle, audience: e.audience, description: e.description, completionMessage: e.completionMessage, difficulty: e.difficulty };
   }));
   Object.keys(TRACK_BY_ID).forEach(k => delete TRACK_BY_ID[k]);
@@ -90,7 +119,7 @@ export function applyContentLocale(lang) {
 
   swap(MISSIONS, FA_MISSIONS.map(m => {
     if (!en) return { ...m };
-    const e = EN_MISSION_BY_ID[m.id];
+    const e = EN.MISSION_BY_ID[m.id];
     return {
       ...m,
       title: e.title, shortDescription: e.shortDescription, context: e.context,
@@ -113,9 +142,9 @@ export function applyContentLocale(lang) {
 
   swap(BADGES, FA_BADGES.map(b => {
     if (!en) return { ...b };
-    const e = EN_BADGE_BY_ID[b.id];
+    const e = EN.BADGE_BY_ID[b.id];
     return { ...b, t: e.t, d: e.d };
   }));
 
-  swap(RANKS, FA_RANKS.map((r, i) => en ? { min: r.min, t: EN_RANKS[i] } : { ...r }));
+  swap(RANKS, FA_RANKS.map((r, i) => en ? { min: r.min, t: EN.RANKS[i] } : { ...r }));
 }
