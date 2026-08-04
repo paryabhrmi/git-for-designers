@@ -58,48 +58,48 @@ export function renderSystem() {
   $('#root').innerHTML = `
     <div class="tracks-head">
       <span class="hero-badge"><i class="ph-fill ph-swatches" aria-hidden="true"></i>${t('system.badge')}</span>
-      <h2>${t('nav.system')}</h2>
+      <h1>${t('nav.system')}</h1>
       <p class="lead">${t('system.lead')}</p>
     </div>
 
     <section class="ds-sec">
-      <h3>${t('system.palette.h')}</h3>
+      <h2>${t('system.palette.h')}</h2>
       <p class="ds-note">${t('system.palette.p')}</p>
       <ul class="ds-grid">${RAMP.map(swatch).join('')}</ul>
     </section>
 
     <section class="ds-sec">
-      <h3>${t('system.ink.h')}</h3>
+      <h2>${t('system.ink.h')}</h2>
       <p class="ds-note">${t('system.ink.p')}</p>
       <ul class="ds-grid">${INK.map(swatch).join('')}</ul>
       <ul class="ds-grid">${SURFACE.map(swatch).join('')}</ul>
     </section>
 
     <section class="ds-sec">
-      <h3>${t('system.semantic.h')}</h3>
+      <h2>${t('system.semantic.h')}</h2>
       <p class="ds-note">${t('system.semantic.p')}</p>
       <ul class="ds-grid">${SEMANTIC.map(swatch).join('')}</ul>
     </section>
 
     <section class="ds-sec">
-      <h3>${t('system.type.h')}</h3>
+      <h2>${t('system.type.h')}</h2>
       <p class="ds-note">${t('system.type.p')}</p>
       <ul class="ds-type-list">
         ${typeRow('h2.title', '37px', '900', t('system.type.display'))}
-        ${typeRow('.body h3', '20px', '800', t('system.type.section'))}
+        ${typeRow('.body h2', '20px', '800', t('system.type.section'))}
         ${typeRow('body', val('--fs') || '16px', '400', t('system.type.body'))}
         ${typeRow('.ds-note', '12.6px', '400', t('system.type.meta'))}
       </ul>
     </section>
 
     <section class="ds-sec">
-      <h3>${t('system.space.h')}</h3>
+      <h2>${t('system.space.h')}</h2>
       <p class="ds-note">${t('system.space.p')}</p>
       <ul class="ds-space-list">${spaceTokens.map(spaceRow).join('')}</ul>
     </section>
 
     <section class="ds-sec">
-      <h3>${t('system.dir.h')}</h3>
+      <h2>${t('system.dir.h')}</h2>
       <p class="ds-note">${t('system.dir.p')}</p>
       <div class="ds-dir">
         <div class="ds-dir-cell">
@@ -115,7 +115,7 @@ export function renderSystem() {
     </section>
 
     <section class="ds-sec">
-      <h3>${t('system.comp.h')}</h3>
+      <h2>${t('system.comp.h')}</h2>
       <p class="ds-note">${t('system.comp.p')}</p>
       <div class="ds-comp">
         <button type="button" class="btn btn-primary"><i class="ph-bold ph-play" aria-hidden="true"></i>${t('system.comp.primary')}</button>

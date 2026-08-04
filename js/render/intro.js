@@ -21,7 +21,7 @@ export function renderIntro() {
           <circle cx="7" cy="6" r="2.3"/><circle cx="7" cy="18" r="2.3"/><circle cx="17" cy="12" r="2.3"/>
           <path d="M7 8.3v7.4M7 12h5.6a2.1 2.1 0 0 0 2.1-2.1V9"/>
         </svg>${t('intro.heroBadge')}</span>
-      <h2>${t('intro.h2')}</h2>
+      <h1>${t('intro.h2')}</h1>
       <p class="lead">${t('intro.lead')}</p>
     </div>
     <div class="stats">
@@ -31,7 +31,7 @@ export function renderIntro() {
       <div class="stat"><i class="ph-duotone ph-clock"></i><b>${FA(totalMinutes())}</b><span>${t('intro.stat.mins')}</span></div>
     </div>
 
-    <h3 style="font-size:19px;font-weight:800;margin:26px 0 12px">${t('intro.how')}</h3>
+    <h2 style="font-size:19px;font-weight:800;margin:26px 0 12px">${t('intro.how')}</h2>
     <div class="steps">
       <div class="step"><span class="n"><i class="ph-bold ph-book-open"></i></span><div><b>${t('intro.step1.t')}</b><p>${t('intro.step1.d')}</p></div></div>
       <div class="step"><span class="n"><i class="ph-bold ph-exam"></i></span><div><b>${t('intro.step2.t')}</b><p>${t('intro.step2.d')}</p></div></div>
@@ -39,7 +39,7 @@ export function renderIntro() {
       <div class="step"><span class="n"><i class="ph-bold ph-trophy"></i></span><div><b>${t('intro.step4.t')}</b><p>${t('intro.step4.d')}</p></div></div>
     </div>
 
-    <h3 style="font-size:19px;font-weight:800;margin:28px 0 2px">${t('intro.badges.h')}</h3>
+    <h2 style="font-size:19px;font-weight:800;margin:28px 0 2px">${t('intro.badges.h')}</h2>
     <p class="sub" style="font-size:13.5px;margin:0 0 4px">${tf('intro.badges.sub', FA(earned().length), FA(BADGES.length), FA(XP_PASS), FA(XP_PERFECT))}</p>
     <div class="badges">
       ${BADGES.map(b => { const ok = earned().some(x => x.id === b.id); return `
@@ -55,7 +55,7 @@ export function renderIntro() {
       <input id="nameIn" type="text" placeholder="${t('intro.name.ph')}" value="${state.learner.replace(/"/g, '&quot;')}">
     </div>
 
-    <h3 style="font-size:19px;font-weight:800;margin:26px 0 4px">${t('intro.phases.h')}</h3>
+    <h2 style="font-size:19px;font-weight:800;margin:26px 0 4px">${t('intro.phases.h')}</h2>
     <div class="phase-cards">
       ${PHASES.map((p, i) => `<div class="phase-card" style="--pc:${p.color}">
         <i class="ph-fill ${PHASE_IC[i]}"></i><span>${p.name}</span>

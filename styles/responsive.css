@@ -28,14 +28,14 @@
 .sm-bar{flex:1; min-width:90px; height:3px; border-radius:var(--r-pill); background:var(--surface-3); overflow:hidden;}
 .sm-bar i{display:block; height:100%; background:var(--ink); border-radius:var(--r-pill); transition:width .5s;}
 .sm-phase{font-size:11.5px; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:var(--s1) var(--s3); border-radius:var(--r-pill); white-space:nowrap;}
-h2.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
-  h2.title .lv{font-size:11px; letter-spacing:1px;}
+h1.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
+  h1.title .lv{font-size:11px; letter-spacing:1px;}
   .sub{font-size:14.8px; margin-top:8px;}
   .meta{gap:10px 14px; font-size:12px; margin-top:13px;}
   .eyebrow{gap:6px; margin-bottom:14px;} .chip{font-size:10.5px; padding:4px 9px;}
   .body{padding-inline-start:16px; margin-inline-start:3px;}
-  .body h3{font-size:18px; margin:30px 0 10px;} .body h3::before{inset-inline-start:-23px; width:9px; height:9px; top:.6em;}
-  .body h4{font-size:15.3px;}
+  .body h2{font-size:18px; margin:30px 0 10px;} .body h2::before{inset-inline-start:-23px; width:9px; height:9px; top:.6em;}
+  .body h3{font-size:15.3px;}
   .body ul,.body ol{margin-inline-start:16px;}
   pre{font-size:12px; padding:15px 15px; line-height:1.8; border-radius:11px;}
   .copy{opacity:1; top:8px; inset-inline-end:8px; padding:4px 8px; font-size:10px;}
@@ -44,7 +44,7 @@ h2.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
   table{font-size:13.3px;} th,td{padding:9px 11px;}
   .quiz{padding:19px 15px; border-radius:17px; margin-top:42px;}
   .quiz-top{gap:11px;} .quiz-ic{width:34px; height:34px; font-size:18px; border-radius:10px;}
-  .quiz-top h3{font-size:17.5px;} .quiz-sub{font-size:12.6px;}
+  .quiz-top h2{font-size:17.5px;} .quiz-sub{font-size:12.6px;}
   .qcount{position:absolute; opacity:0; pointer-events:none;}
   .q-text{font-size:14.8px;}
   .opt{padding:13px 12px; gap:9px; font-size:14.2px; min-height:52px; border-radius:13px;}
@@ -55,7 +55,7 @@ h2.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
   .gate{padding:13px 15px; font-size:13px; align-items:flex-start;}
   .lesson-nav{display:none;}
   .sign{margin-top:26px;}
-  .hero h2{font-size:27px; letter-spacing:-.5px;} .hero .lead{font-size:15px; line-height:1.95;}
+  .hero h1{font-size:27px; letter-spacing:-.5px;} .hero .lead{font-size:15px; line-height:1.95;}
   .stat{padding:14px 15px;} .stat b{font-size:19px;}
   .step{padding:13px 15px; gap:11px;} .step b{font-size:14.4px;} .step p{font-size:13px;}
   .namebox{padding:17px 16px;}
@@ -63,7 +63,7 @@ h2.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
   .cert{padding:30px 18px 24px; border-radius:17px;}
   .cert::before{inset:9px;}
   .cert-seal{width:56px; height:56px; font-size:27px;}
-  .cert h2{font-size:20px; line-height:1.55;}
+  .cert h1{font-size:20px; line-height:1.55;}
   .cert .who{font-size:25px; min-width:100%; padding-bottom:9px;}
   .cert .desc{font-size:13.8px; line-height:1.95; margin-top:18px;}
   .cert-grid{grid-template-columns:1fr; gap:9px; margin:22px 0 18px;}
@@ -93,8 +93,8 @@ h2.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
 .sm-bar{flex:1; min-width:90px; height:3px; border-radius:var(--r-pill); background:var(--surface-3); overflow:hidden;}
 .sm-bar i{display:block; height:100%; background:var(--ink); border-radius:var(--r-pill); transition:width .5s;}
 .sm-phase{font-size:11.5px; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:var(--s1) var(--s3); border-radius:var(--r-pill); white-space:nowrap;}
-h2.title{font-size:23.5px;}
-  .hero h2{font-size:24px;}
+h1.title{font-size:23.5px;}
+  .hero h1{font-size:24px;}
   .phase-card{font-size:13.2px; padding:11px 13px;}
   .cert .who{font-size:21px;}
   .cert-actions{flex-direction:column;} .cert-actions .btn{width:100%;}
@@ -102,7 +102,7 @@ h2.title{font-size:23.5px;}
 
 @media(max-width:380px){
   .wrap{padding:18px 12px 118px;}
-  .body{padding-inline-start:13px;} .body h3::before{inset-inline-start:-20px;}
+  .body{padding-inline-start:13px;} .body h2::before{inset-inline-start:-20px;}
   .opt{grid-template-columns:auto 1fr; } .opt-mark{display:none;}
   .opt.ok,.opt.no{position:relative;}
 }

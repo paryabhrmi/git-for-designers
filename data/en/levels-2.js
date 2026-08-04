@@ -1,30 +1,30 @@
 export const EN_LEVELS_2 = [
 { id:11, title:'Pull Request', subtitle:'The most important place for team conversation about changes.',
 body:`
-<h3>What is a Pull Request?</h3>
+<h2>What is a Pull Request?</h2>
 <p>A <strong>Pull Request (PR)</strong> is a formal request on GitHub: "My branch is ready; please review it, and if it's approved, merge it into main." A PR is not just a Merge button; it's a space for conversation, review, recording decisions, and quality control.</p>
 <div class="callout note"><span class="co-title">A common naming mix-up</span><code>git pull</code> is a local command for fetching changes; a <strong>Pull Request</strong> is a review process on GitHub. They only share part of a name.</div>
-<h3>Creating a PR</h3>
+<h2>Creating a PR</h2>
 <p>After you push a branch, GitHub shows a Compare &amp; pull request button. Two key choices:</p>
 <ul>
 <li><strong>Base Branch:</strong> the merge destination (usually main).</li>
 <li><strong>Compare Branch:</strong> your branch, the one to be reviewed.</li>
 </ul>
 <p>Then you write a <strong>title</strong> (short and descriptive, like a good commit message) and a <strong>description</strong> (what, why, and how to test it).</p>
-<h3>Parts of the PR page</h3>
+<h2>Parts of the PR page</h2>
 <ul>
 <li><strong>Conversation:</strong> the description, comments, and discussion history.</li>
 <li><strong>Commits:</strong> the list of commits on the branch.</li>
 <li><strong>Files Changed:</strong> the full diff; where the real review happens.</li>
 </ul>
-<h3>Roles and management tools</h3>
+<h2>Roles and management tools</h2>
 <ul>
 <li><strong>Reviewer:</strong> the person you ask to review.</li>
 <li><strong>Assignee:</strong> the person responsible for moving the PR forward (usually you).</li>
 <li><strong>Label:</strong> tags like design or bug for categorizing.</li>
 <li><strong>Draft PR:</strong> "Not finished yet, but I'd like your thoughts." When it's ready, you click Ready for Review.</li>
 </ul>
-<h3>The review cycle</h3>
+<h2>The review cycle</h2>
 <ol>
 <li>The reviewer leaves <strong>Inline Comments</strong> on specific lines in the Files Changed tab.</li>
 <li>At the end they submit one of three states: <strong>Approve</strong>, <strong>Request Changes</strong> (fixes are needed), or just Comment.</li>
@@ -33,7 +33,7 @@ body:`
 <li>If main has moved ahead of your branch, the <strong>Update Branch</strong> button syncs your branch with main.</li>
 <li>Finally: <strong>Merge</strong> (with one of the three methods from level 9), or <strong>Close</strong> without merging (and Reopen if needed).</li>
 </ol>
-<h3>Small PR, good review</h3>
+<h2>Small PR, good review</h2>
 <p>A PR with 200 changed lines gets a careful review; a PR with 2,000 lines gets only a tired Approve. Break big changes into several independent PRs. A <strong>PR Template</strong> (a file in the repo that predefines the description structure) helps ensure no PR is opened without the necessary information.</p>
 `,
 quiz:[
@@ -46,9 +46,9 @@ quiz:[
 ]},
 { id:12, title:'Pull Requests for designers', subtitle:'Your PR can be the best Design Handoff document.',
 body:`
-<h3>A design PR is different from a coding PR</h3>
+<h2>A design PR is different from a coding PR</h2>
 <p>When your change is design in nature (a component, a token, a layout, a prototype), the reviewer needs to understand the <strong>design decision</strong>, not just the code. The PR is where the problem, the decision, and the visual evidence are recorded alongside the change itself — and unlike chat messages, they stay searchable forever.</p>
-<h3>Suggested structure for a design PR description</h3>
+<h2>Suggested structure for a design PR description</h2>
 <pre><code>## Problem
 On empty search results, the user was left with a blank page.
 
@@ -71,7 +71,7 @@ Suggestions are static for now; waiting on the API.
 
 ## Questions for review
 Is 40px consistent with the rest of the pages?</code></pre>
-<h3>Key elements</h3>
+<h2>Key elements</h2>
 <ul>
 <li><strong>Before / After:</strong> two screenshots side by side; the fastest way to communicate a visual change. You can drag and drop images directly into the PR description.</li>
 <li><strong>Figma link:</strong> link to the exact frame, not the whole file.</li>
@@ -80,9 +80,9 @@ Is 40px consistent with the rest of the pages?</code></pre>
 <li><strong>Quality checklist:</strong> Design Tokens (no hard-coded raw values!), responsive behavior, and accessibility (contrast, focus, aria).</li>
 <li><strong>Questions for the developer:</strong> ask about ambiguities right there; a question recorded in the PR beats a question lost in chat.</li>
 </ul>
-<h3>The PR as Design Review and Handoff</h3>
+<h2>The PR as Design Review and Handoff</h2>
 <p>When a PR is written this way, it can serve as the formal Design Review venue (a designer reviewer + a developer reviewer) and at the same time as the handoff document: the developer knows what changed, why, and with what limitations.</p>
-<h3>Where PR documentation ends and Figma begins</h3>
+<h2>Where PR documentation ends and Figma begins</h2>
 <table><tr><th>In Figma</th><th>In the PR</th></tr>
 <tr><td>The desired state and design exploration: variants, flows, specs</td><td>The history of actual product change: what happened, why, when, and by whom</td></tr>
 <tr><td>A living document that gets rewritten</td><td>A fixed record of each change that is never lost</td></tr></table>
@@ -96,7 +96,7 @@ quiz:[
 ]},
 { id:13, title:'Reading a Diff', subtitle:'In the AI era, reading changes matters more than memorizing commands.',
 body:`
-<h3>What is a Diff?</h3>
+<h2>What is a Diff?</h2>
 <p>A <strong>Diff</strong> is a precise display of the difference between two states, line by line:</p>
 <pre><code><span class="c">--- a/components/Button.css</span>
 <span class="c">+++ b/components/Button.css</span>
@@ -105,38 +105,38 @@ body:`
 <span class="g">+  padding: 12px 20px;</span>   <span class="c">← Added Line</span>
  }</code></pre>
 <p>A subtle detail: a "modified" line appears in a diff as one removal + one addition. Diffs come at different levels: one file, one commit, between two branches, or an entire Pull Request.</p>
-<h3>Split and Unified</h3>
+<h2>Split and Unified</h2>
 <ul>
 <li><strong>Unified View:</strong> removals and additions stacked in one column; good for small changes.</li>
 <li><strong>Split View:</strong> before and after in two side-by-side columns; usually more readable for a designer doing visual comparison. On GitHub you can switch it in the Files Changed tab.</li>
 </ul>
-<h3>A file-by-file review method</h3>
+<h2>A file-by-file review method</h2>
 <ol>
 <li>First look at the <strong>list of changed files</strong>: is there a file here you didn't expect?</li>
 <li>Read the main changed files carefully.</li>
 <li>On GitHub, mark each reviewed file as Viewed so you don't lose your place.</li>
 </ol>
-<h3>Checklist for hunting unintended changes</h3>
+<h2>Checklist for hunting unintended changes</h2>
 <ul>
 <li><strong>Accidental deletions:</strong> big red blocks. Was this removal intentional?</li>
 <li><strong>Dependency changes:</strong> any change in <code>package.json</code> means a new package or a new version; it must be deliberate and explainable.</li>
 <li><strong>New files:</strong> where did this come from and why is it needed?</li>
 <li><strong>Config changes:</strong> configuration files (build, lint, sample env) affect the whole project; don't skim past them.</li>
 </ul>
-<h3>Reviewing AI-generated changes</h3>
+<h2>Reviewing AI-generated changes</h2>
 <p>The most important modern use of this skill: AI usually changes more than you asked for. Before accepting any output:</p>
 <ul>
 <li>Compare the file list against your own request; anything out of scope?</li>
 <li>Hunt for unwanted deletions and "unrequested rewrites".</li>
 <li>Take added dependencies and config changes seriously.</li>
 </ul>
-<h3>A designer's eye on a Diff</h3>
+<h2>A designer's eye on a Diff</h2>
 <ul>
 <li><strong>Design Tokens:</strong> changing <code>#0969DA</code> to <code>#0A6FD0</code> is one line in a diff, but it affects the entire product.</li>
 <li><strong>Copy and content:</strong> text changes (button labels, error messages) are fully reviewable in a diff.</li>
 <li><strong>States:</strong> did the hover, focus, and disabled classes/styles change accordingly too?</li>
 </ul>
-<h3>Committing only part of your changes</h3>
+<h2>Committing only part of your changes</h2>
 <p>A diff isn't just for reading; it's also a separation tool. With <code>git add -p</code> (or line selection in your editor's Source Control) stage only the related pieces and leave the rest for the next commit.</p>
 `,
 quiz:[
@@ -149,38 +149,38 @@ quiz:[
 ]},
 { id:14, title:'Undoing and fixing changes', subtitle:'Git\'s safety net: almost nothing is ever truly lost.',
 body:`
-<h3>Map of the undo tools</h3>
+<h2>Map of the undo tools</h2>
 <table><tr><th>Situation</th><th>Tool</th><th>Safety</th></tr>
 <tr><td>I don't want the unsaved changes in a file</td><td><code>git restore file</code></td><td>⚠️ Uncommitted changes really are deleted</td></tr>
 <tr><td>I staged a file by mistake</td><td><code>git restore --staged file</code></td><td>✅ Completely safe</td></tr>
 <tr><td>Message/content of the last commit (not pushed)</td><td><code>git commit --amend</code></td><td>✅ Safe before pushing</td></tr>
 <tr><td>A published commit was wrong</td><td><code>git revert</code></td><td>✅ The safest public option</td></tr>
 <tr><td>Any other disaster</td><td><code>git reflog</code></td><td>🛟 The spare tire</td></tr></table>
-<h3>git restore — bringing a file back</h3>
+<h2>git restore — bringing a file back</h2>
 <pre><code>git restore styles.css            <span class="c"># throw away the file's uncommitted changes</span>
 git restore .                     <span class="c"># all files (use with caution)</span>
 git restore --staged styles.css   <span class="c"># only unstage; keep the changes</span>
 git restore --source=abc123 tokens.json  <span class="c"># bring the file back from an old commit</span></code></pre>
-<h3>git revert — the public antidote</h3>
+<h2>git revert — the public antidote</h2>
 <p>Revert creates a <strong>new commit</strong> that neutralizes the effect of a previous commit. History stays intact and nothing is "erased"; that's why it's the standard, safe path for pushed commits and shared branches:</p>
 <pre><code>git revert abc123
 <span class="c"># history: ...→ abc123 (mistake) → def456 (Revert "mistake")</span></code></pre>
-<h3>Revert versus Reset</h3>
+<h2>Revert versus Reset</h2>
 <table><tr><th></th><th>Revert</th><th>Reset</th></tr>
 <tr><td>Method</td><td>Creates a new neutralizing commit</td><td>Moves history backwards (rewriting)</td></tr>
 <tr><td>History</td><td>Preserved</td><td>Changed</td></tr>
 <tr><td>Public/pushed commits</td><td>✅ Correct</td><td>❌ Forbidden</td></tr></table>
-<h3>git reflog — the spare tire</h3>
+<h2>git reflog — the spare tire</h2>
 <p>The reflog is Git's local diary: everywhere your HEAD has been — even commits "lost" through a reset, or deleted branches — is recorded there:</p>
 <pre><code>git reflog
 <span class="c"># a1b2c3 HEAD@{0}: reset: moving to HEAD~2</span>
 <span class="c"># d4e5f6 HEAD@{1}: commit: feat: add hero section  ← this is the one I want!</span>
 git switch -c rescue d4e5f6   <span class="c"># recover it on a new branch</span></code></pre>
 <p>The same technique brings back a <strong>deleted branch</strong>: find the branch's last commit in the reflog and create a new branch from it.</p>
-<h3>Aborting an operation midway</h3>
+<h2>Aborting an operation midway</h2>
 <pre><code>git merge --abort     <span class="c"># cancel a merge mid-conflict</span>
 git rebase --abort    <span class="c"># cancel a rebase</span></code></pre>
-<h3>A restore point before AI changes</h3>
+<h2>A restore point before AI changes</h2>
 <p>Before handing work to an agent or running a big prompt: <strong>commit</strong> (and preferably work on a separate branch). Then whatever happens, the way back is one command away.</p>
 <div class="callout tip"><span class="co-title">Learning priority</span>1) restore 2) revert 3) commit --amend 4) reflog 5) and only after all of these: reset.</div>
 `,
@@ -194,7 +194,7 @@ quiz:[
 ]},
 { id:15, title:'Reset', subtitle:'The powerful tool for rewriting local history — with respect and caution.',
 body:`
-<h3>What does git reset do?</h3>
+<h2>What does git reset do?</h2>
 <p>Reset moves the branch pointer back to a previous commit, as if the commits after it "never happened". It has three modes, which differ in what happens to your changes:</p>
 <pre><code><span class="c"># HEAD~1 means "one commit back"</span>
 git reset --soft HEAD~1   <span class="c"># the commit is undone; changes stay staged</span>
@@ -204,17 +204,17 @@ git reset --hard HEAD~1   <span class="c"># ⚠️ the commit and all changes ar
 <tr><td>Soft</td><td>Undone</td><td>Kept</td><td>Kept</td><td>Combining the last few commits into one better commit</td></tr>
 <tr><td>Mixed</td><td>Undone</td><td>Emptied</td><td>Kept</td><td>"Let me redo the add and commit from scratch"</td></tr>
 <tr><td>Hard</td><td>Deleted</td><td>Deleted</td><td>Deleted</td><td>"Destroy this work completely" — with eyes open</td></tr></table>
-<h3>The danger of reset --hard</h3>
+<h2>The danger of reset --hard</h2>
 <div class="callout warn"><span class="co-title">Two very different kinds of destruction</span>Commits deleted by a reset can usually be recovered from <code>git reflog</code>; but changes that <strong>were never committed</strong> and get wiped by --hard are truly gone forever. Before any --hard, run <code>git status</code> once and make sure you have nothing uncommitted.</div>
-<h3>The before-and-after-Push rule</h3>
+<h2>The before-and-after-Push rule</h2>
 <ul>
 <li><strong>Before pushing:</strong> reset is a legitimate local cleanup tool; the commits are still yours alone.</li>
 <li><strong>After pushing:</strong> reset means rewriting shared history; your next push will be rejected, and it can only proceed with a Force Push, which breaks your teammates' history. In that case the right path is <code>git revert</code>.</li>
 </ul>
-<h3>Recovering from a bad reset</h3>
+<h2>Recovering from a bad reset</h2>
 <pre><code>git reflog                       <span class="c"># find the hash of the commit before the reset</span>
 git reset --hard d4e5f6          <span class="c"># go right back there</span></code></pre>
-<h3>The right times to use reset</h3>
+<h2>The right times to use reset</h2>
 <ul>
 <li>You made three messy local commits and want one clean commit instead: <code>reset --soft HEAD~3</code> plus one new commit.</li>
 <li>The last commit was entirely wrong and it hasn't been pushed: <code>reset --hard HEAD~1</code> (after checking status).</li>
@@ -230,14 +230,14 @@ quiz:[
 ]},
 { id:16, title:'Stash', subtitle:'The temporary drawer: set unfinished work aside, come back later.',
 body:`
-<h3>What is Stash?</h3>
+<h2>What is Stash?</h2>
 <p><strong>Stash</strong> puts your uncommitted changes into a "temporary drawer" and cleans the Working Directory. The classic scenario: you're mid-way through a feature when an urgent bug shows up on main; you don't want to commit the half-done work, but you don't want to throw it away either.</p>
 <pre><code>git stash push -m "hero layout WIP"   <span class="c"># save with a name (a good habit)</span>
 git switch main                        <span class="c"># go fix the bug</span>
 <span class="c"># ... fix, commit, push ...</span>
 git switch feature/hero
 git stash pop                          <span class="c"># the half-done work is back</span></code></pre>
-<h3>The main commands</h3>
+<h2>The main commands</h2>
 <pre><code>git stash                    <span class="c"># quick save (unnamed)</span>
 git stash -u                 <span class="c"># include untracked files too</span>
 git stash list               <span class="c"># stash@{0}: hero layout WIP ...</span>
@@ -246,13 +246,13 @@ git stash pop                <span class="c"># apply + remove from the list</spa
 git stash drop stash@{0}     <span class="c"># delete one stash</span>
 git stash clear              <span class="c"># delete all (no way back)</span></code></pre>
 <div class="callout note"><span class="co-title">apply or pop?</span>pop is for one-time consumption; apply is for when you want to try the same changes in several places, or when you're being careful so the stashed copy isn't lost if a conflict occurs.</div>
-<h3>Tips and edge cases</h3>
+<h2>Tips and edge cases</h2>
 <ul>
 <li><strong>Untracked:</strong> by default, stash does not pick up brand-new files; the <code>-u</code> flag is required.</li>
 <li><strong>Stash when switching branches:</strong> if your uncommitted changes are incompatible with the target branch, Git refuses the switch; stash is the standard solution. A stash isn't glued to a branch; you can apply it on a different branch too.</li>
 <li><strong>Conflicts in a stash:</strong> if the files changed since you stashed, the familiar conflict markers appear during pop/apply and you resolve them just like a merge. Note: on a conflict, pop does not automatically delete the stash.</li>
 </ul>
-<h3>Stash or Commit?</h3>
+<h2>Stash or Commit?</h2>
 <p>Stash is for "a few hours, quick context switch": it's local, never pushed, has no proper message, and is easy to forget. If the unfinished work will sit for more than a day or matters, make a temporary commit with a wip message on its own branch instead of stashing; it's safer and more visible.</p>
 `,
 quiz:[
@@ -264,9 +264,9 @@ quiz:[
 ]},
 { id:17, title:'Tags and Releases', subtitle:'Marking important versions and announcing them officially.',
 body:`
-<h3>What is a Tag?</h3>
+<h2>What is a Tag?</h2>
 <p>A <strong>Tag</strong> is a permanent label on a specific commit; like placing a bookmark on a point in history that says "this was version 1.2.0". Unlike a branch, which moves forward with every new commit, a tag stays fixed.</p>
-<h3>Two kinds of tags</h3>
+<h2>Two kinds of tags</h2>
 <ul>
 <li><strong>Lightweight Tag:</strong> just a simple pointer to a commit, with no extra information.</li>
 <li><strong>Annotated Tag:</strong> a full object with the creator's name, a date, and a message. Always choose this one for official releases.</li>
@@ -279,15 +279,15 @@ git push origin v1.2.0                      <span class="c"># tags are NOT pushe
 git push origin --tags                      <span class="c"># all of them at once</span>
 git tag -d v1.2.0                           <span class="c"># delete locally</span>
 git push origin --delete v1.2.0             <span class="c"># delete from the remote</span></code></pre>
-<h3>Semantic Versioning</h3>
+<h2>Semantic Versioning</h2>
 <p>The universal numbering convention: <code>MAJOR.MINOR.PATCH</code> — for example <code>2.4.1</code></p>
 <table><tr><th>Part</th><th>When does it increase?</th><th>Design System example</th></tr>
 <tr><td><strong>MAJOR</strong> (2.x.x)</td><td>Breaking change: consumers must change their code</td><td>Removing or renaming a token; removing a component prop</td></tr>
 <tr><td><strong>MINOR</strong> (x.4.x)</td><td>New, backwards-compatible capability</td><td>Adding a new button variant or a new token</td></tr>
 <tr><td><strong>PATCH</strong> (x.x.1)</td><td>Bug fix with no behavior change</td><td>Fixing the error color's contrast or a wrong spacing value</td></tr></table>
-<h3>Releases on GitHub</h3>
+<h2>Releases on GitHub</h2>
 <p>A <strong>Release</strong> is a layer on top of a tag: an official page with a version title, a <strong>Release Note</strong> (this version explained for humans), and attached files. GitHub can also generate the list of changes automatically.</p>
-<h3>Changelog</h3>
+<h2>Changelog</h2>
 <p>A <strong>Changelog</strong> is a file in the repo (usually <code>CHANGELOG.md</code>) that keeps a categorized history of versions:</p>
 <pre><code>## [2.0.0] - 2026-03-14
 ### Breaking
@@ -310,28 +310,28 @@ quiz:[
 ]},
 { id:18, title:'GitHub Issues and managing work', subtitle:'Where work gets defined, moves forward, and connects to real change.',
 body:`
-<h3>What is an Issue?</h3>
+<h2>What is an Issue?</h2>
 <p>An <strong>Issue</strong> is a unit of work or discussion in a repo: a bug, a feature request, or a task. Every Issue has a number (<code>#42</code>), is searchable, and lives right next to the code — not in a chat that gets lost by tomorrow.</p>
-<h3>Three common kinds</h3>
+<h2>Three common kinds</h2>
 <ul>
 <li><strong>Bug Report:</strong> what you saw, what you expected, how to reproduce it (+ a screenshot).</li>
 <li><strong>Feature Request:</strong> what problem, for whom, why now.</li>
 <li><strong>Task:</strong> a specific, bounded piece of work, e.g. "document the spacing tokens".</li>
 </ul>
-<h3>Organizing tools</h3>
+<h2>Organizing tools</h2>
 <ul>
 <li><strong>Label:</strong> a categorization tag (bug, design, tokens, a11y).</li>
 <li><strong>Milestone:</strong> a group of Issues for one goal or version (e.g. v2.0).</li>
 <li><strong>Assignee:</strong> the person responsible for doing it.</li>
 <li><strong>Issue Template:</strong> a ready-made form that asks for the required fields up front. A good <strong>Design Task Template</strong> asks: the problem, the audience, the required states, the Figma link, and the acceptance criteria.</li>
 </ul>
-<h3>Connecting an Issue to a Pull Request</h3>
+<h2>Connecting an Issue to a Pull Request</h2>
 <p>Use keywords in the description or commit message so the Issue closes automatically when the PR is merged:</p>
 <pre><code>Closes #42
 Fixes #17
 Resolves #103</code></pre>
 <p>Even a plain mention of <code>#42</code> creates a two-way link, keeping the "problem → change" trail traceable.</p>
-<h3>GitHub Projects</h3>
+<h2>GitHub Projects</h2>
 <p>A <strong>Board</strong> (kanban) view over Issues and PRs: Status columns (Todo / In Progress / In Review / Done) and fields like Priority. Its advantage over a separate tool is that the cards' status stays in sync with real activity in the repo.</p>
 <div class="callout note"><span class="co-title">Connecting design decisions to Issues</span>Record design decisions in the related Issue, not just in the Figma file. Six months later, whoever asks "why did it end up this way?" can find the discussion, the rejected options, and the final PR side by side with a single search.</div>
 `,
@@ -344,30 +344,30 @@ quiz:[
 ]},
 { id:19, title:'Collaboration', subtitle:'The rules of the game when several people work on one repo.',
 body:`
-<h3>What is a Fork?</h3>
+<h2>What is a Fork?</h2>
 <p>A <strong>Fork</strong> means making a complete copy of someone else's repo <strong>in your own GitHub account</strong>. Because you usually can't push directly to other people's repos, you make your changes in your fork and then send a PR from there.</p>
 <table><tr><th></th><th>Fork</th><th>Clone</th></tr>
 <tr><td>Where does the copy go?</td><td>In your GitHub account (the server)</td><td>On your computer (local)</td></tr>
 <tr><td>When?</td><td>When you don't have write access (Open Source projects)</td><td>Always; for working on any repo</td></tr></table>
-<h3>Contributor Workflow</h3>
+<h2>Contributor Workflow</h2>
 <pre><code>1. Fork  →  2. Clone your fork  →  3. New branch
 4. Change + Commit  →  5. Push to your fork  →  6. Open a PR to the original repo</code></pre>
 <p>On an internal team where you have write access, no fork is needed: you create a branch directly and open a PR.</p>
-<h3>Access levels</h3>
+<h2>Access levels</h2>
 <ul>
 <li><strong>Read:</strong> viewing and cloning; no pushing.</li>
 <li><strong>Write:</strong> creating branches, pushing, and opening PRs — the usual access for a team member.</li>
 <li><strong>Admin:</strong> repo settings, access management, and branch rules.</li>
 </ul>
 <p>A <strong>Collaborator</strong> is someone who has been granted access to the repo. A <strong>Code Owner</strong> (defined in the <code>CODEOWNERS</code> file) is the person responsible for specific parts of the project; for example, any PR that touches the tokens file automatically adds the system designer as a reviewer.</p>
-<h3>Protected Branch</h3>
+<h2>Protected Branch</h2>
 <p>Rules placed on main so nobody can break it by accident:</p>
 <ul>
 <li><strong>Blocking direct pushes:</strong> every change goes through a PR only.</li>
 <li><strong>Required Review:</strong> without at least one Approve, the Merge button is disabled.</li>
 <li><strong>Required Status Check:</strong> tests and builds must be green.</li>
 </ul>
-<h3>Team conventions</h3>
+<h2>Team conventions</h2>
 <ul>
 <li><strong>Branching Convention:</strong> a shared naming pattern (<code>feature/</code>, <code>fix/</code>).</li>
 <li><strong>Definition of Done:</strong> the team's agreement on what "done" means — e.g.: reviewed, states covered, documented, checks green.</li>
@@ -384,26 +384,26 @@ quiz:[
 ]},
 { id:20, title:'Security', subtitle:'A leaked key is the most expensive commit of your life.',
 body:`
-<h3>What is a Secret?</h3>
+<h2>What is a Secret?</h2>
 <p>A <strong>Secret</strong> is any piece of information that only authorized systems should have: an <strong>API Key</strong>, an <strong>Access Token</strong>, a database password, a private key. The simple rule: a secret must never be inside your code or your Git history.</p>
-<h3>The right way: .env files</h3>
+<h2>The right way: .env files</h2>
 <pre><code><span class="c"># .env  ← in .gitignore, never committed</span>
 FIGMA_TOKEN=figd_xxxxxxxx
 
 <span class="c"># .env.example  ← this one IS committed (variable names only, no values)</span>
 FIGMA_TOKEN=</code></pre>
-<h3>If a secret leaks</h3>
+<h2>If a secret leaks</h2>
 <ol>
 <li><strong>Revoke it immediately</strong> and create a new key. This is the most important step, because anything pushed even once may have been seen and saved.</li>
 <li>Untrack the file and add it to gitignore.</li>
 <li>If needed, scrub the history (with tools like git-filter-repo); but this is no substitute for step one.</li>
 </ol>
-<h3>GitHub's automatic shields</h3>
+<h2>GitHub's automatic shields</h2>
 <ul>
 <li><strong>Secret Scanning:</strong> GitHub detects the patterns of known tokens in pushes and warns you (and in some cases notifies the provider so the key gets invalidated).</li>
 <li><strong>Dependabot:</strong> monitors your project's dependencies and produces a <strong>Dependency Alert</strong> — and even an upgrade PR — for vulnerable versions.</li>
 </ul>
-<h3>Access hygiene</h3>
+<h2>Access hygiene</h2>
 <ul>
 <li><strong>Private versus Public:</strong> default to Private unless you deliberately want it public. Public means anyone on the internet can see it.</li>
 <li><strong>Repository Permission:</strong> grant the minimum access needed (Read for an observer, Write for an active member).</li>

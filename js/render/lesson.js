@@ -31,7 +31,7 @@ export function renderLesson() {
       <span class="sm-bar"><i style="width:${(l.id / LEVELS.length * 100).toFixed(1)}%"></i></span>
       <span class="sm-phase"><i class="ph-fill ${PHASE_IC[pi]}" aria-hidden="true"></i> ${ph.name.split('·')[0].trim()}</span>
     </div>
-    <h2 class="title">${l.title}</h2>
+    <h1 class="title">${l.title}</h1>
     <p class="sub">${l.subtitle}</p>
     <div class="meta">
       <span class="mono" style="direction:ltr"><i class="ph ph-git-branch"></i>${l.branch}</span>
@@ -54,7 +54,7 @@ export function renderLesson() {
       <div class="quiz-top">
         <span class="quiz-ic"><i class="ph-duotone ph-exam"></i></span>
         <div>
-          <h3>${tf('lesson.quiz.h', FA(l.id))}</h3>
+          <h2>${tf('lesson.quiz.h', FA(l.id))}</h2>
           <p class="quiz-sub">${tf('lesson.quiz.sub', FA(l.quiz.length), FA(need))}</p>
         </div>
         <span class="qcount" id="qcount">${FA(0)}/${FA(l.quiz.length)}</span>
@@ -175,7 +175,7 @@ export function enhance() {
 export function buildToc() {
   const body = $('#root').querySelector('.body');
   if (!body) return;
-  const hs = [...body.querySelectorAll('h3')];
+  const hs = [...body.querySelectorAll('h2')];
   if (hs.length < 3) return;
   hs.forEach((h, i) => h.id = 'sec-' + i);
   const small = window.matchMedia('(max-width:940px)').matches;

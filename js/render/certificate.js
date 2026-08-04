@@ -49,7 +49,7 @@ export function renderCert() {
     $('#root').innerHTML = `
       <div class="locked-cert">
         <i class="ph-duotone ph-trophy big" aria-hidden="true"></i>
-        <h2>${t('ach.locked.h')}</h2>
+        <h1>${t('ach.locked.h')}</h1>
         <p>${tf('ach.locked.p', FA(n))}</p>
         <div class="mini-prog"><i style="width:${n / LEVELS.length * 100}%"></i></div>
         <button class="btn btn-primary" id="contBtn"><i class="ph-bold ph-play" aria-hidden="true"></i>${tf('ach.continue', FA(LEVELS[firstOpen()].id))}</button>
@@ -69,7 +69,7 @@ export function renderCert() {
       <div class="ach-card ach-theme-${data.themeKey} ach-layout-${data.layoutMode}" id="achCard" data-theme-key="${data.themeKey}">
         <div class="ach-in">
           <div class="ach-kicker"><i class="ph-fill ph-trophy" aria-hidden="true"></i>${t('ach.card')}</div>
-          <h2 class="ach-title">${t('ach.title')}</h2>
+          <h1 class="ach-title">${t('ach.title')}</h1>
           <p class="ach-to">${t('ach.completed')}</p>
           <div class="ach-who" id="certName" contenteditable="true" spellcheck="false" role="textbox" aria-label="${t('ach.nameAria')}">${nameHtml}</div>
           <div class="ach-meta">
@@ -109,7 +109,7 @@ export function renderCert() {
       </div>
 
       <div class="ach-share-panel" id="sharePanel" hidden>
-        <h3><i class="ph-fill ph-export" aria-hidden="true"></i>${t('ach.panel.h')}</h3>
+        <h2><i class="ph-fill ph-export" aria-hidden="true"></i>${t('ach.panel.h')}</h2>
         <p id="shareHint">${nativeShare ? t('ach.hint.native') : t('ach.hint.dl')}</p>
         <div class="ach-share-row">
           <button type="button" class="btn btn-primary" id="dlSquare">

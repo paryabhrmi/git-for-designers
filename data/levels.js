@@ -1,25 +1,25 @@
 export const LEVELS = [
 { id:1, title:'مفاهیم پایه و ضروری', branch:'main', subtitle:'قبل از هر دستوری، باید بفهمی Git اصلاً چه مسئله‌ای را حل می‌کند.',
 body:`
-<h3>Version Control چیست؟</h3>
+<h2>Version Control چیست؟</h2>
 <p><strong>Version Control</strong> (کنترل نسخه) یعنی سیستمی که تاریخچهٔ تغییرات فایل‌ها را نگه می‌دارد؛ به‌طوری که بتوانی ببینی چه چیزی، کی و توسط چه کسی تغییر کرده و در صورت نیاز به هر نقطه‌ای در گذشته برگردی.</p>
 <div class="example"><div class="ex-title">مثال آشنا برای طراح</div>
 <p>حتماً پوشه‌ای شبیه این دیده‌ای: <code>final.fig</code> و <code>final-v2.fig</code> و <code>final-FINAL-approved.fig</code>. این همان کنترل نسخهٔ دستی و شکننده است. Version Control همین کار را به‌صورت منظم، خودکار و قابل‌اعتماد انجام می‌دهد؛ بدون کپی‌کردن فایل‌ها.</p></div>
-<h3>Git چیست؟</h3>
+<h2>Git چیست؟</h2>
 <p><strong>Git</strong> محبوب‌ترین ابزار کنترل نسخه در دنیاست. یک نرم‌افزار رایگان که روی کامپیوتر خودت نصب می‌شود و تاریخچهٔ کامل پروژه را داخل همان پوشهٔ پروژه نگه می‌دارد. Git برای کارکردن حتی به اینترنت نیاز ندارد.</p>
-<h3>تفاوت Git و GitHub</h3>
+<h2>تفاوت Git و GitHub</h2>
 <table><tr><th></th><th>Git</th><th>GitHub</th></tr>
 <tr><td><strong>چیست؟</strong></td><td>نرم‌افزار کنترل نسخه</td><td>وب‌سایت میزبانی پروژه‌های Git</td></tr>
 <tr><td><strong>کجاست؟</strong></td><td>روی کامپیوتر تو</td><td>روی سرورهای ابری</td></tr>
 <tr><td><strong>چه می‌کند؟</strong></td><td>تاریخچه را ثبت می‌کند</td><td>اشتراک‌گذاری، همکاری، Pull Request</td></tr></table>
 <p>تشبیه ساده: Git مثل «قابلیت ذخیره‌سازی فایل» است و GitHub مثل «Google Drive برای پروژه‌های Git». می‌توانی از Git بدون GitHub استفاده کنی، ولی برعکسش معنا ندارد. رقبای GitHub هم وجود دارند: GitLab و Bitbucket.</p>
-<h3>Repository چیست؟</h3>
+<h2>Repository چیست؟</h2>
 <p><strong>Repository</strong> (یا کوتاه: Repo) یعنی پوشهٔ پروژه به‌همراه تمام تاریخچه‌اش. هر پروژه یک Repo است.</p>
 <ul>
 <li><strong>Local Repository:</strong> نسخه‌ای که روی کامپیوتر خودت است و مستقیم با آن کار می‌کنی.</li>
 <li><strong>Remote Repository:</strong> نسخه‌ای که روی سرور (مثلاً GitHub) است و نقطهٔ مشترک تیم محسوب می‌شود.</li>
 </ul>
-<h3>سه ناحیهٔ اصلی Git</h3>
+<h2>سه ناحیهٔ اصلی Git</h2>
 <p>هر تغییری در Git از سه ایستگاه عبور می‌کند. این مهم‌ترین مدل ذهنی کل Git است:</p>
 <ol>
 <li><strong>Working Directory:</strong> پوشهٔ پروژه؛ جایی که فایل‌ها را واقعاً ویرایش می‌کنی.</li>
@@ -29,17 +29,17 @@ body:`
 <pre><code><span class="c"># مسیر حرکت هر تغییر:</span>
 Working Directory  →  Staging Area  →  Commit History
    (ویرایش)            (git add)        (git commit)</code></pre>
-<h3>Commit و Commit History</h3>
+<h2>Commit و Commit History</h2>
 <p>هر <strong>Commit</strong> یک نقطهٔ ذخیرهٔ کامل از پروژه است: چه فایل‌هایی چه محتوایی داشتند، به‌همراه توضیح، نویسنده و زمان. <strong>Commit History</strong> زنجیرهٔ همین نقطه‌هاست؛ داستان کامل پروژه از اول تا الان.</p>
-<h3>Snapshot در Git</h3>
+<h2>Snapshot در Git</h2>
 <p>Git به‌جای ذخیرهٔ «فرق فایل‌ها»، در هر Commit یک <strong>عکس کامل از کل پروژه</strong> ذخیره می‌کند (و هوشمندانه فایل‌های تغییرنکرده را تکرار نمی‌کند). به همین دلیل برگشتن به هر Commit یعنی برگشتن کل پروژه به همان لحظه.</p>
-<h3>تفاوت Save و Commit</h3>
+<h2>تفاوت Save و Commit</h2>
 <p><strong>Save</strong> (Ctrl+S) فقط آخرین حالت فایل را روی دیسک می‌نویسد و حالت قبلی را نابود می‌کند. <strong>Commit</strong> یک نقطهٔ تاریخی جدید می‌سازد بدون اینکه نقاط قبلی از بین بروند. Save یعنی «بازنویسی»، Commit یعنی «افزودن به تاریخچه».</p>
-<h3>تفاوت Git با Cloud Storage</h3>
+<h2>تفاوت Git با Cloud Storage</h2>
 <p>Dropbox یا Google Drive فقط «آخرین نسخهٔ فایل» را همگام می‌کنند و شاید چند نسخهٔ خودکار قبلی را نگه دارند. Git در عوض: نقاط ذخیرهٔ <strong>عمدی و توضیح‌دار</strong> دارد، شاخه‌سازی (Branch) دارد، مقایسهٔ دقیق خط‌به‌خط (Diff) دارد و برای همکاری چند نفر روی یک فایل ساخته شده است.</p>
-<h3>ساختار یک Repository و پوشهٔ مخفی .git</h3>
+<h2>ساختار یک Repository و پوشهٔ مخفی .git</h2>
 <p>وقتی پوشه‌ای را به Repo تبدیل می‌کنی، Git یک پوشهٔ مخفی به نام <code>.git</code> داخلش می‌سازد. تمام تاریخچه، تنظیمات و جادوی Git داخل همین یک پوشه است. اگر <code>.git</code> را پاک کنی، پروژه سالم می‌ماند ولی کل تاریخچه از بین می‌رود؛ پس هرگز دستی به آن دست نزن.</p>
-<h3>Git Workflow پایه</h3>
+<h2>Git Workflow پایه</h2>
 <pre><code><span class="c"># چرخهٔ روزمرهٔ کار با Git:</span>
 1. فایل‌ها را ویرایش کن          <span class="c">(Working Directory)</span>
 2. git status                    <span class="c">← ببین چه چیزی تغییر کرده</span>
@@ -58,28 +58,28 @@ quiz:[
 ]},
 { id:2, title:'راه‌اندازی اولیه', branch:'setup/install', subtitle:'نصب، معرفی خودت به Git و اتصال امن به GitHub.',
 body:`
-<h3>نصب و بررسی نسخه</h3>
+<h2>نصب و بررسی نسخه</h2>
 <p>Git را از <code>git-scm.com</code> دانلود و نصب کن (در مک معمولاً با نصب Xcode Command Line Tools هم می‌آید). بعد از نصب، در Terminal بررسی کن:</p>
 <pre><code>git --version
 <span class="c"># خروجی چیزی شبیه: git version 2.45.0</span></code></pre>
-<h3>معرفی خودت به Git</h3>
+<h2>معرفی خودت به Git</h2>
 <p>هر Commit با نام و ایمیل نویسنده ثبت می‌شود؛ پس اول خودت را معرفی کن. فلگ <code>--global</code> یعنی این تنظیم برای همهٔ پروژه‌های تو اعمال شود:</p>
 <pre><code>git config --global user.name "Sara Ahmadi"
 git config --global user.email "sara@example.com"
 git config --global init.defaultBranch main   <span class="c"># نام شاخهٔ پیش‌فرض</span>
 git config --list                             <span class="c"># بررسی تنظیمات</span></code></pre>
 <div class="callout note"><span class="co-title">Default Branch</span>در گذشته شاخهٔ اصلی <code>master</code> نام داشت؛ استاندارد امروزی <code>main</code> است. با تنظیم بالا، هر Repo جدیدی که بسازی مستقیم با main شروع می‌شود.</div>
-<h3>ابزارهای کارت</h3>
+<h2>ابزارهای کارت</h2>
 <ul>
 <li><strong>Code Editor:</strong> در این دوره از <strong>VS Code</strong> به‌عنوان مثال استفاده می‌کنیم؛ پیشنهاد رایج و نقطهٔ شروع خوبی است چون Git داخلش یکپارچه است و Diff و Conflict را بصری نشان می‌دهد. ولی انتخاب ادیتور به سلیقه و تیم بستگی دارد؛ مفاهیم Git مستقل از ادیتور است و در ادیتورها و کلاینت‌های سازگار دیگر هم به همان شکل کار می‌کند.</li>
 <li><strong>Terminal:</strong> در مک اپ Terminal، در ویندوز Git Bash یا Windows Terminal. نترس؛ برای شروع فقط ده‌ها دستور ساده لازم داری، نه صدها.</li>
 <li><strong>GitHub Desktop:</strong> اپ گرافیکی رسمی GitHub. برای شروع عالی است چون Commit و Push و Branch را با دکمه انجام می‌دهی و همزمان مفاهیم را می‌بینی. توصیه: از GitHub Desktop شروع کن ولی به‌مرور دستورهای معادل را هم یاد بگیر.</li>
 </ul>
-<h3>حساب GitHub و اتصال</h3>
+<h2>حساب GitHub و اتصال</h2>
 <p>در <code>github.com</code> حساب بساز. برای اینکه کامپیوترت اجازهٔ Push داشته باشد، باید هویتش را ثابت کند. دو راه اصلی:</p>
-<h4>۱) HTTPS + Personal Access Token</h4>
+<h3>۱) HTTPS + Personal Access Token</h3>
 <p>در روش HTTPS با رمز واقعی حسابت وارد نمی‌شوی؛ به‌جای آن یک <strong>Personal Access Token (PAT)</strong> می‌سازی: یک رمز مخصوص با دسترسی محدود و تاریخ انقضا. از مسیر Settings ← Developer settings ← Personal access tokens ساخته می‌شود و هنگام Push به‌جای پسورد وارد می‌شود. اگر از GitHub Desktop استفاده کنی، ورود به حساب همهٔ این‌ها را خودش مدیریت می‌کند.</p>
-<h4>۲) SSH Key</h4>
+<h3>۲) SSH Key</h3>
 <p>SSH یک جفت کلید می‌سازد: کلید <strong>خصوصی</strong> که فقط روی کامپیوتر تو می‌ماند و کلید <strong>عمومی</strong> که به GitHub می‌دهی. از آن به بعد بدون واردکردن رمز، امن وصل می‌شوی:</p>
 <pre><code><span class="c"># 1) ساخت کلید</span>
 ssh-keygen -t ed25519 -C "sara@example.com"
@@ -90,7 +90,7 @@ pbcopy &lt; ~/.ssh/id_ed25519.pub
 ssh -T git@github.com
 <span class="c"># Hi sara! You've successfully authenticated ✓</span></code></pre>
 <div class="callout warn"><span class="co-title">قانون طلایی</span>کلید خصوصی (فایل بدون پسوند <code>.pub</code>) و توکن‌ها را هرگز با کسی به اشتراک نگذار، در اسکرین‌شات نشان نده و هرگز داخل Repo نگذار.</div>
-<h3>تنظیمات اولیهٔ هر Repository</h3>
+<h2>تنظیمات اولیهٔ هر Repository</h2>
 <p>هنگام ساخت Repo در GitHub سه انتخاب اولیه داری: نام و توضیح کوتاه، Public یا Private بودن، و افزودن فایل‌های شروع مثل README و <code>.gitignore</code>. برای پروژه‌های شخصی و تمرینی معمولاً Private را انتخاب می‌کنی؛ ولی حواست باشد Private یعنی «محدودکردن دسترسی» (فقط افراد مجاز می‌بینند)، نه امنیت کامل. حتی در Repo خصوصی هم نباید Secret مثل توکن، رمز یا کلید را Commit کنی؛ امنیت حساب، سطح دسترسی‌ها و مدیریت Secret همچنان مهم‌اند (جزئیات در سطح ۲۰).</p>
 `,
 quiz:[
@@ -102,23 +102,23 @@ quiz:[
 ]},
 { id:3, title:'ساخت و دریافت Repository', branch:'setup/repo', subtitle:'دو راه ورود به دنیای هر پروژه: از صفر بساز یا موجود را بیاور.',
 body:`
-<h3>راه اول: ساخت از صفر با git init</h3>
+<h2>راه اول: ساخت از صفر با git init</h2>
 <p>هر پوشه‌ای را می‌توانی با یک دستور به Repository تبدیل کنی:</p>
 <pre><code>cd my-prototype
 git init
 <span class="c"># Initialized empty Git repository in my-prototype/.git/</span></code></pre>
 <p>از این لحظه پوشهٔ <code>.git</code> ساخته شده و Git آمادهٔ ردگیری تغییرات است. راه دیگر این است که اول Repo را در سایت GitHub بسازی (دکمهٔ New repository) و بعد آن را Clone کنی؛ برای شروع این مسیر ساده‌تر است چون اتصال Remote خودکار برقرار می‌شود.</p>
-<h3>راه دوم: دریافت پروژهٔ موجود با git clone</h3>
+<h2>راه دوم: دریافت پروژهٔ موجود با git clone</h2>
 <pre><code>git clone git@github.com:team/design-system.git
 <span class="c"># یا با HTTPS:</span>
 git clone https://github.com/team/design-system.git</code></pre>
 <p>Clone یک کپی کامل می‌سازد: همهٔ فایل‌ها + کل تاریخچه + اتصال آماده به Remote.</p>
-<h3>تفاوت Init و Clone</h3>
+<h2>تفاوت Init و Clone</h2>
 <table><tr><th>git init</th><th>git clone</th></tr>
 <tr><td>پروژهٔ جدید از صفر</td><td>دریافت پروژهٔ موجود</td></tr>
 <tr><td>تاریخچهٔ خالی</td><td>کل تاریخچه همراهش می‌آید</td></tr>
 <tr><td>Remote ندارد؛ باید خودت اضافه کنی</td><td>Remote به‌صورت خودکار با نام origin تنظیم شده</td></tr></table>
-<h3>Remote و مفهوم origin</h3>
+<h2>Remote و مفهوم origin</h2>
 <p><strong>Remote</strong> یعنی آدرس یک نسخهٔ راه‌دور از Repo (مثلاً روی GitHub). هر Remote یک نام مستعار دارد و نام قراردادی اولین Remote همیشه <strong>origin</strong> است. پس هر جا origin دیدی، بخوان: «همان Repo روی GitHub».</p>
 <pre><code>git remote -v                 <span class="c"># لیست Remoteها با آدرس</span>
 git remote add origin git@github.com:sara/portfolio.git   <span class="c"># افزودن</span>
@@ -127,7 +127,7 @@ git remote rename origin upstream                          <span class="c"># ت�
 git remote remove origin                                   <span class="c"># حذف</span></code></pre>
 <div class="example"><div class="ex-title">سناریوی واقعی</div>
 <p>پروتوتایپی را محلی با <code>git init</code> شروع کرده‌ای و حالا می‌خواهی روی GitHub بگذاری: در GitHub یک Repo خالی بساز، آدرسش را کپی کن، با <code>git remote add origin ADDRESS</code> وصلش کن و بعد Push کن. همین.</p></div>
-<h3>بررسی اطلاعات Repository</h3>
+<h2>بررسی اطلاعات Repository</h2>
 <pre><code>git status        <span class="c"># وضعیت فعلی: شاخه، تغییرات، همگامی با Remote</span>
 git log --oneline <span class="c"># تاریخچهٔ خلاصه</span>
 git remote -v     <span class="c"># به کجا وصلی؟</span>
@@ -142,14 +142,14 @@ quiz:[
 ]},
 { id:4, title:'مدیریت تغییرات', branch:'feature/daily-flow', subtitle:'چرخهٔ روزانه: ببین، انتخاب کن، ثبت کن.',
 body:`
-<h3>وضعیت فایل‌ها: چهار حالت</h3>
+<h2>وضعیت فایل‌ها: چهار حالت</h2>
 <ul>
 <li><strong>Untracked:</strong> فایل جدیدی که Git هنوز آن را نمی‌شناسد.</li>
 <li><strong>Tracked:</strong> فایلی که Git آن را زیر نظر دارد (حداقل یک‌بار Commit یا add شده).</li>
 <li><strong>Modified:</strong> فایل Tracked که بعد از آخرین Commit تغییر کرده ولی هنوز Stage نشده.</li>
 <li><strong>Staged:</strong> تغییری که با add انتخاب شده و آمادهٔ Commit است.</li>
 </ul>
-<h3>git status — قطب‌نمای همیشگی</h3>
+<h2>git status — قطب‌نمای همیشگی</h2>
 <pre><code>git status
 <span class="c"># On branch main</span>
 <span class="c"># Changes to be committed:        ← سبز: Staged</span>
@@ -159,28 +159,28 @@ body:`
 <span class="c"># Untracked files:                ← قرمز: جدید</span>
 <span class="r">#   hero-v2.png</span></code></pre>
 <p>عادت طلایی: قبل و بعد از هر کاری <code>git status</code> بزن. هیچ‌وقت پشیمان نمی‌شوی.</p>
-<h3>git diff — دقیقاً چه چیزی عوض شده؟</h3>
+<h2>git diff — دقیقاً چه چیزی عوض شده؟</h2>
 <pre><code>git diff              <span class="c"># تغییرات Stage‌نشده</span>
 git diff --staged     <span class="c"># تغییرات Stage‌شده (قبل از Commit ببین چه ثبت می‌کنی)</span>
 git diff main design  <span class="c"># مقایسهٔ دو شاخه</span>
 git diff abc123 def456 <span class="c"># مقایسهٔ دو Commit</span></code></pre>
-<h3>git add — انتخاب برای ثبت</h3>
+<h2>git add — انتخاب برای ثبت</h2>
 <pre><code>git add styles.css            <span class="c"># یک فایل</span>
 git add styles.css tokens.json <span class="c"># چند فایل</span>
 git add .                     <span class="c"># همهٔ تغییرات (با احتیاط!)</span>
 git add -p                    <span class="c"># بخش‌به‌بخش: از هر تکه می‌پرسد بله/خیر</span>
 git restore --staged styles.css <span class="c"># خارج‌کردن از Stage (خود تغییر می‌ماند)</span></code></pre>
 <div class="callout tip"><span class="co-title">چرا add -p ارزشمند است؟</span>وقتی در یک فایل هم رنگ دکمه را عوض کرده‌ای و هم یک باگ فاصله‌گذاری را، با <code>git add -p</code> می‌توانی این دو را در دو Commit جدا ثبت کنی. Stage کردن بخشی از فایل، کلید Commitهای تمیز است.</div>
-<h3>git commit — ثبت در تاریخچه</h3>
+<h2>git commit — ثبت در تاریخچه</h2>
 <pre><code>git commit -m "fix: align search icon in mobile header"
 <span class="c"># یا بدون -m تا ادیتور برای پیام کامل‌تر باز شود</span></code></pre>
-<h3>خواندن تاریخچه</h3>
+<h2>خواندن تاریخچه</h2>
 <pre><code>git log                   <span class="c"># کامل: نویسنده، تاریخ، پیام</span>
 git log --oneline         <span class="c"># هر Commit در یک خط</span>
 git log --oneline --graph <span class="c"># با نمودار شاخه‌ها</span>
 git show abc123           <span class="c"># جزئیات و تغییرات یک Commit خاص</span>
 git log --stat            <span class="c"># کدام فایل‌ها در هر Commit تغییر کرده‌اند</span></code></pre>
-<h3>حذف و جابه‌جایی فایل با Git</h3>
+<h2>حذف و جابه‌جایی فایل با Git</h2>
 <pre><code>git rm old-logo.svg           <span class="c"># حذف فایل + ثبت حذف در Stage</span>
 git mv btn.css button.css     <span class="c"># تغییر نام/جابه‌جایی + ثبت در Stage</span></code></pre>
 <p>اگر فایل را دستی حذف یا rename کنی هم مشکلی نیست؛ فقط بعدش باید تغییر را add کنی. دستورهای بالا این دو مرحله را یکجا انجام می‌دهند.</p>
@@ -202,19 +202,19 @@ quiz:[
 ]},
 { id:5, title:'نوشتن Commit حرفه‌ای', branch:'feature/clean-commits', subtitle:'Commit خوب، سند تصمیم‌های توست؛ نه یک ذخیرهٔ الکی.',
 body:`
-<h3>Commit کوچک و متمرکز (Atomic Commit)</h3>
+<h2>Commit کوچک و متمرکز (Atomic Commit)</h2>
 <p>هر Commit باید <strong>یک تغییر منطقی</strong> باشد: نه آن‌قدر بزرگ که ده موضوع را قاطی کند، نه آن‌قدر ریز که بی‌معنا شود. قانون تست: اگر نتوانی Commit را در یک جمله بدون «و» توضیح بدهی، احتمالاً باید دو Commit باشد.</p>
 <div class="example"><div class="ex-title">بد در برابر خوب</div>
 <p><span class="diff-del">− "update stuff" (تغییر ۱۲ فایل: رنگ دکمه + فونت + باگ منو + فایل تست)</span>
 <span class="diff-add">+ "fix: prevent menu overlap on tablet breakpoint"</span>
 <span class="diff-add">+ "style: switch body font to Vazirmatn"</span></p></div>
-<h3>Commit Message معنادار</h3>
+<h2>Commit Message معنادار</h2>
 <ul>
 <li>خط اول کوتاه (زیر ~۵۰-۷۲ کاراکتر) و توصیفی؛ به‌صورت امری: «add» نه «added».</li>
 <li>به «چه» و مهم‌تر از آن «چرا» جواب بده، نه «چطور» (چطور را خود Diff نشان می‌دهد).</li>
 <li>اگر توضیح بیشتر لازم است، بعد از یک خط خالی، بدنهٔ پیام را بنویس.</li>
 </ul>
-<h3>Conventional Commits</h3>
+<h2>Conventional Commits</h2>
 <p>یک قرارداد ساده برای شروع پیام‌ها: <code>type: description</code></p>
 <table><tr><th>نوع</th><th>یعنی</th><th>مثال</th></tr>
 <tr><td><code>feat</code></td><td>قابلیت جدید</td><td>feat: add empty state to search results</td></tr>
@@ -224,9 +224,9 @@ body:`
 <tr><td><code>docs</code></td><td>مستندات</td><td>docs: add usage notes for Modal</td></tr>
 <tr><td><code>test</code></td><td>تست</td><td>test: add visual test for dark mode</td></tr>
 <tr><td><code>chore</code></td><td>کارهای جانبی (تنظیمات، ابزار، آپدیت وابستگی)</td><td>chore: update storybook to v9</td></tr></table>
-<h3>زمان مناسب Commit</h3>
+<h2>زمان مناسب Commit</h2>
 <p>هر وقت به یک «نقطهٔ کامل کوچک» رسیدی: یک State تمام شد، یک باگ رفع شد، یک توکن اضافه شد. قبل از هر کار ریسکی (مثلاً اجرای یک Prompt بزرگ روی AI) هم حتماً Commit کن تا نقطهٔ بازگشت داشته باشی.</p>
-<h3>اصلاح آخرین Commit</h3>
+<h2>اصلاح آخرین Commit</h2>
 <p>فایلی را جا انداختی یا پیام غلط بود؟ تا وقتی Push نکرده‌ای:</p>
 <pre><code><span class="c"># فقط اصلاح پیام:</span>
 git commit --amend -m "fix: correct focus ring color on inputs"
@@ -234,7 +234,7 @@ git commit --amend -m "fix: correct focus ring color on inputs"
 git add forgotten-file.css
 git commit --amend --no-edit   <span class="c"># --no-edit یعنی پیام قبلی بماند</span></code></pre>
 <div class="callout warn"><span class="co-title">احتیاط</span><code>--amend</code> آخرین Commit را بازنویسی می‌کند (هش عوض می‌شود). فقط روی Commitهایی استفاده کن که هنوز Push نشده‌اند.</div>
-<h3>بررسی قبل از Push</h3>
+<h2>بررسی قبل از Push</h2>
 <pre><code>git log --oneline origin/main..HEAD  <span class="c"># چه Commitهایی قرار است بروند؟</span>
 git diff origin/main                 <span class="c"># مجموع تغییرات نسبت به Remote</span></code></pre>
 `,
@@ -248,7 +248,7 @@ quiz:[
 ]},
 { id:6, title:'فایل‌های قابل ردگیری و \u2066.gitignore\u2069', branch:'chore/gitignore', subtitle:'همه‌چیز نباید وارد تاریخچه شود؛ بعضی چیزها هرگز.',
 body:`
-<h3>gitignore. چیست؟</h3>
+<h2>gitignore. چیست؟</h2>
 <p>فایلی متنی به نام <code>.gitignore</code> در ریشهٔ پروژه که به Git می‌گوید کدام فایل‌ها و پوشه‌ها را <strong>اصلاً نبیند</strong>. این فایل‌ها در status ظاهر نمی‌شوند و هرگز Commit نمی‌شوند.</p>
 <pre><code><span class="c"># .gitignore نمونه برای پروژهٔ طراحی/فرانت‌اند</span>
 
@@ -275,24 +275,24 @@ Thumbs.db
 <span class="c"># الگوها</span>
 *.log          <span class="c"># هر فایلی با پسوند log</span>
 temp-*         <span class="c"># هر چیزی که با temp- شروع شود</span></code></pre>
-<h3>چه چیزهایی را ignore کنیم؟</h3>
+<h2>چه چیزهایی را ignore کنیم؟</h2>
 <ul>
 <li><strong>Dependencies (node_modules):</strong> هزاران فایل که با یک دستور از روی <code>package.json</code> قابل بازسازی‌اند. Commit کردنشان Repo را سنگین و بی‌دلیل شلوغ می‌کند.</li>
 <li><strong>Build و Cache:</strong> خروجی تولیدشده از سورس؛ سورس را نگه می‌داریم نه خروجی را.</li>
 <li><strong>فایل‌های سیستم‌عامل و ادیتور:</strong> <code>.DS_Store</code> مک معروف‌ترین مزاحم تاریخچه‌هاست.</li>
 <li><strong>اطلاعات حساس:</strong> مهم‌ترین مورد. ادامه را بخوان.</li>
 </ul>
-<h3>فایل .env و Secretها</h3>
+<h2>فایل .env و Secretها</h2>
 <p>فایل <code>.env</code> جایی است که API Key، رمزها و تنظیمات محیطی نگهداری می‌شوند. این فایل <strong>باید همیشه در gitignore باشد</strong>، چون هر چیزی که یک‌بار Commit شود، در تاریخچه می‌ماند — حتی اگر بعداً حذفش کنی. یک API Key لورفته یعنی هر کسی می‌تواند با هزینهٔ تو از سرویس استفاده کند.</p>
-<h3>فایلی که قبلاً Commit شده را چطور از ردگیری خارج کنیم؟</h3>
+<h2>فایلی که قبلاً Commit شده را چطور از ردگیری خارج کنیم؟</h2>
 <p>gitignore فقط جلوی فایل‌های <strong>جدید</strong> را می‌گیرد؛ فایلی که قبلاً Tracked شده همچنان ردگیری می‌شود. راه‌حل:</p>
 <pre><code>git rm --cached .env    <span class="c"># از ردگیری خارج شود ولی فایل روی دیسک بماند</span>
 <span class="c"># حالا .env را به .gitignore اضافه کن و Commit بزن</span></code></pre>
 <div class="callout warn"><span class="co-title">نکتهٔ حیاتی</span>این کار فایل را از Commitهای آینده حذف می‌کند، ولی نسخه‌های قبلی همچنان در تاریخچه هستند. اگر Secret واقعی لو رفته، باید فوراً آن Key را باطل (Revoke) کنی و نسخهٔ جدید بسازی؛ پاک‌کردن از تاریخچه به‌تنهایی کافی نیست.</div>
-<h3>Gitignore Template</h3>
+<h2>Gitignore Template</h2>
 <p>لازم نیست از صفر بنویسی؛ GitHub هنگام ساخت Repo قالب آماده برای هر نوع پروژه (Node، macOS و...) پیشنهاد می‌دهد و مجموعهٔ کامل قالب‌ها در Repo رسمی <code>github/gitignore</code> موجود است.</p>
 
-<h3>فایل‌های باینری و Git LFS</h3>
+<h2>فایل‌های باینری و Git LFS</h2>
 <p>Git برای متن ساخته شده است: از هر Commit فقط تفاوت خط‌ها را نگه می‌دارد. اما فایل باینری — PNG، ویدیو، فونت، خروجی Figma، فایل PSD — قابل diff گرفتن نیست، پس Git مجبور است هر نسخه را <b>کامل</b> ذخیره کند. ده بار ویرایش یک تصویر ۵ مگابایتی یعنی حدود ۵۰ مگابایت در تاریخچه، برای همیشه — حتی اگر بعداً فایل را حذف کنی. تاریخچه پاک نمی‌شود.</p>
 <p>این همان نقطه‌ای است که کار طراح بیشتر از هر جای دیگری به Git می‌خورد. سه قاعدهٔ عملی:</p>
 <ul>
@@ -313,7 +313,7 @@ git add .gitattributes
 git commit -m "chore: track binary design assets with LFS"</code></pre></div>
 <div class="callout warn"><span class="co-title">LFS تصمیم تیمی است، نه شخصی</span>اگر همکاری LFS را نصب نکرده باشد، به‌جای تصویر یک فایل متنی چندخطی می‌بیند. قبل از فعال‌کردنش با تیم هماهنگ کن. LFS معمولاً سهمیهٔ ذخیره‌سازی جدا دارد که ممکن است هزینه داشته باشد.</div>
 
-<h3>‌.gitattributes و ماجرای پایان خط</h3>
+<h2>‌.gitattributes و ماجرای پایان خط</h2>
 <p>روزی می‌رسد که یک ویرگول عوض می‌کنی و Git می‌گوید کل ۴۰۰ خط فایل تغییر کرده. معمولاً تقصیر تو نیست: ویندوز پایان هر خط را با دو کاراکتر (<code>CRLF</code>) ذخیره می‌کند و مک و لینوکس با یکی (<code>LF</code>). وقتی طراحِ ویندوزی و توسعه‌دهندهٔ مک روی یک Repo کار می‌کنند، هر ذخیره می‌تواند کل فایل را «تغییر‌یافته» نشان دهد.</p>
 <p>این مستقیماً کیفیت Review را خراب می‌کند: Diffی که همه‌چیزش قرمز و سبز است، عملاً غیرقابل بررسی است. راه‌حل، یک فایل <code>.gitattributes</code> در ریشهٔ پروژه است:</p>
 <div class="code-wrap"><pre><code><span class="c"># پایان خط را برای همه یکسان کن</span>
@@ -337,14 +337,14 @@ quiz:[
 ]},
 { id:7, title:'Branch', branch:'feature/branching', subtitle:'دنیای موازی برای هر ایده، بدون دست‌زدن به نسخهٔ اصلی.',
 body:`
-<h3>Branch چیست و چرا؟</h3>
+<h2>Branch چیست و چرا؟</h2>
 <p><strong>Branch</strong> (شاخه) یک خط زمانی مستقل از پروژه است. روی شاخهٔ جدید هر تغییری بدهی، شاخهٔ اصلی (<strong>main</strong>) دست‌نخورده و سالم می‌ماند. وقتی نتیجه راضی‌کننده بود، شاخه را به main ادغام (Merge) می‌کنی؛ اگر نبود، شاخه را دور می‌اندازی و انگار هیچ اتفاقی نیفتاده.</p>
 <pre><code>          o───o───o   feature/search-empty-state
          /
 o───o───o───o───o     main (همیشه سالم)</code></pre>
-<h3>فرق Branch با کپی‌کردن پوشه</h3>
+<h2>فرق Branch با کپی‌کردن پوشه</h2>
 <p>کپی پوشه یعنی دو نسخهٔ جدا که هیچ رابطه‌ای ندارند: تاریخچهٔ مشترک ندارند، مقایسهٔ دقیق ندارند و ادغامشان دستی و دردناک است. Branch سبک است (فایل‌ها کپی نمی‌شوند)، تاریخچهٔ مشترک دارد، با یک دستور Diff می‌گیری و با یک دستور Merge می‌کنی.</p>
-<h3>دستورهای اصلی</h3>
+<h2>دستورهای اصلی</h2>
 <pre><code>git branch                       <span class="c"># لیست شاخه‌های محلی (* یعنی شاخهٔ فعلی)</span>
 git branch -a                    <span class="c"># محلی + Remote</span>
 git switch -c feature/hero-redesign  <span class="c"># ساخت شاخه + رفتن روی آن</span>
@@ -353,7 +353,7 @@ git branch -m old-name new-name  <span class="c"># تغییر نام</span>
 git branch -d feature/done       <span class="c"># حذف شاخهٔ Merge‌شده</span>
 git branch -D feature/failed     <span class="c"># حذف اجباری شاخهٔ Merge‌نشده</span></code></pre>
 <div class="callout note"><span class="co-title">switch یا checkout؟</span><code>git checkout</code> دستور قدیمی و چندکاره بود (هم جابه‌جایی شاخه، هم بازگردانی فایل). برای شفافیت، دو دستور جدید ساختند: <code>git switch</code> برای شاخه‌ها و <code>git restore</code> برای فایل‌ها. در آموزش‌های قدیمی checkout زیاد می‌بینی؛ معادل مدرنش را استفاده کن.</div>
-<h3>شاخهٔ محلی، Remote و Tracking</h3>
+<h2>شاخهٔ محلی، Remote و Tracking</h2>
 <ul>
 <li><strong>Local Branch:</strong> شاخه‌ای روی کامپیوتر تو، مثل <code>main</code> یا <code>feature/hero-redesign</code>.</li>
 <li><strong>Remote Branch:</strong> شاخه‌ای که واقعاً روی سرور (مثلاً GitHub) ذخیره شده است.</li>
@@ -363,13 +363,13 @@ git branch -D feature/failed     <span class="c"># حذف اجباری شاخه�
 </ul>
 <pre><code>git push -u origin feature/hero-redesign
 <span class="c"># -u یعنی upstream ست شود؛ از این به بعد فقط git push کافی است</span></code></pre>
-<h3>Branch در کار طراحی</h3>
+<h2>Branch در کار طراحی</h2>
 <ul>
 <li><strong>Feature Branch:</strong> هر قابلیت در شاخهٔ خودش ساخته و Review می‌شود.</li>
 <li><strong>Prototype Variant:</strong> هر واریانت پروتوتایپ یک شاخه؛ مقایسه و ارائهٔ موازی راحت می‌شود.</li>
 <li><strong>Experiment:</strong> ایده‌های پرریسک (مثلاً خروجی یک Agent هوش مصنوعی) را در شاخهٔ جدا امتحان کن.</li>
 </ul>
-<h3>Branch Naming Convention</h3>
+<h2>Branch Naming Convention</h2>
 <pre><code>feature/search-empty-state
 prototype/editorial-layout
 fix/mobile-navigation
@@ -386,7 +386,7 @@ quiz:[
 ]},
 { id:8, title:'اتصال Local و Remote', branch:'feature/sync', subtitle:'Push، Pull و Fetch: زبان گفت‌وگوی کامپیوتر تو با GitHub.',
 body:`
-<h3>سه دستور همگام‌سازی</h3>
+<h2>سه دستور همگام‌سازی</h2>
 <p>برای فهم جهت داده، سه جا را جدا نگه دار: <strong>شاخهٔ محلی</strong> (مثل <code>main</code>)، <strong>remote-tracking</strong> (مثل <code>origin/main</code>)، و <strong>شاخه روی Remote</strong> (مثلاً روی GitHub).</p>
 <table><tr><th>دستور</th><th>مسیر داده <span dir="ltr">(منبع → مقصد)</span></th><th>چه می‌کند</th></tr>
 <tr><td><code>git push</code></td><td><span dir="ltr">Local branch → Remote repo</span></td><td>Commitها و مرجع شاخهٔ محلی را طبق refspec به Remote می‌فرستد؛ کار Remote را به شاخهٔ محلی نمی‌آورد</td></tr>
@@ -396,7 +396,7 @@ body:`
 <pre dir="ltr"><code>push:   [local main] ----------------------> [GitHub main]
 fetch:  [GitHub main] ---> [origin/main]      (working branch untouched)
 pull:   [GitHub main] ---> [origin/main] ---> integrate into [local main]</code></pre>
-<h3>تفاوت Pull و Fetch — با مثال</h3>
+<h2>تفاوت Pull و Fetch — با مثال</h2>
 <p><strong>Fetch</strong> مثل چک‌کردن صندوق پست است: نامه‌ها را می‌بینی ولی هنوز بازشان نکرده‌ای؛ فقط مراجع remote-tracking مثل <code>origin/main</code> به‌روز می‌شوند و می‌توانی قبل از پذیرش، تغییرات را بررسی کنی. <strong>Pull</strong> یعنی نامه را بگیر و همین حالا در شاخهٔ فعلی‌ات یکپارچه کن. روش یکپارچه‌سازی ممکن است <strong>merge</strong> یا <strong>rebase</strong> باشد — بسته به فلگ دستور یا تنظیماتی مثل <code>pull.rebase</code>. جزئیات Rebase در سطح ۲۷ می‌آید؛ اینجا کافی است بدانی Pull همیشه فقط Merge نیست.</p>
 <pre><code>git fetch origin
 git log --oneline main..origin/main   <span class="c"># چه Commitهایی روی Remote هست که من ندارم؟</span>
@@ -406,12 +406,12 @@ git pull                              <span class="c"># fetch + یکپارچه�
 <span class="c"># git pull --no-rebase   → بعد از fetch، merge</span>
 <span class="c"># git pull --rebase      → بعد از fetch، rebase</span></code></pre>
 <p>مثال طراحی: همکارت توکن رنگ دکمه را روی <code>main</code> در GitHub عوض کرده. با <code>fetch</code> فقط می‌فهمی چه شده؛ با <code>pull</code> آن تغییر وارد شاخهٔ محلی‌ات می‌شود تا روی همان پایه کار کنی.</p>
-<h3>اولین Push یک شاخه</h3>
+<h2>اولین Push یک شاخه</h2>
 <pre><code>git push -u origin feature/hero-redesign
 <span class="c"># شاخه روی GitHub منتشر (Publish) شد + upstream تنظیم شد</span>
 git push                              <span class="c"># دفعات بعد همین کافی است</span></code></pre>
 <div class="callout tip"><span class="co-title">اگر Push رد شد</span>وقتی Remote جلوتر باشد، Git ممکن است Push را reject کند (مثلاً پیام <code>fetch first</code>). این یعنی تاریخچهٔ Remote را هنوز یکپارچه نکرده‌ای؛ force push در کار تیمی خطرناک است.</div>
-<h3>Ahead و Behind</h3>
+<h2>Ahead و Behind</h2>
 <p><code>git status</code> بعد از Fetch نسبت به upstream (معمولاً همان remote-tracking) می‌گوید کجایی:</p>
 <ul>
 <li><strong>Ahead 2:</strong> دو Commit داری که هنوز Push نشده.</li>
@@ -424,7 +424,7 @@ git push                              <span class="c"># دفعات بعد همی
 <span class="c"># یعنی: Remote جلوتر از توست. راه‌حل رایج:</span>
 git pull      <span class="c"># fetch + یکپارچه‌سازی (merge یا rebase طبق تنظیم)</span>
 git push      <span class="c"># حالا معمولاً قبول می‌شود</span></code></pre></div>
-<h3>حذف شاخهٔ Remote</h3>
+<h2>حذف شاخهٔ Remote</h2>
 <pre><code>git push origin --delete feature/old-experiment
 <span class="c"># شاخهٔ محلی سر جایش می‌ماند؛ جدا حذفش کن: git branch -d</span></code></pre>
 <div class="callout tip"><span class="co-title">عادت حرفه‌ای</span>قبل از شروع کار روزانه همگام شو (fetch یا pull)، و Commitهایت را زود‌به‌زود Push کن. هرچه فاصلهٔ همگام‌سازی کمتر باشد، Conflictها کوچک‌تر و کم‌دردتر می‌شوند.</div>
@@ -438,31 +438,31 @@ quiz:[
 ]},
 { id:9, title:'Merge', branch:'feature/merge', subtitle:'لحظهٔ بازگشت شاخه به خانه.',
 body:`
-<h3>Merge چیست؟</h3>
+<h2>Merge چیست؟</h2>
 <p><strong>Merge</strong> یعنی آوردن تغییرات یک شاخه به شاخهٔ دیگر. رایج‌ترین حالت: کارَت در Feature Branch تمام شده و حالا آن را وارد main می‌کنی:</p>
 <pre><code>git switch main
 git pull                          <span class="c"># main را به‌روز کن</span>
 git merge feature/search-empty-state
 git branch -d feature/search-empty-state  <span class="c"># شاخهٔ تمام‌شده را حذف کن</span></code></pre>
-<h3>سه روش Merge — همین سه تا را بدان کافی است</h3>
-<h4>۱) Fast-forward</h4>
+<h2>سه روش Merge — همین سه تا را بدان کافی است</h2>
+<h3>۱) Fast-forward</h3>
 <p>اگر از زمان جداشدن شاخه، main هیچ Commit جدیدی نگرفته باشد، Git فقط اشاره‌گر main را جلو می‌کشد. هیچ Commit جدیدی ساخته نمی‌شود؛ تاریخچه یک خط صاف می‌ماند.</p>
 <pre><code>قبل:  main ──o───o
                   \\───o───o  feature
 بعد:  main ──o───o───o───o   <span class="c">(خط صاف)</span></code></pre>
-<h4>۲) Merge Commit</h4>
+<h3>۲) Merge Commit</h3>
 <p>اگر هر دو شاخه جلو رفته باشند، Git یک <strong>Commit ادغام</strong> با دو والد می‌سازد. تاریخچهٔ کامل هر دو شاخه حفظ می‌شود ولی نمودار شلوغ‌تر است (تاریخچهٔ غیرخطی).</p>
 <pre><code>main ──o───o───────M   <span class="c">← Merge Commit با دو والد</span>
             \\─o───o/   feature</code></pre>
-<h4>۳) Squash Merge</h4>
+<h3>۳) Squash Merge</h3>
 <p>همهٔ Commitهای شاخه <strong>فشرده در یک Commit تمیز</strong> وارد main می‌شوند. تاریخچهٔ main خطی و خوانا می‌ماند و جزئیات Commitهای ریز شاخه («wip»، «fix typo») واردش نمی‌شود. در PRهای GitHub گزینهٔ بسیار محبوبی است.</p>
-<h3>کدام را انتخاب کنم؟</h3>
+<h2>کدام را انتخاب کنم؟</h2>
 <table><tr><th>روش</th><th>مناسبِ</th><th>نتیجه در تاریخچه</th></tr>
 <tr><td>Fast-forward</td><td>شاخه‌های کوچک وقتی main ثابت مانده</td><td>خطی، بدون Commit اضافه</td></tr>
 <tr><td>Merge Commit</td><td>وقتی می‌خواهی تاریخچهٔ کامل شاخه حفظ شود</td><td>غیرخطی، با نقطهٔ ادغام مشخص</td></tr>
 <tr><td>Squash</td><td>Feature Branchهایی با Commitهای ریز و کثیف</td><td>خطی، هر Feature یک Commit</td></tr></table>
 <p><strong>Rebase and Merge</strong> گزینهٔ چهارم در GitHub است: Commitهای شاخه تک‌تک و بازنویسی‌شده روی main گذاشته می‌شوند تا تاریخچه خطی بماند؛ فعلاً فقط بدان چنین چیزی هست، جزئیاتش در سطح Rebase.</p>
-<h3>قبل از Merge چه چیزی را بررسی کنیم؟</h3>
+<h2>قبل از Merge چه چیزی را بررسی کنیم؟</h2>
 <pre><code>git diff main..feature/search-empty-state   <span class="c"># کل تغییراتی که وارد main می‌شود</span>
 git log --oneline main..feature/search-empty-state  <span class="c"># لیست Commitها</span></code></pre>
 <div class="callout note"><span class="co-title">در کار تیمی</span>Merge مستقیم روی main نمی‌زنی؛ شاخه را Push می‌کنی، Pull Request باز می‌کنی و Merge از داخل PR و بعد از Review انجام می‌شود. مکانیک همان است، فقط با نظارت.</div>
@@ -476,9 +476,9 @@ quiz:[
 ]},
 { id:10, title:'Merge Conflict', branch:'fix/conflicts', subtitle:'ترسناک به نظر می‌رسد، ولی فقط یک سؤال ساده است: کدام نسخه؟',
 body:`
-<h3>Conflict چیست و چرا پیش می‌آید؟</h3>
+<h2>Conflict چیست و چرا پیش می‌آید؟</h2>
 <p>وقتی دو شاخه <strong>همان خط‌های همان فایل</strong> را به دو شکل متفاوت تغییر داده باشند، Git نمی‌تواند خودش تصمیم بگیرد کدام درست است؛ پس Merge را نگه می‌دارد و از تو می‌پرسد. Conflict خطا نیست؛ درخواست تصمیم انسانی است. اگر تغییرات در فایل‌ها یا خط‌های متفاوت باشند، Git خودش بی‌سروصدا ادغام می‌کند.</p>
-<h3>تشخیص و شکل Conflict</h3>
+<h2>تشخیص و شکل Conflict</h2>
 <pre><code>git merge feature/new-palette
 <span class="r"># CONFLICT (content): Merge conflict in tokens.json</span>
 git status   <span class="c"># فایل‌های Conflictدار زیر "Unmerged paths" لیست می‌شوند</span></code></pre>
@@ -488,14 +488,14 @@ git status   <span class="c"># فایل‌های Conflictدار زیر "Unmerged
 =======
   "primary": "#8250DF"        <span class="c">← Incoming Change (شاخه‌ای که می‌آوری)</span>
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/new-palette</code></pre>
-<h3>چهار راه حل — در VS Code با یک کلیک</h3>
+<h2>چهار راه حل — در VS Code با یک کلیک</h2>
 <ul>
 <li><strong>Accept Current:</strong> نسخهٔ شاخهٔ خودت بماند.</li>
 <li><strong>Accept Incoming:</strong> نسخهٔ شاخهٔ ورودی جایگزین شود.</li>
 <li><strong>Accept Both:</strong> هر دو نگه داشته شوند (وقتی هر دو خط لازم‌اند).</li>
 <li><strong>حل دستی:</strong> Markerها را پاک کن و نسخهٔ نهایی درست را خودت بنویس؛ گاهی جواب درست ترکیبی از هر دو است.</li>
 </ul>
-<h3>بعد از حل: ادامه یا لغو</h3>
+<h2>بعد از حل: ادامه یا لغو</h2>
 <pre><code><span class="c"># بعد از تصمیم‌گیری در همهٔ فایل‌ها:</span>
 git add tokens.json          <span class="c"># یعنی «این فایل حل شد»</span>
 git commit                   <span class="c"># Merge کامل می‌شود</span>
@@ -503,13 +503,13 @@ git commit                   <span class="c"># Merge کامل می‌شود</spa
 <span class="c"># اگر پشیمان شدی و می‌خواهی به قبل از Merge برگردی:</span>
 git merge --abort</code></pre>
 <div class="callout warn"><span class="co-title">همیشه نتیجه را چک کن</span>بعد از حل Conflict، فایل را باز کن و مطمئن شو هیچ Marker (&lt;&lt;&lt;&lt;&lt;&lt;&lt;)ی جا نمانده و فایل معتبر است. در فایل‌های JSON (مثل Design Tokenها) یک ویرگول جامانده کل فایل را می‌شکند.</div>
-<h3>Conflict در ابزارهای تو</h3>
+<h2>Conflict در ابزارهای تو</h2>
 <ul>
 <li><strong>VS Code:</strong> بخش‌های Conflict را رنگی نشان می‌دهد با دکمه‌های Accept بالای هر بلوک + نمای Merge Editor سه‌ستونه.</li>
 <li><strong>GitHub Desktop:</strong> فایل‌های Conflictدار را لیست می‌کند و برای حل، ادیتور را باز می‌کند؛ حل ساده‌ها را هم داخل خودش دارد.</li>
 <li><strong>Design Tokenها:</strong> Conflict روی JSON توکن‌ها رایج‌ترین Conflict طراح‌هاست؛ چون فایل مشترک و پرتغییر است.</li>
 </ul>
-<h3>پیشگیری بهتر از درمان</h3>
+<h2>پیشگیری بهتر از درمان</h2>
 <ul>
 <li>شاخه‌ها را کوچک و کوتاه‌عمر نگه دار و زود Merge کن.</li>
 <li>مرتب از main، Pull کن تا شاخه‌ات عقب نماند.</li>
@@ -526,30 +526,30 @@ quiz:[
 ]},
 { id:11, title:'Pull Request', branch:'feature/pull-requests', subtitle:'مهم‌ترین محل گفت‌وگوی تیم دربارهٔ تغییرات.',
 body:`
-<h3>Pull Request چیست؟</h3>
+<h2>Pull Request چیست؟</h2>
 <p><strong>Pull Request (PR)</strong> یک درخواست رسمی در GitHub است: «شاخهٔ من آماده است؛ لطفاً بررسی کنید و اگر تأیید شد، به main ادغام کنید.» PR فقط دکمهٔ Merge نیست؛ فضای گفت‌وگو، Review، ثبت تصمیم‌ها و کنترل کیفیت است.</p>
 <div class="callout note"><span class="co-title">اشتباه رایج اسم‌ها</span><code>git pull</code> یک دستور محلی برای دریافت تغییرات است؛ <strong>Pull Request</strong> یک فرایند بررسی در GitHub است. فقط اشتراک اسمی دارند.</div>
-<h3>ساخت PR</h3>
+<h2>ساخت PR</h2>
 <p>بعد از Push شاخه، در GitHub دکمهٔ Compare &amp; pull request ظاهر می‌شود. دو انتخاب کلیدی:</p>
 <ul>
 <li><strong>Base Branch:</strong> مقصد ادغام (معمولاً main).</li>
 <li><strong>Compare Branch:</strong> شاخهٔ تو که قرار است بررسی شود.</li>
 </ul>
 <p>سپس <strong>عنوان</strong> (کوتاه و توصیفی، مثل یک Commit Message خوب) و <strong>توضیحات</strong> (چه، چرا، چطور تست شود) را می‌نویسی.</p>
-<h3>اجزای صفحهٔ PR</h3>
+<h2>اجزای صفحهٔ PR</h2>
 <ul>
 <li><strong>Conversation:</strong> توضیحات، کامنت‌ها و تاریخچهٔ گفت‌وگو.</li>
 <li><strong>Commits:</strong> لیست Commitهای شاخه.</li>
 <li><strong>Files Changed:</strong> Diff کامل؛ جایی که Review واقعی اتفاق می‌افتد.</li>
 </ul>
-<h3>نقش‌ها و ابزارهای مدیریتی</h3>
+<h2>نقش‌ها و ابزارهای مدیریتی</h2>
 <ul>
 <li><strong>Reviewer:</strong> کسی که از او درخواست بررسی می‌کنی.</li>
 <li><strong>Assignee:</strong> مسئول پیش‌بردن PR (معمولاً خودت).</li>
 <li><strong>Label:</strong> برچسب‌هایی مثل design، bug برای دسته‌بندی.</li>
 <li><strong>Draft PR:</strong> «هنوز تمام نشده ولی نظرتان را می‌خواهم.» وقتی آماده شد، Ready for Review می‌زنی.</li>
 </ul>
-<h3>چرخهٔ Review</h3>
+<h2>چرخهٔ Review</h2>
 <ol>
 <li>Reviewer در تب Files Changed روی خط‌های مشخص <strong>Inline Comment</strong> می‌گذارد.</li>
 <li>در پایان یکی از سه حالت را ثبت می‌کند: <strong>Approve</strong> (تأیید)، <strong>Request Changes</strong> (اصلاح لازم است)، یا فقط Comment.</li>
@@ -558,7 +558,7 @@ body:`
 <li>اگر main از شاخه‌ات جلو افتاده، دکمهٔ <strong>Update Branch</strong> شاخه را با main همگام می‌کند.</li>
 <li>در نهایت: <strong>Merge</strong> (با یکی از سه روش سطح ۹)، یا <strong>Close</strong> بدون ادغام (و در صورت نیاز Reopen).</li>
 </ol>
-<h3>PR کوچک، Review خوب</h3>
+<h2>PR کوچک، Review خوب</h2>
 <p>یک PR با ۲۰۰ خط تغییر، Review دقیق می‌گیرد؛ یک PR با ۲۰۰۰ خط، فقط یک Approve خسته. تغییرات بزرگ را به چند PR مستقل بشکن. <strong>PR Template</strong> (فایلی در Repo که ساختار توضیحات را از قبل مشخص می‌کند) کمک می‌کند هیچ PRای بدون اطلاعات لازم باز نشود.</p>
 `,
 quiz:[
@@ -571,9 +571,9 @@ quiz:[
 ]},
 { id:12, title:'Pull Request برای طراحان', branch:'design/pr-craft', subtitle:'PR تو می‌تواند بهترین سند Design Handoff باشد.',
 body:`
-<h3>PR طراحی با PR کدنویسی فرق دارد</h3>
+<h2>PR طراحی با PR کدنویسی فرق دارد</h2>
 <p>وقتی تغییر تو ماهیت طراحی دارد (کامپوننت، توکن، لی‌آوت، پروتوتایپ)، Reviewer باید <strong>تصمیم طراحی</strong> را بفهمد، نه فقط کد را. PR جایی است که مسئله، تصمیم و شواهد بصری کنار خود تغییر ثبت می‌شوند — و برخلاف پیام‌های چت، برای همیشه قابل جست‌وجو می‌مانند.</p>
-<h3>ساختار پیشنهادی توضیحات PR طراحی</h3>
+<h2>ساختار پیشنهادی توضیحات PR طراحی</h2>
 <pre><code>## Problem
 در نتایج خالی جست‌وجو، کاربر با صفحهٔ سفید رها می‌شد.
 
@@ -596,7 +596,7 @@ Default / بدون پیشنهاد / RTL / موبایل
 
 ## Questions for review
 آیا 40px با بقیهٔ صفحات سازگار است؟</code></pre>
-<h3>عناصر کلیدی</h3>
+<h2>عناصر کلیدی</h2>
 <ul>
 <li><strong>Before / After:</strong> دو اسکرین‌شات کنار هم؛ سریع‌ترین راه انتقال تغییر بصری. تصاویر را می‌توانی مستقیم در توضیحات PR بکشی و رها کنی.</li>
 <li><strong>لینک Figma:</strong> به فریم دقیق لینک بده، نه کل فایل.</li>
@@ -605,9 +605,9 @@ Default / بدون پیشنهاد / RTL / موبایل
 <li><strong>چک‌لیست کیفی:</strong> Design Tokenها (مقدار خام ننوشته باشی!)، Responsive Behavior و Accessibility (کنتراست، فوکوس، aria).</li>
 <li><strong>سؤال از Developer:</strong> ابهام‌ها را همان‌جا بپرس؛ سؤال ثبت‌شده در PR بهتر از سؤال گم‌شده در چت است.</li>
 </ul>
-<h3>PR به‌عنوان Design Review و Handoff</h3>
+<h2>PR به‌عنوان Design Review و Handoff</h2>
 <p>وقتی PR این‌طور نوشته شود، همان‌جا می‌تواند محل Design Review رسمی باشد (Reviewer طراح + Reviewer دولوپر) و همزمان سند Handoff: دولوپر می‌داند چه چیزی، چرا و با چه محدودیت‌هایی تغییر کرده.</p>
-<h3>مرز مستندسازی PR و Figma</h3>
+<h2>مرز مستندسازی PR و Figma</h2>
 <table><tr><th>در Figma</th><th>در PR</th></tr>
 <tr><td>وضعیت مطلوب و اکتشاف طراحی: واریانت‌ها، فلوها، Specها</td><td>تاریخچهٔ تغییر واقعی محصول: چه شد، چرا، کی و توسط چه کسی</td></tr>
 <tr><td>سند زنده که بازنویسی می‌شود</td><td>سند ثابت هر تغییر که هرگز گم نمی‌شود</td></tr></table>
@@ -621,7 +621,7 @@ quiz:[
 ]},
 { id:13, title:'خواندن Diff', branch:'review/read-diff', subtitle:'در دورهٔ AI، مهارت خواندن تغییرات از حفظ‌بودن دستورها مهم‌تر است.',
 body:`
-<h3>Diff چیست؟</h3>
+<h2>Diff چیست؟</h2>
 <p><strong>Diff</strong> نمایش دقیق تفاوت دو وضعیت است، خط به خط:</p>
 <pre><code><span class="c">--- a/components/Button.css</span>
 <span class="c">+++ b/components/Button.css</span>
@@ -630,38 +630,38 @@ body:`
 <span class="g">+  padding: 12px 20px;</span>   <span class="c">← Added Line (خط اضافه‌شده)</span>
  }</code></pre>
 <p>نکتهٔ ظریف: «تغییر یک خط» (Modified) در Diff به‌صورت یک حذف + یک اضافه نمایش داده می‌شود. سطح‌های مختلف Diff: یک فایل، یک Commit، بین دو Branch، یا کل یک Pull Request.</p>
-<h3>Split و Unified</h3>
+<h2>Split و Unified</h2>
 <ul>
 <li><strong>Unified View:</strong> حذف و اضافه پشت‌سرهم در یک ستون؛ برای تغییرات کوچک.</li>
 <li><strong>Split View:</strong> قبل و بعد در دو ستون کنار هم؛ برای طراح که مقایسهٔ بصری می‌کند معمولاً خواناتر است. در GitHub از تب Files Changed قابل تغییر است.</li>
 </ul>
-<h3>روش بررسی فایل‌به‌فایل</h3>
+<h2>روش بررسی فایل‌به‌فایل</h2>
 <ol>
 <li>اول <strong>لیست فایل‌های تغییرکرده</strong> را نگاه کن: آیا فایلی اینجا هست که انتظارش را نداشتی؟</li>
 <li>فایل‌های اصلی تغییر را با دقت بخوان.</li>
 <li>در GitHub هر فایل بررسی‌شده را Viewed بزن تا گم نشوی.</li>
 </ol>
-<h3>چک‌لیست شکار تغییرات ناخواسته</h3>
+<h2>چک‌لیست شکار تغییرات ناخواسته</h2>
 <ul>
 <li><strong>حذف تصادفی:</strong> بلوک‌های قرمز بزرگ. آیا این حذف عمدی بوده؟</li>
 <li><strong>تغییر Dependency:</strong> هر تغییری در <code>package.json</code> یعنی پکیج جدید یا نسخهٔ جدید؛ باید عمدی و قابل توضیح باشد.</li>
 <li><strong>فایل جدید:</strong> از کجا آمده و چرا لازم است؟</li>
 <li><strong>تغییر Config:</strong> فایل‌های تنظیمات (build، lint، env نمونه) روی کل پروژه اثر می‌گذارند؛ سرسری رد نشو.</li>
 </ul>
-<h3>بررسی تغییرات AI-generated</h3>
+<h2>بررسی تغییرات AI-generated</h2>
 <p>مهم‌ترین کاربرد امروزی این مهارت: AI معمولاً بیشتر از چیزی که خواستی تغییر می‌دهد. قبل از پذیرش هر خروجی:</p>
 <ul>
 <li>لیست فایل‌ها را با درخواست خودت مقایسه کن؛ تغییر خارج از Scope؟</li>
 <li>دنبال حذف‌های ناخواسته و «بازنویسی‌های سرخود» بگرد.</li>
 <li>Dependencyهای اضافه‌شده و تغییرات Config را جدی بگیر.</li>
 </ul>
-<h3>نگاه طراحانه به Diff</h3>
+<h2>نگاه طراحانه به Diff</h2>
 <ul>
 <li><strong>Design Tokenها:</strong> تغییر <code>#0969DA</code> به <code>#0A6FD0</code> در Diff یک خط است، ولی روی کل محصول اثر می‌گذارد.</li>
 <li><strong>Copy و Content:</strong> تغییر متن‌ها (لیبل دکمه، پیام خطا) در Diff کاملاً قابل Review است.</li>
 <li><strong>Stateها:</strong> آیا کلاس‌ها/استایل‌های hover و focus و disabled هم متناسب تغییر کرده‌اند؟</li>
 </ul>
-<h3>انتخاب بخشی از تغییرات برای Commit</h3>
+<h2>انتخاب بخشی از تغییرات برای Commit</h2>
 <p>Diff فقط برای خواندن نیست؛ ابزار جداسازی هم هست. با <code>git add -p</code> (یا انتخاب خط‌ها در Source Control ادیتور) فقط تکه‌های مرتبط را Stage کن و بقیه را برای Commit بعدی بگذار.</p>
 `,
 quiz:[
@@ -674,38 +674,38 @@ quiz:[
 ]},
 { id:14, title:'بازگرداندن و اصلاح تغییرات', branch:'fix/undo-safely', subtitle:'شبکهٔ ایمنی Git: تقریباً هیچ‌چیز واقعاً از بین نمی‌رود.',
 body:`
-<h3>نقشهٔ ابزارهای بازگشت</h3>
+<h2>نقشهٔ ابزارهای بازگشت</h2>
 <table><tr><th>موقعیت</th><th>ابزار</th><th>امنیت</th></tr>
 <tr><td>تغییرات ذخیره‌نشده در یک فایل را نمی‌خواهم</td><td><code>git restore file</code></td><td>⚠️ تغییرات Commit‌نشده واقعاً حذف می‌شوند</td></tr>
 <tr><td>فایل را اشتباهی Stage کردم</td><td><code>git restore --staged file</code></td><td>✅ کاملاً امن</td></tr>
 <tr><td>پیام/محتوای آخرین Commit (Push‌نشده)</td><td><code>git commit --amend</code></td><td>✅ قبل از Push امن</td></tr>
 <tr><td>یک Commit منتشرشده اشتباه بود</td><td><code>git revert</code></td><td>✅ امن‌ترین راه عمومی</td></tr>
 <tr><td>هر فاجعهٔ دیگری</td><td><code>git reflog</code></td><td>🛟 چرخ یدک</td></tr></table>
-<h3>git restore — برگرداندن فایل</h3>
+<h2>git restore — برگرداندن فایل</h2>
 <pre><code>git restore styles.css            <span class="c"># تغییرات Commit‌نشدهٔ فایل را دور بریز</span>
 git restore .                     <span class="c"># همهٔ فایل‌ها (با احتیاط)</span>
 git restore --staged styles.css   <span class="c"># فقط از Stage خارج کن؛ تغییرات بمانند</span>
 git restore --source=abc123 tokens.json  <span class="c"># فایل را از یک Commit قدیمی بیاور</span></code></pre>
-<h3>git revert — پادزهر عمومی</h3>
+<h2>git revert — پادزهر عمومی</h2>
 <p>Revert یک <strong>Commit جدید</strong> می‌سازد که اثر یک Commit قبلی را خنثی می‌کند. تاریخچه دست نمی‌خورد و چیزی «پاک» نمی‌شود؛ به همین دلیل برای Commitهای Push‌شده و شاخه‌های مشترک، راه استاندارد و امن است:</p>
 <pre><code>git revert abc123
 <span class="c"># تاریخچه: ...→ abc123 (اشتباه) → def456 (Revert "اشتباه")</span></code></pre>
-<h3>Revert در برابر Reset</h3>
+<h2>Revert در برابر Reset</h2>
 <table><tr><th></th><th>Revert</th><th>Reset</th></tr>
 <tr><td>روش</td><td>Commit خنثی‌کنندهٔ جدید می‌سازد</td><td>تاریخچه را به عقب می‌برد (بازنویسی)</td></tr>
 <tr><td>تاریخچه</td><td>حفظ می‌شود</td><td>تغییر می‌کند</td></tr>
 <tr><td>Commit عمومی/Push‌شده</td><td>✅ درست</td><td>❌ ممنوع</td></tr></table>
-<h3>git reflog — چرخ یدک</h3>
+<h2>git reflog — چرخ یدک</h2>
 <p>Reflog دفترچهٔ خاطرات محلی Git است: هر جایی که HEAD تو بوده — حتی Commitهایی که با reset «گم» شده‌اند یا شاخه‌های حذف‌شده — آنجا ثبت است:</p>
 <pre><code>git reflog
 <span class="c"># a1b2c3 HEAD@{0}: reset: moving to HEAD~2</span>
 <span class="c"># d4e5f6 HEAD@{1}: commit: feat: add hero section  ← این را می‌خواهم!</span>
 git switch -c rescue d4e5f6   <span class="c"># بازیابی در یک شاخهٔ جدید</span></code></pre>
 <p>با همین روش <strong>شاخهٔ حذف‌شده</strong> هم برمی‌گردد: آخرین Commit شاخه را در reflog پیدا کن و شاخه‌ای جدید از آن بساز.</p>
-<h3>لغو عملیات نیمه‌کاره</h3>
+<h2>لغو عملیات نیمه‌کاره</h2>
 <pre><code>git merge --abort     <span class="c"># لغو Merge وسط Conflict</span>
 git rebase --abort    <span class="c"># لغو Rebase</span></code></pre>
-<h3>Restore Point قبل از تغییرات AI</h3>
+<h2>Restore Point قبل از تغییرات AI</h2>
 <p>قبل از سپردن کار به یک Agent یا اجرای Prompt بزرگ: <strong>Commit کن</strong> (و ترجیحاً در شاخهٔ جدا کار کن). بعدش هر اتفاقی افتاد، بازگشت یک دستور فاصله دارد.</p>
 <div class="callout tip"><span class="co-title">اولویت یادگیری</span>۱) restore ۲) revert ۳) commit --amend ۴) reflog ۵) و فقط بعد از این‌ها: reset.</div>
 `,
@@ -719,7 +719,7 @@ quiz:[
 ]},
 { id:15, title:'Reset', branch:'danger/reset', subtitle:'ابزار قدرتمند بازنویسی تاریخچهٔ محلی — با احترام و احتیاط.',
 body:`
-<h3>git reset چه می‌کند؟</h3>
+<h2>git reset چه می‌کند؟</h2>
 <p>Reset اشاره‌گر شاخه را به یک Commit قبلی برمی‌گرداند؛ انگار Commitهای بعد از آن «هرگز اتفاق نیفتاده‌اند». سه حالت دارد که فرقشان در سرنوشت تغییرات است:</p>
 <pre><code><span class="c"># HEAD~1 یعنی «یک Commit قبل»</span>
 git reset --soft HEAD~1   <span class="c"># Commit باز می‌شود؛ تغییرات در Stage می‌مانند</span>
@@ -729,17 +729,17 @@ git reset --hard HEAD~1   <span class="c"># ⚠️ Commit و همهٔ تغییر
 <tr><td>Soft</td><td>باز می‌شود</td><td>می‌ماند</td><td>می‌ماند</td><td>ترکیب چند Commit آخر در یک Commit بهتر</td></tr>
 <tr><td>Mixed</td><td>باز می‌شود</td><td>خالی می‌شود</td><td>می‌ماند</td><td>«بگذار add و commit را از نو انجام دهم»</td></tr>
 <tr><td>Hard</td><td>حذف</td><td>حذف</td><td>حذف</td><td>«این کار را کامل نابود کن» — با چشم باز</td></tr></table>
-<h3>خطر reset --hard</h3>
+<h2>خطر reset --hard</h2>
 <div class="callout warn"><span class="co-title">دو نوع نابودی متفاوت</span>Commitهای حذف‌شده با reset معمولاً از <code>git reflog</code> قابل بازیابی‌اند؛ ولی تغییراتی که <strong>هرگز Commit نشده بودند</strong> و با --hard پاک شوند، واقعاً و برای همیشه از بین می‌روند. قبل از هر --hard یک بار <code>git status</code> بزن و مطمئن شو چیز Commit‌نشده‌ای نداری.</div>
-<h3>قانون قبل و بعد از Push</h3>
+<h2>قانون قبل و بعد از Push</h2>
 <ul>
 <li><strong>قبل از Push:</strong> Reset ابزار مشروع نظافت محلی است؛ Commitها هنوز مال خودت‌اند.</li>
 <li><strong>بعد از Push:</strong> Reset یعنی بازنویسی تاریخچهٔ مشترک؛ Push بعدی‌ات رد می‌شود و تنها با Force Push پیش می‌رود که تاریخچهٔ همکارانت را می‌شکند. در این حالت راه درست <code>git revert</code> است.</li>
 </ul>
-<h3>بازیابی بعد از Reset اشتباه</h3>
+<h2>بازیابی بعد از Reset اشتباه</h2>
 <pre><code>git reflog                       <span class="c"># هش Commit قبل از reset را پیدا کن</span>
 git reset --hard d4e5f6          <span class="c"># به همان‌جا برگرد</span></code></pre>
-<h3>زمان درست استفاده از Reset</h3>
+<h2>زمان درست استفاده از Reset</h2>
 <ul>
 <li>سه Commit شلوغ محلی زده‌ای و می‌خواهی یکی تمیز جایشان بگذاری: <code>reset --soft HEAD~3</code> و یک Commit جدید.</li>
 <li>Commit آخر کلاً اشتباه بود و Push هم نشده: <code>reset --hard HEAD~1</code> (بعد از چک status).</li>
@@ -755,14 +755,14 @@ quiz:[
 ]},
 { id:16, title:'Stash', branch:'feature/stash', subtitle:'کشوی موقت: کار نیمه‌تمام را کنار بگذار، بعداً برگرد.',
 body:`
-<h3>Stash چیست؟</h3>
+<h2>Stash چیست؟</h2>
 <p><strong>Stash</strong> تغییرات Commit‌نشده را در یک «کشوی موقت» می‌گذارد و Working Directory را تمیز می‌کند. سناریوی کلاسیک: وسط کار روی یک فیچر هستی، یک باگ فوری روی main پیدا می‌شود؛ کار نصفه را نه می‌خواهی Commit کنی نه دور بریزی.</p>
 <pre><code>git stash push -m "hero layout WIP"   <span class="c"># ذخیره با نام (عادت خوب)</span>
 git switch main                        <span class="c"># برو باگ را حل کن</span>
 <span class="c"># ... fix, commit, push ...</span>
 git switch feature/hero
 git stash pop                          <span class="c"># کار نصفه برگشت</span></code></pre>
-<h3>دستورهای اصلی</h3>
+<h2>دستورهای اصلی</h2>
 <pre><code>git stash                    <span class="c"># ذخیرهٔ سریع (بی‌نام)</span>
 git stash -u                 <span class="c"># شامل فایل‌های Untracked هم بشود</span>
 git stash list               <span class="c"># stash@{0}: hero layout WIP ...</span>
@@ -771,13 +771,13 @@ git stash pop                <span class="c"># اعمال + حذف از لیست
 git stash drop stash@{0}     <span class="c"># حذف یک Stash</span>
 git stash clear              <span class="c"># حذف همه (بی‌بازگشت)</span></code></pre>
 <div class="callout note"><span class="co-title">apply یا pop؟</span>pop برای مصرف یک‌باره؛ apply وقتی می‌خواهی همان تغییرات را روی چند جا امتحان کنی یا محتاطی که اگر Conflict شد، نسخهٔ Stash از دست نرود.</div>
-<h3>نکته‌ها و لبه‌ها</h3>
+<h2>نکته‌ها و لبه‌ها</h2>
 <ul>
 <li><strong>Untracked:</strong> Stash پیش‌فرض فایل‌های کاملاً جدید را برنمی‌دارد؛ فلگ <code>-u</code> لازم است.</li>
 <li><strong>Stash هنگام تغییر Branch:</strong> اگر تغییرات Commit‌نشده با شاخهٔ مقصد ناسازگار باشد، Git جابه‌جایی را رد می‌کند؛ Stash راه‌حل استاندارد است. Stash به شاخه چسبیده نیست؛ می‌توانی روی شاخهٔ دیگری هم اعمالش کنی.</li>
 <li><strong>Conflict در Stash:</strong> اگر فایل‌ها از زمان Stash تغییر کرده باشند، هنگام pop/apply همان Conflict Markerهای آشنا ظاهر می‌شوند و مثل Merge حلشان می‌کنی. نکته: در صورت Conflict، pop به‌طور خودکار Stash را حذف نمی‌کند.</li>
 </ul>
-<h3>Stash یا Commit؟</h3>
+<h2>Stash یا Commit؟</h2>
 <p>Stash برای «چند ساعت، جابه‌جایی سریع» است: محلی است، Push نمی‌شود، پیام درست‌وحسابی ندارد و فراموش‌شدنش آسان است. اگر کار نیمه‌تمام قرار است بیش از یک روز بماند یا مهم است، به‌جای Stash یک Commit موقت با پیام wip در شاخهٔ خودش بزن؛ امن‌تر و قابل‌مشاهده‌تر است.</p>
 `,
 quiz:[
@@ -789,9 +789,9 @@ quiz:[
 ]},
 { id:17, title:'Tag و Release', branch:'release/v1.0.0', subtitle:'نشانه‌گذاری نسخه‌های مهم و اعلام رسمی آن‌ها.',
 body:`
-<h3>Tag چیست؟</h3>
+<h2>Tag چیست؟</h2>
 <p><strong>Tag</strong> یک برچسب دائمی روی یک Commit خاص است؛ مثل گذاشتن یک بوک‌مارک روی نقطه‌ای از تاریخچه که می‌گوید «این نسخهٔ ۱.۲.۰ بود». برخلاف Branch که با هر Commit جدید جلو می‌رود، Tag ثابت می‌ماند.</p>
-<h3>دو نوع Tag</h3>
+<h2>دو نوع Tag</h2>
 <ul>
 <li><strong>Lightweight Tag:</strong> فقط یک اشاره‌گر ساده به Commit، بدون اطلاعات اضافه.</li>
 <li><strong>Annotated Tag:</strong> شیء کاملی با نام سازنده، تاریخ و پیام. برای انتشار رسمی همیشه این را انتخاب کن.</li>
@@ -804,15 +804,15 @@ git push origin v1.2.0                      <span class="c"># Tagها خودکا
 git push origin --tags                      <span class="c"># همه با هم</span>
 git tag -d v1.2.0                           <span class="c"># حذف محلی</span>
 git push origin --delete v1.2.0             <span class="c"># حذف از Remote</span></code></pre>
-<h3>Semantic Versioning</h3>
+<h2>Semantic Versioning</h2>
 <p>قرارداد جهانی شماره‌گذاری: <code>MAJOR.MINOR.PATCH</code> — مثلاً <code>2.4.1</code></p>
 <table><tr><th>بخش</th><th>کی زیاد می‌شود؟</th><th>مثال در Design System</th></tr>
 <tr><td><strong>MAJOR</strong> (2.x.x)</td><td>تغییر شکننده (Breaking): مصرف‌کننده باید کدش را عوض کند</td><td>حذف یا تغییر نام یک توکن؛ حذف یک prop کامپوننت</td></tr>
 <tr><td><strong>MINOR</strong> (x.4.x)</td><td>قابلیت جدید و سازگار با قبل</td><td>افزودن واریانت جدید دکمه یا توکن جدید</td></tr>
 <tr><td><strong>PATCH</strong> (x.x.1)</td><td>رفع باگ بدون تغییر رفتار</td><td>اصلاح کنتراست رنگ خطا یا فاصلهٔ غلط</td></tr></table>
-<h3>Release در GitHub</h3>
+<h2>Release در GitHub</h2>
 <p><strong>Release</strong> لایه‌ای روی Tag است: یک صفحهٔ رسمی با عنوان نسخه، <strong>Release Note</strong> (توضیح این نسخه برای انسان‌ها) و فایل‌های پیوست. GitHub می‌تواند فهرست تغییرات را هم به‌صورت خودکار تولید کند.</p>
-<h3>Changelog</h3>
+<h2>Changelog</h2>
 <p><strong>Changelog</strong> فایلی در Repo (معمولاً <code>CHANGELOG.md</code>) که تاریخچهٔ نسخه‌ها را دسته‌بندی‌شده نگه می‌دارد:</p>
 <pre><code>## [2.0.0] - 2026-03-14
 ### Breaking
@@ -835,28 +835,28 @@ quiz:[
 ]},
 { id:18, title:'GitHub Issues و مدیریت کار', branch:'chore/issues', subtitle:'جایی که کار تعریف می‌شود، پیش می‌رود و به تغییر واقعی وصل می‌شود.',
 body:`
-<h3>Issue چیست؟</h3>
+<h2>Issue چیست؟</h2>
 <p><strong>Issue</strong> یک واحد کار یا گفت‌وگو در Repo است: یک باگ، یک درخواست قابلیت، یا یک تسک. هر Issue شماره دارد (<code>#42</code>)، قابل جست‌وجو است و کنار خود کد زندگی می‌کند — نه در چتی که فردا گم می‌شود.</p>
-<h3>سه نوع رایج</h3>
+<h2>سه نوع رایج</h2>
 <ul>
 <li><strong>Bug Report:</strong> چه دیدی، چه انتظار داشتی، چطور تکرارش کنیم (+ اسکرین‌شات).</li>
 <li><strong>Feature Request:</strong> چه مسئله‌ای، برای چه کسی، چرا حالا.</li>
 <li><strong>Task:</strong> کار مشخص و محدود، مثلاً «توکن‌های spacing را مستند کن».</li>
 </ul>
-<h3>ابزارهای سازمان‌دهی</h3>
+<h2>ابزارهای سازمان‌دهی</h2>
 <ul>
 <li><strong>Label:</strong> برچسب دسته‌بندی (bug، design، tokens، a11y).</li>
 <li><strong>Milestone:</strong> گروهی از Issueها برای یک هدف یا نسخه (مثلاً v2.0).</li>
 <li><strong>Assignee:</strong> مسئول انجام.</li>
 <li><strong>Issue Template:</strong> فرم آماده که فیلدهای لازم را از قبل می‌پرسد. یک <strong>Design Task Template</strong> خوب می‌پرسد: مسئله، مخاطب، Stateهای موردنیاز، لینک Figma، معیار پذیرش.</li>
 </ul>
-<h3>وصل‌کردن Issue به Pull Request</h3>
+<h2>وصل‌کردن Issue به Pull Request</h2>
 <p>در توضیحات یا Commit Message از کلیدواژه‌ها استفاده کن تا با Merge شدن PR، Issue خودکار بسته شود:</p>
 <pre><code>Closes #42
 Fixes #17
 Resolves #103</code></pre>
 <p>حتی اشارهٔ ساده به <code>#42</code> هم لینک دوطرفه می‌سازد تا مسیر «مسئله ← تغییر» قابل ردیابی بماند.</p>
-<h3>GitHub Projects</h3>
+<h2>GitHub Projects</h2>
 <p>نمای <strong>Board</strong> (کانبان) روی Issueها و PRها: ستون‌های Status (Todo / In Progress / In Review / Done) و فیلدهایی مثل Priority. مزیتش نسبت به ابزار جدا این است که وضعیت کارت‌ها با فعالیت واقعی در Repo همگام می‌شود.</p>
 <div class="callout note"><span class="co-title">ارتباط Design Decision با Issue</span>تصمیم‌های طراحی را در Issue مربوطه ثبت کن، نه فقط در فایل Figma. شش ماه بعد کسی که می‌پرسد «چرا این‌طوری شد؟» با یک جست‌وجو، بحث، گزینه‌های رد‌شده و PR نهایی را کنار هم پیدا می‌کند.</div>
 `,
@@ -869,30 +869,30 @@ quiz:[
 ]},
 { id:19, title:'Collaboration', branch:'team/workflow', subtitle:'قواعد بازی وقتی چند نفر روی یک Repo کار می‌کنند.',
 body:`
-<h3>Fork چیست؟</h3>
+<h2>Fork چیست؟</h2>
 <p><strong>Fork</strong> یعنی ساختن کپی کاملی از Repo شخص دیگر <strong>در حساب GitHub خودت</strong>. چون معمولاً اجازهٔ Push مستقیم به Repo دیگران را نداری، تغییرات را در Fork خودت انجام می‌دهی و بعد از آنجا PR می‌فرستی.</p>
 <table><tr><th></th><th>Fork</th><th>Clone</th></tr>
 <tr><td>کجا کپی می‌شود؟</td><td>در حساب GitHub تو (سرور)</td><td>روی کامپیوتر تو (محلی)</td></tr>
 <tr><td>کِی؟</td><td>وقتی دسترسی نوشتن نداری (پروژه‌های Open Source)</td><td>همیشه؛ برای کارکردن روی هر Repo</td></tr></table>
-<h3>Contributor Workflow</h3>
+<h2>Contributor Workflow</h2>
 <pre><code>1. Fork  →  2. Clone فورک خودت  →  3. Branch جدید
 4. تغییر + Commit  →  5. Push به فورک  →  6. باز کردن PR به Repo اصلی</code></pre>
 <p>در تیم داخلی که دسترسی نوشتن داری، Fork لازم نیست: مستقیم Branch می‌سازی و PR می‌دهی.</p>
-<h3>سطوح دسترسی</h3>
+<h2>سطوح دسترسی</h2>
 <ul>
 <li><strong>Read:</strong> دیدن و Clone؛ بدون Push.</li>
 <li><strong>Write:</strong> ساخت Branch، Push و باز کردن PR — دسترسی معمول یک عضو تیم.</li>
 <li><strong>Admin:</strong> تنظیمات Repo، مدیریت دسترسی‌ها و قوانین Branch.</li>
 </ul>
 <p><strong>Collaborator</strong> کسی است که به Repo دسترسی داده شده. <strong>Code Owner</strong> (تعریف‌شده در فایل <code>CODEOWNERS</code>) یعنی صاحب مسئولیت بخش‌های مشخصی از پروژه؛ مثلاً هر PR که فایل توکن‌ها را تغییر دهد، خودکار طراح سیستم را به‌عنوان Reviewer اضافه می‌کند.</p>
-<h3>Protected Branch</h3>
+<h2>Protected Branch</h2>
 <p>قوانینی که روی main گذاشته می‌شود تا کسی نتواند سهواً خرابش کند:</p>
 <ul>
 <li><strong>جلوگیری از Push مستقیم:</strong> هر تغییر فقط از راه PR.</li>
 <li><strong>Required Review:</strong> بدون حداقل یک Approve، دکمهٔ Merge غیرفعال است.</li>
 <li><strong>Required Status Check:</strong> تست‌ها و Buildها باید سبز باشند.</li>
 </ul>
-<h3>قراردادهای تیمی</h3>
+<h2>قراردادهای تیمی</h2>
 <ul>
 <li><strong>Branching Convention:</strong> الگوی نام‌گذاری مشترک (<code>feature/</code>، <code>fix/</code>).</li>
 <li><strong>Definition of Done:</strong> توافق تیم بر اینکه «تمام‌شده» یعنی چه — مثلاً: Review شده، Stateها پوشش دارد، مستند شده، Checkها سبزند.</li>
@@ -909,26 +909,26 @@ quiz:[
 ]},
 { id:20, title:'امنیت', branch:'security/hardening', subtitle:'یک کلید لورفته گران‌ترین Commit عمر توست.',
 body:`
-<h3>Secret چیست؟</h3>
+<h2>Secret چیست؟</h2>
 <p><strong>Secret</strong> هر اطلاعاتی است که فقط باید در اختیار سیستم‌های مجاز باشد: <strong>API Key</strong>، <strong>Access Token</strong>، پسورد دیتابیس، کلید خصوصی. قانون ساده: Secret هرگز نباید داخل کد یا تاریخچهٔ Git باشد.</p>
-<h3>روش درست: فایل env.</h3>
+<h2>روش درست: فایل env.</h2>
 <pre><code><span class="c"># .env  ← در .gitignore، هرگز Commit نمی‌شود</span>
 FIGMA_TOKEN=figd_xxxxxxxx
 
 <span class="c"># .env.example  ← این Commit می‌شود (فقط نام متغیرها، بدون مقدار)</span>
 FIGMA_TOKEN=</code></pre>
-<h3>اگر Secret لو رفت</h3>
+<h2>اگر Secret لو رفت</h2>
 <ol>
 <li><strong>فوراً Revoke کن</strong> و کلید جدید بساز. این مهم‌ترین قدم است؛ چون هر چیزی که یک بار Push شده، ممکن است دیده و ذخیره شده باشد.</li>
 <li>فایل را از ردگیری خارج کن و به gitignore اضافه کن.</li>
 <li>در صورت نیاز، تاریخچه را پاک‌سازی کن (ابزارهایی مثل git-filter-repo)؛ ولی این جایگزین قدم اول نیست.</li>
 </ol>
-<h3>سپرهای خودکار GitHub</h3>
+<h2>سپرهای خودکار GitHub</h2>
 <ul>
 <li><strong>Secret Scanning:</strong> GitHub الگوی توکن‌های شناخته‌شده را در Push پیدا می‌کند و هشدار می‌دهد (و در برخی موارد سرویس‌دهنده را مطلع می‌کند تا کلید باطل شود).</li>
 <li><strong>Dependabot:</strong> وابستگی‌های پروژه را رصد می‌کند و برای نسخه‌های آسیب‌پذیر <strong>Dependency Alert</strong> و حتی PR ارتقا می‌سازد.</li>
 </ul>
-<h3>بهداشت دسترسی</h3>
+<h2>بهداشت دسترسی</h2>
 <ul>
 <li><strong>Private در برابر Public:</strong> پیش‌فرض را Private بگذار مگر اینکه عمداً بخواهی عمومی باشد. Public یعنی هر کسی روی اینترنت می‌بیند.</li>
 <li><strong>Repository Permission:</strong> حداقل دسترسی لازم را بده (Read برای ناظر، Write برای عضو فعال).</li>
@@ -949,9 +949,9 @@ quiz:[
 ]},
 { id:21, title:'Git برای پروژه‌های AI', branch:'ai/safe-workflow', subtitle:'وقتی بخشی از کد را ماشین می‌نویسد، Git به سیستم کنترل کیفیت تبدیل می‌شود.',
 body:`
-<h3>چرا Git اینجا حیاتی است؟</h3>
+<h2>چرا Git اینجا حیاتی است؟</h2>
 <p>کد تولیدشده با AI سریع، حجیم و گاهی فراتر از چیزی است که خواسته‌ای. Git سه چیز می‌دهد که بدون آن‌ها کار با Agentها بی‌مهار است: <strong>نقطهٔ بازگشت</strong>، <strong>Diff قابل بررسی</strong> و <strong>فضای جدا برای آزمایش</strong>.</p>
-<h3>پروتکل ایمن کار با Agent</h3>
+<h2>پروتکل ایمن کار با Agent</h2>
 <pre><code>1. git status            <span class="c"># مطمئن شو چیز Commit‌نشده‌ای معلق نیست</span>
 2. git commit            <span class="c"># نقطهٔ بازگشت سالم بساز</span>
 3. git switch -c experiment/ai-onboarding   <span class="c"># شاخهٔ جدا برای آزمایش</span>
@@ -959,7 +959,7 @@ body:`
 5. git diff              <span class="c"># خط‌به‌خط بررسی کن؛ چیزی خارج از Scope هست؟</span>
 6. git add -p            <span class="c"># فقط تغییرات درست را Stage کن</span>
 7. git commit            <span class="c"># با پیام شفاف، و ذکر اینکه AI-assisted بوده</span></code></pre>
-<h3>چک‌لیست بررسی خروجی AI</h3>
+<h2>چک‌لیست بررسی خروجی AI</h2>
 <ul>
 <li><strong>تغییر خارج از Scope:</strong> فایل‌هایی که نباید دست می‌خوردند تغییر کرده‌اند؟ بازنویسی سرخود بخش‌های سالم؟</li>
 <li><strong>Dependencyهای اضافه‌شده:</strong> هر پکیج جدید در <code>package.json</code> باید ضروری و قابل‌اعتماد باشد.</li>
@@ -967,16 +967,16 @@ body:`
 <li><strong>Security Risk:</strong> کلید یا توکن نمونه در کد، فراخوانی سرویس ناشناس، غیرفعال‌کردن محافظت‌ها.</li>
 <li><strong>حذف تصادفی:</strong> بلوک‌های قرمز بزرگ در Diff را جدی بگیر.</li>
 </ul>
-<h3>ثبت زمینهٔ تولید (Prompt Changelog)</h3>
+<h2>ثبت زمینهٔ تولید (Prompt Changelog)</h2>
 <p>برای تکرارپذیری و شفافیت، اطلاعات تولید را در Repo نگه دار: Promptی که استفاده شد، مدل و نسخه‌اش، و Context و Constraintهایی که دادی. یک فایل ساده مثل <code>ai/prompts.md</code> کافی است:</p>
 <pre><code>## 2026-04-02 — Empty state component
 Model: claude-opus-5
 Prompt: «کامپوننت EmptyState با توکن‌های موجود بساز؛ رنگ خام ننویس.»
 Constraints: بدون کتابخانهٔ جدید، RTL-safe
 Outcome: پذیرفته‌شده با اصلاح spacing (PR #128)</code></pre>
-<h3>مقایسهٔ چند خروجی</h3>
+<h2>مقایسهٔ چند خروجی</h2>
 <p>می‌خواهی دو راه‌حل AI را بسنجی؟ هر خروجی را در شاخهٔ جداگانه بگذار (<code>experiment/ai-a</code> و <code>experiment/ai-b</code>)، هر کدام را Commit کن و با <code>git diff experiment/ai-a experiment/ai-b</code> یا Preview هر شاخه مقایسه کن. شاخهٔ بازنده حذف می‌شود، بدون هیچ ردی روی main.</p>
-<h3>حاکمیت: Agent در تیم</h3>
+<h2>حاکمیت: Agent در تیم</h2>
 <ul>
 <li><strong>محدودکردن دسترسی:</strong> Agent نباید کلید تولید (production) داشته باشد یا اجازهٔ Push مستقیم به main.</li>
 <li><strong>Agent-generated Commit/PR:</strong> در پیام Commit یا توضیح PR مشخص کن که خروجی با کمک AI تولید شده و چه کسی بازبینی کرده است.</li>
@@ -994,9 +994,9 @@ quiz:[
 ]},
 { id:22, title:'Git برای Prototypeها', branch:'prototype/variants', subtitle:'چند نسخهٔ زنده و قابل‌مقایسه، بدون پوشه‌های final-v7.',
 body:`
-<h3>Repository برای Prototype</h3>
+<h2>Repository برای Prototype</h2>
 <p>پروتوتایپ کد یک Repo مستقل و سبک می‌خواهد؛ جایی که آزادی آزمایش داشته باشی بدون فشار استانداردهای محصول. توصیهٔ عملی: <strong>Prototype و Production را جدا نگه دار</strong> تا کد اکتشافی سهواً وارد محصول نشود و کدهای موقتی، Review تیم را کند نکنند.</p>
-<h3>هر ایده، یک شاخه</h3>
+<h2>هر ایده، یک شاخه</h2>
 <ul>
 <li><strong>Variant:</strong> <code>prototype/nav-tabs</code> و <code>prototype/nav-drawer</code> برای مقایسهٔ دو راه‌حل.</li>
 <li><strong>User Flow:</strong> <code>prototype/checkout-one-step</code> برای یک مسیر کامل.</li>
@@ -1004,7 +1004,7 @@ body:`
 <li><strong>User Test:</strong> <code>prototype/test-round-2</code> که در طول تست دست‌نخورده می‌ماند تا نتایج معتبر باشند.</li>
 </ul>
 <p>شاخهٔ <strong>main در Repo پروتوتایپ</strong> را به‌عنوان <strong>Stable Version</strong> نگه دار: نسخه‌ای که همیشه کار می‌کند و می‌توانی بدون استرس به کسی نشان دهی.</p>
-<h3>Deploy هر Branch و Preview URL</h3>
+<h2>Deploy هر Branch و Preview URL</h2>
 <p>سرویس‌های میزبانی (مثل Vercel یا Netlify و همچنین GitHub Pages) می‌توانند به Repo وصل شوند و برای هر شاخه یا هر PR یک <strong>Preview URL</strong> زنده بسازند. اثرش برای طراح تحول‌آفرین است:</p>
 <ul>
 <li>لینک زنده به‌جای فایل zip یا اسکرین‌شات برای Stakeholder.</li>
@@ -1017,14 +1017,14 @@ body:`
 git push -u origin prototype/nav-drawer
 <span class="c"># Preview URL خودکار ساخته می‌شود → لینک را برای تیم بفرست</span>
 <span class="c"># بازخوردها را در PR یا Issue همان شاخه ثبت کن</span></code></pre></div>
-<h3>ثبت بازخورد و سرنوشت هر نسخه</h3>
+<h2>ثبت بازخورد و سرنوشت هر نسخه</h2>
 <p>برای هر واریانت یک PR (حتی Draft) باز کن و بازخوردها، نتایج تست و تصمیم نهایی را همان‌جا بنویس. بعد از تصمیم:</p>
 <ul>
 <li><strong>برنده:</strong> Merge به main پروتوتایپ.</li>
 <li><strong>بازنده:</strong> شاخه را حذف کن — تاریخچه و مستندات بحثش در PR بسته‌شده باقی می‌ماند.</li>
 <li><strong>Rollback:</strong> اگر نسخهٔ جدید در ارائه بد از آب درآمد، با revert یا برگشت به Tag نسخهٔ پایدار، سریع به عقب برگرد.</li>
 </ul>
-<h3>تبدیل Prototype به Production</h3>
+<h2>تبدیل Prototype به Production</h2>
 <p>کد پروتوتایپ معمولاً مستقیم به محصول نمی‌رود؛ ولی ارزشش هم دور ریخته نمی‌شود: پروتوتایپ نقش <strong>مشخصات اجرایی</strong> را دارد — رفتار، انیمیشن، Stateها و Edge Caseها را دقیق نشان می‌دهد. در PR انتقال، به شاخه یا Commit پروتوتایپ لینک بده تا دولوپر مرجع دقیق داشته باشد.</p>
 `,
 quiz:[
@@ -1036,9 +1036,9 @@ quiz:[
 ]},
 { id:23, title:'Git برای Design System', branch:'ds/governance', subtitle:'وقتی خروجی طراحی تو کد است، Git می‌شود ابزار اصلی مدیریتش.',
 body:`
-<h3>چرا Design System بدون Version Control شکننده است؟</h3>
+<h2>چرا Design System بدون Version Control شکننده است؟</h2>
 <p>Design System محصولی است با مصرف‌کننده‌های متعدد. بدون تاریخچه، نسخه‌بندی و Review، یک تغییر کوچک می‌تواند ده محصول را همزمان بشکند. Git به سه سؤال حیاتی جواب می‌دهد: چه چیزی تغییر کرد، چرا، و چطور برگردیم.</p>
-<h3>Design Token Repository</h3>
+<h2>Design Token Repository</h2>
 <p>توکن‌ها معمولاً در فایل‌های JSON نگهداری می‌شوند و منبع تغذیهٔ همهٔ پلتفرم‌ها هستند:</p>
 <pre><code>{
   "color": {
@@ -1048,26 +1048,26 @@ body:`
   "spacing": { "md": { "value": "16px" } }
 }</code></pre>
 <p>هر تغییر توکن در Diff کاملاً شفاف است: یک خط قرمز و یک خط سبز. به همین دلیل Review توکن‌ها بسیار دقیق‌تر از فرستادن اسکرین‌شات رنگ در چت است.</p>
-<h3>جریان کار تغییر کامپوننت</h3>
+<h2>جریان کار تغییر کامپوننت</h2>
 <pre><code>1. Issue: مسئله و دلیل تغییر
 2. Branch: ds/button-focus-state
 3. تغییر کامپوننت + به‌روزرسانی مستندات (Storybook)
 4. PR با Before/After، Stateها و یادداشت a11y
 5. Review طراح سیستم (Code Owner) + دولوپر
 6. Merge → انتشار نسخهٔ جدید با Tag و Changelog</code></pre>
-<h3>Breaking Change، Deprecation و Migration</h3>
+<h2>Breaking Change، Deprecation و Migration</h2>
 <ul>
 <li><strong>Breaking Change:</strong> تغییری که مصرف‌کننده مجبور به اصلاح کدش می‌شود (حذف توکن، تغییر نام prop) ← نسخهٔ MAJOR.</li>
 <li><strong>Deprecation:</strong> مسیر مؤدبانه‌تر: اول عنصر قدیمی را «منسوخ» اعلام کن (با هشدار و جایگزین پیشنهادی) و در نسخهٔ بعدی حذفش کن.</li>
 <li><strong>Migration Guide:</strong> راهنمای گام‌به‌گام «از نسخهٔ ۱ به ۲» با جدول قدیمی ← جدید. بدون آن، ارتقا برای تیم‌ها بسیار پرهزینه می‌شود.</li>
 </ul>
-<h3>مستندات و کیفیت</h3>
+<h2>مستندات و کیفیت</h2>
 <ul>
 <li><strong>Storybook:</strong> مستندات زندهٔ کامپوننت‌ها که کنار کد در همان Repo نگهداری و با هر PR به‌روز می‌شود. مستندات جدا از کد، همیشه عقب می‌ماند.</li>
 <li><strong>Documentation Versioning:</strong> مستندات هر نسخه باید با کد همان نسخه بخواند؛ تیمی که روی v1 مانده باید مستندات v1 را ببیند.</li>
 <li><strong>Visual Regression Test:</strong> اسکرین‌شات خودکار کامپوننت‌ها در هر PR و مقایسه با نسخهٔ قبل؛ تغییر بصری ناخواسته را قبل از Merge می‌گیرد.</li>
 </ul>
-<h3>حاکمیت (Governance)</h3>
+<h2>حاکمیت (Governance)</h2>
 <ul>
 <li><strong>Contribution Guideline:</strong> فایلی که می‌گوید چطور پیشنهاد بدهند، چه چیزی لازم است و معیار پذیرش چیست.</li>
 <li><strong>Code Owners:</strong> تغییر توکن‌ها یا کامپوننت‌های پایه، خودکار Review طراح سیستم را لازم می‌کند.</li>
@@ -1085,29 +1085,29 @@ quiz:[
 ]},
 { id:24, title:'Git برای Figma و Design Tokens', branch:'tokens/figma-sync', subtitle:'اتصال دنیای طراحی و کد؛ جایی که باید بدانی حقیقت کجاست.',
 body:`
-<h3>Figma Variables و Design Token</h3>
+<h2>Figma Variables و Design Token</h2>
 <p><strong>Figma Variables</strong> مقادیر نام‌دار (رنگ، فاصله، تایپوگرافی و...) در فایل طراحی‌اند. همین مفاهیم در کد به‌صورت <strong>Design Token</strong> در قالب JSON نگهداری می‌شوند. Sync یعنی این دو با هم بخوانند.</p>
-<h3>Sync چطور کار می‌کند؟</h3>
+<h2>Sync چطور کار می‌کند؟</h2>
 <p>پلاگین‌های Figma (مثل Tokens Studio و پلاگین‌های مشابه) می‌توانند به یک Repo وصل شوند:</p>
 <ul>
 <li><strong>Push از Figma به GitHub:</strong> تغییرات متغیرها در یک شاخهٔ جدید Commit می‌شود و PR ساخته می‌شود.</li>
 <li><strong>Pull از GitHub به Figma:</strong> مقادیر از Repo به فایل طراحی برمی‌گردد.</li>
 <li><strong>یک‌طرفه یا دوطرفه:</strong> Sync دوطرفه امکان <strong>Token Conflict</strong> می‌سازد (هر دو طرف یک توکن را عوض کرده‌اند). ساده‌ترین سیاست برای تیم‌های کوچک: یک جهت را رسمی کن — معمولاً Figma منبع تغییر و Repo مقصد.</li>
 </ul>
-<h3>Source of Truth</h3>
+<h2>Source of Truth</h2>
 <p>مهم‌ترین تصمیم این حوزه: <strong>حقیقت کجاست؟</strong></p>
 <table><tr><th>Design Source of Truth (Figma)</th><th>Code Source of Truth (Repo)</th></tr>
 <tr><td>طراح تغییر می‌دهد، کد دنبال می‌کند</td><td>Repo مرجع رسمی است، Figma با آن همگام می‌شود</td></tr>
 <tr><td>سریع‌تر برای تیم‌های طراحی‌محور</td><td>مطمئن‌تر برای محصولات چندپلتفرمی و بزرگ</td></tr></table>
 <p>انتخاب غلط نداریم؛ انتخاب <strong>نامشخص</strong> داریم. تیمی که این را روشن نکرده، دائم درگیر «کدام مقدار درست است؟» می‌شود.</p>
-<h3>Branch و PR برای توکن‌ها</h3>
+<h2>Branch و PR برای توکن‌ها</h2>
 <p>تغییر رنگ برند یا مقیاس تایپوگرافی را هرگز مستقیم روی main نبر. شاخهٔ <code>tokens/brand-color-update</code> بساز و در PR بنویس: چه توکنی، مقدار قبلی و جدید، کجاها استفاده شده، و اسکرین‌شات اثر بصری.</p>
-<h3>تغییر نام، حذف و Alias</h3>
+<h2>تغییر نام، حذف و Alias</h2>
 <ul>
 <li><strong>تغییر نام یا حذف توکن:</strong> Breaking Change است؛ نیاز به Deprecation، Migration Guide و نسخهٔ MAJOR دارد.</li>
 <li><strong>Token Alias:</strong> توکنی که به توکن دیگری اشاره می‌کند — مثلاً <code>button-background → color-brand</code>. لایهٔ Alias (توکن‌های معنایی) باعث می‌شود تغییر مقدار پایه، همه‌جا به‌درستی منتشر شود بدون تغییر نام در کامپوننت‌ها.</li>
 </ul>
-<h3>Token Transformation و Style Dictionary</h3>
+<h2>Token Transformation و Style Dictionary</h2>
 <p><strong>Style Dictionary</strong> ابزاری است که توکن‌های JSON را به فرمت هر پلتفرم تبدیل می‌کند: CSS Variables برای وب، XML برای اندروید، Swift برای iOS. یک منبع، چند خروجی؛ و چون این تبدیل در Repo انجام می‌شود، خروجی‌ها همیشه با منبع هماهنگ‌اند.</p>
 <div class="callout tip"><span class="co-title">هنگام Review توکن در Diff چه ببینیم؟</span>آیا فقط مقدار عوض شده یا نام هم؟ (تغییر نام = Breaking) آیا توکن جدید با قرارداد نام‌گذاری می‌خواند؟ آیا Aliasها هنوز به توکن موجود اشاره می‌کنند؟ آیا فایل JSON معتبر مانده است؟</div>
 `,
@@ -1121,12 +1121,12 @@ quiz:[
 ]},
 { id:25, title:'GitHub Actions و CI/CD', branch:'ci/checks', subtitle:'در حد فهمیدن اینکه چرا PR قرمز شده و چه باید کرد.',
 body:`
-<h3>CI و CD چیست؟</h3>
+<h2>CI و CD چیست؟</h2>
 <ul>
 <li><strong>CI (Continuous Integration):</strong> با هر تغییر، به‌صورت خودکار بررسی می‌شود که پروژه سالم است (Build می‌شود، تست‌ها پاس می‌شوند، استانداردها رعایت شده).</li>
 <li><strong>CD (Continuous Delivery/Deployment):</strong> تغییر تأییدشده به‌صورت خودکار منتشر یا آمادهٔ انتشار می‌شود.</li>
 </ul>
-<h3>GitHub Actions و واژگانش</h3>
+<h2>GitHub Actions و واژگانش</h2>
 <p><strong>GitHub Actions</strong> سیستم اجرای این کارهاست. ساختارش ساده است:</p>
 <ul>
 <li><strong>Workflow:</strong> کل فرایند خودکار (تعریف‌شده در فایلی داخل <code>.github/workflows/</code>).</li>
@@ -1140,7 +1140,7 @@ jobs:
     steps:              <span class="c"># Steps</span>
       - npm install
       - npm test</code></pre>
-<h3>Checkهای رایج که در PR می‌بینی</h3>
+<h2>Checkهای رایج که در PR می‌بینی</h2>
 <table><tr><th>Check</th><th>یعنی چه</th><th>وقتی قرمز شد یعنی</th></tr>
 <tr><td>Build</td><td>پروژه ساخته می‌شود؟</td><td>خطای کد؛ نسخه اصلاً اجرا نمی‌شود</td></tr>
 <tr><td>Test</td><td>تست‌ها پاس می‌شوند؟</td><td>رفتاری شکسته شده</td></tr>
@@ -1148,9 +1148,9 @@ jobs:
 <tr><td>Accessibility</td><td>قواعد a11y (کنتراست، نقش‌ها، لیبل‌ها)</td><td>مشکل دسترس‌پذیری — برای طراح مهم!</td></tr>
 <tr><td>Visual Regression</td><td>تفاوت بصری با نسخهٔ قبل</td><td>یا باگ بصری، یا تغییر عمدی که باید تأیید شود</td></tr>
 </table>
-<h3>Preview Deployment و Deploy بعد از Merge</h3>
+<h2>Preview Deployment و Deploy بعد از Merge</h2>
 <p>یک Workflow می‌تواند برای هر PR یک <strong>Preview Deployment</strong> بسازد (همان Preview URL سطح ۲۲) و پس از Merge شدن به main، نسخهٔ اصلی را منتشر کند.</p>
-<h3>وقتی PR قرمز می‌شود</h3>
+<h2>وقتی PR قرمز می‌شود</h2>
 <ol>
 <li>روی نام Check کلیک کن و <strong>Action Log</strong> را باز کن.</li>
 <li>معمولاً پیام خطا در انتهای لاگ و در خط‌های قرمز است.</li>
@@ -1160,7 +1160,7 @@ jobs:
 <p><strong>Required Check</strong> یعنی Checkهایی که تا سبز نشوند دکمهٔ Merge فعال نمی‌شود. <strong>Secret در Actions</strong> هم جایی است که کلیدهای موردنیاز Workflow (بدون قرارگرفتن در کد) در تنظیمات Repo ذخیره می‌شوند.</p>
 <div class="callout note"><span class="co-title">نقش تو</span>لازم نیست Pipeline بنویسی. باید بتوانی وضعیت Checkها را بخوانی، مشکل مربوط به طراحی (a11y و Visual Regression) را تشخیص بدهی و بدانی که «روی سیستم من کار می‌کند» جواب معتبری برای یک Check قرمز نیست.</div>
 
-<h3>Hook — بررسی‌هایی که قبل از CI اجرا می‌شوند</h3>
+<h2>Hook — بررسی‌هایی که قبل از CI اجرا می‌شوند</h2>
 <p>گاهی <code>git commit</code> می‌زنی و به‌جای ثبت، پیام خطا می‌گیری؛ یا Commit ثبت می‌شود ولی می‌بینی فایل‌هایت خودبه‌خود قالب‌بندی دوباره شده‌اند. خراب نشده — یک <b>Hook</b> کار کرده است.</p>
 <p>Hook اسکریپتی است که Git در لحظه‌های مشخصی روی کامپیوتر <i>خودت</i> اجرا می‌کند؛ برخلاف GitHub Actions که روی سرور اجرا می‌شود. تیم‌ها معمولاً با ابزارهایی مثل Husky آن را روی مخزن سوار می‌کنند تا خطاها قبل از رسیدن به PR گرفته شوند.</p>
 <table><tr><th>Hook</th><th>کِی</th><th>کار رایجش</th></tr>
@@ -1181,7 +1181,7 @@ quiz:[
 ]},
 { id:26, title:'مرجع دستورهای خط فرمان', branch:'ref/cli', subtitle:'دستورهای ضروری روزمره و لایهٔ بعدی، در یک نگاه.',
 body:`
-<h3>لایهٔ اول: دستورهای ضروری</h3>
+<h2>لایهٔ اول: دستورهای ضروری</h2>
 <p>این‌ها ۹۰٪ کار روزمرهٔ تو را پوشش می‌دهند:</p>
 <table><tr><th>دستور</th><th>کار</th></tr>
 <tr><td><code>git --version</code></td><td>بررسی نصب و نسخه</td></tr>
@@ -1204,7 +1204,7 @@ body:`
 <tr><td><code>git stash</code></td><td>ذخیرهٔ موقت تغییرات</td></tr>
 <tr><td><code>git tag</code></td><td>نشانه‌گذاری نسخه</td></tr>
 </table>
-<h3>لایهٔ دوم: وقتی حرفه‌ای‌تر شدی</h3>
+<h2>لایهٔ دوم: وقتی حرفه‌ای‌تر شدی</h2>
 <ul>
 <li><code>git show COMMIT</code> — جزئیات و تغییرات یک Commit مشخص.</li>
 <li><code>git blame FILE</code> — هر خط فایل را چه کسی، در چه Commitی و کِی نوشته. برای فهمیدن «چرا این مقدار این‌طور است؟» بی‌نظیر است (نامش ترسناک است، کاربردش کاوشگرانه).</li>
@@ -1229,7 +1229,7 @@ quiz:[
 ]},
 { id:27, title:'Rebase', branch:'advanced/rebase', subtitle:'بازنویسی تاریخچه برای خط زمانی تمیز — فقط با دانستن قواعدش.',
 body:`
-<h3>Rebase چیست؟</h3>
+<h2>Rebase چیست؟</h2>
 <p><strong>Rebase</strong> یعنی برداشتن Commitهای شاخهٔ تو و «کاشتن دوبارهٔ» آن‌ها روی نوک یک شاخهٔ دیگر. نتیجه: انگار از همان ابتدا کارت را روی آخرین نسخهٔ main شروع کرده بودی.</p>
 <pre><code>قبل:  main    o───o───A───B
                 \\
@@ -1239,17 +1239,17 @@ body:`
       main    o───o───A───B
                           \\
       feature              o1'──o2'   <span class="c">← Commitهای بازنویسی‌شده</span></code></pre>
-<h3>Merge یا Rebase؟</h3>
+<h2>Merge یا Rebase؟</h2>
 <table><tr><th></th><th>Merge</th><th>Rebase</th></tr>
 <tr><td>تاریخچه</td><td>واقعی و غیرخطی، با Commit ادغام</td><td>خطی و تمیز (Linear History)</td></tr>
 <tr><td>Commitها</td><td>دست‌نخورده می‌مانند</td><td>بازنویسی می‌شوند (هش جدید)</td></tr>
 <tr><td>امنیت</td><td>همیشه امن</td><td>فقط روی شاخهٔ شخصی امن</td></tr>
 </table>
-<h3>به‌روزرسانی شاخهٔ محلی با Rebase</h3>
+<h2>به‌روزرسانی شاخهٔ محلی با Rebase</h2>
 <pre><code>git switch feature/hero
 git fetch origin
 git rebase origin/main     <span class="c"># کارم را روی آخرین main بنشان</span></code></pre>
-<h3>Interactive Rebase — نظافت قبل از PR</h3>
+<h2>Interactive Rebase — نظافت قبل از PR</h2>
 <pre><code>git rebase -i HEAD~4   <span class="c"># چهار Commit آخر را ویرایش کن</span></code></pre>
 <p>ویرایشگری باز می‌شود و برای هر Commit یک فرمان انتخاب می‌کنی:</p>
 <ul>
@@ -1258,14 +1258,14 @@ git rebase origin/main     <span class="c"># کارم را روی آخرین mai
 <li><strong>drop:</strong> حذف کامل یک Commit.</li>
 <li><strong>ترتیب خط‌ها:</strong> جابه‌جا کردن خط‌ها یعنی تغییر ترتیب Commitها.</li>
 </ul>
-<h3>Conflict در Rebase</h3>
+<h2>Conflict در Rebase</h2>
 <p>چون Commitها یکی‌یکی دوباره اعمال می‌شوند، ممکن است چند بار Conflict ببینی — هر بار برای یک Commit:</p>
 <pre><code><span class="c"># حل Conflict در فایل‌ها، سپس:</span>
 git add FILE
 git rebase --continue
 <span class="c"># یا انصراف کامل و بازگشت به قبل:</span>
 git rebase --abort</code></pre>
-<h3>قانون طلایی و Force Push</h3>
+<h2>قانون طلایی و Force Push</h2>
 <div class="callout warn"><span class="co-title">هرگز شاخهٔ عمومی را Rebase نکن</span>Rebase هش Commitها را عوض می‌کند. اگر شاخه‌ای را که دیگران رویش کار می‌کنند Rebase کنی، تاریخچهٔ آن‌ها با تو ناسازگار می‌شود و همه دچار دردسر می‌شوند. Rebase مال شاخهٔ شخصی و Push‌نشده (یا شاخه‌ای که فقط خودت رویش هستی) است.</div>
 <p>بعد از Rebase، شاخهٔ محلی با نسخهٔ Remote واگرا می‌شود و Push معمولی رد می‌شود. راه درست:</p>
 <pre><code>git push --force-with-lease
@@ -1282,32 +1282,32 @@ quiz:[
 ]},
 { id:28, title:'Cherry-pick', branch:'advanced/cherry-pick', subtitle:'برداشتن دقیقاً یک Commit از یک شاخه و آوردنش به شاخهٔ دیگر.',
 body:`
-<h3>Cherry-pick چیست؟</h3>
+<h2>Cherry-pick چیست؟</h2>
 <p>وقتی فقط <strong>یک Commit مشخص</strong> از یک شاخه را لازم داری — نه کل شاخه — از Cherry-pick استفاده می‌کنی. Git تغییرات آن Commit را برمی‌دارد و به‌صورت یک Commit جدید (با هش جدید) روی شاخهٔ فعلی اعمال می‌کند.</p>
 <pre><code>git switch main
 git cherry-pick a1b2c3d          <span class="c"># یک Commit</span>
 git cherry-pick a1b2c3d f4e5d6c  <span class="c"># چند Commit</span></code></pre>
-<h3>کاربردهای درست</h3>
+<h2>کاربردهای درست</h2>
 <ul>
 <li><strong>Hotfix:</strong> باگ فوری را در شاخهٔ فیچر رفع کرده‌ای و همان یک Commit باید فوراً روی main برود، بی‌آنکه بقیهٔ کار نیمه‌تمام برود.</li>
 <li><strong>نجات یک تکه از شاخهٔ رهاشده:</strong> آزمایش شکست خورده ولی یک Commit مفید داشت.</li>
 <li><strong>انتقال Commit به شاخهٔ درست:</strong> اشتباهاً روی main یا شاخهٔ اشتباه Commit زده‌ای.</li>
 </ul>
-<h3>Conflict و انصراف</h3>
+<h2>Conflict و انصراف</h2>
 <pre><code><span class="c"># در صورت Conflict: فایل‌ها را حل کن، سپس</span>
 git add FILE
 git cherry-pick --continue
 <span class="c"># یا انصراف:</span>
 git cherry-pick --abort</code></pre>
-<h3>خطر تکرار Commit</h3>
+<h2>خطر تکرار Commit</h2>
 <div class="callout warn"><span class="co-title">Commit دوقلو</span>Commit منتقل‌شده هش جدیدی دارد، یعنی از نظر Git با اصل یکی نیست. اگر بعداً همان شاخه را هم Merge کنی، «همان تغییر» دو بار در تاریخچه دیده می‌شود و احتمال Conflictهای گیج‌کننده بالا می‌رود.</div>
-<h3>Cherry-pick یا Merge؟</h3>
+<h2>Cherry-pick یا Merge؟</h2>
 <table><tr><th></th><th>Cherry-pick</th><th>Merge</th></tr>
 <tr><td>چه می‌آورد؟</td><td>فقط Commitهای انتخابی</td><td>کل شاخه با تاریخچه‌اش</td></tr>
 <tr><td>هش‌ها</td><td>جدید (کپی)</td><td>حفظ می‌شود</td></tr>
 <tr><td>مناسبِ</td><td>موارد استثنایی و فوری</td><td>جریان کار عادی</td></tr>
 </table>
-<h3>کی از Cherry-pick استفاده نکنیم؟</h3>
+<h2>کی از Cherry-pick استفاده نکنیم؟</h2>
 <ul>
 <li>به‌عنوان جریان کار روزمره به‌جای Merge — تاریخچه را تکه‌تکه و غیرقابل‌اعتماد می‌کند.</li>
 <li>وقتی چندین Commit پشت‌سرهم لازم داری (به‌جایش شاخه را Merge یا Rebase کن).</li>
@@ -1324,7 +1324,7 @@ quiz:[
 { id:29, title:'Git Internals', branch:'deep/internals', subtitle:'زیر کاپوت: Object Model، HEAD و ساختار تاریخچه.',
 body:`
 <div class="callout note"><span class="co-title">عمق بیشتر، همان مسیر دوره</span>این سطح از کار روزمره عمیق‌تر است، ولی بخشی از مسیر کامل دوره و شرط گواهی پایان است. اینجا می‌فهمی چرا Git این‌قدر مطمئن است و چرا تقریباً هیچ‌چیز گم نمی‌شود.</div>
-<h3>Object Model — Git یک پایگاه‌دادهٔ ساده است</h3>
+<h2>Object Model — Git یک پایگاه‌دادهٔ ساده است</h2>
 <p>Git در واقع یک انبار «شیء» است که هر شیء با <strong>Hash</strong> (یک <strong>SHA</strong>ی محاسبه‌شده از محتوایش) شناخته می‌شود. چهار نوع شیء اصلی:</p>
 <ul>
 <li><strong>Blob:</strong> محتوای یک فایل (بدون نام).</li>
@@ -1333,18 +1333,18 @@ body:`
 <li><strong>Tag Object:</strong> برچسب Annotated.</li>
 </ul>
 <p>چون شناسه از محتوا ساخته می‌شود، تغییر یک بایت یعنی شیء کاملاً جدید با هش متفاوت؛ به همین دلیل هر تغییر در محتوا <strong>قابل‌تشخیص</strong> است و یکپارچگی تاریخچه را می‌توان راستی‌آزمایی کرد. توجه: این یعنی دستکاری «آشکار می‌شود»، نه اینکه تاریخچه تغییرناپذیر باشد — تاریخچهٔ محلی را همچنان می‌توان با <code>reset</code> یا <code>rebase</code> بازنویسی و با force push منتشر کرد؛ ولی چون هش‌ها عوض می‌شوند، این بازنویسی پنهان نمی‌ماند.</p>
-<h3>Reference و HEAD</h3>
+<h2>Reference و HEAD</h2>
 <p><strong>Reference</strong> اسم خوانا برای یک هش است: شاخه‌ها و Tagها فقط اشاره‌گر به یک Commit‌اند. <strong>HEAD</strong> یعنی «الان کجا ایستاده‌ای» — معمولاً به یک شاخه اشاره می‌کند.</p>
 <p><strong>Detached HEAD</strong> وقتی است که مستقیم روی یک Commit ایستاده‌ای، نه روی شاخه. اگر آنجا Commit بزنی و بروی، آن کار به هیچ شاخه‌ای وصل نیست (ولی از reflog قابل بازیابی است). راه‌حل: <code>git switch -c new-branch</code>.</p>
-<h3>Index و Packfile</h3>
+<h2>Index و Packfile</h2>
 <ul>
 <li><strong>Index:</strong> نام فنی همان Staging Area؛ فایلی که وضعیت آمادهٔ Commit بعدی را نگه می‌دارد.</li>
 <li><strong>Packfile:</strong> برای صرفه‌جویی، Git اشیاء را در فایل‌های فشرده و به‌صورت تفاضلی بسته‌بندی می‌کند. به همین دلیل تاریخچهٔ چندساله می‌تواند حجم کمی داشته باشد.</li>
 <li><strong>Garbage Collection:</strong> پاک‌سازی خودکار اشیائی که هیچ Reference یا reflogی به آن‌ها اشاره نمی‌کند. تا وقتی reflog نگهشان دارد، Commitهای «گم‌شده» قابل بازیابی‌اند.</li>
 </ul>
-<h3>DAG و Three-way Merge</h3>
+<h2>DAG و Three-way Merge</h2>
 <p>ساختار تاریخچهٔ Git یک <strong>DAG</strong> (گراف جهت‌دار بدون دور) است: هر Commit به والدش اشاره می‌کند و Merge Commitها دو والد دارند. برای ادغام، Git از <strong>Three-way Merge</strong> استفاده می‌کند: نسخهٔ من، نسخهٔ تو و <strong>جد مشترک</strong> را مقایسه می‌کند. همین جد مشترک است که به Git اجازه می‌دهد بفهمد چه چیزی واقعاً تغییر کرده و کجا واقعاً تضاد وجود دارد.</p>
-<h3>Plumbing در برابر Porcelain</h3>
+<h2>Plumbing در برابر Porcelain</h2>
 <p>دستورهای روزمره (<code>add</code>، <code>commit</code>، <code>log</code>) لایهٔ <strong>Porcelain</strong> هستند: برای انسان. زیرشان دستورهای <strong>Plumbing</strong> مثل <code>git hash-object</code> و <code>git cat-file</code> قرار دارند که مستقیم با پایگاه‌دادهٔ اشیاء کار می‌کنند و بیشتر در اسکریپت‌ها کاربرد دارند.</p>
 `,
 quiz:[
@@ -1356,7 +1356,7 @@ quiz:[
 ]},
 { id:30, title:'جمع‌بندی و نقشهٔ راه', branch:'main', subtitle:'حالا این‌ها را کجا و چطور به کار ببری.',
 body:`
-<h3>Workflow اصلی که باید در آن مسلط باشی</h3>
+<h2>Workflow اصلی که باید در آن مسلط باشی</h2>
 <pre><code>Clone
  → Create Branch
  → Make Change
@@ -1380,21 +1380,21 @@ git push -u origin feature/search-empty-state
 <span class="c"># در GitHub: Pull Request → Review → Merge</span>
 git switch main &amp;&amp; git pull
 git revert COMMIT   <span class="c"># در صورت نیاز</span></code></pre>
-<h3>چهار سناریویی که باید بتوانی اجرا کنی</h3>
+<h2>چهار سناریویی که باید بتوانی اجرا کنی</h2>
 <ol>
 <li><strong>مدیریت چند نسخهٔ Prototype:</strong> شاخه برای هر واریانت، Preview URL برای هرکدام، ثبت بازخورد در PR، حذف بازنده‌ها و نگه‌داشتن نسخهٔ پایدار روی main. <em>(سطح ۷، ۲۲)</em></li>
 <li><strong>بررسی تغییرات تولیدشده توسط AI:</strong> Commit به‌عنوان Restore Point، شاخهٔ آزمایش جدا، خواندن دقیق Diff، توجه به Dependency و Config، Stage گزینشی و Revert در صورت نیاز. <em>(سطح ۱۳، ۱۴، ۲۱)</em></li>
 <li><strong>تحویل و Review طراحی در Pull Request:</strong> PR با ساختار Problem / Design decision / What changed / Figma / States / Limitations / Questions، همراه Before-After و پاسخ به Reviewها. <em>(سطح ۱۱، ۱۲)</em></li>
 <li><strong>مدیریت تغییرات Design System و Tokenها:</strong> شاخه و PR برای تغییر توکن، Review دقیق Diff، تشخیص Breaking Change، Semantic Versioning، Changelog و Release. <em>(سطح ۱۷، ۲۳، ۲۴)</em></li>
 </ol>
-<h3>ترتیب یادگیری، خلاصه‌شده</h3>
+<h2>ترتیب یادگیری، خلاصه‌شده</h2>
 <table><tr><th>مرحله</th><th>محتوا</th><th>سطح‌ها</th></tr>
 <tr><td><strong>۱. حتماً</strong></td><td>مفاهیم پایه، Repo، Commit، Diff، Branch، Push/Pull، Merge، Conflict، PR، Restore/Revert، gitignore</td><td>۱ تا ۱۴</td></tr>
 <tr><td><strong>۲. کار حرفه‌ای</strong></td><td>Reset، Stash، Tag و Release، Issue، Collaboration، امنیت</td><td>۱۵ تا ۲۰</td></tr>
 <tr><td><strong>۳. Design Technologist</strong></td><td>Git برای AI، Prototype، Design System، Figma Sync، CI/CD، CLI، Rebase</td><td>۲۱ تا ۲۷</td></tr>
 <tr><td><strong>۴. تعمیق و جمع‌بندی</strong></td><td>Cherry-pick، Git Internals، جمع‌بندی و نقشهٔ راه</td><td>۲۸ تا ۳۰</td></tr>
 </table>
-<h3>سه عادتی که بیشترین اثر را دارند</h3>
+<h2>سه عادتی که بیشترین اثر را دارند</h2>
 <ul>
 <li><strong>قبل از هر کاری status، قبل از هر Commit ای diff.</strong> این دو عادت جلوی بیشتر اشتباه‌های رایج را می‌گیرند.</li>
 <li><strong>شاخه‌های کوچک، PRهای کوچک، Commitهای متمرکز.</strong> کیفیت Review و سرعت تیم مستقیماً به این بستگی دارد.</li>

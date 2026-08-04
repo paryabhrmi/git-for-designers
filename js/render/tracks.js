@@ -85,7 +85,7 @@ function overview() {
   $('#root').innerHTML = `
     <div class="tracks-head">
       <span class="hero-badge"><i class="ph-fill ph-path" aria-hidden="true"></i>${t('track.heroBadge')}</span>
-      <h2>${t('nav.tracks')}</h2>
+      <h1>${t('nav.tracks')}</h1>
       <p class="lead">${t('track.lead')}</p>
     </div>
     <div class="track-reco">
@@ -158,7 +158,7 @@ function missionSection(track) {
     </a></li>`;
   }).join('');
   return `<section class="td-missions">
-    <h3 class="td-missions-h">${t('track.missions.h')}</h3>
+    <h2 class="td-missions-h">${t('track.missions.h')}</h2>
     <p class="td-missions-sub">${t('track.missions.sub')}</p>
     <ol class="td-levels" style="margin-bottom:0">${rows}</ol>
   </section>`;
@@ -186,7 +186,7 @@ function detail(track) {
     <div class="track-detail-head">
       <span class="td-ic"><i class="ph-fill ${track.icon}" aria-hidden="true"></i></span>
       <div>
-        <h2>${track.shortTitle}</h2>
+        <h1>${track.shortTitle}</h1>
         <p class="td-en" dir="ltr">${track.title}</p>
       </div>
     </div>
@@ -203,7 +203,7 @@ function detail(track) {
       <div class="td-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${st.pct}" aria-label="${tf('track.prog.barAria', track.shortTitle)}"><i style="width:${st.pct}%"></i></div>
     </div>
     ${actionBlock(track, st)}
-    <h3 class="td-lv-h">${t('track.levels.h')}</h3>
+    <h2 class="td-lv-h">${t('track.levels.h')}</h2>
     <ol class="td-levels">
       ${st.levels.map(l => levelRow(l, recIdx)).join('')}
     </ol>

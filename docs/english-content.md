@@ -195,3 +195,18 @@ No third language, no translation API or runtime translation service, no
 user-submitted translations, no separate English progress, no duplicate XP or
 badge systems, no backend, accounts, cloud sync, analytics, or tracking, no new
 levels, tracks, or missions, and no external runtime dependency.
+
+## Static metadata stays Persian
+
+The `<title>`, `<meta name="description">` and Open Graph tags in `index.html`
+are Persian and are **not** swapped when the language is switched — they are
+static markup, and the language switch happens in JavaScript after the document
+is parsed.
+
+For a crawler or preview bot that does not execute JavaScript, the page is
+therefore described in Persian regardless of the reader's language. This is a
+deliberate trade-off: Persian is the project's primary audience, and the
+alternative (rendering metadata per language) would require either a build step
+or a server, both of which the architecture rules out. `document.title` **is**
+updated per route once the app runs, so the browser tab is always correct for
+the active language.
