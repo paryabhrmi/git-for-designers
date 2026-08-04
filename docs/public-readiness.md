@@ -1,5 +1,12 @@
 # Public Readiness — Phase 4 Quality Report
 
+> **Status: superseded.** This is the Phase 4 quality report, kept as a record.
+> The product has since shipped as [**v1.0.0**](https://github.com/paryabhrmi/git-for-designers/releases/tag/v1.0.0), live at <https://paryabhrmi.github.io/git-for-designers/> under
+> the MIT licence. Statements below about nothing being deployed or about
+> pending owner decisions were true when written. See
+> [`release-candidate.md`](release-candidate.md) and
+> [`design-review.md`](design-review.md) for what happened after.
+
 **Branch:** `chore/public-readiness` · **Base:** `origin/main` after PR #11 (`e553489`)
 **Environment:** Linux container, Node v22.22.2, Chromium 1194 (Playwright-driven), local static server (`http-server`).
 **Date context:** 2026-08-03.

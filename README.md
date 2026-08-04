@@ -115,7 +115,10 @@ progress upload. Learner state lives only in `localStorage` under a single key.
 
 ## Project status
 
-Actively developed and **live at https://paryabhrmi.github.io/git-for-designers/**, served by GitHub Pages from `main`. See
+Released as **[v1.0.0](https://github.com/paryabhrmi/git-for-designers/releases/tag/v1.0.0)** and
+live at **https://paryabhrmi.github.io/git-for-designers/**, served by GitHub Pages
+from `main` with no build step. See [`CHANGELOG.md`](CHANGELOG.md) for what is in
+the release, and
 [`docs/release-candidate.md`](docs/release-candidate.md) for the current
 go/no-go assessment, what was verified and how, and the open items;
 [`docs/public-readiness.md`](docs/public-readiness.md) for the earlier quality
