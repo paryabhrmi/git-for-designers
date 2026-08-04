@@ -75,7 +75,10 @@
 .gline.off{background:transparent;}
 .gdot{width:12px; height:12px; border-radius:50%; border:2px solid var(--pc); background:var(--rail); flex-shrink:0; display:grid; place-items:center; transition:all .2s; color:var(--rail);}
 .gdot i{font-size:7px; opacity:0;}
-.nav-item.done .gdot{background:var(--pc);} .nav-item.done .gdot i{opacity:1; color:#fff;}
+/* The completed-level tick paints on var(--pc), which inverts with the theme;
+   a hardcoded white glyph measured 1.13:1 in dark — the same failure the skip
+   link had. --paper is the contrasting ink in both themes. */
+.nav-item.done .gdot{background:var(--pc);} .nav-item.done .gdot i{opacity:1; color:var(--paper);}
 .nav-item.lock .gdot{border-color:var(--rail-line); background:var(--rail-fill);}
 .nav-item.active .gdot{box-shadow:0 0 0 4px color-mix(in srgb,var(--pc) 25%, transparent); transform:scale(1.12);}
 .nav-lb{flex:1; padding:8px 11px; border-radius:10px; margin:2px 0; font-size:13.5px; line-height:1.55; color:var(--rail-item); transition:background .15s,color .15s; display:flex; align-items:center; gap:8px;}
@@ -110,11 +113,6 @@
 .nav-special:hover .nav-lb > i:first-child{color:var(--rail-ink);}
 .rail-foot{padding:13px 16px 15px; border-top:1px solid var(--rail-line); background:var(--rail-2); display:grid; gap:10px;}
 .author-row{display:flex; align-items:center; gap:10px;}
-.monogram{
-  width:36px; height:36px; border-radius:11px; flex-shrink:0; display:grid; place-items:center;
-  font-size:12.5px; font-weight:800; color:#fff; letter-spacing:-.5px;
-  background:linear-gradient(150deg,#3549D6,#7B45D6); box-shadow:0 5px 14px -6px #3549D6;
-}
 .author-id{min-width:0; line-height:1.5;}
 .author-id b{display:block; font-size:13.5px; font-weight:700; color:var(--rail-ink);}
 .author-id span{display:block; font-size:11px; color:var(--rail-muted);}
@@ -135,15 +133,14 @@
 .rail-settings[open] summary .cs{transform:rotate(180deg);}
 .rail-settings-body{padding:10px 2px 2px; display:grid; gap:8px;}
 .rail-settings-body p{font-size:11px; line-height:1.75; color:var(--rail-muted); margin:0;}
-.mini-btn.danger{border-color:color-mix(in srgb,var(--danger,#B3261E) 40%, var(--rail-line)); color:var(--rail-ink);}
-.mini-btn.danger:hover{border-color:var(--danger,#B3261E);}
+.mini-btn.danger{border-color:color-mix(in srgb,var(--del) 40%, var(--rail-line)); color:var(--rail-ink);}
+.mini-btn.danger:hover{border-color:var(--del);}
 
 /* author card + byline in content */
 .author-card{
   display:flex; align-items:center; gap:15px; background:var(--surface); border:1px solid var(--line);
   border-radius:var(--r); padding:18px 20px; margin:26px 0 8px; box-shadow:var(--sh-1); flex-wrap:wrap;
 }
-.author-card .monogram{width:52px; height:52px; border-radius:15px; font-size:17px;}
 .avatar{width:38px; height:38px; border-radius:12px; object-fit:cover; object-position:center 22%; flex-shrink:0; border:1px solid var(--rail-line);}
 .author-card .avatar{width:62px; height:62px; border-radius:19px; border:1px solid var(--line); box-shadow:var(--sh-1);}
 .cert-avatar{width:54px; height:54px; border-radius:50%; object-fit:cover; object-position:center 22%; border:2px solid color-mix(in srgb,var(--gold) 45%, transparent);}
