@@ -103,15 +103,26 @@ honest accounting.
 <div dir="rtl">
 
 - پیشرفت تو فقط در **همین مرورگر** (localStorage) ذخیره می‌شود.
-- هیچ **حسابی** لازم نیست و هیچ داده‌ای **جایی آپلود نمی‌شود**.
+- هیچ **حسابی** لازم نیست و **پیشرفت تو جایی آپلود نمی‌شود**.
 - پیشرفت به‌طور خودکار **همگام‌سازی نمی‌شود**؛ پاک‌کردن دادهٔ مرورگر می‌تواند آن را حذف کند.
-- این برنامه **آنالیتیکس، ردیاب، یا جمع‌آوری ایمیل/شماره** ندارد.
+- **ایمیل یا شماره‌ای** جمع نمی‌شود.
 
 </div>
 
-At runtime the application makes no network requests (verified by review): all
-fonts and icons are served locally, and there is no analytics, tracking, or
-progress upload. Learner state lives only in `localStorage` under a single key.
+Learner state lives only in `localStorage` under a single key and is never
+uploaded. Fonts and icons are served locally.
+
+**Analytics are opt-in and off by default.** `CLARITY_ID` in `js/config.js` is
+empty, so `js/analytics.js` loads nothing and the app makes no third-party
+requests — which is what a fork of this repo inherits. Setting the id to a
+Microsoft Clarity project switches on anonymous interaction analytics (clicks,
+scrolls, session replay) sent to Microsoft; it never reads or transmits stored
+progress, respects `navigator.doNotTrack`, and the course works unchanged when
+the script is blocked.
+
+One rule if you turn it on: the intro screen's privacy line has to match the
+build. `intro.privacy.an` in `js/i18n.js` is appended automatically whenever
+`CLARITY_ID` is set, so the two cannot drift — do not hard-code either half.
 
 ## Project status
 

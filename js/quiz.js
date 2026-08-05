@@ -86,7 +86,11 @@ export function checkQuiz() {
   const res = $('#result');
   res.className = 'result show ' + (passed ? 'pass' : 'fail');
   res.innerHTML = `<span class="tag"><i class="ph-bold ph-${passed ? 'check' : 'x'}"></i>${FA(correct)}/${FA(l.quiz.length)}</span>` +
-    (passed ? t('quiz.pass') : tf('quiz.fail', FA(need))) +
+    // On a pass the row carries data only — score, XP, perfect bonus. The verdict
+    // is already the green tick on the score chip and the gate line below it, and
+    // a fourth restatement of "you passed" was most of why this area felt loud.
+    // A failure still needs its sentence: the number alone does not say what to do.
+    (passed ? '' : tf('quiz.fail', FA(need))) +
     (gained ? `<span class="xp-gain"><i class="ph-fill ph-lightning"></i>+${gained} XP</span>` : '') +
     (perfect && passed ? `<span class="perfect-tag"><i class="ph-fill ph-target"></i>${t('quiz.perfect')}</span>` : '') +
     (state.tries[l.id] > 1 ? `<span class="streak"><i class="ph ph-arrow-counter-clockwise"></i>${tf('quiz.try', FA(state.tries[l.id]))}</span>` : '');

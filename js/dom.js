@@ -1,3 +1,8 @@
 export const $ = (s) => document.querySelector(s);
-import { getLang } from './i18n.js';
-export const FA = (n) => getLang() === 'en' ? String(n) : String(n).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+// Numerals stay Latin in both languages. IRANYekanX's Persian figures are
+// noticeably lighter and narrower than its letters, so at display sizes the
+// numbers read as weaker than the words around them — the opposite of what a
+// stat block is for. Terminology is untouched: Git terms stay English and
+// Persian prose stays Persian. The helper is kept (a dozen call sites) so the
+// decision lives in one place and can be reversed in one line.
+export const FA = (n) => String(n);

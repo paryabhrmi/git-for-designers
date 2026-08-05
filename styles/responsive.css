@@ -139,8 +139,8 @@ html[dir="ltr"] .ph-arrow-right::before,
 html[dir="ltr"] .ph-caret-left::before,
 html[dir="ltr"] .ph-caret-right::before{display:inline-block; transform:scaleX(-1);}
 
-/* Quiz answer chips: the label text lives in CSS content, so localize it. */
-html[lang="en"] .opt.ok::after{content:'Correct answer';}
+/* Quiz answer chips: the label text lives in CSS content, so localize it.
+   The correct option no longer carries a tag — see styles/quiz.css. */
 html[lang="en"] .opt.no::after{content:'Your choice';}
 html[lang="en"] .q-item.need::after{content:'Unanswered';}
 
