@@ -144,8 +144,22 @@ the release, and
 [`docs/release-candidate.md`](docs/release-candidate.md) for the current
 go/no-go assessment, what was verified and how, and the open items;
 [`docs/public-readiness.md`](docs/public-readiness.md) for the earlier quality
-report; and [`docs/`](docs/) for the curriculum audit, curriculum map, and
-learning-experience design notes.
+report.
+
+Everything in `docs/` is a record of a decision or a review, indexed here so
+none of it is orphaned:
+
+| Document | What it is |
+|---|---|
+| [`analytics.md`](docs/analytics.md) | Every tag and event sent to Clarity, and how to read them |
+| [`clarity-setup.md`](docs/clarity-setup.md) | Setting up the dashboard, plus the report script |
+| [`curriculum-audit.md`](docs/curriculum-audit.md) | Coverage review of the 30 levels |
+| [`curriculum-map.md`](docs/curriculum-map.md) | What exists, against the proposed track structure |
+| [`design-review.md`](docs/design-review.md) | Interface critique, measured in a real browser |
+| [`english-content.md`](docs/english-content.md) | How the English learning experience is built |
+| [`bilingual-architecture.md`](docs/bilingual-architecture.md) | The bilingual shell (superseded record) |
+| [`learning-experience.md`](docs/learning-experience.md) | The missions layer |
+| [`public-readiness.md`](docs/public-readiness.md) · [`release-candidate.md`](docs/release-candidate.md) | Phase quality reports (superseded records) |
 
 Licence (MIT), hosting (GitHub Pages) and the production URL are all settled,
 so `canonical` and `og:url` are now published in `index.html`.

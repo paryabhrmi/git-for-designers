@@ -1,5 +1,12 @@
 # Bilingual Architecture (Phase 5A)
 
+> **Status: superseded.** This describes the Phase 5A *shell* — the language
+> state, string catalog and direction handling — at a point when the curriculum
+> was still Persian-only. Phase 5B delivered the complete English learning
+> experience, so the statement below that lessons "remain Persian-only" is no
+> longer true. Kept as a record of how the bilingual layer was designed; see
+> [`english-content.md`](english-content.md) for the finished state.
+
 Phase 5A introduces the **infrastructure** for a Persian/English product. It does
 **not** translate curriculum content — lessons, quizzes, scenarios, missions,
 and the glossary remain Persian-only until the content-translation phase (5B).
