@@ -19,7 +19,7 @@ import { renderTracks } from './render/tracks.js';
 import { renderMissions } from './render/missions.js';
 import { renderSystem } from './render/system.js';
 import { setLang, getLang, t } from './i18n.js';
-import { initAnalytics, trackView } from './analytics.js';
+import { initAnalytics, trackView, tagContext, trackEvent, keepSession } from './analytics.js';
 
 export { shuffle, newAttempt, refreshCount, checkQuiz };
 export {
@@ -39,9 +39,17 @@ export function render() {
   buildNav($('#search').value);
   updateMob();
   syncHash();
+  // Re-tag on every render so a session's dimensions always describe the
+  // furthest point it reached, not where it happened to start.
+  tagContext();
+  if (state.view === 'lesson' && state.current !== lastTagged) {
+    lastTagged = state.current;
+    trackEvent('level_open');
+  }
   const r = $('#root');
   r.classList.remove('view-in'); void r.offsetWidth; r.classList.add('view-in');
 }
+let lastTagged = null;
 
 let modalAction = null;
 export function openModal(action) {
@@ -102,6 +110,7 @@ $('#themeBtn').addEventListener('click', () => {
   el.dataset.theme = el.dataset.theme === 'dark' ? 'light' : 'dark';
   $('#themeBtn').innerHTML = `<i class="ph ph-${el.dataset.theme === 'dark' ? 'sun' : 'moon'}"></i>`;
   save();
+  trackEvent('theme_switch');
 });
 $('#langBtn').addEventListener('click', async () => {
   const btn = $('#langBtn');
@@ -112,6 +121,7 @@ $('#langBtn').addEventListener('click', async () => {
     await setLang(getLang() === 'fa' ? 'en' : 'fa');
     save();
     render();   // rebuild nav + views so t()-driven labels update
+    trackEvent('lang_switch');
   } finally {
     delete btn.dataset.busy;
     btn.removeAttribute('aria-busy');
@@ -126,6 +136,8 @@ $('#resetBtn').addEventListener('click', () => openModal(() => {
   state.current = 0; state.view = 'intro'; state.openPhases = null;
   state.track = null; state.mission = null; state.missionsDone = [];
   save(); render();
+  trackEvent('progress_reset');
+  keepSession('progress_reset');   // someone wiping everything is worth watching
   toast(t('app.reset'), 'ph-arrow-counter-clockwise');
 }));
 document.addEventListener('keydown', e => {

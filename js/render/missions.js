@@ -12,6 +12,7 @@ import { SITE, LINKEDIN } from '../config.js';
 import { $, FA } from '../dom.js';
 import { byline as bylineFn } from '../ui.js';
 import { ctx } from '../ctx.js';
+import { trackEvent, tag } from '../analytics.js';
 import { t, tf } from '../i18n.js';
 
 const byline = () => bylineFn(SITE, LINKEDIN);
@@ -33,7 +34,12 @@ const isDone = (id) => state.missionsDone.includes(id);
 const trackName = (id) => (TRACK_BY_ID[id] ? TRACK_BY_ID[id].shortTitle : id);
 
 function markDone(id) {
-  if (!isDone(id)) { state.missionsDone.push(id); ctx.save(); }   // first completion only; no XP, no duplicates
+  if (!isDone(id)) {
+    state.missionsDone.push(id);
+    ctx.save();   // first completion only; no XP, no duplicates
+    tag('last_mission', id);
+    trackEvent('mission_complete');
+  }
 }
 
 /* ---------------- hub ---------------- */
