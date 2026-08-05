@@ -15,7 +15,7 @@ export const PUBLIC_COURSE_URL = '';
  * Paste the id from clarity.microsoft.com → Settings → Overview to switch it on.
  * If you do, keep the `intro.privacy` string in js/i18n.js honest about it.
  */
-export const CLARITY_ID = '';
+export const CLARITY_ID = 'xxmk2hgkty';
 export const ROUTES = {
   intro: '#/intro',
   glossary: '#/glossary',
