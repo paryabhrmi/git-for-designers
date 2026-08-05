@@ -124,6 +124,11 @@ One rule if you turn it on: the intro screen's privacy line has to match the
 build. `intro.privacy.an` in `js/i18n.js` is appended automatically whenever
 `CLARITY_ID` is set, so the two cannot drift — do not hard-code either half.
 
+Setting the dashboard up — smart events, saved segments, the funnel worth
+building — is in [`docs/clarity-setup.md`](docs/clarity-setup.md), together with
+`scripts/clarity-report.mjs`, which pulls Clarity's export API and renders a
+self-contained HTML report (`CLARITY_API_TOKEN=… node scripts/clarity-report.mjs`).
+
 What gets sent, and how to read it in the dashboard, is documented in
 [`docs/analytics.md`](docs/analytics.md): a dozen bucketed tags (progress, level,
 phase, language, theme), a dozen events (`quiz_fail`, `quiz_retry`,
