@@ -3,7 +3,7 @@
 /* ---- overview ---- */
 .tracks-head{margin-bottom:var(--s5);}
 .tracks-head h1{font-size:clamp(26px,3.6vw,38px); font-weight:900; letter-spacing:-.7px; line-height:1.4; margin-top:6px;}
-.tracks-head .lead{font-size:16px; color:var(--muted); margin-top:12px; max-width:62ch; line-height:2;}
+.tracks-head .lead{font-size:16px; color:var(--muted); margin-top:12px; line-height:2;}
 
 .track-reco{display:flex; align-items:center; gap:var(--s3); flex-wrap:wrap;
   background:var(--surface); border:1px solid var(--line); border-inline-start:3px solid var(--accent);
@@ -43,7 +43,7 @@
 .tc-bar i{display:block; height:100%; background:var(--accent); border-radius:99px; transition:width .5s;}
 .tc-cta{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; color:var(--accent-ink);}
 .tc-cta i{font-size:15px;}
-.track-note{display:flex; gap:8px; align-items:flex-start; font-size:12.8px; color:var(--muted); line-height:1.85; margin:var(--s5) 0 0; max-width:70ch;}
+.track-note{display:flex; gap:8px; align-items:flex-start; font-size:12.8px; color:var(--muted); line-height:1.85; margin:var(--s5) 0 0;}
 .track-note i{margin-top:3px; flex-shrink:0;}
 
 /* ---- detail ---- */
@@ -59,8 +59,8 @@
 .td-tag{white-space:nowrap; font-size:12px; font-weight:700; padding:5px 11px; border-radius:var(--r-pill); border:1px solid var(--line); background:var(--surface); color:var(--ink-2);}
 .td-tag.t-req{background:var(--accent); color:var(--on-accent); border-color:var(--accent);}
 .td-tag.t-opt{background:var(--surface-2); color:var(--muted);}
-.td-desc{font-size:15px; color:var(--ink-2); line-height:2; max-width:66ch;}
-.td-aud,.td-prereq{display:flex; align-items:flex-start; gap:8px; font-size:13.2px; color:var(--muted); line-height:1.8; margin-top:10px; max-width:66ch;}
+.td-desc{font-size:15px; color:var(--ink-2); line-height:2;}
+.td-aud,.td-prereq{display:flex; align-items:flex-start; gap:8px; font-size:13.2px; color:var(--muted); line-height:1.8; margin-top:10px;}
 .td-aud i,.td-prereq i{margin-top:3px; flex-shrink:0;}
 .td-prog{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--s4) var(--s5); box-shadow:var(--sh-1); margin:var(--s5) 0;}
 .td-prog-row{display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:9px;}
