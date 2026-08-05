@@ -9,6 +9,13 @@ export const LINKEDIN = 'https://www.linkedin.com/in/paryabhrmi';
 export const AVATAR_SRC = './assets/avatar.jpg';
 /** Public course URL for optional share links; empty disables URL attachment. */
 export const PUBLIC_COURSE_URL = '';
+/**
+ * Microsoft Clarity project id. Empty means no analytics script is loaded at
+ * all — that is the default, and it is what forks of this repo get.
+ * Paste the id from clarity.microsoft.com → Settings → Overview to switch it on.
+ * If you do, keep the `intro.privacy` string in js/i18n.js honest about it.
+ */
+export const CLARITY_ID = 'xxmk2hgkty';
 export const ROUTES = {
   intro: '#/intro',
   glossary: '#/glossary',

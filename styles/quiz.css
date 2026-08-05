@@ -16,8 +16,10 @@
 .opt.sel .opt-key{background:var(--pc); color:var(--on-accent); border-color:var(--pc);}
 .opt.ok{border-color:var(--add); border-width:2px; background:var(--add-soft);}
 .opt.ok .opt-text{font-weight:700;}
-.opt.ok::after{content:'پاسخ درست'; position:absolute; top:-9px; inset-inline-start:14px; font-size:10px; font-weight:700;
-  background:var(--add); color:var(--on-add); padding:2px 8px; border-radius:var(--r-pill);}
+/* No "correct answer" tag: the green fill, the 2px border, the bold text, the
+   tinted key and the check mark already say it four times over. The wrong
+   option keeps its tag, because "this was your pick" is information the styling
+   alone cannot carry. */
 .opt.ok .opt-key{background:var(--add); color:var(--on-add); border-color:var(--add);}
 .opt.ok .opt-mark{opacity:1; color:var(--add);}
 .opt.no{border-color:var(--del); border-style:solid; background:var(--del-soft);}
@@ -36,6 +38,10 @@
 .btn-add{background:var(--add); color:var(--on-add);} .btn-add:hover{filter:brightness(1.09);}
 .btn-gold{background:var(--gold); color:var(--on-accent);} .btn-gold:hover{filter:brightness(1.09);}
 .btn:disabled{opacity:.45; cursor:not-allowed;}
+/* .btn sets display:inline-flex, which outranks the user-agent [hidden] rule —
+   so buttons the script hid after checking stayed on the row, greyed out, still
+   competing with the real next action. */
+.btn[hidden]{display:none;}
 .result{display:none; align-items:center; gap:9px; font-size:14px; font-weight:700; margin-inline-start:auto;}
 .result.show{display:flex;}
 .result .tag{font-family:'JetBrains Mono',monospace; font-size:12px; padding:4px 9px; border-radius:8px; display:flex; align-items:center; gap:5px;}

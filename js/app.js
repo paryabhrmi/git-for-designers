@@ -19,6 +19,7 @@ import { renderTracks } from './render/tracks.js';
 import { renderMissions } from './render/missions.js';
 import { renderSystem } from './render/system.js';
 import { setLang, getLang, t } from './i18n.js';
+import { initAnalytics, trackView } from './analytics.js';
 
 export { shuffle, newAttempt, refreshCount, checkQuiz };
 export {
@@ -163,7 +164,7 @@ if (window.matchMedia('(max-width:940px)').matches) $('#menuBtn').style.display 
 
 window.addEventListener('hashchange', () => {
   if (state.routing) return;
-  if (applyHash()) { render(); save(); focusMain(); }
+  if (applyHash()) { render(); save(); focusMain(); trackView(location.hash); }
 });
 
 if (document.fonts && document.fonts.ready) {
@@ -179,5 +180,8 @@ if (document.fonts && document.fonts.ready) {
   $('#themeBtn').innerHTML = `<i class="ph ph-${document.documentElement.dataset.theme === 'dark' ? 'sun' : 'moon'}"></i>`;
   applyHash();   // a shared link wins over the stored position
   render();
+  // Last, and never awaited: a blocked or missing analytics script must not be
+  // able to delay or break the first paint of the course.
+  if (initAnalytics()) trackView(location.hash || '#/intro');
 })();
 

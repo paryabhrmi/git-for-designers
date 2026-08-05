@@ -114,7 +114,7 @@ export const MISSIONS = [
       },
     ],
     completionMessage: 'یک تغییر طراحی را از بررسی وضعیت تا Pull Request و پاسخ به بازبینی، تمیز و امن به مقصد رساندی.',
-    nextAction: { label: 'مرور سطح ۱۲: Pull Request برای طراحان', href: '#/level-12' },
+    nextAction: { label: 'مرور سطح 12: Pull Request برای طراحان', href: '#/level-12' },
   },
 
   /* ---------------- AI & PROTOTYPE ---------------- */
@@ -126,7 +126,7 @@ export const MISSIONS = [
     levelIds: [21, 6, 14],
     difficulty: 'تخصصی',
     icon: 'ph-robot',
-    context: 'یک ابزار کدنویسی AI روی پروتوتایپ ۱۴ فایل را تغییر داده. بعضی تغییرها مفیدند، بعضی نه — و یک فایل <code>.env</code> با توکن Figma هم ساخته شده. می‌خواهی قبل از Prompt بعدی، یک نقطهٔ امن داشته باشی.',
+    context: 'یک ابزار کدنویسی AI روی پروتوتایپ 14 فایل را تغییر داده. بعضی تغییرها مفیدند، بعضی نه — و یک فایل <code>.env</code> با توکن Figma هم ساخته شده. می‌خواهی قبل از Prompt بعدی، یک نقطهٔ امن داشته باشی.',
     objectives: [
       'خروجی AI را قبل از پذیرش بررسی کنی',
       'از Commit‌شدن Secret جلوگیری کنی',
@@ -136,12 +136,12 @@ export const MISSIONS = [
     steps: [
       {
         id: 's1',
-        situation: 'ابزار می‌گوید «۱۴ فایل به‌روز شد». اولین کار درست چیست؟',
+        situation: 'ابزار می‌گوید «14 فایل به‌روز شد». اولین کار درست چیست؟',
         commandPreview: 'git diff',
         stateNote: 'git diff تغییرات Commit‌نشده را نشان می‌دهد؛ چیزی را تغییر نمی‌دهد.',
         choices: [
           { id: 'a', label: 'اول git diff بزنم و خروجی تولیدشده را بخوانم', feedback: 'درست است. کد AI خودکار درست نیست؛ باید مثل کد یک همکار تازه‌کار بازبینی شود. git diff دقیقاً می‌گوید چه چیزی عوض شده تا آگاهانه تصمیم بگیری.', tone: 'correct' },
-          { id: 'b', label: 'git add . و Commit بزنم چون ابزار معمولاً درست کار می‌کند', feedback: 'مناسب نیست. فرض «AI درست است» خطرناک است. Commit‌کردن ۱۴ فایل بدون دیدن آن‌ها، هم تغییر ناخواسته و هم احتمالاً Secret را وارد تاریخچه می‌کند.', tone: 'unsafe' },
+          { id: 'b', label: 'git add . و Commit بزنم چون ابزار معمولاً درست کار می‌کند', feedback: 'مناسب نیست. فرض «AI درست است» خطرناک است. Commit‌کردن 14 فایل بدون دیدن آن‌ها، هم تغییر ناخواسته و هم احتمالاً Secret را وارد تاریخچه می‌کند.', tone: 'unsafe' },
           { id: 'c', label: 'همه را دور بریزم چون معلوم نیست چه کرده', feedback: 'عجولانه است. شاید بخشی از تغییرات مفید باشد. اول بررسی کن، بعد تصمیم بگیر چه چیزی بماند و چه چیزی برود.', tone: 'risky' },
         ],
         correct: 'a',
@@ -203,7 +203,7 @@ export const MISSIONS = [
       },
     ],
     completionMessage: 'خروجی AI را کنترل‌شده مدیریت کردی: بررسی، بیرون‌گذاشتن Secret، شاخهٔ آزمایش، چک‌پوینت، و بازگردانی امن یک فایل.',
-    nextAction: { label: 'مرور سطح ۲۱: Git برای پروژه‌های AI', href: '#/level-21' },
+    nextAction: { label: 'مرور سطح 21: Git برای پروژه‌های AI', href: '#/level-21' },
   },
 
   /* ---------------- DESIGN SYSTEM ---------------- */
@@ -291,7 +291,7 @@ export const MISSIONS = [
       },
     ],
     completionMessage: 'یک تعارض توکن مشترک را بدون بازنویسی کار تیم حل کردی: شاخهٔ جدا، fetch، حل درست مارکرها و ادامهٔ امن ادغام.',
-    nextAction: { label: 'مرور سطح ۲۴: Git برای Figma و Design Tokens', href: '#/level-24' },
+    nextAction: { label: 'مرور سطح 24: Git برای Figma و Design Tokens', href: '#/level-24' },
   },
 
   /* ---------------- DESIGN TECHNOLOGIST ---------------- */
@@ -366,7 +366,7 @@ export const MISSIONS = [
       },
     ],
     completionMessage: 'یک شاخهٔ تمیز و قابل‌بازبینی ساختی: Rebase امن روی کار محلی، Cherry-pick هدفمند، و خنثی‌کردن امن یک Commit منتشرشده با revert.',
-    nextAction: { label: 'مرور سطح ۲۷: Rebase', href: '#/level-27' },
+    nextAction: { label: 'مرور سطح 27: Rebase', href: '#/level-27' },
   },
 ];
 
