@@ -5,6 +5,7 @@ import { earned } from './content.js';
 import { $, FA } from './dom.js';
 import { ctx } from './ctx.js';
 import { t, tf } from './i18n.js';
+import { trackEvent, tag, keepSession } from './analytics.js';
 
 export const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
@@ -95,6 +96,22 @@ export function checkQuiz() {
     (perfect && passed ? `<span class="perfect-tag"><i class="ph-fill ph-target"></i>${t('quiz.perfect')}</span>` : '') +
     (state.tries[l.id] > 1 ? `<span class="streak"><i class="ph ph-arrow-counter-clockwise"></i>${tf('quiz.try', FA(state.tries[l.id]))}</span>` : '');
   fresh.forEach((b, i) => setTimeout(() => ctx.toast(tf('quiz.newBadge', b.t), b.ic), 900 + i * 1400));
+
+  /* The one place worth measuring precisely: which level a learner fails, on
+     which attempt, and whether they come back. A failure also pins the session
+     recording — sampling would otherwise throw away exactly the sessions that
+     explain where the material is unclear. */
+  tag('last_quiz_level', String(l.id).padStart(2, '0'));
+  trackEvent('quiz_submit');
+  trackEvent(passed ? 'quiz_pass' : 'quiz_fail');
+  if (perfect && passed) trackEvent('quiz_perfect');
+  if (!passed) {
+    tag('failed_level', String(l.id).padStart(2, '0'));
+    keepSession('quiz_fail');
+  }
+  if (state.tries[l.id] > 1) trackEvent('quiz_retry');
+  fresh.forEach(() => trackEvent('badge_earned'));
+  if (passed && allPassed()) trackEvent('course_complete');
   // Hidden, not merely disabled: a greyed-out filled button still reads as the
   // heaviest control on the row and competed with the real next action.
   $('#checkBtn').disabled = true;

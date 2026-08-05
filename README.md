@@ -124,6 +124,12 @@ One rule if you turn it on: the intro screen's privacy line has to match the
 build. `intro.privacy.an` in `js/i18n.js` is appended automatically whenever
 `CLARITY_ID` is set, so the two cannot drift — do not hard-code either half.
 
+What gets sent, and how to read it in the dashboard, is documented in
+[`docs/analytics.md`](docs/analytics.md): a dozen bucketed tags (progress, level,
+phase, language, theme), a dozen events (`quiz_fail`, `quiz_retry`,
+`course_complete`, …), and two cases where the session recording is pinned so
+sampling cannot discard it. No identity call, ever.
+
 ## Project status
 
 Released as **[v1.0.0](https://github.com/paryabhrmi/git-for-designers/releases/tag/v1.0.0)** and
