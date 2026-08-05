@@ -23,15 +23,13 @@ export function renderIntro() {
           <path d="M7 8.3v7.4M7 12h5.6a2.1 2.1 0 0 0 2.1-2.1V9"/>
         </svg>${t('intro.heroBadge')}</span>
       <h1>${t('intro.h2')}</h1>
-      <div class="hero-body">
-        <p class="lead">${t('intro.lead')}</p>
-        <div class="stats">
-          <div class="stat"><i class="ph-duotone ph-stack"></i><b>${FA(LEVELS.length)}</b><span>${t('intro.stat.levels')}</span></div>
-          <div class="stat"><i class="ph-duotone ph-seal-question"></i><b>${FA(LEVELS.reduce((a, l) => a + l.quiz.length, 0))}</b><span>${t('intro.stat.quiz')}</span></div>
-          <div class="stat"><i class="ph-duotone ph-lightning"></i><b>${FA(maxXP())}</b><span>${t('intro.stat.xp')}</span></div>
-          <div class="stat"><i class="ph-duotone ph-clock"></i><b>${FA(totalMinutes())}</b><span>${t('intro.stat.mins')}</span></div>
-        </div>
-      </div>
+      <p class="lead">${t('intro.lead')}</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><i class="ph-duotone ph-stack"></i><b>${FA(LEVELS.length)}</b><span>${t('intro.stat.levels')}</span></div>
+      <div class="stat"><i class="ph-duotone ph-seal-question"></i><b>${FA(LEVELS.reduce((a, l) => a + l.quiz.length, 0))}</b><span>${t('intro.stat.quiz')}</span></div>
+      <div class="stat"><i class="ph-duotone ph-lightning"></i><b>${FA(maxXP())}</b><span>${t('intro.stat.xp')}</span></div>
+      <div class="stat"><i class="ph-duotone ph-clock"></i><b>${FA(totalMinutes())}</b><span>${t('intro.stat.mins')}</span></div>
     </div>
 
     <h2 style="font-size:19px;font-weight:800;margin:26px 0 12px">${t('intro.how')}</h2>
