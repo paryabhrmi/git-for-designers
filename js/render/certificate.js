@@ -5,7 +5,7 @@
  */
 import { state, passedCount, allPassed, firstOpen } from '../state.js';
 import { LEVELS } from '../course.js';
-import { SITE, LINKEDIN } from '../config.js';
+import { SITE, LINKEDIN, PUBLIC_COURSE_URL } from '../config.js';
 import { $, FA } from '../dom.js';
 import { byline as bylineFn } from '../ui.js';
 import { ctx } from '../ctx.js';
@@ -124,7 +124,7 @@ export function renderCert() {
           <button type="button" class="btn btn-ghost" id="copyCaption">
             <i class="ph-bold ph-copy" aria-hidden="true"></i>${t('ach.copyCaption')}
           </button>
-          <button type="button" class="btn btn-ghost" id="liUrlBtn">
+          <button type="button" class="btn btn-ghost" id="liUrlBtn" ${PUBLIC_COURSE_URL ? '' : 'hidden'}>
             <i class="ph-fill ph-linkedin-logo" aria-hidden="true"></i>${t('ach.liShare')}
           </button>
         </div>

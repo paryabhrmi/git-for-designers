@@ -86,7 +86,9 @@ function resolveEarnedBadges(badgeIds) {
 function formatDisplayDate(date = new Date()) {
   // Persian mode keeps the Jalali calendar; English mode uses a Gregorian date.
   try {
-    const locale = getLang() === 'en' ? 'en-US' : 'fa-IR';
+    // -u-nu-latn keeps the Jalali calendar — right for a Persian card — while
+    // rendering its numerals in Latin, like every other number in the product.
+    const locale = getLang() === 'en' ? 'en-US' : 'fa-IR-u-nu-latn';
     return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
   } catch (e) {
     return '—';

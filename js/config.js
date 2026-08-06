@@ -7,8 +7,8 @@ export const PHASE_IC = ['ph-seedling', 'ph-briefcase', 'ph-compass-tool', 'ph-c
 export const SITE = 'https://paryabahrami.ir';
 export const LINKEDIN = 'https://www.linkedin.com/in/paryabhrmi';
 export const AVATAR_SRC = './assets/avatar.jpg';
-/** Public course URL for optional share links; empty disables URL attachment. */
-export const PUBLIC_COURSE_URL = '';
+/** Public URL attached to share links. Empty hides the URL-based share actions. */
+export const PUBLIC_COURSE_URL = 'https://paryabhrmi.github.io/git-for-designers/';
 /**
  * Microsoft Clarity project id. Empty means no analytics script is loaded at
  * all — that is the default, and it is what forks of this repo get.
