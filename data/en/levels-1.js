@@ -64,8 +64,8 @@ body:`
 <span class="c"># Output looks something like: git version 2.45.0</span></code></pre>
 <h2>Introducing yourself to Git</h2>
 <p>Every commit is recorded with the author's name and email — so introduce yourself first. The <code>--global</code> flag means this setting applies to all of your projects:</p>
-<pre><code>git config --global user.name "Sara Ahmadi"
-git config --global user.email "sara@example.com"
+<pre><code>git config --global user.name "Parya Bahrami"
+git config --global user.email "parya@example.com"
 git config --global init.defaultBranch main   <span class="c"># name of the default branch</span>
 git config --list                             <span class="c"># review your settings</span></code></pre>
 <div class="callout note"><span class="co-title">Default Branch</span>In the past the main branch was called <code>master</code>; today's standard is <code>main</code>. With the setting above, every new repo you create starts on main right away.</div>
@@ -82,7 +82,7 @@ git config --list                             <span class="c"># review your sett
 <h3>2) SSH Key</h3>
 <p>SSH creates a pair of keys: a <strong>private</strong> key that stays only on your computer, and a <strong>public</strong> key that you give to GitHub. From then on you connect securely without entering a password:</p>
 <pre><code><span class="c"># 1) Generate the key</span>
-ssh-keygen -t ed25519 -C "sara@example.com"
+ssh-keygen -t ed25519 -C "parya@example.com"
 <span class="c"># 2) Copy the public key (Mac):</span>
 pbcopy &lt; ~/.ssh/id_ed25519.pub
 <span class="c"># 3) On GitHub: Settings → SSH and GPG keys → New SSH key</span>
@@ -94,7 +94,7 @@ ssh -T git@github.com
 <p>When creating a repo on GitHub you make three initial choices: a name and short description, Public or Private visibility, and whether to add starter files like a README and a <code>.gitignore</code>. For personal and practice projects you usually choose Private — but keep in mind that Private means "restricting access" (only authorized people can see it), not complete security. Even in a private repo you must never commit secrets like tokens, passwords, or keys; account security, access levels, and secret management still matter (details in Level 20).</p>
 `,
 quiz:[
-{q:'Which command tells Git your name for all of your projects?', o:['git name "Sara"','git config --global user.name "Sara"','git set username Sara','git user --add Sara'], why:'Identity settings are done with git config, and --global applies them to all of your repos.'},
+{q:'Which command tells Git your name for all of your projects?', o:['git name "Parya"','git config --global user.name "Parya"','git set username Parya','git user --add Parya'], why:'Identity settings are done with git config, and --global applies them to all of your repos.'},
 {q:'What is a Personal Access Token?', o:['Your main GitHub account password','A dedicated password with limited permissions and an expiry date, used instead of your password for HTTPS authentication','An activation code for installing Git','Another name for an SSH key'], why:'A PAT is the secure replacement for your password with HTTPS; you can limit its scope and set an expiry date.'},
 {q:'With SSH, which key do you give to GitHub?', o:['The private key','Both keys','The public key (the .pub file)','Neither; SSH has no keys'], why:'The public key is registered on GitHub; the private key never leaves your computer.'},
 {q:'Which command tests your SSH connection to GitHub?', o:['git test ssh','ssh -T git@github.com','git connect github','ssh --check github.com'], why:'This command tests SSH authentication and, on success, replies with your username.'},

@@ -64,8 +64,8 @@ body:`
 <span class="c"># خروجی چیزی شبیه: git version 2.45.0</span></code></pre>
 <h2>معرفی خودت به Git</h2>
 <p>هر Commit با نام و ایمیل نویسنده ثبت می‌شود؛ پس اول خودت را معرفی کن. فلگ <code>--global</code> یعنی این تنظیم برای همهٔ پروژه‌های تو اعمال شود:</p>
-<pre><code>git config --global user.name "Sara Ahmadi"
-git config --global user.email "sara@example.com"
+<pre><code>git config --global user.name "Parya Bahrami"
+git config --global user.email "parya@example.com"
 git config --global init.defaultBranch main   <span class="c"># نام شاخهٔ پیش‌فرض</span>
 git config --list                             <span class="c"># بررسی تنظیمات</span></code></pre>
 <div class="callout note"><span class="co-title">Default Branch</span>در گذشته شاخهٔ اصلی <code>master</code> نام داشت؛ استاندارد امروزی <code>main</code> است. با تنظیم بالا، هر Repo جدیدی که بسازی مستقیم با main شروع می‌شود.</div>
@@ -82,7 +82,7 @@ git config --list                             <span class="c"># بررسی تن�
 <h3>2) SSH Key</h3>
 <p>SSH یک جفت کلید می‌سازد: کلید <strong>خصوصی</strong> که فقط روی کامپیوتر تو می‌ماند و کلید <strong>عمومی</strong> که به GitHub می‌دهی. از آن به بعد بدون واردکردن رمز، امن وصل می‌شوی:</p>
 <pre><code><span class="c"># 1) ساخت کلید</span>
-ssh-keygen -t ed25519 -C "sara@example.com"
+ssh-keygen -t ed25519 -C "parya@example.com"
 <span class="c"># 2) کپی کلید عمومی (مک):</span>
 pbcopy &lt; ~/.ssh/id_ed25519.pub
 <span class="c"># 3) در GitHub: Settings → SSH and GPG keys → New SSH key</span>
@@ -94,7 +94,7 @@ ssh -T git@github.com
 <p>هنگام ساخت Repo در GitHub سه انتخاب اولیه داری: نام و توضیح کوتاه، Public یا Private بودن، و افزودن فایل‌های شروع مثل README و <code>.gitignore</code>. برای پروژه‌های شخصی و تمرینی معمولاً Private را انتخاب می‌کنی؛ ولی حواست باشد Private یعنی «محدودکردن دسترسی» (فقط افراد مجاز می‌بینند)، نه امنیت کامل. حتی در Repo خصوصی هم نباید Secret مثل توکن، رمز یا کلید را Commit کنی؛ امنیت حساب، سطح دسترسی‌ها و مدیریت Secret همچنان مهم‌اند (جزئیات در سطح 20).</p>
 `,
 quiz:[
-{q:'دستور معرفی نام تو به Git برای همهٔ پروژه‌ها کدام است؟', o:['git name "Sara"','git config --global user.name "Sara"','git set username Sara','git user --add Sara'], a:1, why:'تنظیمات هویتی با git config انجام می‌شود و --global آن را برای همهٔ Repoها اعمال می‌کند.'},
+{q:'دستور معرفی نام تو به Git برای همهٔ پروژه‌ها کدام است؟', o:['git name "Parya"','git config --global user.name "Parya"','git set username Parya','git user --add Parya'], a:1, why:'تنظیمات هویتی با git config انجام می‌شود و --global آن را برای همهٔ Repoها اعمال می‌کند.'},
 {q:'Personal Access Token چیست؟', o:['رمز اصلی حساب GitHub','یک رمز مخصوص با دسترسی محدود و انقضا، برای احراز هویت به‌جای پسورد در HTTPS','کد فعال‌سازی نصب Git','نام دیگری برای SSH Key'], a:1, why:'PAT جایگزین امن پسورد در روش HTTPS است؛ می‌توانی دامنهٔ دسترسی (Scope) و تاریخ انقضایش را محدود کنی.'},
 {q:'در روش SSH کدام کلید را به GitHub می‌دهی؟', o:['کلید خصوصی','هر دو کلید','کلید عمومی (فایل .pub)','هیچ‌کدام؛ SSH کلید ندارد'], a:2, why:'کلید عمومی روی GitHub ثبت می‌شود؛ کلید خصوصی هرگز از کامپیوتر تو خارج نمی‌شود.'},
 {q:'دستور تست اتصال SSH به GitHub؟', o:['git test ssh','ssh -T git@github.com','git connect github','ssh --check github.com'], a:1, why:'این دستور احراز هویت SSH را امتحان می‌کند و در صورت موفقیت با نام کاربری‌ات جواب می‌دهد.'},

@@ -148,7 +148,7 @@ export const STRINGS = {
   'intro.badges.sub':   { fa: '{0} از {1} نشان باز شده · هر سطح {2} امتیاز و نمرهٔ کامل {3} امتیاز اضافه دارد.', en: '{0} of {1} badges unlocked · every level is worth {2} XP, and a perfect score adds {3} more.' },
   'intro.name.label':   { fa: 'نام تو (روی دستاورد مسیر می‌آید)', en: 'Your name (shown on the path achievement)' },
   'intro.name.desc':    { fa: 'هر وقت خواستی عوضش کن؛ روی صفحهٔ دستاورد هم قابل ویرایش است.', en: 'You can change it whenever you like; it is editable on the achievement page too.' },
-  'intro.name.ph':      { fa: 'مثلاً: سارا احمدی', en: 'e.g. Sara Ahmadi' },
+  'intro.name.ph':      { fa: 'مثلاً: پریا بهرامی', en: 'e.g. Parya Bahrami' },
   'intro.phases.h':     { fa: 'چهار مرحله', en: 'Four stages' },
   'intro.tracks.p':     { fa: 'سطح‌ها در چهار مسیر دسته‌بندی شده‌اند: از «مبانی Git» شروع کن و بعد مسیرهای تخصصی (AI و پروتوتایپ، Design System، Design Technologist) را ببین. پیشرفتت خودکار در هر مسیر شمرده می‌شود.', en: 'The levels are grouped into four tracks: start with “Git Basics”, then explore the specialised tracks (AI & prototyping, design systems, design technologist). Your progress counts towards every track automatically.' },
   'intro.tracks.btn':   { fa: 'دیدن چهار مسیر', en: 'See the four tracks' },
