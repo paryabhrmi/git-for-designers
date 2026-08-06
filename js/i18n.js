@@ -18,7 +18,28 @@ import { applyContentLocale } from './content.js';
 
 export const LANGS = ['fa', 'en'];
 
-/** Shell string catalog. Every key must have both fa and en (validator-enforced). */
+/**
+ * Shell string catalog. Every key must have both fa and en (validator-enforced).
+ *
+ * Voice, in both languages:
+ *
+ * 1. Second person, direct. The learner is addressed as «تو» / "you".
+ * 2. The interface never says "I". Only the author does, and only in the
+ *    personal note about data on the intro screen.
+ * 3. One word for one thing. «نشان» is a badge; «دستاورد» is the end-of-path
+ *    award. They were both «نشان» once, and there is a badge literally called
+ *    «پایان مسیر» — so the two read as the same object.
+ * 4. Verbs, not noun piles. The level opens; its lock does not open.
+ * 5. No dead ends. Every failure names what to do instead, and the alternative
+ *    it names has to actually exist on screen.
+ * 6. A button says what it does. "Share" is a category; "Share the image" is
+ *    an action.
+ * 7. Git terminology stays English in both locales, and stays LTR.
+ *
+ * If a message has to apologise for a broken feature, fix the feature. The
+ * "public URL is not configured" line is kept only as a guard — the button that
+ * used to trigger it is now hidden when there is no URL.
+ */
 export const STRINGS = {
   'skip':            { fa: 'پرش به محتوای درس', en: 'Skip to lesson content' },
   'logo.title':      { fa: 'Git برای طراحان', en: 'Git for Designers' },
@@ -73,7 +94,7 @@ export const STRINGS = {
   'nav.tracks':      { fa: 'مسیرهای یادگیری', en: 'Learning tracks' },
   'nav.missions':    { fa: 'مأموریت‌های عملی', en: 'Practice missions' },
   'nav.glossary':    { fa: 'واژه‌نامهٔ Git', en: 'Git glossary' },
-  'nav.achievement': { fa: 'نشان مسیر', en: 'Path achievement' },
+  'nav.achievement': { fa: 'دستاورد مسیر', en: 'Path achievement' },
   'author.site':      { fa: 'وب‌سایت پریا بهرامی', en: 'Parya Bahrami’s website' },
   'author.li':        { fa: 'لینکدین پریا بهرامی', en: 'Parya Bahrami on LinkedIn' },
   'author.role':     { fa: 'طراح محصول · نویسنده', en: 'Product designer · author' },
@@ -100,7 +121,7 @@ export const STRINGS = {
   'lock.levelLocked':   { fa: 'این سطح هنوز قفل است.', en: 'This level is still locked.' },
   'lock.levelLockedRoute': { fa: 'این سطح هنوز قفل است؛ از سطح باز فعلی ادامه بده.', en: 'This level is still locked — continue from your current open level.' },
   'app.quizInProgress': { fa: 'آزمون نیمه‌کاره است؛ برای رفتن به سطح دیگر از فهرست استفاده کن.', en: 'This quiz is half-finished — use the contents list to move to another level.' },
-  'app.reset':          { fa: 'پیشرفت پاک شد؛ همه‌چیز از ابتدا شروع می‌شود.', en: 'Progress cleared — everything starts from the beginning.' },
+  'app.reset':          { fa: 'پیشرفت پاک شد. از سطح 1 شروع کن.', en: 'Progress cleared. Start again from level 1.' },
 
   /* ---- intro page ---- */
   'intro.crumb':        { fa: 'شروع', en: 'Start here' },
@@ -113,20 +134,20 @@ export const STRINGS = {
   'intro.stat.levels':  { fa: 'سطح آموزشی', en: 'levels' },
   'intro.stat.quiz':    { fa: 'سؤال آزمون', en: 'quiz questions' },
   'intro.stat.xp':      { fa: 'امتیاز قابل کسب', en: 'XP to earn' },
-  'intro.stat.mins':    { fa: 'دقیقه مطالعه (تقریبی)', en: 'minutes of reading (approx.)' },
+  'intro.stat.mins':    { fa: 'دقیقهٔ مطالعه', en: 'minutes to read' },
   'intro.how':          { fa: 'اینجا چطور کار می‌کند؟', en: 'How this works' },
   'intro.step1.t':      { fa: '1. سطح را بخوان', en: '1. Read the level' },
   'intro.step1.d':      { fa: 'هر سطح یک موضوع کامل است: توضیح روان، مثال طراحی و دستورهای واقعی Git با قابلیت کپی.', en: 'Each level covers one topic end to end: a clear explanation, a design example, and real Git commands you can copy.' },
   'intro.step2.t':      { fa: '2. آزمون بده', en: '2. Take the quiz' },
   'intro.step2.d':      { fa: 'در پایان هر سطح چند سؤال چهارگزینه‌ای. پاسخ درست، پاسخ تو و دلیلش بعد از بررسی نمایش داده می‌شود.', en: 'A few multiple-choice questions close each level. After you check your answers you see the correct one, your own, and why.' },
   'intro.step3.t':      { fa: '3. سطح بعد باز می‌شود', en: '3. The next level unlocks' },
-  'intro.step3.d':      { fa: 'با کسب حداقل 70٪ نمره، قفل سطح بعدی باز می‌شود. اگر قبول نشوی، توضیح‌ها را می‌خوانی و دوباره امتحان می‌کنی.', en: 'Score at least 70% and the next level unlocks. If you do not pass, read the explanations and try again.' },
-  'intro.step4.t':      { fa: '4. نشان فتح مسیر بگیر', en: '4. Earn the path achievement' },
-  'intro.step4.d':      { fa: 'با قبولی در هر 30 سطح، نشان فتح مسیر و کارت دستاورد شخصی‌سازی‌شده می‌گیری؛ قابل چاپ، دانلود تصویر و اشتراک‌گذاری.', en: 'Pass all 30 levels to earn the path achievement and a personalised achievement card you can print, download, and share.' },
+  'intro.step3.d':      { fa: 'با حداقل 70٪ نمره، سطح بعدی باز می‌شود. اگر قبول نشوی، توضیح‌ها را می‌خوانی و دوباره امتحان می‌کنی.', en: 'Score at least 70% and the next level unlocks. If you do not pass, read the explanations and try again.' },
+  'intro.step4.t':      { fa: '4. دستاورد مسیر را بگیر', en: '4. Earn the path achievement' },
+  'intro.step4.d':      { fa: 'با قبولی در هر 30 سطح، دستاورد مسیر و کارت شخصی‌سازی‌شده‌اش را می‌گیری — قابل چاپ، دانلود و اشتراک‌گذاری.', en: 'Pass all 30 levels to earn the path achievement and a personalised achievement card you can print, download, and share.' },
   'intro.badges.h':     { fa: 'نشان‌ها', en: 'Badges' },
   'intro.badges.sub':   { fa: '{0} از {1} نشان باز شده · هر سطح {2} امتیاز و نمرهٔ کامل {3} امتیاز اضافه دارد.', en: '{0} of {1} badges unlocked · every level is worth {2} XP, and a perfect score adds {3} more.' },
-  'intro.name.label':   { fa: 'نام تو (روی نشان مسیر نمایش داده می‌شود)', en: 'Your name (shown on the path achievement)' },
-  'intro.name.desc':    { fa: 'هر وقت خواستی می‌توانی تغییرش بدهی؛ روی صفحهٔ نشان مسیر هم قابل ویرایش است.', en: 'You can change it whenever you like; it is editable on the achievement page too.' },
+  'intro.name.label':   { fa: 'نام تو (روی دستاورد مسیر می‌آید)', en: 'Your name (shown on the path achievement)' },
+  'intro.name.desc':    { fa: 'هر وقت خواستی عوضش کن؛ روی صفحهٔ دستاورد هم قابل ویرایش است.', en: 'You can change it whenever you like; it is editable on the achievement page too.' },
   'intro.name.ph':      { fa: 'مثلاً: سارا احمدی', en: 'e.g. Sara Ahmadi' },
   'intro.phases.h':     { fa: 'چهار مرحله', en: 'Four stages' },
   'intro.tracks.p':     { fa: 'سطح‌ها در چهار مسیر دسته‌بندی شده‌اند: از «مبانی Git» شروع کن و بعد مسیرهای تخصصی (AI و پروتوتایپ، Design System، Design Technologist) را ببین. پیشرفتت خودکار در هر مسیر شمرده می‌شود.', en: 'The levels are grouped into four tracks: start with “Git Basics”, then explore the specialised tracks (AI & prototyping, design systems, design technologist). Your progress counts towards every track automatically.' },
@@ -153,13 +174,13 @@ export const STRINGS = {
   'lesson.review.h':    { fa: 'در تلاش قبلی این‌ها را اشتباه زدی', en: 'You got these wrong on your last attempt' },
   'lesson.review.go':   { fa: 'رفتن به آزمون', en: 'Go to the quiz' },
   'lesson.quiz.h':      { fa: 'آزمون سطح {0}', en: 'Level {0} quiz' },
-  'lesson.quiz.sub':    { fa: '{0} سؤال · برای باز شدن سطح بعد {1} پاسخ درست لازم است.', en: '{0} questions · {1} correct answers unlock the next level.' },
-  'lesson.gate.open':   { fa: 'قفل سطح بعدی باز است. هر وقت آماده بودی ادامه بده.', en: 'The next level is unlocked. Continue whenever you are ready.' },
-  'lesson.gate.last':   { fa: 'آخرین سطح را هم قبول شدی؛ نشان فتح مسیر آماده است.', en: 'You passed the final level — your path achievement is ready.' },
-  'lesson.gate.locked': { fa: 'سطح بعدی قفل است. برای باز شدن آن، در آزمون بالا قبول شو.', en: 'The next level is locked. Pass the quiz above to unlock it.' },
+  'lesson.quiz.sub':    { fa: '{0} سؤال · با {1} پاسخ درست، سطح بعد باز می‌شود.', en: '{0} questions · {1} correct answers unlock the next level.' },
+  'lesson.gate.open':   { fa: 'سطح بعدی باز است. هر وقت آماده بودی ادامه بده.', en: 'The next level is unlocked. Continue whenever you are ready.' },
+  'lesson.gate.last':   { fa: 'آخرین سطح را هم قبول شدی. دستاورد مسیر آماده است.', en: 'You passed the final level — your path achievement is ready.' },
+  'lesson.gate.locked': { fa: 'سطح بعدی قفل است. آزمون بالا را قبول شو تا باز شود.', en: 'The next level is locked. Pass the quiz above to unlock it.' },
   'lesson.practice.h':  { fa: 'تمرین این مهارت', en: 'Practise this skill' },
-  'lesson.practice.d':  { fa: 'مأموریت عملی «{0}» — اختیاری و بدون اثر روی امتیاز.', en: 'Practice mission “{0}” — optional, and it does not affect your XP.' },
-  'lesson.nav.end':     { fa: 'پایان', en: 'The end' },
+  'lesson.practice.d':  { fa: 'مأموریت عملی «{0}» — اختیاری، و روی امتیازت اثری ندارد.', en: 'Practice mission “{0}” — optional, and it does not affect your XP.' },
+  'lesson.nav.end':     { fa: 'آخرین سطح', en: 'Final level' },
   'lesson.toc':         { fa: 'در این سطح می‌خوانی', en: 'In this level' },
   'code.copy':          { fa: 'کپی', en: 'Copy' },
   'code.copied':        { fa: 'کپی شد', en: 'Copied' },
@@ -172,23 +193,21 @@ export const STRINGS = {
   'quiz.clear':         { fa: 'پاک‌کردن پاسخ‌ها', en: 'Clear answers' },
   'quiz.allAnswered':   { fa: 'هر {0} سؤال پاسخ داده شد', en: 'All {0} questions answered' },
   'quiz.answered':      { fa: '{0} از {1} سؤال پاسخ داده شد', en: '{0} of {1} questions answered' },
-  'quiz.missing':       { fa: 'به {0} سؤال جواب نداده‌ای؛ مشخص‌شان کردم.', en: 'You left {0} questions unanswered — I marked them for you.' },
+  'quiz.missing':       { fa: '{0} سؤال بی‌پاسخ مانده — پایین علامت خورده‌اند.', en: '{0} questions are still unanswered — they are marked below.' },
   'quiz.why':           { fa: 'چرا؟', en: 'Why?' },
   'quiz.fail':          { fa: '{0} پاسخ درست لازم بود. توضیح‌ها را بخوان و دوباره تلاش کن.', en: 'You needed {0} correct answers. Read the explanations and try again.' },
   'quiz.perfect':       { fa: 'نمرهٔ کامل در تلاش اول', en: 'Perfect score on the first try' },
   'quiz.try':           { fa: 'تلاش {0}', en: 'Attempt {0}' },
   'quiz.newBadge':      { fa: 'نشان تازه: {0}', en: 'New badge: {0}' },
   'quiz.redo':          { fa: 'تکرار آزمون', en: 'Retake the quiz' },
-  'quiz.gate.all':      { fa: 'همهٔ سطح‌ها را کامل کردی — نشان فتح مسیر آماده است.', en: 'You completed every level — your path achievement is ready.' },
-  'quiz.gate.next':     { fa: 'قفل سطح بعدی باز شد.', en: 'The next level is now unlocked.' },
+  'quiz.gate.all':      { fa: 'همهٔ سطح‌ها را کامل کردی. دستاورد مسیر آماده است.', en: 'You completed every level — your path achievement is ready.' },
+  'quiz.gate.next':     { fa: 'سطح بعدی باز شد.', en: 'The next level is now unlocked.' },
   'quiz.goNext':        { fa: 'رفتن به سطح بعد', en: 'Go to the next level' },
-  'quiz.toast.done':    { fa: 'هر 30 سطح کامل شد! نشان مسیر آماده است.', en: 'All 30 levels complete! Your path achievement is ready.' },
-  'quiz.toast.pass':    { fa: 'آفرین! سطح بعدی باز شد.', en: 'Nice work! The next level is unlocked.' },
 
   /* ---- rail / bottom bar ---- */
   'nav.progTxt':        { fa: '{0} از {1} سطح · {2} نشان', en: '{0} of {1} levels · {2} badges' },
   'nav.searchMode':     { fa: 'جست‌وجو در کل متن · {0} نتیجه', en: 'Full-text search · {0} results' },
-  'nav.noHit':          { fa: 'سطحی با این عبارت پیدا نشد.', en: 'No level matches that search.' },
+  'nav.noHit':          { fa: 'سطحی با این عبارت پیدا نشد؛ عبارت کوتاه‌تری را امتحان کن.', en: 'No level matches that — try a shorter search.' },
   'mid.start':          { fa: 'شروع', en: 'Start' },
   'mid.next':           { fa: 'سطح بعد', en: 'Next level' },
   'mid.retry':          { fa: 'تلاش دوباره', en: 'Try again' },
@@ -214,7 +233,7 @@ export const STRINGS = {
   'track.reco.continue': { fa: 'ادامهٔ مبانی', en: 'Continue the basics' },
   'track.reco.start':   { fa: 'شروع از مبانی', en: 'Start with the basics' },
   'track.list.aria':    { fa: 'فهرست مسیرهای یادگیری', en: 'List of learning tracks' },
-  'track.note':         { fa: 'سطح‌های تکمیل‌شده همین حالا در مسیرشان شمرده می‌شوند و چیزی از نو تکرار نمی‌شود. مسیرهای تخصصی جلوی تکمیل مبانی را نمی‌گیرند. نشان فتح مسیر با قبولی در هر 30 سطح (همهٔ مسیرها) باز می‌شود.', en: 'Levels you have already completed count towards their track right away — nothing is repeated. The specialised tracks do not block finishing the basics. The path achievement unlocks once you pass all 30 levels (every track).' },
+  'track.note':         { fa: 'سطح‌های تکمیل‌شده همین حالا در مسیرشان شمرده می‌شوند و چیزی از نو تکرار نمی‌شود. مسیرهای تخصصی جلوی تکمیل مبانی را نمی‌گیرند. دستاورد مسیر با قبولی در هر 30 سطح (همهٔ مسیرها) باز می‌شود.', en: 'Levels you have already completed count towards their track right away — nothing is repeated. The specialised tracks do not block finishing the basics. The path achievement unlocks once you pass all 30 levels (every track).' },
   'track.lvAria':       { fa: 'سطح {0}: {1} — {2}', en: 'Level {0}: {1} — {2}' },
   'track.action':       { fa: '{0} — سطح {1}: {2}', en: '{0} — level {1}: {2}' },
   'track.gate.t1':      { fa: 'سطح‌های بعدی این مسیر هنوز باز نشده‌اند', en: 'The next levels of this track are not open yet' },
@@ -223,9 +242,9 @@ export const STRINGS = {
   'track.gate.b2':      { fa: 'این مسیر بعدتر باز می‌شود. اول در مبانی پیش برو؛ سطح‌های این مسیر با ترتیب سطح‌ها باز می‌شوند.', en: 'This track opens later on. Work through the basics first; these levels unlock in level order.' },
   'track.gate.cta':     { fa: 'ادامه از سطح باز فعلی', en: 'Continue from the current open level' },
   'track.missions.h':   { fa: 'تمرین عملی این مسیر', en: 'Hands-on practice for this track' },
-  'track.missions.sub': { fa: 'مأموریت اختیاری برای تمرین همین مهارت‌ها در یک موقعیت واقعی طراحی. روی امتیاز و نشان فتح مسیر اثری ندارد.', en: 'An optional mission that practises these skills in a real design situation. It does not affect your XP or the path achievement.' },
+  'track.missions.sub': { fa: 'مأموریت اختیاری برای تمرین همین مهارت‌ها در یک موقعیت واقعی طراحی. روی امتیاز و دستاورد مسیر اثری ندارد.', en: 'An optional mission that practises these skills in a real design situation. It does not affect your XP or the path achievement.' },
   'track.next':         { fa: 'مسیر پیشنهادی بعدی: {0}', en: 'Recommended next track: {0}' },
-  'track.allDone':      { fa: 'همهٔ مسیرها را پوشش دادی. اگر هر 30 سطح را قبول شده‌ای، نشان فتح مسیر آماده است.', en: 'You have covered every track. If you have passed all 30 levels, your path achievement is ready.' },
+  'track.allDone':      { fa: 'همهٔ مسیرها را پوشش دادی. اگر هر 30 سطح را قبول شده‌ای، دستاورد مسیر آماده است.', en: 'You have covered every track. If you have passed all 30 levels, your path achievement is ready.' },
   'track.crumb':        { fa: 'مسیر {0}', en: '{0} track' },
   'track.back':         { fa: 'همهٔ مسیرها', en: 'All tracks' },
   'track.tag.diff':     { fa: 'سختی: {0}', en: 'Difficulty: {0}' },
@@ -248,7 +267,7 @@ export const STRINGS = {
   'mission.steps':      { fa: '{0} مرحله', en: '{0} steps' },
   'mission.stepsDiff':  { fa: '{0} مرحله · {1}', en: '{0} steps · {1}' },
   'mission.heroBadge':  { fa: 'تمرین عملی', en: 'Hands-on practice' },
-  'mission.lead':       { fa: 'هر مأموریت یک موقعیت واقعی طراحی است که در چند مرحله تصمیم می‌گیری و برای هر انتخاب، بازخورد روشن می‌گیری: چه اتفاقی می‌افتد، کدام حالت Git تغییر می‌کند و امن‌تر چیست. این‌ها اختیاری‌اند و مکمل درس‌ها و آزمون‌ها هستند؛ روی امتیاز و نشان فتح مسیر اثری ندارند.', en: 'Every mission is a real design situation: you make a decision at each step and get clear feedback on your choice — what happens, which part of Git’s state changes, and what would be safer. Missions are optional companions to the lessons and quizzes; they do not affect your XP or the path achievement.' },
+  'mission.lead':       { fa: 'هر مأموریت یک موقعیت واقعی طراحی است که در چند مرحله تصمیم می‌گیری و برای هر انتخاب، بازخورد روشن می‌گیری: چه اتفاقی می‌افتد، کدام حالت Git تغییر می‌کند و امن‌تر چیست. این‌ها اختیاری‌اند و مکمل درس‌ها و آزمون‌ها هستند؛ روی امتیاز و دستاورد مسیر اثری ندارند.', en: 'Every mission is a real design situation: you make a decision at each step and get clear feedback on your choice — what happens, which part of Git’s state changes, and what would be safer. Missions are optional companions to the lessons and quizzes; they do not affect your XP or the path achievement.' },
   'mission.simNotice':  { fa: 'شبیه‌سازی آموزشی — هیچ فرمانی روی سیستم تو اجرا نمی‌شود.', en: 'Educational simulation — no command is run on your machine.' },
   'mission.reco':       { fa: 'مأموریت پیشنهادی: {0}', en: 'Suggested mission: {0}' },
   'mission.recoMeta':   { fa: 'مسیر {0} · {1} مرحله · {2}', en: '{0} track · {1} steps · {2}' },
@@ -279,22 +298,22 @@ export const STRINGS = {
   'gl.terms':           { fa: '{0} اصطلاح', en: '{0} terms' },
   'gl.hear':            { fa: 'شنیدن تلفظ {0}', en: 'Hear how {0} is pronounced' },
   'gl.pron':            { fa: 'تلفظ:', en: 'Pronunciation:' },
-  'gl.empty':           { fa: 'اصطلاحی با این عبارت پیدا نشد.', en: 'No term matches that search.' },
-  'gl.noVoice':         { fa: 'مرورگر تو از پخش صدا پشتیبانی نمی‌کند.', en: 'Your browser does not support speech playback.' },
-  'gl.voiceFail':       { fa: 'پخش صدا ممکن نشد.', en: 'The audio could not be played.' },
+  'gl.empty':           { fa: 'اصطلاحی با این عبارت پیدا نشد؛ عبارت کوتاه‌تری را امتحان کن.', en: 'No term matches that — try a shorter search.' },
+  'gl.noVoice':         { fa: 'این مرورگر تلفظ را پخش نمی‌کند؛ تلفظ نوشتاری زیر هر واژه آمده است.', en: 'This browser cannot play the audio — the written pronunciation is under each term.' },
+  'gl.voiceFail':       { fa: 'پخش تلفظ ممکن نشد؛ تلفظ نوشتاری زیر واژه آمده است.', en: 'The audio would not play — the written pronunciation is under the term.' },
 
   /* ---- path achievement ---- */
-  'ach.title':          { fa: 'نشان فتح مسیر Git for Designers', en: 'Git for Designers path achievement' },
-  'ach.short':          { fa: 'نشان مسیر', en: 'Path achievement' },
-  'ach.page':           { fa: 'نشان فتح مسیر', en: 'Path achievement' },
-  'ach.disclaimer':     { fa: 'این نشان یادبود دیجیتال تکمیل مسیر آموزشی Git for Designers است و مدرک رسمی، دانشگاهی یا حرفه‌ای محسوب نمی‌شود.', en: 'This is a digital keepsake for finishing the Git for Designers learning path. It is not an official, academic, or professional credential.' },
+  'ach.title':          { fa: 'دستاورد مسیر Git for Designers', en: 'Git for Designers path achievement' },
+  'ach.short':          { fa: 'دستاورد مسیر', en: 'Path achievement' },
+  'ach.page':           { fa: 'دستاورد مسیر', en: 'Path achievement' },
+  'ach.disclaimer':     { fa: 'این دستاورد، یادبود دیجیتال تکمیل مسیر Git for Designers است و مدرک رسمی، دانشگاهی یا حرفه‌ای نیست.', en: 'This is a digital keepsake for finishing the Git for Designers learning path. It is not an official, academic, or professional credential.' },
   'ach.learner':        { fa: 'یادگیرنده', en: 'Learner' },
-  'ach.locked.h':       { fa: 'نشان مسیر هنوز قفل است', en: 'The path achievement is still locked' },
-  'ach.locked.p':       { fa: 'نشان فتح مسیر پس از قبولی در آزمون هر 30 سطح باز می‌شود. تا اینجا {0} سطح را کامل کرده‌ای.', en: 'The path achievement unlocks once you pass the quiz of all 30 levels. So far you have completed {0} of them.' },
+  'ach.locked.h':       { fa: 'دستاورد مسیر هنوز قفل است', en: 'The path achievement is still locked' },
+  'ach.locked.p':       { fa: 'دستاورد مسیر با قبولی در آزمون هر 30 سطح باز می‌شود. تا اینجا {0} سطح را کامل کرده‌ای.', en: 'The path achievement unlocks once you pass the quiz of all 30 levels. So far you have completed {0} of them.' },
   'ach.continue':       { fa: 'ادامه از سطح {0}', en: 'Continue from level {0}' },
   'ach.card':           { fa: 'کارت دستاورد', en: 'Achievement card' },
   'ach.completed':      { fa: 'مسیر را کامل کرد', en: 'completed the path' },
-  'ach.nameAria':       { fa: 'نام روی نشان مسیر', en: 'Name on the path achievement' },
+  'ach.nameAria':       { fa: 'نام روی دستاورد مسیر', en: 'Name on the path achievement' },
   'ach.rank':           { fa: 'رتبه', en: 'Rank' },
   'ach.xp':             { fa: 'امتیاز', en: 'XP' },
   'ach.levelsDone':     { fa: 'سطح‌های کامل‌شده', en: 'Levels completed' },
@@ -305,11 +324,11 @@ export const STRINGS = {
   'ach.hero':           { fa: 'نشان برجسته: {0}', en: 'Featured badge: {0}' },
   'ach.foot':           { fa: 'تکمیل‌شده در Git for Designers · پریا بهرامی', en: 'Completed in Git for Designers · Parya Bahrami' },
   'ach.build':          { fa: 'ساخت کارت دستاورد', en: 'Build the achievement card' },
-  'ach.share':          { fa: 'اشتراک‌گذاری', en: 'Share' },
+  'ach.share':          { fa: 'اشتراک تصویر', en: 'Share the image' },
   'ach.print':          { fa: 'چاپ', en: 'Print' },
   'ach.editName':       { fa: 'ویرایش نام', en: 'Edit name' },
-  'ach.back':           { fa: 'بازگشت', en: 'Back' },
-  'ach.view':           { fa: 'مشاهده نشان مسیر', en: 'View the path achievement' },
+  'ach.back':           { fa: 'بازگشت به سطح‌ها', en: 'Back to the levels' },
+  'ach.view':           { fa: 'دیدن دستاورد مسیر', en: 'View the path achievement' },
   'ach.panel.h':        { fa: 'ساخت و اشتراک کارت دستاورد', en: 'Build and share your achievement card' },
   'ach.hint.native':    { fa: 'می‌توانی تصویر را از طریق برگهٔ اشتراک دستگاه بفرستی، یا دانلود کنی و در LinkedIn یا Instagram بارگذاری کنی.', en: 'You can send the image through your device’s share sheet, or download it and upload it to LinkedIn or Instagram.' },
   'ach.hint.dl':        { fa: 'اشتراک‌گذاری مستقیم فایل در این مرورگر در دسترس نیست. تصویر را دانلود کن و همراه متن پست در LinkedIn یا Instagram بارگذاری کن.', en: 'Direct file sharing is not available in this browser. Download the image and upload it with the post text to LinkedIn or Instagram.' },
