@@ -144,8 +144,26 @@ export const STRINGS = {
   'intro.step3.d':      { fa: 'با حداقل 70٪ نمره، سطح بعدی باز می‌شود. اگر قبول نشوی، توضیح‌ها را می‌خوانی و دوباره امتحان می‌کنی.', en: 'Score at least 70% and the next level unlocks. If you do not pass, read the explanations and try again.' },
   'intro.step4.t':      { fa: '4. دستاورد مسیر را بگیر', en: '4. Earn the path achievement' },
   'intro.step4.d':      { fa: 'با قبولی در هر 30 سطح، دستاورد مسیر و کارت شخصی‌سازی‌شده‌اش را می‌گیری — قابل چاپ، دانلود و اشتراک‌گذاری.', en: 'Pass all 30 levels to earn the path achievement and a personalised achievement card you can print, download, and share.' },
+  /* Scoring used to be explained inside the badges subtitle, where a reader
+     looking up badges was told the XP formula and a reader looking for the XP
+     formula never found it. It has its own section now. */
+  'intro.scoring.h':    { fa: 'امتیاز و رتبه چطور کار می‌کند؟', en: 'How XP and ranks work' },
+  'intro.scoring.p':    { fa: 'امتیاز فقط از آزمون‌ها می‌آید. هر بار امتیازت از یک آستانه رد شود، رتبه‌ات عوض می‌شود؛ کار دیگری لازم نیست.', en: 'XP comes from quizzes and nothing else. Each time your XP passes a threshold your rank changes on its own — there is nothing to claim.' },
+  'intro.scoring.pass.t':    { fa: 'قبولی در یک سطح', en: 'Passing a level' },
+  'intro.scoring.pass.d':    { fa: '{0} امتیاز. برای قبولی باید دست‌کم {1}٪ سؤال‌های آن سطح را درست بزنی.', en: '{0} XP. To pass you need at least {1}% of that level’s questions right.' },
+  'intro.scoring.perfect.t': { fa: 'نمرهٔ کامل در همان آزمون', en: 'A perfect score on that quiz' },
+  'intro.scoring.perfect.d': { fa: '{0} امتیاز اضافه. اگر بعداً برگردی و همان آزمون را بی‌خطا بدهی هم حساب می‌شود.', en: '{0} XP on top. It still counts if you come back later and take the same quiz without a mistake.' },
+  'intro.scoring.none.t':    { fa: 'نشان‌ها و مأموریت‌ها', en: 'Badges and missions' },
+  'intro.scoring.none.d':    { fa: 'امتیاز ندارند. نشان یعنی به یک نقطه‌عطف رسیدی و مأموریت تمرین عملی است.', en: 'Neither gives XP. A badge marks a milestone you reached; a mission is hands-on practice.' },
+  'intro.scoring.max':       { fa: 'سقف امتیاز {0} است: {1} سطح، هرکدام تا {2} امتیاز.', en: 'The ceiling is {0} XP: {1} levels, each worth up to {2}.' },
+  'intro.ranks.h':      { fa: 'شش رتبه', en: 'Six ranks' },
+  'intro.ranks.p':      { fa: 'رتبه فقط اسمی است که امتیازت به آن رسیده. چیزی برای انتخاب‌کردن نیست و در باز شدن سطح‌ها نقشی ندارد.', en: 'A rank is simply the name your XP has reached. There is nothing to pick, and it plays no part in unlocking levels.' },
+  'intro.ranks.here':   { fa: 'اینجایی', en: 'You are here' },
+  // A bare "600 XP" beside a rank name is the kind of unlabelled number this
+  // whole section exists to get rid of. Say what the threshold is.
+  'intro.ranks.from':   { fa: 'از', en: 'from' },
   'intro.badges.h':     { fa: 'نشان‌ها', en: 'Badges' },
-  'intro.badges.sub':   { fa: '{0} از {1} نشان باز شده · هر سطح {2} امتیاز و نمرهٔ کامل {3} امتیاز اضافه دارد.', en: '{0} of {1} badges unlocked · every level is worth {2} XP, and a perfect score adds {3} more.' },
+  'intro.badges.sub':   { fa: '{0} از {1} نشان باز شده. نشان‌ها با پیشرفتت خودبه‌خود باز می‌شوند.', en: '{0} of {1} badges unlocked. They open by themselves as you go.' },
   'intro.name.label':   { fa: 'نام تو (روی دستاورد مسیر می‌آید)', en: 'Your name (shown on the path achievement)' },
   'intro.name.desc':    { fa: 'هر وقت خواستی عوضش کن؛ روی صفحهٔ دستاورد هم قابل ویرایش است.', en: 'You can change it whenever you like; it is editable on the achievement page too.' },
   'intro.name.ph':      { fa: 'مثلاً: پریا بهرامی', en: 'e.g. Parya Bahrami' },
@@ -206,6 +224,8 @@ export const STRINGS = {
 
   /* ---- rail / bottom bar ---- */
   'nav.progTxt':        { fa: '{0} از {1} سطح · {2} نشان', en: '{0} of {1} levels · {2} badges' },
+  'nav.rankNext':       { fa: 'رتبهٔ {0} از {1} · {2} XP تا رتبهٔ بعدی', en: 'Rank {0} of {1} · {2} XP to the next one' },
+  'nav.rankTop':        { fa: 'رتبهٔ {0} از {1} · بالاترین رتبه', en: 'Rank {0} of {1} · the top rank' },
   'nav.searchMode':     { fa: 'جست‌وجو در کل متن · {0} نتیجه', en: 'Full-text search · {0} results' },
   'nav.noHit':          { fa: 'سطحی با این عبارت پیدا نشد؛ عبارت کوتاه‌تری را امتحان کن.', en: 'No level matches that — try a shorter search.' },
   'mid.start':          { fa: 'شروع', en: 'Start' },

@@ -1,7 +1,7 @@
-import { state, passedCount, firstOpen, totalMinutes, totalXP, maxXP, rankOf } from '../state.js';
+import { state, passedCount, firstOpen, totalMinutes, totalXP, maxXP, rankOf, rankIndex } from '../state.js';
 import { LEVELS, PHASES } from '../course.js';
-import { XP_PASS, XP_PERFECT, PHASE_IC, SITE, LINKEDIN, AVATAR_SRC } from '../config.js';
-import { BADGES, earned } from '../content.js';
+import { XP_PASS, XP_PERFECT, PASS_RATIO, PHASE_IC, SITE, LINKEDIN, AVATAR_SRC } from '../config.js';
+import { BADGES, RANKS, earned } from '../content.js';
 import { $, FA } from '../dom.js';
 import { authorCard as authorCardFn } from '../ui.js';
 import { ctx } from '../ctx.js';
@@ -15,6 +15,7 @@ export function renderIntro() {
   document.documentElement.style.setProperty('--pc', 'var(--p1)');
   $('#crumbTitle').textContent = t('intro.crumb');
   const n = passedCount();
+  const xp = totalXP(), here = rankIndex(xp);
   $('#root').innerHTML = `
     <div class="hero">
       <span class="hero-badge">
@@ -40,8 +41,37 @@ export function renderIntro() {
       <div class="step"><span class="n"><i class="ph-bold ph-trophy"></i></span><div><b>${t('intro.step4.t')}</b><p>${t('intro.step4.d')}</p></div></div>
     </div>
 
+    <h2 style="font-size:19px;font-weight:800;margin:28px 0 2px">${t('intro.scoring.h')}</h2>
+    <p class="sub" style="font-size:13.5px;margin:0 0 4px">${t('intro.scoring.p')}</p>
+    <ul class="scoring">
+      <li>
+        <span class="sc-v" dir="ltr">+${FA(XP_PASS)}</span>
+        <div><b>${t('intro.scoring.pass.t')}</b><p>${tf('intro.scoring.pass.d', FA(XP_PASS), FA(Math.round(PASS_RATIO * 100)))}</p></div>
+      </li>
+      <li>
+        <span class="sc-v" dir="ltr">+${FA(XP_PERFECT)}</span>
+        <div><b>${t('intro.scoring.perfect.t')}</b><p>${tf('intro.scoring.perfect.d', FA(XP_PERFECT))}</p></div>
+      </li>
+      <li>
+        <span class="sc-v sc-zero" dir="ltr">${FA(0)}</span>
+        <div><b>${t('intro.scoring.none.t')}</b><p>${t('intro.scoring.none.d')}</p></div>
+      </li>
+    </ul>
+    <p class="sc-max">${tf('intro.scoring.max', FA(maxXP()), FA(LEVELS.length), FA(XP_PASS + XP_PERFECT))}</p>
+
+    <h2 style="font-size:19px;font-weight:800;margin:26px 0 2px">${t('intro.ranks.h')}</h2>
+    <p class="sub" style="font-size:13.5px;margin:0 0 4px">${t('intro.ranks.p')}</p>
+    <ol class="ranks">
+      ${RANKS.map((r, i) => `<li class="rank-step${xp >= r.min ? ' on' : ''}${i === here ? ' here' : ''}">
+        <span class="rk-n">${FA(i + 1)}</span>
+        <span class="rk-t">${r.t}</span>
+        ${i === here ? `<span class="rk-here">${t('intro.ranks.here')}</span>` : ''}
+        <span class="rk-x">${t('intro.ranks.from')} <span dir="ltr">${FA(r.min)} XP</span></span>
+      </li>`).join('')}
+    </ol>
+
     <h2 style="font-size:19px;font-weight:800;margin:28px 0 2px">${t('intro.badges.h')}</h2>
-    <p class="sub" style="font-size:13.5px;margin:0 0 4px">${tf('intro.badges.sub', FA(earned().length), FA(BADGES.length), FA(XP_PASS), FA(XP_PERFECT))}</p>
+    <p class="sub" style="font-size:13.5px;margin:0 0 4px">${tf('intro.badges.sub', FA(earned().length), FA(BADGES.length))}</p>
     <div class="badges">
       ${BADGES.map(b => { const ok = earned().some(x => x.id === b.id); return `
         <div class="badge${ok ? '' : ' off'}">
@@ -76,7 +106,7 @@ export function renderIntro() {
         <i class="ph-bold ph-play"></i>${n ? tf('intro.continue', FA(LEVELS[firstOpen()].id)) : t('intro.start')}
       </button>
       <button class="btn btn-ghost" id="glBtn"><i class="ph ph-book-bookmark"></i>${t('nav.glossary')}</button>
-      ${n ? `<span class="streak"><i class="ph-fill ph-lightning"></i>${tf('intro.xpRank', FA(totalXP()), rankOf(totalXP()).t)}</span>` : ''}
+      ${n ? `<span class="streak"><i class="ph-fill ph-lightning"></i>${tf('intro.xpRank', FA(xp), rankOf(xp).t)}</span>` : ''}
     </div>
     <p class="privacy-note"><i class="ph-fill ph-lock-simple" aria-hidden="true"></i>${t('intro.privacy')}${analyticsEnabled() ? ' ' + t('intro.privacy.an') : ''}</p>
     ${authorCard()}`;

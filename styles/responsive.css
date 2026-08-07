@@ -58,6 +58,8 @@ h1.title{font-size:26px; line-height:1.5; letter-spacing:-.4px;}
   .hero h1{font-size:27px; letter-spacing:-.5px;} .hero .lead{font-size:15px; line-height:1.95;}
   .stat{padding:14px 15px;} .stat b{font-size:19px;}
   .step{padding:13px 15px; gap:11px;} .step b{font-size:14.4px;} .step p{font-size:13px;}
+  .scoring li{padding:13px 15px; gap:11px;} .scoring b{font-size:14.4px;} .scoring p{font-size:13px;}
+  .rank-step{padding:9px 13px; gap:10px;} .rk-t{font-size:13.4px;} .rk-x{font-size:11.5px;}
   .namebox{padding:17px 16px;}
   .toc{margin:18px 0 4px;}
   .cert{padding:30px 18px 24px; border-radius:17px;}

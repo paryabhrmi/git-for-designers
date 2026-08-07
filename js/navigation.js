@@ -1,7 +1,7 @@
-import { state, phaseIndex, firstOpen, isUnlocked, passedCount, totalXP, maxXP, rankOf, allPassed } from './state.js';
+import { state, phaseIndex, firstOpen, isUnlocked, passedCount, totalXP, maxXP, rankOf, rankIndex, nextRank, allPassed } from './state.js';
 import { LEVELS, PHASES } from './course.js';
 import { PHASE_IC } from './config.js';
-import { earned } from './content.js';
+import { earned, RANKS } from './content.js';
 import { $, FA } from './dom.js';
 import { ctx } from './ctx.js';
 import { t, tf } from './i18n.js';
@@ -200,6 +200,12 @@ export function syncNav() {
   $('#xpTxt').textContent = `${FA(xp)} XP`;
   $('#xpBar').style.width = (xp / maxXP() * 100) + '%';
   $('#rankTxt').textContent = rankOf(xp).t;
+  // A rank name on its own says nothing about the ladder it sits in. Name the
+  // position, and the gap to the next step so the number has somewhere to go.
+  const up = nextRank(xp);
+  $('#rankNext').textContent = up
+    ? tf('nav.rankNext', FA(rankIndex(xp) + 1), FA(RANKS.length), FA(up.min - xp))
+    : tf('nav.rankTop', FA(rankIndex(xp) + 1), FA(RANKS.length));
 }
 
 export function focusMain() {
