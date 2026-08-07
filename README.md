@@ -156,6 +156,7 @@ none of it is orphaned:
 | [`curriculum-audit.md`](docs/curriculum-audit.md) | Coverage review of the 30 levels |
 | [`curriculum-map.md`](docs/curriculum-map.md) | What exists, against the proposed track structure |
 | [`design-review.md`](docs/design-review.md) | Interface critique, measured in a real browser |
+| [`information-architecture.md`](docs/information-architecture.md) | The three layers, what belongs to each, and the order of work |
 | [`english-content.md`](docs/english-content.md) | How the English learning experience is built |
 | [`bilingual-architecture.md`](docs/bilingual-architecture.md) | The bilingual shell (superseded record) |
 | [`learning-experience.md`](docs/learning-experience.md) | The missions layer |
