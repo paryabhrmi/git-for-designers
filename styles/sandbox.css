@@ -5,7 +5,9 @@
 
 .sbx-term{
   background:#16181C; border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column;
-  min-block-size:290px; box-shadow:var(--sh-2); cursor:text;
+  /* A fixed height, not a minimum: in a flex column an auto-height parent lets
+     the log grow forever, so it never scrolls and the prompt walks off screen. */
+  block-size:360px; box-shadow:var(--sh-2); cursor:text;
 }
 .sbx-bar{height:34px; background:#212429; display:flex; align-items:center; gap:6px; padding:0 12px; position:relative;}
 .sbx-bar i{inline-size:9px; block-size:9px; border-radius:50%; background:#43474D; display:block;}
@@ -65,7 +67,7 @@
 
 @media (max-width:900px){
   .sbx{grid-template-columns:1fr;}
-  .sbx-term{min-block-size:240px;}
+  .sbx-term{block-size:300px;}
 }
 @media (max-width:520px){
   .sbx-out{font-size:12px; padding:12px 13px 4px;}
