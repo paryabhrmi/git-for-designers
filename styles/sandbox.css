@@ -1,0 +1,75 @@
+/* The practice sandbox: a terminal, and the state it changes.
+   The two sit side by side on a wide screen and stack on a narrow one — the
+   panel is the point of the feature, so it is never the thing that gets cut. */
+.sbx{display:grid; grid-template-columns:1.25fr .95fr; gap:var(--s3); margin:var(--s4) 0 var(--s2);}
+
+.sbx-term{
+  background:#16181C; border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column;
+  min-block-size:290px; box-shadow:var(--sh-2); cursor:text;
+}
+.sbx-bar{height:34px; background:#212429; display:flex; align-items:center; gap:6px; padding:0 12px; position:relative;}
+.sbx-bar i{inline-size:9px; block-size:9px; border-radius:50%; background:#43474D; display:block;}
+.sbx-title{position:absolute; inset-inline:0; text-align:center; font:11px var(--mono); color:#7C8189;}
+.sbx-out{
+  flex:1; overflow-y:auto; padding:14px 16px 4px; font:13px/1.75 var(--mono); color:#E4E7EA;
+  white-space:pre-wrap; word-break:break-word;
+}
+.sbx-row{margin-bottom:4px;}
+.sbx-cmd{color:#FFF;}
+.sbx-err{color:#F0938A;}
+.sbx-prompt{color:#6E9BE6; margin-inline-end:8px;}
+.sbx-line{display:flex; align-items:center; gap:0; padding:6px 16px 14px; font:13px var(--mono);}
+.sbx-line input{
+  flex:1; background:transparent; border:0; outline:0; color:#FFF;
+  font:13px var(--mono); caret-color:#6E9BE6; min-inline-size:0;
+}
+
+.sbx-state{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:var(--s4); display:flex; flex-direction:column; gap:var(--s3);
+}
+.sbx-branch{display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;}
+.sbx-chip{
+  display:inline-flex; align-items:center; gap:6px; font:700 12px var(--mono);
+  background:color-mix(in srgb,var(--ink) 8%, transparent); border-radius:99px; padding:4px 11px;
+}
+.sbx-commits{font-size:11.5px; color:var(--muted);}
+.sbx-commits b{font-family:var(--mono);}
+.sbx-cols{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; flex:1;}
+.sbx-col{background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-md); padding:10px;}
+.sbx-col b{display:block; font-size:12px; font-weight:700;}
+.sbx-col em{display:block; font-size:10.5px; color:var(--muted); font-style:normal; line-height:1.5; margin-bottom:8px;}
+.sbx-col ul{list-style:none; margin:0; padding:0; display:grid; gap:4px;}
+.sbx-col li{
+  font:11px var(--mono); background:var(--surface); border:1px solid var(--line);
+  border-radius:6px; padding:4px 7px; overflow-wrap:anywhere; line-height:1.5;
+}
+.sbx-col li.none{border-style:dashed; color:var(--muted); text-align:center;}
+/* One colour per stage, so a file that moves is a file that changed colour. */
+.sbx-col.is-work  li:not(.none){border-color:#D8C48F; background:color-mix(in srgb,#E3B341 14%, var(--surface));}
+.sbx-col.is-stage li:not(.none){border-color:#9FC6E8; background:color-mix(in srgb,#0969DA 12%, var(--surface));}
+.sbx-col.is-done  li:not(.none){border-color:#9BD3AC; background:color-mix(in srgb,#1A7F37 12%, var(--surface));}
+.sbx-empty{font-size:12.5px; color:var(--muted); line-height:1.8; margin:0;}
+
+/* The invitation that sits above the terminal on the intro page. */
+.sbx-try{margin:var(--s6) 0 var(--s2);}
+.sbx-try h2{font-size:19px; font-weight:800; margin:0 0 2px;}
+.sbx-try .sub{font-size:13.5px; margin:0;}
+.sbx-hint{
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  font-size:12.5px; color:var(--muted); margin-top:var(--s3);
+}
+.sbx-hint code{font-family:var(--mono); font-size:12px; background:var(--surface-2);
+  border:1px solid var(--line); border-radius:6px; padding:2px 7px;}
+.sbx-note{font-size:12px; color:var(--muted); line-height:1.8; margin:var(--s3) 0 0;}
+
+@media (max-width:900px){
+  .sbx{grid-template-columns:1fr;}
+  .sbx-term{min-block-size:240px;}
+}
+@media (max-width:520px){
+  .sbx-out{font-size:12px; padding:12px 13px 4px;}
+  .sbx-line{padding:6px 13px 12px;} .sbx-line input{font-size:12px;}
+  .sbx-cols{grid-template-columns:1fr; gap:6px;}
+  .sbx-col ul{grid-auto-flow:column; grid-auto-columns:minmax(0,1fr);}
+}

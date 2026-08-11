@@ -147,6 +147,26 @@ export const STRINGS = {
   /* Scoring used to be explained inside the badges subtitle, where a reader
      looking up badges was told the XP formula and a reader looking for the XP
      formula never found it. It has its own section now. */
+  /* The sandbox. The invitation is deliberately the first thing on the page
+     that asks for an action rather than attention: the distance between
+     arriving and doing something real is the whole funnel. */
+  'sbx.try.h':          { fa: 'همین حالا امتحان کن', en: 'Try it right now' },
+  'sbx.try.p':          { fa: 'این یک تمرین‌گاه است، نه ترمینال واقعی — هرچه بزنی اینجا می‌ماند و هیچ‌چیزی خراب نمی‌شود. یک پروژهٔ کوچک برایت آماده است و یک فایل را همین الان عوض کرده‌ای.', en: 'A practice sandbox, not a real terminal — nothing you type here can break anything. A small project is already set up, and you have just changed one file in it.' },
+  'sbx.try.hint':       { fa: 'با این شروع کن:', en: 'Start with:' },
+  'sbx.try.next':       { fa: 'بعدش: {0} و بعد {1}', en: 'Then: {0} and then {1}' },
+  'sbx.input':          { fa: 'خط فرمان تمرین', en: 'Practice command line' },
+  'sbx.help':           { fa: 'دستورهایی که این تمرین‌گاه می‌شناسد:', en: 'Commands this sandbox understands:' },
+  'sbx.noRepo':         { fa: 'هنوز مخزنی نیست. با git init شروع کن.', en: 'No repository yet. Start with git init.' },
+  'sbx.commits':        { fa: 'Commitها', en: 'Commits' },
+  'sbx.work':           { fa: 'Working tree', en: 'Working tree' },
+  'sbx.work.h':         { fa: 'عوض شده، هنوز ثبت نشده', en: 'changed, not staged' },
+  'sbx.stage':          { fa: 'Staging area', en: 'Staging area' },
+  'sbx.stage.h':        { fa: 'آمادهٔ Commit', en: 'ready to commit' },
+  'sbx.done':           { fa: 'آخرین Commit', en: 'Last commit' },
+  'sbx.done.h':         { fa: 'در تاریخچه', en: 'in the history' },
+  'sbx.reset':          { fa: 'از اول', en: 'Start over' },
+  'sbx.note':           { fa: 'این تمرین‌گاه فقط همان دستورهایی را می‌فهمد که این دوره درس می‌دهد. برای کار واقعی، ترمینال خودت را باز کن.', en: 'This sandbox understands only the commands this course teaches. For real work, open your own terminal.' },
+
   'intro.scoring.h':    { fa: 'امتیاز و رتبه چطور کار می‌کند؟', en: 'How XP and ranks work' },
   'intro.scoring.p':    { fa: 'امتیاز فقط از آزمون‌ها می‌آید. هر بار امتیازت از یک آستانه رد شود، رتبه‌ات عوض می‌شود؛ کار دیگری لازم نیست.', en: 'XP comes from quizzes and nothing else. Each time your XP passes a threshold your rank changes on its own — there is nothing to claim.' },
   'intro.scoring.pass.t':    { fa: 'قبولی در یک سطح', en: 'Passing a level' },

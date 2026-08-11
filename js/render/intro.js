@@ -6,7 +6,9 @@ import { $, FA } from '../dom.js';
 import { authorCard as authorCardFn } from '../ui.js';
 import { ctx } from '../ctx.js';
 import { t, tf } from '../i18n.js';
-import { analyticsEnabled } from '../analytics.js';
+import { analyticsEnabled, trackEvent } from '../analytics.js';
+import { mountTerminal } from '../sandbox/terminal.js';
+import { seedIntro } from '../sandbox/repo.js';
 
 const authorCard = () => authorCardFn(AVATAR_SRC, SITE, LINKEDIN);
 
@@ -32,6 +34,20 @@ export function renderIntro() {
       <div class="stat"><i class="ph-duotone ph-lightning"></i><b>${FA(maxXP())}</b><span>${t('intro.stat.xp')}</span></div>
       <div class="stat"><i class="ph-duotone ph-clock"></i><b>${FA(totalMinutes())}</b><span>${t('intro.stat.mins')}</span></div>
     </div>
+
+    <section class="sbx-try">
+      <h2>${t('sbx.try.h')}</h2>
+      <p class="sub">${t('sbx.try.p')}</p>
+      <div class="sbx-hint">
+        <span>${t('sbx.try.hint')}</span><code dir="ltr">git status</code>
+        <span>${tf('sbx.try.next', '<code dir="ltr">git add hero.css</code>', '<code dir="ltr">git commit -m "hero"</code>')}</span>
+      </div>
+      <div id="sbxHost"></div>
+      <div class="quiz-actions" style="border:none;margin:0">
+        <button class="btn btn-ghost" id="sbxReset"><i class="ph ph-arrow-counter-clockwise"></i>${t('sbx.reset')}</button>
+      </div>
+      <p class="sbx-note">${t('sbx.note')}</p>
+    </section>
 
     <h2 style="font-size:19px;font-weight:800;margin:26px 0 12px">${t('intro.how')}</h2>
     <div class="steps">
@@ -110,6 +126,15 @@ export function renderIntro() {
     </div>
     <p class="privacy-note"><i class="ph-fill ph-lock-simple" aria-hidden="true"></i>${t('intro.privacy')}${analyticsEnabled() ? ' ' + t('intro.privacy.an') : ''}</p>
     ${authorCard()}`;
+
+  // One event, the first time a visitor actually runs something. This is the
+  // number that says whether the invitation works at all.
+  let firstRun = false;
+  const term = mountTerminal($('#sbxHost'), {
+    repo: seedIntro(), seed: seedIntro,
+    onRun: () => { if (!firstRun) { firstRun = true; trackEvent('sandbox_first_command'); } },
+  });
+  $('#sbxReset').addEventListener('click', () => { term.reset(); term.focus(); });
 
   $('#nameIn').addEventListener('input', e => { state.learner = e.target.value; ctx.save(); });
   $('#startBtn').addEventListener('click', () => ctx.go(firstOpen()));
